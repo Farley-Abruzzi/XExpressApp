@@ -1,0 +1,32 @@
+.mainSlide,
+.mainSlide ion-slide {
+    width: 100%;
+    height: 100%;
+}
+
+img {
+    width: 120px;
+}
+
+.pick-avatar {
+    width: 80px;
+    opacity: 0.3;
+}
+
+.pick-avatar-seleccionado {
+    transition: opacity 0.5s linear;
+    opacity: 1 !important;
+}
+
+.gridPosition {
+    position: fixed;
+    bottom: 35%;
+    right: 10%;
+    left: 10%;
+}
+
+ion-item {
+    color: #10dc60;
+    --background: none;
+    --highlight-height: 1px;
+}

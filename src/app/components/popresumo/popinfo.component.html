@@ -1,0 +1,23 @@
+
+  <ion-card class="cardReciboPorCidade" mode="ios" *ngFor="let obj of resumos">
+    <!-- <ion-popover-controller></ion-popover-controller> -->
+    <ion-item class="itemObjResumo">
+      <ion-label><b>Cidade:</b> {{ obj.cidade }}</ion-label>
+    </ion-item>
+    <ion-item class="itemObjResumo">
+      <ion-label><b>Recebidas:</b> {{ obj.qtdRecebidos }}</ion-label>
+    </ion-item>
+    <ion-item class="itemObjResumo">
+      <ion-label><b>Recebidos:</b> R$ {{ obj.valorRecebidos.toFixed(2) }}</ion-label>
+    </ion-item>
+    <ion-item class="itemObjResumo">
+      <ion-label><b>Total:</b> {{ obj.qtdTotal }}</ion-label>
+    </ion-item>
+    <ion-item class="itemObjResumo">
+      <ion-label><b>Valor total:</b> R$ {{ obj.valorTotal.toFixed(2) }}</ion-label>
+    </ion-item>
+    <ion-item class="itemObjResumo">
+      <ion-label><b>Percentual:</b> {{ obj.percentualRecebido.toFixed(1) }}%</ion-label>
+    </ion-item>
+  
+  </ion-card>

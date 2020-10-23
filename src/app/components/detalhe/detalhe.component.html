@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="dark">
+      <ion-button (click)="sairDoModal()" color="light" fill="clear" slot="start">
+        <ion-icon slot="start" name="arrow-round-back"></ion-icon>
+      </ion-button>
+      <ion-button color="success" slot="end" fill="clear" (click)="inputDoacao()">
+        <ion-icon name="cash"></ion-icon>
+      </ion-button>
+      <ion-button color="success" slot="end" fill="clear">
+        <ion-icon name="calendar"></ion-icon>
+        <ion-datetime  class="dateModel" cancelText="Cancelar" done-text="Ok" display-format="DD/MM/YYYY" (ionChange)="reagendar( $event )" [ngModel]="dtReagendamento.toISOString()"></ion-datetime>
+      </ion-button>
+      <ion-button color="success" slot="end" fill="clear" (click)="alertDevolucao()">
+        <ion-icon name="swap"></ion-icon>
+      </ion-button>
+    <ion-title>Detalhes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-text class="text-1">Hospital do Câncer em Uberlândia</ion-text><br>
+              <ion-card style="height: 100%;" *ngIf="recibo"  color="warning">
+                <ion-card-content padding color="warning">
+                    <ion-label color="dark"><b>Nome:</b> {{ recibo.nomenorecibo }}</ion-label><br>
+                    <ion-label color="dark"><b>Agendamento:</b> {{ recibo.dtcobranca  }}</ion-label><br>
+                    <ion-label color="dark"><b>Cidade:</b> {{ recibo.cidadesecundario }}</ion-label><br><br>
+                    <ion-label color="dark"><b>Endereço:</b> <br>{{ recibo.enderecosecundario +", "+ recibo.numerosecundario +", "+ recibo.bairrosecundario }}</ion-label><br>
+                    <ion-label color="dark" [style.visibility]="lbReferencia ? 'visible':'hidden'"><b>Referência:</b> {{ recibo.complementosecundario }}</ion-label><br><br>
+                    <ion-label color="dark"><b>Valor:</b> R$ {{ recibo.valorgerado }}</ion-label><br>
+                    <ion-label color="dark"><b>Telefone(s):</b> {{ recibo.telefonesecundario }}</ion-label><br>
+                    <ion-label color="dark"><b>Categoria:</b> {{ recibo.desccategoria }}</ion-label><br><br>
+                    <ion-label color="dark"><br><b>Obs. da Parcela:</b> {{ recibo.observacoes }}</ion-label><br>
+                </ion-card-content>
+              </ion-card>
+
+              <ion-button 
+                class="buttonAction"
+                color="dark"
+                expand="block"
+                (click)="presentActionSheet()">
+                Mostrar Ações
+              </ion-button>
+              
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+      
+
+</ion-content>

@@ -1,0 +1,44 @@
+.buttonPrint {
+    --color-activated: #3880ff !important;
+    color: #10dc60;
+}
+
+.calendarStart {
+    position: fixed;
+    top: 25px;
+    right: 50%;
+    --ripple-color: #192035 !important;
+}
+
+.calendarEnd {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    --ripple-color: #192035 !important;
+}
+
+.itemCalendar {
+    --inner-padding-bottom: 5% !important;
+}
+
+.sizeLabel {
+    font-size: 20px;
+}
+
+.ListPorCidade {
+    --background: none;
+    background-color: #d7d8da !important;
+}
+
+.LabelPeriodo {
+    margin-bottom: 15% !important;
+}
+
+.SizeToolbar {
+    height: 70px;
+}
+
+.ButtonPorCidade {
+    --border-radius: 10px !important;
+}
+

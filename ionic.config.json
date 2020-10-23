@@ -1,0 +1,7 @@
+{
+  "name": "express",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

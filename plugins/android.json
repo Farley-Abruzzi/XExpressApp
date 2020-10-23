@@ -1,0 +1,40 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-bluetooth-serial": {
+      "PACKAGE_NAME": "io.xexpress.com"
+    },
+    "cordova-plugin-calendar": {
+      "PACKAGE_NAME": "io.xexpress.com"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "io.xexpress.com"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "io.xexpress.com"
+    },
+    "cordova-plugin-ionic-webview": {
+      "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+",
+      "PACKAGE_NAME": "io.xexpress.com"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "io.xexpress.com"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "io.xexpress.com"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.xexpress.com"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "io.express.com"
+    }
+  },
+  "dependent_plugins": {}
+}

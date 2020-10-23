@@ -1,0 +1,95 @@
+<ion-header>
+    <ion-toolbar color="dark">
+        <ion-title>
+            X-Express
+        </ion-title>
+        <ion-icon slot="end" name="moon"></ion-icon>
+        <ion-toggle slot="end" [ngModel]="darkMode" (ionChange)="alterarTema()"></ion-toggle>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content text-center color="light">
+
+    <!-- Layout da página Iniciar. -->
+    <ion-grid fixed>
+        <ion-row>
+            <ion-col size="6" size-lg="3" size-md="4" size-sm="6">
+                <div>
+                    <ion-button class="button-1" size="large" fill="clear" (click)="contribuicao()">
+                        <img src="assets/icon/box.png">
+                    </ion-button>
+                    <ion-label class="label-1">
+                        Contribuições
+                    </ion-label>
+                </div>
+            </ion-col>
+
+            <ion-col size="6" size-lg="3" size-md="4" size-sm="6">
+                <div>
+                    <ion-button class="button-2" size="large" fill="clear" (click)="relatorio()">
+                        <img src="assets/icon/analytics.png">
+                    </ion-button>
+                    <ion-label class="label-2">
+                        Relatórios
+                    </ion-label>
+                </div>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="6" size-lg="3" size-md="4" size-sm="6">
+                <div>
+                    <ion-button class="button-3" size="large" fill="clear" (click)="envioTotal()">
+                        <!-- <ion-datetime class="datetime-text"
+                          cancelText="Cancelar" 
+                          done-text="Ok"
+                          pickerFormat="D MMM YYYY"
+                          [ngModel]="envioFechado.toISOString()"
+                          min="2000-01-01"
+                          max="2050-12-31">
+           </ion-datetime> -->
+                        <img src="assets/icon/send.png">
+                    </ion-button>
+                    <ion-label class="label-3">
+                        Baixar recibos
+                    </ion-label>
+                </div>
+            </ion-col>
+            <ion-col size="6" size-lg="3" size-md="4" size-sm="6">
+                <div>
+                    <ion-button class="button-4" size="large" fill="clear" (click)="beneficio()">
+                        <img src="assets/icon/money-bag.png">
+                    </ion-button>
+                    <ion-label class="label-4">
+                        Benefícios
+                    </ion-label>
+                </div>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="6" size-lg="3" size-md="4" size-sm="6">
+                <div>
+                    <ion-button class="button-5" size="large" fill="clear">
+                        <img src="assets/icon/donation.png">
+                    </ion-button>
+                    <ion-label class="label-5">
+                        Lançar Doação
+                    </ion-label>
+                </div>
+            </ion-col>
+            <ion-col size="6" size-lg="3" size-md="4" size-sm="6">
+                <div>
+                    <ion-button class="button-6" size="large" fill="clear" (click)="mensagem()">
+                        <img src="assets/icon/chat.png">
+                    </ion-button>
+                    <ion-label class="label-6">
+                        Mensagens
+                    </ion-label>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-textarea class="Developer" disabled="true" placeholder="@GLPV - Developed by Farley Abruzzi."></ion-textarea>
+
+</ion-content>

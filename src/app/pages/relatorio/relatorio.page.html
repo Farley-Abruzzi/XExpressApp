@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-button class="buttonPrint" slot="end" fill="clear" (click)="Imprimir()">
+      <ion-icon name="print"></ion-icon>
+    </ion-button>
+    <ion-button class="buttonPrint" slot="end" fill="clear" (click)="mostrarRecidos()">
+      <ion-icon name="save"></ion-icon>
+    </ion-button>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Relatórios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+
+          
+
+        <ion-list *ngIf="objetos">
+          <ion-toolbar class="SizeToolbar" text-center color="success">
+            <ion-label class="LabelPeriodo">Período</ion-label>
+            <ion-button color="dark" class="calendarStart" slot="start" fill="clear">De
+              <ion-icon name="calendar"></ion-icon>
+              <ion-datetime class="dateTime-1" cancelText="Cancelar" done-text="Ok" (ionChange)="carregarDtInicio( $event )" [ngModel]="dtStart.toISOString()"
+                display-format="DD/MM/YYYY"></ion-datetime>
+            </ion-button>
+      
+            <ion-button color="dark" class="calendarEnd" slot="start" fill="clear">Até
+              <ion-icon name="calendar"></ion-icon>
+              <ion-datetime class="dateTime-2" cancelText="Cancelar" done-text="Ok" (ionChange)="carregarDtFim( $event )" [ngModel]="dtEnd.toISOString()"
+                display-format="DD/MM/YYYY"></ion-datetime>
+            </ion-button>
+          </ion-toolbar>
+
+          <ion-button class="ButtonPorCidade" expand="block" fill="outline" (click)="mostrarPop( $event )" color="success">
+            <b>Ver Por Cidade</b>
+          </ion-button>
+          
+            
+
+          
+      
+          <ion-card color="light">
+            <!-- Lista de contabilização por período. -->
+            <ion-item color="medium">
+              <ion-label><b>Recebidos (Hoje):</b> R$ {{ objetos.qtdRecebido.toFixed(2) }}</ion-label>
+            </ion-item>
+            <ion-item color="light">
+              <ion-label><b>Total de contribuições:</b> R$ {{ objetos.totalQtd.toFixed(2) }}</ion-label>
+            </ion-item>
+            <ion-item color="light">
+              <ion-label><b>A Receber:</b> R$ {{ objetos.valorEmAberto.toFixed(2) }}</ion-label>
+            </ion-item>
+            <ion-item color="light">
+              <ion-label color="medium"><b>Em Aberto:</b> {{ objetos.qtdEmAberto }}</ion-label>
+            </ion-item>
+            <ion-item color="light">
+              <ion-label color="success"><b>Recebidas:</b> {{ objetos.qtdRecebido }}</ion-label>
+            </ion-item>
+            <ion-item color="light">
+              <ion-label color="danger"><b>Devolvidas:</b> {{ objetos.qtdDevolvido }}</ion-label>
+            </ion-item>
+            <ion-item color="light">
+              <ion-label color="danger"><b>Canceladas:</b> {{ objetos.qtdCancelado }}</ion-label>
+            </ion-item>
+            <br>
+          </ion-card>
+        </ion-list>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
