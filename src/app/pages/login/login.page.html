@@ -1,40 +1,40 @@
 <ion-content color="dark">
 
-    <form (ngSubmit)="login( fLogin )" #fLogin="ngForm">
-        <ion-grid class="gridPosition">
+    <!-- <form (ngSubmit)="login( fLogin )" #fLogin="ngForm"></form> -->
+    <ion-grid class="gridPosition">
 
-            <ion-row text-center>
-                <ion-col>
-                    <img src="/assets/avatars/av-2.png">
-                </ion-col>
-            </ion-row>
+        <ion-row text-center>
+            <ion-col>
+                <img src="/assets/avatars/av-2.png">
+            </ion-col>
+        </ion-row>
 
-            <ion-row>
-                <ion-col>
+        <ion-row>
+            <ion-col>
 
-                    <ion-item>
-                        <ion-label>Email</ion-label>
-                        <ion-input name="email" type="email" [(ngModel)]="loginUser.email" required></ion-input>
-                    </ion-item>
-                    <br>
-                    <ion-item>
-                        <ion-label>Senha</ion-label>
-                        <ion-input name="password" type="password" [(ngModel)]="loginUser.password" required></ion-input>
-                    </ion-item>
+                <ion-item>
+                    <ion-label>Email</ion-label>
+                    <ion-input name="email" type="text" [(ngModel)]="creds.email"></ion-input>
+                </ion-item>
+                <br>
+                <ion-item>
+                    <ion-label>Senha</ion-label>
+                    <ion-input name="password" type="password" [(ngModel)]="creds.password"></ion-input>
+                </ion-item>
 
-                </ion-col>
-            </ion-row>
+            </ion-col>
+        </ion-row>
 
-            <ion-row text-center>
-                <ion-col>
-                    <ion-button type="submit" color="success" shape="round" (click)="logar()">
-                        Entrar
-                    </ion-button>
-                </ion-col>
-            </ion-row>
+        <ion-row text-center>
+            <ion-col>
+                <ion-button type="submit" color="success" shape="round" (click)="logar()">
+                    Entrar
+                </ion-button>
+            </ion-col>
+        </ion-row>
 
-        </ion-grid>
-    </form>
+    </ion-grid>
+    <!-- </form> -->
 
 
 
