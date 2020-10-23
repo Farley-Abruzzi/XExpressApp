@@ -3,7 +3,7 @@ import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
 import { ContribuintesService } from '../../services/contribuintes.service';
 import { Resumo } from '../../interfaces/resumo';
 import { DatePipe } from '@angular/common';
-import { DataLocalService } from '../../services/data-local.service';
+import { StorageService } from '../../services/storage.service';
 import { PopoverController } from '@ionic/angular';
 import { PopinfoComponent } from '../../components/popresumo/popinfo.component';
 
@@ -26,7 +26,7 @@ export class RelatorioPage implements OnInit {
   constructor( private bluetoothSerial: BluetoothSerial,
                private contribService: ContribuintesService,
                private datePipe: DatePipe,
-               private dataLocal: DataLocalService,
+               private storage: StorageService,
                private popoverCtrl: PopoverController ) { }
 
 
@@ -87,7 +87,7 @@ export class RelatorioPage implements OnInit {
 
   // Teste, guarda recibos no local storage
   mostrarRecidos() {
-    this.dataLocal.guardarRecibos( this.objetos );
+    this.storage.setRecibos( this.objetos );
     console.log('Recibos salvos', this.objetos );
   }
 

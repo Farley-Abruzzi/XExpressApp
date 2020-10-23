@@ -27,7 +27,7 @@ export class LoginPage implements OnInit {
   logar() {
     this.auth.authenticate(this.creds)
       .subscribe(resp => {
-        console.log(resp.headers.get('Authorization'));
+        this.auth.successfullLogin(resp.headers.get('Authorization'));
         this.navCtrl.navigateRoot('main/tabs/tab2', { animated: true });
       },
         error => {});
