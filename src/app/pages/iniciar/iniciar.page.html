@@ -3,6 +3,7 @@
         <ion-title>
             X-Express
         </ion-title>
+        <ion-icon style="margin-left: 7px;" slot="start" name="person" (click)="profile()"></ion-icon>
         <ion-icon slot="end" name="moon"></ion-icon>
         <ion-toggle slot="end" [ngModel]="darkMode" (ionChange)="alterarTema()"></ion-toggle>
     </ion-toolbar>

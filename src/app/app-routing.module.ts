@@ -17,7 +17,8 @@ const routes: Routes = [
     redirectTo: 'main/tabs/tab2'
   },
   
-  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' }
+  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
+  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' }
 
 ];
 @NgModule({

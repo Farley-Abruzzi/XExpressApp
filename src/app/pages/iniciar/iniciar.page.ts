@@ -65,6 +65,10 @@ export class Tab2Page implements OnInit {
   });
 }
 
+  profile() {
+    this.navCtrl.navigateForward('profile', { animated: true });
+  }
+
   // Navega para página Benefício.
   beneficio() {
     this.navCtrl.navigateForward( 'beneficio', {animated: true} );
