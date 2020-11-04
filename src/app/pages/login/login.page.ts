@@ -16,9 +16,7 @@ export class LoginPage implements OnInit {
   };
   
  
-  constructor( private navCtrl: NavController,
-    private auth: AuthService,
-    private toastCtrl: ToastController) { }
+  constructor( private navCtrl: NavController, private auth: AuthService) { }
   
 
   ngOnInit() {
@@ -31,20 +29,8 @@ export class LoginPage implements OnInit {
         this.auth.successfullLogin(resp.headers.get('Authorization'));
         this.navCtrl.navigateRoot('main/tabs/tab2', { animated: true });
       },
-        error => {
-          this.presentToast('Login ou senha inválidos');
-        });
+        error => {});
   }
-
-  async presentToast( message: string ) {
-    const toast = await this.toastCtrl.create({
-      message,
-      duration: 2000,
-      mode: "ios"
-    });
-    toast.present();
-  }
-
 
   // async login( fLogin: NgForm ) {
 
