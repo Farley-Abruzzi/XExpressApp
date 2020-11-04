@@ -33,4 +33,9 @@ export class ProfilePage implements OnInit {
     }
   }
 
+  logout() {
+    this.storage.setLocalUser(null);
+    this.navCtrl.navigateRoot('login', { animated: true });
+  }
+
 }
