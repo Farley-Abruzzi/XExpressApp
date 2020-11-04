@@ -20,7 +20,12 @@ export class LoginPage implements OnInit {
   
 
   ngOnInit() {
-    
+    this.auth.refreshToken()
+      .subscribe(resp => {
+        this.auth.successfullLogin(resp.headers.get('Authorization'));
+        this.navCtrl.navigateRoot('main/tabs/tab2', { animated: true });
+      },
+        error => {});
   }
 
   logar() {
