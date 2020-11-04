@@ -9,8 +9,7 @@ const URL = environment.url;
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    constructor(public storage: StorageService) {
-    }
+    constructor(public storage: StorageService) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
