@@ -3,7 +3,7 @@ import { CredenciaisDTO } from '../interfaces/credenciaisDTO';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.prod';
 import { StorageService } from './storage.service';
-import { LocalUser } from '../class/local_user';
+import { LocalUser } from '../interfaces/local_user';
 import { JwtHelperService  } from '@auth0/angular-jwt';
 
 const URL = environment.url;

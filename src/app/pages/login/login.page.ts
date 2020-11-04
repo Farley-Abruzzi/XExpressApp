@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonSlides, NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { CredenciaisDTO } from '../../interfaces/credenciaisDTO';
 import { AuthService } from '../../services/auth.services';
 
@@ -17,7 +17,8 @@ export class LoginPage implements OnInit {
   
  
   constructor( private navCtrl: NavController,
-               private auth: AuthService) { }
+    private auth: AuthService,
+    private toastCtrl: ToastController) { }
   
 
   ngOnInit() {
@@ -30,7 +31,18 @@ export class LoginPage implements OnInit {
         this.auth.successfullLogin(resp.headers.get('Authorization'));
         this.navCtrl.navigateRoot('main/tabs/tab2', { animated: true });
       },
-        error => {});
+        error => {
+          this.presentToast('Login ou senha inválidos');
+        });
+  }
+
+  async presentToast( message: string ) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 2000,
+      mode: "ios"
+    });
+    toast.present();
   }
 
 

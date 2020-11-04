@@ -7,6 +7,10 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    {{ email }}
+<ion-content padding>
+    <ion-avatar class="avatarPosition">
+        <img class="circle" [src]="usuario?.imageUrl || 'assets/avatars/avatar-blank.png'" />
+    </ion-avatar>
+    <h2 style="margin-top: 30%;" text-center>{{usuario?.login}}</h2>
+    <p text-center>Email: {{usuario?.email}}</p>
 </ion-content>

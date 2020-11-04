@@ -8,17 +8,16 @@ import { catchError } from 'rxjs/operators';
 export class ErrorInterceptor implements HttpInterceptor{
   
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
-     
         return next.handle(req)
             .pipe(
                 catchError(error => {
                     let errorObj = error;
-                    if(!errorObj.status ){
-                        errorObj = JSON.parse(errorObj.error);
-                        
-                    }
-                    if(errorObj.status){
+                    if(errorObj.error){
                         errorObj = errorObj.error;
+                    }
+                    if (!errorObj.status) {
+                        errorObj = JSON.parse(errorObj);
+                        
                     }
                     console.log("Erro detectado pelo Inteceptor:");
                     console.log(errorObj);

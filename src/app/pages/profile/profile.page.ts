@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/services/storage.service';
+import { UsuarioDTO } from '../../interfaces/usuario.dto';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-profile',
@@ -8,14 +10,18 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class ProfilePage implements OnInit {
 
-  email: string;
+  usuario: UsuarioDTO;
 
-  constructor(public storage: StorageService) { }
+  constructor(public storage: StorageService, public usuarioService: UsuarioService) { }
 
   ngOnInit() {
     let localUser = this.storage.getLocalUser();
     if (localUser && localUser.email) {
-      this.email = localUser.email;
+      this.usuarioService.findByEmail(localUser.email)
+        .subscribe(resp => {
+          this.usuario = resp;
+        },
+        error => {});
     }
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Resumo } from '../interfaces/resumo';
-import { LocalUser } from '../class/local_user';
+import { LocalUser } from '../interfaces/local_user';
 import { STORAGE_KEYS } from '../../environments/storage_keys.config';
 
 

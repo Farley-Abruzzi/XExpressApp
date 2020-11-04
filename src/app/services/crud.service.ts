@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { DatabaseService } from './database.service';
 import { Recibos } from '../class/recibos';
 import { SQLiteObject } from '@ionic-native/sqlite/ngx';
-import { environment } from '../../environments/environment';
 import { Devolvidos } from '../Class/devolvidos';
 
 @Injectable({

@@ -8,7 +8,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
 import { DatePipe } from '@angular/common';
@@ -18,6 +18,10 @@ import { environment } from '../environments/environment';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { AuthService } from './services/auth.services';
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
+import { UsuarioService } from './services/usuario.service';
+import { AuthInterceptor } from '../interceptors/auth-interceptor';
+
+
 
 
 
@@ -41,8 +45,10 @@ import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
     Calendar,
     BluetoothSerial,
     DatePipe,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    ErrorInterceptorProvider,
     AuthService,
-    ErrorInterceptorProvider
+    UsuarioService
   ],
   bootstrap: [AppComponent]
 })
