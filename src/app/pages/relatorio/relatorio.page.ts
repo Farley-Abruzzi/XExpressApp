@@ -4,7 +4,7 @@ import { ContribuintesService } from '../../services/contribuintes.service';
 import { Resumo } from '../../interfaces/resumo';
 import { DatePipe } from '@angular/common';
 import { StorageService } from '../../services/storage.service';
-import { PopoverController } from '@ionic/angular';
+import { LoadingController, PopoverController } from '@ionic/angular';
 import { PopinfoComponent } from '../../components/popresumo/popinfo.component';
 
 
@@ -27,11 +27,11 @@ export class RelatorioPage implements OnInit {
                private contribService: ContribuintesService,
                private datePipe: DatePipe,
                private storage: StorageService,
-               private popoverCtrl: PopoverController ) { }
+               private popoverCtrl: PopoverController,
+               public loadingController: LoadingController) { }
 
 
   ngOnInit() {
-
     this.conversorDate();
     this.connect();
     this.carregarPeriodo();
@@ -46,10 +46,12 @@ export class RelatorioPage implements OnInit {
   }
 
   // Carrega o objeto de resumo do mensageiro.
-  carregarResumo() {
+  async carregarResumo() {
+    let loading = await this.presentLoading();
      this.contribService.getResumo(this.dtInicio, this.dtFim)
       .subscribe( resp => {
         this.objetos = resp;
+        loading.dismiss();
       });
   }
 
@@ -109,6 +111,18 @@ export class RelatorioPage implements OnInit {
     console.log('Data Fim ' + this.dtFim);
 
     this.carregarPeriodo();
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'loadingClass',
+      message: 'Carregando...'
+      //duration: 2000,
+    });
+    loading.present();
+    return loading;
+
+    //const { role, data } = await loading.onDidDismiss();
   }
 
   // Mostra o resumo por cidade da página relatorio
