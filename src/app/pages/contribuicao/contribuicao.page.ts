@@ -4,7 +4,7 @@ import { ContribuintesService } from 'src/app/services/contribuintes.service';
 import { DetalheComponent } from '../../components/detalhe/detalhe.component';
 import { Recibos } from '../../class/recibos';
 import { CrudService } from '../../services/crud.service';
-import { async } from '@angular/core/testing';
+
 
 @Component({
   selector: 'app-contribuicao',
@@ -68,13 +68,37 @@ export class ContribuicaoPage implements OnInit {
   async presentLoading() {
     const loading = await this.loadingController.create({
       cssClass: 'loadingClass',
-      message: 'Carregando...'
-      //duration: 2000,
+      message: 'Carregando...',
+      animated: true,
+      spinner: 'circles',
+      translucent: true
     });
     loading.present();
     return loading;
 
     //const { role, data } = await loading.onDidDismiss();
+  }
+
+  doRefresh(event) {
+    this.refreshRecibos();
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  }
+
+  refreshRecibos() {
+    this.contribService.getListaRecibos()
+    .subscribe( resp => {
+
+      this.listaDeRecibos = resp;
+      console.log("Recibos:", this.listaDeRecibos);
+      
+      if(this.listaDeRecibos.length[4] == "S") {
+        this.cardColors = "secondary";
+      } else {
+        this.cardColors = "danger";
+      }
+    },error=> {});
   }
 
 

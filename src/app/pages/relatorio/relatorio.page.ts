@@ -116,8 +116,10 @@ export class RelatorioPage implements OnInit {
   async presentLoading() {
     const loading = await this.loadingController.create({
       cssClass: 'loadingClass',
-      message: 'Carregando...'
-      //duration: 2000,
+      message: 'Carregando...',
+      animated: true,
+      spinner: 'circles',
+      translucent: true
     });
     loading.present();
     return loading;
