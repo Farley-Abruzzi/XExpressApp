@@ -34,6 +34,10 @@
     },
     "cordova-sqlite-storage": {
       "PACKAGE_NAME": "io.express.com"
+    },
+    "cordova-plugin-camera": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
+      "PACKAGE_NAME": "io.express.com"
     }
   },
   "dependent_plugins": {}
