@@ -5,13 +5,16 @@ import { UsuarioDTO } from '../interfaces/usuario.dto';
 import { environment } from '../../environments/environment.prod';
 import { StorageService } from './storage.service';
 import { Depositos } from '../class/depositos';
+import { ImageUtilService } from './image-util.service';
 
 const URL = environment.url;
 
 @Injectable()
 export class UsuarioService {
 
-  constructor(public http: HttpClient, public storage: StorageService) {
+  constructor(public http: HttpClient,
+    public storage: StorageService,
+    public imageUtilService: ImageUtilService) {
   }
 
   findByEmail(email: string): Observable<UsuarioDTO> {
@@ -25,5 +28,17 @@ export class UsuarioService {
         'Content-Type': 'application/json'
       })
     });
+  }
+
+  uploadPicture(picture) {
+    let pictureBlob = this.imageUtilService.dataUriToBlob(picture);
+    let formData: FormData = new FormData();
+    formData.set('file', pictureBlob, 'file.png');
+    return this.http.post(`${URL}/deposito/picture`, formData,
+      {
+        observe: 'response',
+        responseType: 'text'
+      }
+    );
   }
 }

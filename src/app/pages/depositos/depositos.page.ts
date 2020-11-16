@@ -4,6 +4,7 @@ import { ContribuintesService } from '../../services/contribuintes.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Depositos } from '../../class/depositos';
 import { UsuarioService } from '../../services/usuario.service';
+import { NavController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -18,17 +19,12 @@ export class Tab1Page implements OnInit {
   deposito: Depositos = new Depositos();
 
   dtDeposito: Date = new Date();
-  dataDep: string = " ";
+  dtDepFim = new Date(this.dtDeposito.getFullYear(), this.dtDeposito.getMonth() + 1, 0);
   dtFech: string = " ";
   entity: string = " ";
   codValid: number;
   valorDesp: number;
   detailDesp: string;
- 
-  entidade: string;
-  codvalidacao: number;
-  valorDespesa: number;
-  detalhamentoDespesa: string;
 
   picture: string;
   cameraOn: boolean = false;
@@ -38,11 +34,13 @@ export class Tab1Page implements OnInit {
 
   constructor(private usuarioService: UsuarioService,
               private datePipe: DatePipe,
-              private camera: Camera) { }
+              private camera: Camera,
+              private toastCtrl: ToastController,
+              private navCtrl: NavController) { }
 
 
   ngOnInit() {
-    this.conversorDate();
+    //this.conversorDate();
     this.mySlide.lockSwipes(true);
     //this.cameraOn = false;
   }
@@ -55,8 +53,8 @@ export class Tab1Page implements OnInit {
 
 
   selectDtDeposito(event){
-    this.dataDep = this.datePipe.transform(new Date( event.detail.value ),"yyyy-MM-dd");
-    console.log('Data Inicio ' + this.dataDep);
+    this.dtFech = event.detail.value;
+    console.log("Data de fechamento: ", this.datePipe.transform(this.dtFech, "yyyy-MM-dd"));
     this.isVisible = true;
   }
 
@@ -80,9 +78,6 @@ export class Tab1Page implements OnInit {
     console.log("Descrição desp: ", this.detailDesp);
   }
 
-  conversorDate(): void {
-    this.dataDep = this.datePipe.transform(this.dtDeposito,"yyyy-MM-dd");
-  }
 
   setObjDeposito() {
     this.deposito = new Depositos();
@@ -108,19 +103,19 @@ export class Tab1Page implements OnInit {
 
   }
 
-  getApiDbPostDepositos(){
+  getApiDbPostDepositos() {
     this.usuarioService.getApiDbPostDepositos(this.deposito)
     .subscribe(resp=>{
-      alert('Deposito inserido com sucesso!')
-
+      this.presentToast('Deposito inserido com sucesso!');
+      this.navCtrl.navigateRoot('main/tabs/tab2', { animated: true });
     },error=>{
-      alert('VALOR DO DEPOSITO INCORRETO')
+      this.presentToast('VALOR DO DEPOSITO INCORRETO');
       console.log(error)
     });
   }
   
   getCameraPicture() {
-
+    this.isVisible = false;
     this.cameraOn = true;
 
     const options: CameraOptions = {
@@ -137,6 +132,38 @@ export class Tab1Page implements OnInit {
     }, (err) => {
       
     });
+  }
+
+  sendPicture() {
+    this.setObjDeposito();
+    this.usuarioService.uploadPicture(this.picture)
+      .subscribe(resp => {
+        this.picture = null;
+        this.getApiDbPostDepositos();
+        this.navCtrl.navigateRoot('main/tabs/tab2', { animated: true });
+      }, error => {
+          
+      });
+  }
+
+  cancel() {
+    this.picture = null;
+  }
+
+  salvar(){
+    this.setObjDeposito();
+      console.log("Obj Deposito: ",this.deposito);
+      this.getApiDbPostDepositos();
+  }
+
+  async presentToast( message: string ) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 3000,
+      mode: "ios",
+      color: "dark"
+    });
+    toast.present();
   }
 
 }

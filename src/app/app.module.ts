@@ -20,6 +20,7 @@ import { AuthService } from './services/auth.services';
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { UsuarioService } from './services/usuario.service';
 import { AuthInterceptor } from '../interceptors/auth-interceptor';
+import { ImageUtilService } from './services/image-util.service';
 
 
 
@@ -48,7 +49,8 @@ import { AuthInterceptor } from '../interceptors/auth-interceptor';
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     ErrorInterceptorProvider,
     AuthService,
-    UsuarioService
+    UsuarioService,
+    ImageUtilService
   ],
   bootstrap: [AppComponent]
 })
