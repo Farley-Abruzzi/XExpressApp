@@ -25,18 +25,22 @@
                 </ion-card-header>
                 <ion-card-content>
                     <p>Olá (Nome), antes de iniciar observe o seguinte:</p>
-                    <p>-> Você precisa ter impresso o resumo do dia.</p>
-                    <p>-> Ter os comprovantes dos depósitos em mãos.</p>
-                    <p>-> Se tiver despesa, precisa da nota de despesa.</p>
+                    <p>* Você precisa ter impresso o resumo do dia.</p>
+                    <p>* Ter os comprovantes dos depósitos em mãos.</p>
+                    <p>* Se tiver despesa, precisa da nota de despesa.</p>
                     <br>
-                    <br>
-                    <p>1º Passo: Informe a data do recebimento</p>
+                    <p>1º Passo: Informe a data do recebimento e o valor do deposito</p>
                     <ion-row text-center>
                         <ion-col>
                             <ion-button shape="round" color="success" class="calendarDeposito" fill="outline">
                                 <ion-icon slot="start" name="calendar"></ion-icon>
                                 <ion-datetime cancelText="Cancelar" done-text="Ok" (ionChange)="selectDtDeposito( $event )" [ngModel]="dtDeposito.toISOString()" display-format="DD/MM/YYYY"></ion-datetime>
                             </ion-button>
+                            <br>
+                            <br>
+                            <ion-item>
+                                <ion-input type="number" placeholder="Valor deposito" (ionChange)="selectByValorDeposito( $event )" [(ngModel)]="deposito.valordeposito"></ion-input>
+                            </ion-item>
                         </ion-col>
                     </ion-row>
                 </ion-card-content>
@@ -93,6 +97,7 @@
                 <ion-item>
                     <ion-button *ngIf="picture" fill="outline" color="success" ion-button block (click)="sendPicture()">Enviar imagem</ion-button>
                     <ion-button *ngIf="picture" fill="outline" color="danger" ion-button block (click)="cancel()">Descartar imagem</ion-button>
+                    <ion-button color="success" ion-button block (click)="salvar()">Comunicar Deposito</ion-button>
                 </ion-item>
             </ion-card>
         </ion-slide>

@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-row>\n  <ion-col text-center>\n    <h3>Selecione Avatar</h3>\n  </ion-col>\n</ion-row>\n\n<ion-row>\n  <ion-col>\n    <ion-slides [options]=\"avatarSlide\">\n      <ion-slide *ngFor=\"let avatar of avatars\">\n        <ion-img class=\"pick-avatar\" src=\"/assets/avatars/{{ avatar.img }}\"\n          [ngClass]=\"{ 'pick-avatar-seleccionado': avatar.seleccionado }\" (click)=\"selecionarAvatar( avatar )\">\n        </ion-img>\n      </ion-slide>\n    </ion-slides>\n  </ion-col>\n</ion-row>"
+module.exports = "<ion-row>\r\n  <ion-col text-center>\r\n    <h3>Selecione Avatar</h3>\r\n  </ion-col>\r\n</ion-row>\r\n\r\n<ion-row>\r\n  <ion-col>\r\n    <ion-slides [options]=\"avatarSlide\">\r\n      <ion-slide *ngFor=\"let avatar of avatars\">\r\n        <ion-img class=\"pick-avatar\" src=\"/assets/avatars/{{ avatar.img }}\"\r\n          [ngClass]=\"{ 'pick-avatar-seleccionado': avatar.seleccionado }\" (click)=\"selecionarAvatar( avatar )\">\r\n        </ion-img>\r\n      </ion-slide>\r\n    </ion-slides>\r\n  </ion-col>\r\n</ion-row>"
 
 /***/ }),
 
@@ -18,7 +18,7 @@ module.exports = "<ion-row>\n  <ion-col text-center>\n    <h3>Selecione Avatar</
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-content>\n\n  <ion-card>\n\n    <!-- <ion-list slot=\"end\" *ngFor=\"let contribuinte of contribuintes\">\n      <ion-item>\n        <ion-label>Nome: {{ contribuinte.nomenorecibo }}</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-label>Telefone: {{ contribuinte.telefoneprincipal }}</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-label>Cidade: {{ contribuinte.cidadeprincipal }}</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-label>Bairro: {{ contribuinte.bairroprincipal }}</ion-label>\n      </ion-item>\n      <br>\n      <br>\n      <br>\n    </ion-list> -->\n\n  </ion-card>\n\n</ion-content>"
+module.exports = "<ion-content>\r\n\r\n  <ion-card>\r\n\r\n    <!-- <ion-list slot=\"end\" *ngFor=\"let contribuinte of contribuintes\">\r\n      <ion-item>\r\n        <ion-label>Nome: {{ contribuinte.nomenorecibo }}</ion-label>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-label>Telefone: {{ contribuinte.telefoneprincipal }}</ion-label>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-label>Cidade: {{ contribuinte.cidadeprincipal }}</ion-label>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-label>Bairro: {{ contribuinte.bairroprincipal }}</ion-label>\r\n      </ion-item>\r\n      <br>\r\n      <br>\r\n      <br>\r\n    </ion-list> -->\r\n\r\n  </ion-card>\r\n\r\n</ion-content>"
 
 /***/ }),
 
@@ -29,7 +29,7 @@ module.exports = "<ion-content>\n\n  <ion-card>\n\n    <!-- <ion-list slot=\"end
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar color=\"dark\">\n      <ion-button (click)=\"sairDoModal()\" color=\"light\" fill=\"clear\" slot=\"start\">\n        <ion-icon slot=\"start\" name=\"arrow-round-back\"></ion-icon>\n      </ion-button>\n      <ion-button color=\"success\" slot=\"end\" fill=\"clear\" (click)=\"inputDoacao()\">\n        <ion-icon name=\"cash\"></ion-icon>\n      </ion-button>\n      <ion-button color=\"success\" slot=\"end\" fill=\"clear\">\n        <ion-icon name=\"calendar\"></ion-icon>\n        <ion-datetime  class=\"dateModel\" cancelText=\"Cancelar\" done-text=\"Ok\" display-format=\"DD/MM/YYYY\" (ionChange)=\"reagendar( $event )\" [ngModel]=\"dtReagendamento.toISOString()\"></ion-datetime>\n      </ion-button>\n      <ion-button color=\"success\" slot=\"end\" fill=\"clear\" (click)=\"alertDevolucao()\">\n        <ion-icon name=\"swap\"></ion-icon>\n      </ion-button>\n    <ion-title>Detalhes</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <ion-grid>\n      <ion-row>\n        <ion-col>\n          <ion-text class=\"text-1\">Hospital do Câncer em Uberlândia</ion-text><br>\n              <ion-card style=\"height: 100%;\" *ngIf=\"recibo\"  color=\"warning\">\n                <ion-card-content padding color=\"warning\">\n                    <ion-label color=\"dark\"><b>Nome:</b> {{ recibo.nomenorecibo }}</ion-label><br>\n                    <ion-label color=\"dark\"><b>Agendamento:</b> {{ recibo.dtcobranca  }}</ion-label><br>\n                    <ion-label color=\"dark\"><b>Cidade:</b> {{ recibo.cidadesecundario }}</ion-label><br><br>\n                    <ion-label color=\"dark\"><b>Endereço:</b> <br>{{ recibo.enderecosecundario +\", \"+ recibo.numerosecundario +\", \"+ recibo.bairrosecundario }}</ion-label><br>\n                    <ion-label color=\"dark\" [style.visibility]=\"lbReferencia ? 'visible':'hidden'\"><b>Referência:</b> {{ recibo.complementosecundario }}</ion-label><br><br>\n                    <ion-label color=\"dark\"><b>Valor:</b> R$ {{ recibo.valorgerado }}</ion-label><br>\n                    <ion-label color=\"dark\"><b>Telefone(s):</b> {{ recibo.telefonesecundario }}</ion-label><br>\n                    <ion-label color=\"dark\"><b>Categoria:</b> {{ recibo.desccategoria }}</ion-label><br><br>\n                    <ion-label color=\"dark\"><br><b>Obs. da Parcela:</b> {{ recibo.observacoes }}</ion-label><br>\n                </ion-card-content>\n              </ion-card>\n\n              <ion-button \n                class=\"buttonAction\"\n                color=\"dark\"\n                expand=\"block\"\n                (click)=\"presentActionSheet()\">\n                Mostrar Ações\n              </ion-button>\n              \n\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n\n\n      \n\n</ion-content>\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar color=\"dark\">\r\n      <ion-button (click)=\"sairDoModal()\" color=\"light\" fill=\"clear\" slot=\"start\">\r\n        <ion-icon slot=\"start\" name=\"arrow-round-back\"></ion-icon>\r\n      </ion-button>\r\n      <ion-button color=\"success\" slot=\"end\" fill=\"clear\" (click)=\"inputDoacao()\">\r\n        <ion-icon name=\"cash\"></ion-icon>\r\n      </ion-button>\r\n      <ion-button color=\"success\" slot=\"end\" fill=\"clear\">\r\n        <ion-icon name=\"calendar\"></ion-icon>\r\n        <ion-datetime  class=\"dateModel\" cancelText=\"Cancelar\" done-text=\"Ok\" display-format=\"DD/MM/YYYY\" (ionChange)=\"reagendar( $event )\" [ngModel]=\"dtReagendamento.toISOString()\"></ion-datetime>\r\n      </ion-button>\r\n      <ion-button color=\"success\" slot=\"end\" fill=\"clear\" (click)=\"alertDevolucao()\">\r\n        <ion-icon name=\"swap\"></ion-icon>\r\n      </ion-button>\r\n    <ion-title>Detalhes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n  <ion-grid>\r\n      <ion-row>\r\n        <ion-col>\r\n          <ion-text class=\"text-1\">Hospital do Câncer em Uberlândia</ion-text><br>\r\n              <ion-card style=\"height: 100%;\" *ngIf=\"recibo\"  color=\"warning\">\r\n                <ion-card-content padding color=\"warning\">\r\n                    <ion-label color=\"dark\"><b>Nome:</b> {{ recibo.nomenorecibo }}</ion-label><br>\r\n                    <ion-label color=\"dark\"><b>Agendamento:</b> {{ recibo.dtcobranca  }}</ion-label><br>\r\n                    <ion-label color=\"dark\"><b>Cidade:</b> {{ recibo.cidadesecundario }}</ion-label><br><br>\r\n                    <ion-label color=\"dark\"><b>Endereço:</b> <br>{{ recibo.enderecosecundario +\", \"+ recibo.numerosecundario +\", \"+ recibo.bairrosecundario }}</ion-label><br>\r\n                    <ion-label color=\"dark\" [style.visibility]=\"lbReferencia ? 'visible':'hidden'\"><b>Referência:</b> {{ recibo.complementosecundario }}</ion-label><br><br>\r\n                    <ion-label color=\"dark\"><b>Valor:</b> R$ {{ recibo.valorgerado }}</ion-label><br>\r\n                    <ion-label color=\"dark\"><b>Telefone(s):</b> {{ recibo.telefonesecundario }}</ion-label><br>\r\n                    <ion-label color=\"dark\"><b>Categoria:</b> {{ recibo.desccategoria }}</ion-label><br><br>\r\n                    <ion-label color=\"dark\"><br><b>Obs. da Parcela:</b> {{ recibo.observacoes }}</ion-label><br>\r\n                </ion-card-content>\r\n              </ion-card>\r\n\r\n              <ion-button \r\n                class=\"buttonAction\"\r\n                color=\"dark\"\r\n                expand=\"block\"\r\n                (click)=\"presentActionSheet()\">\r\n                Mostrar Ações\r\n              </ion-button>\r\n              \r\n\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n\r\n\r\n      \r\n\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -40,7 +40,7 @@ module.exports = "<ion-header>\n  <ion-toolbar color=\"dark\">\n      <ion-butto
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  popdevolucao works!\n</p>\n"
+module.exports = "<p>\r\n  popdevolucao works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -51,7 +51,7 @@ module.exports = "<p>\n  popdevolucao works!\n</p>\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n  <ion-card class=\"cardReciboPorCidade\" mode=\"ios\" *ngFor=\"let obj of resumos\">\n    <!-- <ion-popover-controller></ion-popover-controller> -->\n    <ion-item class=\"itemObjResumo\">\n      <ion-label><b>Cidade:</b> {{ obj.cidade }}</ion-label>\n    </ion-item>\n    <ion-item class=\"itemObjResumo\">\n      <ion-label><b>Recebidas:</b> {{ obj.qtdRecebidos }}</ion-label>\n    </ion-item>\n    <ion-item class=\"itemObjResumo\">\n      <ion-label><b>Recebidos:</b> R$ {{ obj.valorRecebidos.toFixed(2) }}</ion-label>\n    </ion-item>\n    <ion-item class=\"itemObjResumo\">\n      <ion-label><b>Total:</b> {{ obj.qtdTotal }}</ion-label>\n    </ion-item>\n    <ion-item class=\"itemObjResumo\">\n      <ion-label><b>Valor total:</b> R$ {{ obj.valorTotal.toFixed(2) }}</ion-label>\n    </ion-item>\n    <ion-item class=\"itemObjResumo\">\n      <ion-label><b>Percentual:</b> {{ obj.percentualRecebido.toFixed(1) }}%</ion-label>\n    </ion-item>\n  \n  </ion-card>"
+module.exports = "\r\n  <ion-card class=\"cardReciboPorCidade\" mode=\"ios\" *ngFor=\"let obj of resumos\">\r\n    <!-- <ion-popover-controller></ion-popover-controller> -->\r\n    <ion-item class=\"itemObjResumo\">\r\n      <ion-label><b>Cidade:</b> {{ obj.cidade }}</ion-label>\r\n    </ion-item>\r\n    <ion-item class=\"itemObjResumo\">\r\n      <ion-label><b>Recebidas:</b> {{ obj.qtdRecebidos }}</ion-label>\r\n    </ion-item>\r\n    <ion-item class=\"itemObjResumo\">\r\n      <ion-label><b>Recebidos:</b> R$ {{ obj.valorRecebidos.toFixed(2) }}</ion-label>\r\n    </ion-item>\r\n    <ion-item class=\"itemObjResumo\">\r\n      <ion-label><b>Total:</b> {{ obj.qtdTotal }}</ion-label>\r\n    </ion-item>\r\n    <ion-item class=\"itemObjResumo\">\r\n      <ion-label><b>Valor total:</b> R$ {{ obj.valorTotal.toFixed(2) }}</ion-label>\r\n    </ion-item>\r\n    <ion-item class=\"itemObjResumo\">\r\n      <ion-label><b>Percentual:</b> {{ obj.percentualRecebido.toFixed(1) }}%</ion-label>\r\n    </ion-item>\r\n  \r\n  </ion-card>"
 
 /***/ }),
 
@@ -102,7 +102,7 @@ var Devolvidos = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "img {\n  width: 120px;\n}\n\n.pick-avatar {\n  width: 80px;\n  opacity: 0.3;\n}\n\n.pick-avatar-seleccionado {\n  -webkit-transition: opacity 0.5s linear;\n  transition: opacity 0.5s linear;\n  opacity: 1 !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9hdmF0YXItc2VsZWN0b3IvQzpcXFVzZXJzXFxlbGlzZXVcXERlc2t0b3BcXDEwLWV4cHJlc3Mvc3JjXFxhcHBcXGNvbXBvbmVudHNcXGF2YXRhci1zZWxlY3RvclxcYXZhdGFyLXNlbGVjdG9yLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9jb21wb25lbnRzL2F2YXRhci1zZWxlY3Rvci9hdmF0YXItc2VsZWN0b3IuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxZQUFBO0FDQ0o7O0FERUE7RUFDSSxXQUFBO0VBQ0EsWUFBQTtBQ0NKOztBREVBO0VBQ0ksdUNBQUE7RUFBQSwrQkFBQTtFQUNBLHFCQUFBO0FDQ0oiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL2F2YXRhci1zZWxlY3Rvci9hdmF0YXItc2VsZWN0b3IuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpbWcge1xyXG4gICAgd2lkdGg6IDEyMHB4O1xyXG59XHJcblxyXG4ucGljay1hdmF0YXIge1xyXG4gICAgd2lkdGg6IDgwcHg7XHJcbiAgICBvcGFjaXR5OiAwLjM7XHJcbn1cclxuXHJcbi5waWNrLWF2YXRhci1zZWxlY2Npb25hZG8ge1xyXG4gICAgdHJhbnNpdGlvbjogb3BhY2l0eSAwLjVzIGxpbmVhcjtcclxuICAgIG9wYWNpdHk6IDEgIWltcG9ydGFudDtcclxufSIsImltZyB7XG4gIHdpZHRoOiAxMjBweDtcbn1cblxuLnBpY2stYXZhdGFyIHtcbiAgd2lkdGg6IDgwcHg7XG4gIG9wYWNpdHk6IDAuMztcbn1cblxuLnBpY2stYXZhdGFyLXNlbGVjY2lvbmFkbyB7XG4gIHRyYW5zaXRpb246IG9wYWNpdHkgMC41cyBsaW5lYXI7XG4gIG9wYWNpdHk6IDEgIWltcG9ydGFudDtcbn0iXX0= */"
+module.exports = "img {\n  width: 120px;\n}\n\n.pick-avatar {\n  width: 80px;\n  opacity: 0.3;\n}\n\n.pick-avatar-seleccionado {\n  -webkit-transition: opacity 0.5s linear;\n  transition: opacity 0.5s linear;\n  opacity: 1 !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9hdmF0YXItc2VsZWN0b3IvQzpcXHRlbXBcXHdzLWlvbmljXFxYRXhwcmVzc0FwcC9zcmNcXGFwcFxcY29tcG9uZW50c1xcYXZhdGFyLXNlbGVjdG9yXFxhdmF0YXItc2VsZWN0b3IuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2NvbXBvbmVudHMvYXZhdGFyLXNlbGVjdG9yL2F2YXRhci1zZWxlY3Rvci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFlBQUE7QUNDSjs7QURFQTtFQUNJLFdBQUE7RUFDQSxZQUFBO0FDQ0o7O0FERUE7RUFDSSx1Q0FBQTtFQUFBLCtCQUFBO0VBQ0EscUJBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYXZhdGFyLXNlbGVjdG9yL2F2YXRhci1zZWxlY3Rvci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImltZyB7XHJcbiAgICB3aWR0aDogMTIwcHg7XHJcbn1cclxuXHJcbi5waWNrLWF2YXRhciB7XHJcbiAgICB3aWR0aDogODBweDtcclxuICAgIG9wYWNpdHk6IDAuMztcclxufVxyXG5cclxuLnBpY2stYXZhdGFyLXNlbGVjY2lvbmFkbyB7XHJcbiAgICB0cmFuc2l0aW9uOiBvcGFjaXR5IDAuNXMgbGluZWFyO1xyXG4gICAgb3BhY2l0eTogMSAhaW1wb3J0YW50O1xyXG59IiwiaW1nIHtcbiAgd2lkdGg6IDEyMHB4O1xufVxuXG4ucGljay1hdmF0YXIge1xuICB3aWR0aDogODBweDtcbiAgb3BhY2l0eTogMC4zO1xufVxuXG4ucGljay1hdmF0YXItc2VsZWNjaW9uYWRvIHtcbiAgdHJhbnNpdGlvbjogb3BhY2l0eSAwLjVzIGxpbmVhcjtcbiAgb3BhY2l0eTogMSAhaW1wb3J0YW50O1xufSJdfQ== */"
 
 /***/ }),
 
@@ -327,7 +327,7 @@ var ContribuintesComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".text-1 {\n  position: fixed;\n  right: 0px;\n  left: 30px;\n  font-style: oblique;\n  font-weight: bold;\n}\n\nion-item {\n  --padding-bottom: 1px !important;\n}\n\n.buttonAction {\n  position: fixed;\n  bottom: 5px;\n  width: 95%;\n}\n\n.dateModel {\n  position: fixed;\n  font-size: 0px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9kZXRhbGhlL0M6XFxVc2Vyc1xcZWxpc2V1XFxEZXNrdG9wXFwxMC1leHByZXNzL3NyY1xcYXBwXFxjb21wb25lbnRzXFxkZXRhbGhlXFxkZXRhbGhlLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9jb21wb25lbnRzL2RldGFsaGUvZGV0YWxoZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGVBQUE7RUFDQSxVQUFBO0VBQ0EsVUFBQTtFQUNBLG1CQUFBO0VBQ0EsaUJBQUE7QUNDSjs7QURFQTtFQUNJLGdDQUFBO0FDQ0o7O0FERUE7RUFDSSxlQUFBO0VBQ0EsV0FBQTtFQUNBLFVBQUE7QUNDSjs7QURFQTtFQUNJLGVBQUE7RUFDQSxjQUFBO0FDQ0oiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL2RldGFsaGUvZGV0YWxoZS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi50ZXh0LTEge1xyXG4gICAgcG9zaXRpb246IGZpeGVkOyBcclxuICAgIHJpZ2h0OiAwcHg7IFxyXG4gICAgbGVmdDogMzBweDsgXHJcbiAgICBmb250LXN0eWxlOiBvYmxpcXVlO1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbn1cclxuXHJcbmlvbi1pdGVtIHtcclxuICAgIC0tcGFkZGluZy1ib3R0b206IDFweCAhaW1wb3J0YW50O1xyXG59XHJcblxyXG4uYnV0dG9uQWN0aW9uIHtcclxuICAgIHBvc2l0aW9uOiBmaXhlZDtcclxuICAgIGJvdHRvbTogNXB4O1xyXG4gICAgd2lkdGg6IDk1JTtcclxufVxyXG5cclxuLmRhdGVNb2RlbCB7XHJcbiAgICBwb3NpdGlvbjogZml4ZWQ7XHJcbiAgICBmb250LXNpemU6IDBweDtcclxufSIsIi50ZXh0LTEge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHJpZ2h0OiAwcHg7XG4gIGxlZnQ6IDMwcHg7XG4gIGZvbnQtc3R5bGU6IG9ibGlxdWU7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xufVxuXG5pb24taXRlbSB7XG4gIC0tcGFkZGluZy1ib3R0b206IDFweCAhaW1wb3J0YW50O1xufVxuXG4uYnV0dG9uQWN0aW9uIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBib3R0b206IDVweDtcbiAgd2lkdGg6IDk1JTtcbn1cblxuLmRhdGVNb2RlbCB7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgZm9udC1zaXplOiAwcHg7XG59Il19 */"
+module.exports = ".text-1 {\n  position: fixed;\n  right: 0px;\n  left: 30px;\n  font-style: oblique;\n  font-weight: bold;\n}\n\nion-item {\n  --padding-bottom: 1px !important;\n}\n\n.buttonAction {\n  position: fixed;\n  bottom: 5px;\n  width: 95%;\n}\n\n.dateModel {\n  position: fixed;\n  font-size: 0px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9kZXRhbGhlL0M6XFx0ZW1wXFx3cy1pb25pY1xcWEV4cHJlc3NBcHAvc3JjXFxhcHBcXGNvbXBvbmVudHNcXGRldGFsaGVcXGRldGFsaGUuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2NvbXBvbmVudHMvZGV0YWxoZS9kZXRhbGhlLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZUFBQTtFQUNBLFVBQUE7RUFDQSxVQUFBO0VBQ0EsbUJBQUE7RUFDQSxpQkFBQTtBQ0NKOztBREVBO0VBQ0ksZ0NBQUE7QUNDSjs7QURFQTtFQUNJLGVBQUE7RUFDQSxXQUFBO0VBQ0EsVUFBQTtBQ0NKOztBREVBO0VBQ0ksZUFBQTtFQUNBLGNBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvZGV0YWxoZS9kZXRhbGhlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRleHQtMSB7XHJcbiAgICBwb3NpdGlvbjogZml4ZWQ7IFxyXG4gICAgcmlnaHQ6IDBweDsgXHJcbiAgICBsZWZ0OiAzMHB4OyBcclxuICAgIGZvbnQtc3R5bGU6IG9ibGlxdWU7XHJcbiAgICBmb250LXdlaWdodDogYm9sZDtcclxufVxyXG5cclxuaW9uLWl0ZW0ge1xyXG4gICAgLS1wYWRkaW5nLWJvdHRvbTogMXB4ICFpbXBvcnRhbnQ7XHJcbn1cclxuXHJcbi5idXR0b25BY3Rpb24ge1xyXG4gICAgcG9zaXRpb246IGZpeGVkO1xyXG4gICAgYm90dG9tOiA1cHg7XHJcbiAgICB3aWR0aDogOTUlO1xyXG59XHJcblxyXG4uZGF0ZU1vZGVsIHtcclxuICAgIHBvc2l0aW9uOiBmaXhlZDtcclxuICAgIGZvbnQtc2l6ZTogMHB4O1xyXG59IiwiLnRleHQtMSB7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgcmlnaHQ6IDBweDtcbiAgbGVmdDogMzBweDtcbiAgZm9udC1zdHlsZTogb2JsaXF1ZTtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG59XG5cbmlvbi1pdGVtIHtcbiAgLS1wYWRkaW5nLWJvdHRvbTogMXB4ICFpbXBvcnRhbnQ7XG59XG5cbi5idXR0b25BY3Rpb24ge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIGJvdHRvbTogNXB4O1xuICB3aWR0aDogOTUlO1xufVxuXG4uZGF0ZU1vZGVsIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBmb250LXNpemU6IDBweDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -404,7 +404,7 @@ var DetalheComponent = /** @class */ (function () {
     };
     // Atualiza a API de recibos no backend ou no BD do app
     DetalheComponent.prototype.getPutRecibos = function (msg, opcao) {
-        // Para rodar nmo app
+        // Para rodar no app
         // this.crudService.update(this.recibo, opcao)
         //   .then(() => {
         //     this.presentToast(msg);
@@ -418,7 +418,7 @@ var DetalheComponent = /** @class */ (function () {
             .subscribe(function () {
             // Exibir tost de reagendamento
             _this.presentToast(msg);
-            //this.sairDoModal();
+            _this.sairDoModal();
             console.log(_this.recibo);
         }, function (error) {
             console.log(error);
@@ -457,7 +457,7 @@ var DetalheComponent = /** @class */ (function () {
                                             // Condição para receber o valor com alteração ou não
                                             if (_this.valorDoacao !== _this.recibo.valorgerado) {
                                                 _this.recibo.motivodevol = 'Valor alterado';
-                                                // Tabela motivo delolução, aqui vou chamar essa api
+                                                // Tabela motivo devolução, aqui vou chamar essa api
                                                 _this.objDevolvido('Recebido com alteração de valor');
                                                 _this.getPostDevolvidos();
                                                 _this.insertDevolvidos();
@@ -624,7 +624,9 @@ var DetalheComponent = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.toastCtrl.create({
                             message: message,
-                            duration: 2000
+                            duration: 2000,
+                            mode: "ios",
+                            color: "dark"
                         })];
                     case 1:
                         toast = _a.sent();
@@ -800,7 +802,7 @@ var PopdevolucaoComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".itemObjResumo {\n  --min-height: 30%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9wb3ByZXN1bW8vQzpcXFVzZXJzXFxlbGlzZXVcXERlc2t0b3BcXDEwLWV4cHJlc3Mvc3JjXFxhcHBcXGNvbXBvbmVudHNcXHBvcHJlc3Vtb1xccG9waW5mby5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY29tcG9uZW50cy9wb3ByZXN1bW8vcG9waW5mby5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGlCQUFBO0FDQ0oiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3BvcHJlc3Vtby9wb3BpbmZvLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLml0ZW1PYmpSZXN1bW8ge1xyXG4gICAgLS1taW4taGVpZ2h0OiAzMCU7XHJcbn1cclxuXHJcbiIsIi5pdGVtT2JqUmVzdW1vIHtcbiAgLS1taW4taGVpZ2h0OiAzMCU7XG59Il19 */"
+module.exports = ".itemObjResumo {\n  --min-height: 30%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9wb3ByZXN1bW8vQzpcXHRlbXBcXHdzLWlvbmljXFxYRXhwcmVzc0FwcC9zcmNcXGFwcFxcY29tcG9uZW50c1xccG9wcmVzdW1vXFxwb3BpbmZvLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9jb21wb25lbnRzL3BvcHJlc3Vtby9wb3BpbmZvLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksaUJBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcG9wcmVzdW1vL3BvcGluZm8uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuaXRlbU9ialJlc3VtbyB7XHJcbiAgICAtLW1pbi1oZWlnaHQ6IDMwJTtcclxufVxyXG5cclxuIiwiLml0ZW1PYmpSZXN1bW8ge1xuICAtLW1pbi1oZWlnaHQ6IDMwJTtcbn0iXX0= */"
 
 /***/ }),
 

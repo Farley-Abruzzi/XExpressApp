@@ -149,7 +149,27 @@ var Camera = /** @class */ (function (_super) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n    <ion-toolbar color=\"dark\">\n        <ion-title>\n            Depositos\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content color=\"light\">\n    <!-- <ion-grid fixed>\n    <ion-row>\n      <ion-col size=\"12\">\n        <ion-button color=\"success\" expand=\"block\" href=\"http://localhost:4200/comunicar-deposito\">\n          Comunicar depositos\n        </ion-button>\n      </ion-col>\n    </ion-row>\n  </ion-grid> -->\n\n    <ion-slides mode=\"ios\" #mySlider>\n        <ion-slide>\n            <ion-card color=\"dark\">\n                <ion-card-header>\n                    <ion-card-title>Comunicado de Depósito</ion-card-title>\n                </ion-card-header>\n                <ion-card-content>\n                    <p>Olá (Nome), antes de iniciar observe o seguinte:</p>\n                    <p>-> Você precisa ter impresso o resumo do dia.</p>\n                    <p>-> Ter os comprovantes dos depósitos em mãos.</p>\n                    <p>-> Se tiver despesa, precisa da nota de despesa.</p>\n                    <br>\n                    <br>\n                    <p>1º Passo: Informe a data do recebimento</p>\n                    <br>\n                    <br>\n                    <ion-button shape=\"round\" color=\"success\" class=\"calendarDeposito\" fill=\"outline\">\n                        <ion-icon slot=\"start\" name=\"calendar\"></ion-icon>\n                        <ion-datetime cancelText=\"Cancelar\" done-text=\"Ok\" (ionChange)=\"selectDtDeposito( $event )\" [ngModel]=\"dtDeposito.toISOString()\" display-format=\"DD/MM/YYYY\"></ion-datetime>\n                    </ion-button>\n                </ion-card-content>\n            </ion-card>\n        </ion-slide>\n\n        <ion-slide>\n            <ion-card color=\"dark\">\n                <ion-card-content>\n                    <p>2º Passo: Clique na entidade, e observe se os valores estão estão de acordo com o resumo que você imprimiu.</p>\n                    <br>\n                    <ion-label>Entidade:</ion-label>\n                    <ion-select placeholder=\"Qual entidade?\" (ionChange)=\"selectByEntity( $event )\" [ngModel]=\"entidade\">\n                        <ion-select-option value=\"Hospital do Cancer de Uberlandia\">Hospital do Cancêr de Uberlândia</ion-select-option>\n                    </ion-select>\n                </ion-card-content>\n            </ion-card>\n        </ion-slide>\n\n        <ion-slide>\n            <ion-card color=\"dark\">\n                <ion-card-content>\n                    <p>3º Passo: Informe o código de validação que foi impresso no final do resumo.</p>\n                    <br>\n                    <ion-item>\n                        <ion-input placeholder=\"Código\" (ionChange)=\"selectByCodValidacao( $event )\" [ngModel]=\"codvalidacao\"></ion-input>\n                    </ion-item>\n                    <br>\n                    <br>\n                    <p>Caso tenha alguma despesa autorizada, favor informar nos campos abaixo.</p>\n                    <br>\n                    <ion-item>\n                        <ion-input placeholder=\"Valor despesa\" (ionChange)=\"selectByValorDespesa( $event )\" [(ngModel)]=\"valorDespesa\"></ion-input>\n                    </ion-item>\n                    <br>\n                    <ion-item>\n                        <ion-input placeholder=\"Descrição despesa\" (ionChange)=\"selectByValorDespesa( $event )\" [(ngModel)]=\"detalhamentoDespesa\"></ion-input>\n                    </ion-item>\n                </ion-card-content>\n            </ion-card>\n        </ion-slide>\n\n        <ion-slide>\n            <ion-card color=\"dark\">\n                <ion-card-header>\n                    Enviar imagem do comprovante\n                </ion-card-header>\n                <ion-item *ngIf=\"picture\">\n                    <img [src]=\"picture\">\n                </ion-item>\n                <ion-item>\n                    <ion-button color=\"success\" ion-button block (click)=\"getCameraPicture()\" [disabled]=\"cameraOn\">Camera</ion-button>\n                </ion-item>\n            </ion-card>\n        </ion-slide>\n\n    </ion-slides>\n\n    <br>\n    <br>\n    <ion-button [style.visibility]=\"isVisible ? 'visible' : 'hidden'\" class=\"buttonNext\" shape=\"round\" color=\"success\" (click)=\"slideNext()\">\n        Continuar\n    </ion-button>\n\n\n</ion-content>"
+module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-title>\r\n            Depositos\r\n        </ion-title>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content color=\"light\">\r\n    <!-- <ion-grid fixed>\r\n    <ion-row>\r\n      <ion-col size=\"12\">\r\n        <ion-button color=\"success\" expand=\"block\" href=\"http://localhost:4200/comunicar-deposito\">\r\n          Comunicar depositos\r\n        </ion-button>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid> -->\r\n\r\n    <ion-slides mode=\"ios\" #mySlider>\r\n        <ion-slide>\r\n            <ion-card color=\"dark\">\r\n                <ion-card-header>\r\n                    <ion-card-title>Comunicado de Depósito</ion-card-title>\r\n                </ion-card-header>\r\n                <ion-card-content>\r\n                    <p>Olá (Nome), antes de iniciar observe o seguinte:</p>\r\n                    <p>-> Você precisa ter impresso o resumo do dia.</p>\r\n                    <p>-> Ter os comprovantes dos depósitos em mãos.</p>\r\n                    <p>-> Se tiver despesa, precisa da nota de despesa.</p>\r\n                    <br>\r\n                    <br>\r\n                    <p>1º Passo: Informe a data do recebimento</p>\r\n                    <ion-row text-center>\r\n                        <ion-col>\r\n                            <ion-button shape=\"round\" color=\"success\" class=\"calendarDeposito\" fill=\"outline\">\r\n                                <ion-icon slot=\"start\" name=\"calendar\"></ion-icon>\r\n                                <ion-datetime cancelText=\"Cancelar\" done-text=\"Ok\" (ionChange)=\"selectDtDeposito( $event )\" [ngModel]=\"dtDeposito.toISOString()\" display-format=\"DD/MM/YYYY\"></ion-datetime>\r\n                            </ion-button>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-card-content>\r\n            </ion-card>\r\n        </ion-slide>\r\n\r\n        <ion-slide>\r\n            <ion-card color=\"dark\">\r\n                <ion-card-content>\r\n                    <p>2º Passo: Clique na entidade, e observe se os valores estão estão de acordo com o resumo que você imprimiu.</p>\r\n                    <br>\r\n                    <ion-label>Entidade:</ion-label>\r\n                    <ion-select placeholder=\"Qual entidade?\" (ionChange)=\"selectByEntity( $event )\" [ngModel]=\"deposito.entidade\">\r\n                        <ion-select-option value=\"Hospital do Cancer de Uberlandia\">Hospital do Cancêr de Uberlândia</ion-select-option>\r\n                    </ion-select>\r\n                </ion-card-content>\r\n            </ion-card>\r\n        </ion-slide>\r\n\r\n        <ion-slide>\r\n            <ion-card color=\"dark\">\r\n                <ion-card-content>\r\n                    <p>3º Passo: Informe o código de validação que foi impresso no final do resumo.</p>\r\n                    <br>\r\n                    <ion-item>\r\n                        <ion-input placeholder=\"Código\" (ionChange)=\"selectByCodValidacao( $event )\" [ngModel]=\"deposito.codvalidacao\"></ion-input>\r\n                    </ion-item>\r\n                    <br>\r\n                    <br>\r\n                    <p>Caso tenha alguma despesa autorizada, favor informar nos campos abaixo.</p>\r\n                    <br>\r\n                    <ion-item>\r\n                        <ion-input type=\"number\" placeholder=\"Valor despesa\" (ionChange)=\"selectByValorDespesa( $event )\" [(ngModel)]=\"deposito.valordespesa\"></ion-input>\r\n                    </ion-item>\r\n                    <br>\r\n                    <ion-item>\r\n                        <ion-input type=\"text\" placeholder=\"Descrição despesa\" (ionChange)=\"selectByDetailDespesa( $event )\" [(ngModel)]=\"deposito.descricaodespesa\"></ion-input>\r\n                    </ion-item>\r\n                </ion-card-content>\r\n            </ion-card>\r\n        </ion-slide>\r\n\r\n        <ion-slide>\r\n            <ion-card color=\"dark\">\r\n                <ion-card-header>\r\n                    Enviar imagem do comprovante\r\n                </ion-card-header>\r\n                <ion-item *ngIf=\"picture\">\r\n                    <img [src]=\"picture\">\r\n                </ion-item>\r\n                <ion-item>\r\n                    <ion-button color=\"success\" expand=\"block\" ion-button block (click)=\"getCameraPicture()\" [disabled]=\"cameraOn\">Camera</ion-button>\r\n                </ion-item>\r\n                <ion-item>\r\n                    <ion-button *ngIf=\"picture\" fill=\"outline\" color=\"success\" ion-button block (click)=\"sendPicture()\">Enviar imagem</ion-button>\r\n                    <ion-button *ngIf=\"picture\" fill=\"outline\" color=\"danger\" ion-button block (click)=\"cancel()\">Descartar imagem</ion-button>\r\n                    <ion-button color=\"success\" ion-button block (click)=\"salvar()\">Comunicar Deposito</ion-button>\r\n                </ion-item>\r\n            </ion-card>\r\n        </ion-slide>\r\n\r\n\r\n    </ion-slides>\r\n    <br>\r\n    <br>\r\n    <ion-row text-center>\r\n        <ion-col>\r\n            <ion-button [style.visibility]=\"isVisible ? 'visible' : 'hidden'\" class=\"buttonNext\" shape=\"round\" color=\"success\" (click)=\"slideNext()\">\r\n                Continuar\r\n            </ion-button>\r\n        </ion-col>\r\n    </ion-row>\r\n\r\n\r\n</ion-content>"
+
+/***/ }),
+
+/***/ "./src/app/class/depositos.ts":
+/*!************************************!*\
+  !*** ./src/app/class/depositos.ts ***!
+  \************************************/
+/*! exports provided: Depositos */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Depositos", function() { return Depositos; });
+var Depositos = /** @class */ (function () {
+    function Depositos() {
+    }
+    return Depositos;
+}());
+
+
 
 /***/ }),
 
@@ -213,7 +233,7 @@ var Tab1PageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".welcome-card img {\n  max-height: 35vh;\n  overflow: hidden;\n}\n\nion-slides {\n  width: 90%;\n}\n\n.buttonNext {\n  position: fixed;\n  top: 85%;\n  right: 33%;\n}\n\n.calendarDeposito {\n  position: fixed;\n  top: 77%;\n  right: 30%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvZGVwb3NpdG9zL0M6XFx0ZW1wXFx3cy1pb25pY1xcWEV4cHJlc3NBcHAvc3JjXFxhcHBcXHBhZ2VzXFxkZXBvc2l0b3NcXGRlcG9zaXRvcy5wYWdlLnNjc3MiLCJzcmMvYXBwL3BhZ2VzL2RlcG9zaXRvcy9kZXBvc2l0b3MucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQUE7RUFDQSxnQkFBQTtBQ0NKOztBREVBO0VBQ0ksVUFBQTtBQ0NKOztBREVBO0VBQ0ksZUFBQTtFQUNBLFFBQUE7RUFDQSxVQUFBO0FDQ0o7O0FERUE7RUFDSSxlQUFBO0VBQ0EsUUFBQTtFQUNBLFVBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2RlcG9zaXRvcy9kZXBvc2l0b3MucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLndlbGNvbWUtY2FyZCBpbWcge1xuICAgIG1heC1oZWlnaHQ6IDM1dmg7XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcbn1cblxuaW9uLXNsaWRlcyB7XG4gICAgd2lkdGg6IDkwJTtcbn1cblxuLmJ1dHRvbk5leHQge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDg1JTtcbiAgICByaWdodDogMzMlO1xufVxuXG4uY2FsZW5kYXJEZXBvc2l0byB7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIHRvcDogNzclO1xuICAgIHJpZ2h0OiAzMCU7XG4gICAgLy8tLXJpcHBsZS1jb2xvcjogIzE5MjAzNSAhaW1wb3J0YW50O1xufSIsIi53ZWxjb21lLWNhcmQgaW1nIHtcbiAgbWF4LWhlaWdodDogMzV2aDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbn1cblxuaW9uLXNsaWRlcyB7XG4gIHdpZHRoOiA5MCU7XG59XG5cbi5idXR0b25OZXh0IHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICB0b3A6IDg1JTtcbiAgcmlnaHQ6IDMzJTtcbn1cblxuLmNhbGVuZGFyRGVwb3NpdG8ge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHRvcDogNzclO1xuICByaWdodDogMzAlO1xufSJdfQ== */"
+module.exports = ".welcome-card img {\n  max-height: 35vh;\n  overflow: hidden;\n}\n\nion-slides {\n  width: 90%;\n}\n\n.buttonNext {\n  margin-top: 10%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvZGVwb3NpdG9zL0M6XFx0ZW1wXFx3cy1pb25pY1xcWEV4cHJlc3NBcHAvc3JjXFxhcHBcXHBhZ2VzXFxkZXBvc2l0b3NcXGRlcG9zaXRvcy5wYWdlLnNjc3MiLCJzcmMvYXBwL3BhZ2VzL2RlcG9zaXRvcy9kZXBvc2l0b3MucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQUE7RUFDQSxnQkFBQTtBQ0NKOztBREVBO0VBQ0ksVUFBQTtBQ0NKOztBREVBO0VBQ0ksZUFBQTtBQ0NKIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvZGVwb3NpdG9zL2RlcG9zaXRvcy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIud2VsY29tZS1jYXJkIGltZyB7XHJcbiAgICBtYXgtaGVpZ2h0OiAzNXZoO1xyXG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcclxufVxyXG5cclxuaW9uLXNsaWRlcyB7XHJcbiAgICB3aWR0aDogOTAlO1xyXG59XHJcblxyXG4uYnV0dG9uTmV4dCB7XHJcbiAgICBtYXJnaW4tdG9wOiAxMCU7XHJcbiAgICAvL3JpZ2h0OiAzMyU7XHJcbn0iLCIud2VsY29tZS1jYXJkIGltZyB7XG4gIG1heC1oZWlnaHQ6IDM1dmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG59XG5cbmlvbi1zbGlkZXMge1xuICB3aWR0aDogOTAlO1xufVxuXG4uYnV0dG9uTmV4dCB7XG4gIG1hcmdpbi10b3A6IDEwJTtcbn0iXX0= */"
 
 /***/ }),
 
@@ -230,27 +250,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_contribuintes_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/contribuintes.service */ "./src/app/services/contribuintes.service.ts");
-/* harmony import */ var _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/camera/ngx */ "./node_modules/@ionic-native/camera/ngx/index.js");
+/* harmony import */ var _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/camera/ngx */ "./node_modules/@ionic-native/camera/ngx/index.js");
+/* harmony import */ var _class_depositos__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../class/depositos */ "./src/app/class/depositos.ts");
+/* harmony import */ var _services_usuario_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/usuario.service */ "./src/app/services/usuario.service.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../services/storage.service */ "./src/app/services/storage.service.ts");
+/* harmony import */ var _services_crud_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../services/crud.service */ "./src/app/services/crud.service.ts");
+
+
+
+
 
 
 
 
 
 var Tab1Page = /** @class */ (function () {
-    function Tab1Page(contribService, datePipe, camera) {
-        this.contribService = contribService;
+    function Tab1Page(usuarioService, datePipe, camera, toastCtrl, navCtrl, storage, crud) {
+        this.usuarioService = usuarioService;
         this.datePipe = datePipe;
         this.camera = camera;
+        this.toastCtrl = toastCtrl;
+        this.navCtrl = navCtrl;
+        this.storage = storage;
+        this.crud = crud;
+        this.deposito = new _class_depositos__WEBPACK_IMPORTED_MODULE_4__["Depositos"]();
         this.dtDeposito = new Date();
-        this.dataDep = " ";
+        this.dtDepFim = new Date(this.dtDeposito.getFullYear(), this.dtDeposito.getMonth() + 1, 0);
+        this.dtFech = " ";
         this.entity = " ";
         this.cameraOn = false;
         this.isVisible = false;
+        this.listaDeRecibos = new Array();
     }
     Tab1Page.prototype.ngOnInit = function () {
-        this.conversorDate();
+        this.getCodMensageiro();
+        //this.conversorDate();
         this.mySlide.lockSwipes(true);
+        //this.cameraOn = false;
     };
     Tab1Page.prototype.slideNext = function () {
         this.mySlide.lockSwipes(false);
@@ -258,8 +295,8 @@ var Tab1Page = /** @class */ (function () {
         this.mySlide.lockSwipes(true);
     };
     Tab1Page.prototype.selectDtDeposito = function (event) {
-        this.dataDep = this.datePipe.transform(new Date(event.detail.value), "yyyy-MM-dd");
-        console.log('Data Inicio ' + this.dataDep);
+        this.dtFech = event.detail.value;
+        console.log("Data de fechamento: ", this.datePipe.transform(this.dtFech, "yyyy-MM-dd"));
         this.isVisible = true;
     };
     Tab1Page.prototype.selectByEntity = function (event) {
@@ -278,11 +315,60 @@ var Tab1Page = /** @class */ (function () {
         this.detailDesp = event.detail.value;
         console.log("Descrição desp: ", this.detailDesp);
     };
-    Tab1Page.prototype.conversorDate = function () {
-        this.dataDep = this.datePipe.transform(this.dtDeposito, "yyyy-MM-dd");
+    Tab1Page.prototype.getCodMensageiro = function () {
+        var _this = this;
+        var localUser = this.storage.getLocalUser();
+        if (localUser && localUser.email) {
+            this.usuarioService.findByEmail(localUser.email)
+                .subscribe(function (resp) {
+                _this.usuario = resp;
+                _this.codMens = _this.usuario.codmensageiro;
+                var dataBaixa = new Date();
+                _this.crud.getByCodmensageiro(_this.codMens, dataBaixa)
+                    .then(function (data) {
+                    _this.listaDeRecibos = data;
+                    console.log('DATA ', data);
+                }, function (error) { console.log('Error SqLite: ', error); });
+            }, function (error) {
+                if (error.status == 403) {
+                    console.log(error.status);
+                }
+            });
+        }
+    };
+    Tab1Page.prototype.setObjDeposito = function () {
+        this.deposito = new _class_depositos__WEBPACK_IMPORTED_MODULE_4__["Depositos"]();
+        var newDate = this.dtFech;
+        var dataFechamento = new Date(newDate);
+        this.deposito.dtfechamento = dataFechamento;
+        this.deposito.codvalidacao = this.codValid;
+        this.deposito.valordeposito = 1746;
+        this.deposito.entidade = this.entity;
+        this.deposito.codusuario = 70026;
+        this.deposito.codmensageiro = 345;
+        this.deposito.totalarrecadado = 1745;
+        this.deposito.qtdrecibos = null;
+        this.deposito.valordespesa = this.valorDesp;
+        this.deposito.descricaodespesa = this.detailDesp;
+        if (this.deposito.valordespesa !== null) {
+            this.deposito.valordeposito = this.deposito.valordeposito - this.deposito.valordespesa;
+            console.log('VALOR DEPOSITO: ', this.deposito.valordeposito);
+        }
+    };
+    Tab1Page.prototype.getApiDbPostDepositos = function () {
+        var _this = this;
+        this.usuarioService.getApiDbPostDepositos(this.deposito)
+            .subscribe(function (resp) {
+            _this.presentToast('Deposito inserido com sucesso!');
+            _this.navCtrl.navigateRoot('main/tabs/tab2', { animated: true });
+        }, function (error) {
+            _this.presentToast('VALOR DO DEPOSITO INCORRETO');
+            console.log(error);
+        });
     };
     Tab1Page.prototype.getCameraPicture = function () {
         var _this = this;
+        this.isVisible = false;
         this.cameraOn = true;
         var options = {
             quality: 100,
@@ -293,13 +379,56 @@ var Tab1Page = /** @class */ (function () {
         this.camera.getPicture(options).then(function (imageData) {
             _this.picture = 'data:image/png;base64,' + imageData;
             _this.cameraOn = false;
+            console.log('CAMERA ', _this.picture);
         }, function (err) {
         });
     };
+    Tab1Page.prototype.sendPicture = function () {
+        var _this = this;
+        this.setObjDeposito();
+        this.usuarioService.uploadPicture(this.picture)
+            .subscribe(function (resp) {
+            _this.picture = null;
+            _this.getApiDbPostDepositos();
+            _this.navCtrl.navigateRoot('main/tabs/tab2', { animated: true });
+        }, function (error) {
+        });
+    };
+    Tab1Page.prototype.cancel = function () {
+        this.picture = null;
+    };
+    Tab1Page.prototype.salvar = function () {
+        this.setObjDeposito();
+        console.log("Obj Deposito: ", this.deposito);
+        this.getApiDbPostDepositos();
+    };
+    Tab1Page.prototype.presentToast = function (message) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var toast;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.toastCtrl.create({
+                            message: message,
+                            duration: 3000,
+                            mode: "ios",
+                            color: "dark"
+                        })];
+                    case 1:
+                        toast = _a.sent();
+                        toast.present();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     Tab1Page.ctorParameters = function () { return [
-        { type: _services_contribuintes_service__WEBPACK_IMPORTED_MODULE_3__["ContribuintesService"] },
+        { type: _services_usuario_service__WEBPACK_IMPORTED_MODULE_5__["UsuarioService"] },
         { type: _angular_common__WEBPACK_IMPORTED_MODULE_1__["DatePipe"] },
-        { type: _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_4__["Camera"] }
+        { type: _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_3__["Camera"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["NavController"] },
+        { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_7__["StorageService"] },
+        { type: _services_crud_service__WEBPACK_IMPORTED_MODULE_8__["CrudService"] }
     ]; };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"])('mySlider', { static: true }),
@@ -311,9 +440,13 @@ var Tab1Page = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./depositos.page.html */ "./node_modules/raw-loader/index.js!./src/app/pages/depositos/depositos.page.html"),
             styles: [__webpack_require__(/*! ./depositos.page.scss */ "./src/app/pages/depositos/depositos.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_contribuintes_service__WEBPACK_IMPORTED_MODULE_3__["ContribuintesService"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_usuario_service__WEBPACK_IMPORTED_MODULE_5__["UsuarioService"],
             _angular_common__WEBPACK_IMPORTED_MODULE_1__["DatePipe"],
-            _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_4__["Camera"]])
+            _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_3__["Camera"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["NavController"],
+            _services_storage_service__WEBPACK_IMPORTED_MODULE_7__["StorageService"],
+            _services_crud_service__WEBPACK_IMPORTED_MODULE_8__["CrudService"]])
     ], Tab1Page);
     return Tab1Page;
 }());

@@ -4,7 +4,7 @@ import { ContribuintesService } from '../../services/contribuintes.service';
 import { Resumo } from '../../interfaces/resumo';
 import { DatePipe } from '@angular/common';
 import { StorageService } from '../../services/storage.service';
-import { LoadingController, PopoverController } from '@ionic/angular';
+import { LoadingController, PopoverController, ToastController } from '@ionic/angular';
 import { PopinfoComponent } from '../../components/popresumo/popinfo.component';
 
 
@@ -28,12 +28,12 @@ export class RelatorioPage implements OnInit {
                private datePipe: DatePipe,
                private storage: StorageService,
                private popoverCtrl: PopoverController,
-               public loadingController: LoadingController) { }
+               private loadingController: LoadingController,
+               private toastCtrl: ToastController) { }
 
 
   ngOnInit() {
     this.conversorDate();
-    this.connect();
     this.carregarPeriodo();
     // this.carregarResumo();
   }
@@ -53,6 +53,7 @@ export class RelatorioPage implements OnInit {
         this.objetos = resp;
         loading.dismiss();
       });
+      this.connect();
   }
 
   // Método para conectar o dispositivo a impressora via bluetooth.
@@ -60,6 +61,7 @@ export class RelatorioPage implements OnInit {
       this.bluetoothSerial.connectInsecure("00:02:5B:B4:13:87").subscribe((data) => {
         console.log('Conectado', data);
       });
+      this.presentToast('IMPRESSORA CONECTADA!');
   }
 
   // Desconecta o dispositivo da impressora.
@@ -71,6 +73,17 @@ export class RelatorioPage implements OnInit {
       console.log('Limpo');
     });
   }
+
+  // Mostrando mensagens de confirmação no Toast
+  async presentToast( message: string ) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 2000,
+      mode: "ios",
+      color: "dark"
+    });
+    toast.present();
+}
 
   // Imprime as informações relacionadas na impressora.
   Imprimir() {

@@ -1,3 +1,4 @@
+import { API_CONFIG } from './../../config/api.config';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -18,12 +19,12 @@ export class UsuarioService {
   }
 
   findByEmail(email: string): Observable<UsuarioDTO> {
-    return this.http.get<UsuarioDTO>(`${URL}/usuario/email?value=${email}`);
+    return this.http.get<UsuarioDTO>(`${ URL }/usuario/email?value=${email}`);
   }
 
   // =============================== Inserindo deposito com POST ===================================
   getApiDbPostDepositos(deposito: Depositos): Observable<Depositos> { // api base
-    return this.http.post<Depositos>(`${URL}/deposito`, deposito, {
+    return this.http.post<Depositos>(`${ URL }/deposito`, deposito, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -34,7 +35,7 @@ export class UsuarioService {
     let pictureBlob = this.imageUtilService.dataUriToBlob(picture);
     let formData: FormData = new FormData();
     formData.set('file', pictureBlob, 'file.png');
-    return this.http.post(`${URL}/deposito/picture`, formData,
+    return this.http.post(`${ URL }/deposito/picture`, formData,
       {
         observe: 'response',
         responseType: 'text'

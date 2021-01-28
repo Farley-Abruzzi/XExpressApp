@@ -9,6 +9,9 @@ import { Devolvidos } from '../Class/devolvidos';
 })
 export class CrudService {
 
+  qtdRecibos: number;
+  valorDeposito: number;
+
   constructor( private dbService: DatabaseService ) { }
 
   // Método para inserir recibos no banco do app
@@ -18,7 +21,7 @@ export class CrudService {
       const db = await this.dbService.getDB();
       let sql = 'insert into recibos (nrorecibo, nomenorecibo, entregaweb, dtcobranca, reagendado, dtreagendamento, valorgerado, statusrec, dtbaixa, parcela, via, motivodevol,'
         + ' enderecosecundario, numerosecundario, bairrosecundario, cidadesecundario, complementosecundario, cepsecundario, telefonesecundario, desccategoria, '
-        + ' observacoes, codmensageiro) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+        + ' observacoes, codmensageiro) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
       let data = [recibos.nrorecibo, recibos.nomenorecibo, recibos.entregaweb, recibos.dtcobranca, recibos.reagendado, recibos.dtreagendamento, recibos.valorgerado,
       recibos.statusrec, recibos.dtbaixa, recibos.parcela, recibos.via, recibos.motivodevol, recibos.enderecosecundario, recibos.numerosecundario,
       recibos.bairrosecundario, recibos.cidadesecundario, recibos.complementosecundario, recibos.cepsecundario, recibos.telefonesecundario, recibos.desccategoria,
@@ -76,9 +79,46 @@ export class CrudService {
                 tmp.bairrosecundario, tmp.cidadesecundario, tmp.complementosecundario, tmp.cepsecundario, tmp.telefonesecundario, tmp.desccategoria,
                 tmp.valorremarcado, tmp.dtremarc, tmp.codoperador, tmp.codcategoria, tmp.codcontrib, tmp.codusuario, tmp.observacoes, tmp.codmensageiro)
               recibos.push(recibo);
+              console.log('Consulta realizada!');
             }
             return recibos;
           } else {
+            console.log('return new array<Recibos>');
+            return new Array<Recibos>();
+          }
+        }).catch(e => {
+          console.error(e);
+        });
+    }).catch(e => {
+      console.error(e);
+    });
+  }
+
+  // Consulta DB do app para comparar dados com o DB da aplicação e fazer o comunicado de deposito
+  public getByCodmensageiro(cod: number, dtcobranca: Date) {
+    return this.dbService.getDB().then((db: SQLiteObject) => {
+        let sql = "SELECT COUNT(obj.nrorecibo), SUM(obj.valorgerado) FROM recibos obj "
+          + "WHERE obj.codmensageiro = ? "
+          + "AND obj.statusrec = 'B' "
+          + "AND obj.impresso = 'S' "
+          + "AND obj.dtbaixa = ?";
+        let data = [cod, dtcobranca];
+        return db.executeSql(sql, data)
+        .then((data: any) => {
+          if (data.rows.length > 0) {
+            var deposito: String[] = new Array<String>();
+            for (let i = 0; i < data.rows.length; i++) {
+              let item = data.rows.item(i);
+              
+              deposito.push(item);
+
+              console.log('Consulta realizada ');
+              console.log('COD, DT: ', cod, dtcobranca);
+            }
+            console.log('return recibos: ', deposito);
+            return deposito;
+          } else {
+            console.log('return new array<Recibos>');
             return new Array<Recibos>();
           }
         }).catch(e => {

@@ -11,6 +11,7 @@ export class Depositos {
   valordespesa: number;
   descricaodespesa: string;
 
+
   constructor() {
   }
 }

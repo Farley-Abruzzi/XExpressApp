@@ -11,19 +11,44 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Recibos", function() { return Recibos; });
 var Recibos = /** @class */ (function () {
-    function Recibos(nrorecibo, nomenorecibo, entregaweb, dtcobranca, reagendado, dtreagendamento, valorgerado, statusrec, dtbaixa, parcela, via, motivodevol, enderecosecundario, numerosecundario, bairrosecundario, cidadesecundario, complementosecundario, cepsecundario, telefonesecundario, desccategoria, observacoes, envioservidor, codmensageiro) {
+    function Recibos(nrorecibo, impresso, dtoperacao, entrega, formulario, nomenorecibo, entregaweb, dtcobranca, reagendado, dtreagendamento, dtrecebimento, valorgerado, valordinheiro, valorcheque, doacaoespecial, parceladoacaoespecial, aumentodefinitivo, dtoperacaobaixa, periodicidade, valoralterado, valornaoalterado, dtvaloralteradobaixa, valorbakp, valorhorabkp, valordatabkp, dataqld, naorecebido, nrosorte, statusrec, dtbaixa, parcela, via, motivodevol, valorremarcado, dtremarc, codoperador, codcategoria, enderecosecundario, numerosecundario, bairrosecundario, cidadesecundario, complementosecundario, cepsecundario, telefonesecundario, desccategoria, observacoes, codmensageiro, codcontrib, codusuario) {
         this.nrorecibo = nrorecibo;
+        this.impresso = impresso;
+        this.dtoperacao = dtoperacao;
+        this.entrega = entrega;
+        this.formulario = formulario;
         this.nomenorecibo = nomenorecibo;
         this.entregaweb = entregaweb;
         this.dtcobranca = dtcobranca;
         this.reagendado = reagendado;
         this.dtreagendamento = dtreagendamento;
+        this.dtrecebimento = dtrecebimento;
         this.valorgerado = valorgerado;
+        this.valordinheiro = valordinheiro;
+        this.valorcheque = valorcheque;
+        this.doacaoespecial = doacaoespecial;
+        this.parceladoacaoespecial = parceladoacaoespecial;
+        this.aumentodefinitivo = aumentodefinitivo;
+        this.dtoperacaobaixa = dtoperacaobaixa;
+        this.periodicidade = periodicidade;
+        this.valoralterado = valoralterado;
+        this.valornaoalterado = valornaoalterado;
+        this.dtvaloralteradobaixa = dtvaloralteradobaixa;
+        this.valorbakp = valorbakp;
+        this.valorhorabkp = valorhorabkp;
+        this.valordatabkp = valordatabkp;
+        this.dataqld = dataqld;
+        this.naorecebido = naorecebido;
+        this.nrosorte = nrosorte;
         this.statusrec = statusrec;
         this.dtbaixa = dtbaixa;
         this.parcela = parcela;
         this.via = via;
         this.motivodevol = motivodevol;
+        this.valorremarcado = valorremarcado;
+        this.dtremarc = dtremarc;
+        this.codoperador = codoperador;
+        this.codcategoria = codcategoria;
         this.enderecosecundario = enderecosecundario;
         this.numerosecundario = numerosecundario;
         this.bairrosecundario = bairrosecundario;
@@ -33,22 +58,48 @@ var Recibos = /** @class */ (function () {
         this.telefonesecundario = telefonesecundario;
         this.desccategoria = desccategoria;
         this.observacoes = observacoes;
-        this.envioservidor = envioservidor;
         this.codmensageiro = codmensageiro;
+        this.codcontrib = codcontrib;
+        this.codusuario = codusuario;
     }
     Recibos.ctorParameters = function () { return [
         { type: Number },
         { type: String },
+        { type: Date },
+        { type: Date },
+        { type: Number },
+        { type: String },
         { type: String },
         { type: Date },
-        { type: undefined },
+        { type: String },
         { type: Date },
+        { type: Date },
+        { type: Number },
+        { type: Number },
+        { type: Number },
+        { type: Number },
+        { type: String },
+        { type: Number },
+        { type: Date },
+        { type: Number },
+        { type: Number },
+        { type: Number },
+        { type: undefined },
+        { type: Number },
+        { type: String },
+        { type: Date },
+        { type: Date },
+        { type: Number },
         { type: Number },
         { type: String },
         { type: Date },
         { type: String },
         { type: Number },
-        { type: undefined },
+        { type: String },
+        { type: Number },
+        { type: Date },
+        { type: Number },
+        { type: Number },
         { type: String },
         { type: String },
         { type: String },
@@ -58,7 +109,8 @@ var Recibos = /** @class */ (function () {
         { type: String },
         { type: String },
         { type: String },
-        { type: String },
+        { type: Number },
+        { type: Number },
         { type: Number }
     ]; };
     return Recibos;
@@ -80,15 +132,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContribuintesService", function() { return ContribuintesService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
 
 
 
 
 
-var URL = _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].url;
+var URL = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].url;
 var ContribuintesService = /** @class */ (function () {
     function ContribuintesService(http, route, router) {
         this.http = http;
@@ -117,11 +169,11 @@ var ContribuintesService = /** @class */ (function () {
         // http://192.168.0.243:8081/recibos/mensageiroporcidade1?cod=630&startDate=2019-01-01&endDate=2019-03-10
         return this.http.get(URL + "/recibos/mensageiroporcidade1?cod=315&startDate=" + this.dtInicio + "&endDate=" + this.dtFim);
     };
-    // Atualiza os recibos no local storage
+    // Atualiza os recibos no BD
     ContribuintesService.prototype.putRecibo = function (recibo) {
         // http://localhost:8081/recibos/11369854
         return this.http.put(URL + "/recibos/" + recibo.nrorecibo, recibo, {
-            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json'
             })
         });
@@ -130,21 +182,21 @@ var ContribuintesService = /** @class */ (function () {
     ContribuintesService.prototype.postDevolvidos = function (devolvido) {
         // http://192.168.0.243:8081/devolvido/17044484
         return this.http.post(URL + "/devolvido", devolvido, {
-            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json'
             })
         });
     };
     ContribuintesService.ctorParameters = function () { return [
-        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] },
-        { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },
-        { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
     ]; };
     ContribuintesService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], ContribuintesService);
     return ContribuintesService;
 }());
@@ -188,11 +240,11 @@ var CrudService = /** @class */ (function () {
                         db = _a.sent();
                         sql = 'insert into recibos (nrorecibo, nomenorecibo, entregaweb, dtcobranca, reagendado, dtreagendamento, valorgerado, statusrec, dtbaixa, parcela, via, motivodevol,'
                             + ' enderecosecundario, numerosecundario, bairrosecundario, cidadesecundario, complementosecundario, cepsecundario, telefonesecundario, desccategoria, '
-                            + ' observacoes, envioservidor, codmensageiro) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+                            + ' observacoes, codmensageiro) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
                         data = [recibos.nrorecibo, recibos.nomenorecibo, recibos.entregaweb, recibos.dtcobranca, recibos.reagendado, recibos.dtreagendamento, recibos.valorgerado,
                             recibos.statusrec, recibos.dtbaixa, recibos.parcela, recibos.via, recibos.motivodevol, recibos.enderecosecundario, recibos.numerosecundario,
                             recibos.bairrosecundario, recibos.cidadesecundario, recibos.complementosecundario, recibos.cepsecundario, recibos.telefonesecundario, recibos.desccategoria,
-                            recibos.observacoes, recibos.envioservidor, recibos.codmensageiro];
+                            recibos.observacoes, recibos.codmensageiro];
                         _a.label = 2;
                     case 2:
                         _a.trys.push([2, 4, , 5]);
@@ -212,6 +264,7 @@ var CrudService = /** @class */ (function () {
             });
         });
     };
+    // Método para inserir recibos devolvidos no BD do App
     CrudService.prototype.insertDevolvidos = function (devolvidos) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var db, sql, data, e_3, e_1_2;
@@ -256,7 +309,38 @@ var CrudService = /** @class */ (function () {
                     var recibos = new Array();
                     for (var i = 0; i < data.rows.length; i++) {
                         var tmp = data.rows.item(i);
-                        var recibo = new _class_recibos__WEBPACK_IMPORTED_MODULE_3__["Recibos"](tmp.nrorecibo, tmp.nomenorecibo, tmp.entregaweb, tmp.dtcobranca, tmp.reagendado, tmp.dtreagendamento, tmp.valorgerado, tmp.statusrec, tmp.dtbaixa, tmp.parcela, tmp.via, tmp.motivodevol, tmp.enderecosecundario, tmp.numerosecundario, tmp.bairrosecundario, tmp.cidadesecundario, tmp.complementosecundario, tmp.cepsecundario, tmp.telefonesecundario, tmp.desccategoria, tmp.observacoes, tmp.envioservidor, tmp.codmensageiro);
+                        var recibo = new _class_recibos__WEBPACK_IMPORTED_MODULE_3__["Recibos"](tmp.nrorecibo, tmp.impresso, tmp.dtoperacao, tmp.entrega, tmp.formulario, tmp.nomenorecibo, tmp.entregaweb, tmp.dtcobranca, tmp.reagendado, tmp.dtreagendamento, tmp.dtrecebimento, tmp.valorgerado, tmp.valorcheque, tmp.valordinheiro, tmp.doacaoespecial, tmp.parceladoacaoespecial, tmp.aumentodefinitivo, tmp.dtoperacaobaixa, tmp.periodicidade, tmp.valoralterado, tmp.valornaoalterado, tmp.dtvaloralteradobaixa, tmp.valorbakp, tmp.valorhorabkp, tmp.valordatabkp, tmp.dataqld, tmp.naorecebido, tmp.nrosorte, tmp.statusrec, tmp.dtbaixa, tmp.parcela, tmp.via, tmp.motivodevol, tmp.enderecosecundario, tmp.numerosecundario, tmp.bairrosecundario, tmp.cidadesecundario, tmp.complementosecundario, tmp.cepsecundario, tmp.telefonesecundario, tmp.desccategoria, tmp.valorremarcado, tmp.dtremarc, tmp.codoperador, tmp.codcategoria, tmp.codcontrib, tmp.codusuario, tmp.observacoes, tmp.codmensageiro);
+                        recibos.push(recibo);
+                    }
+                    return recibos;
+                }
+                else {
+                    return new Array();
+                }
+            }).catch(function (e) {
+                console.error(e);
+            });
+        }).catch(function (e) {
+            console.error(e);
+        });
+    };
+    // Consulta DB do app para comparar dados com o DB da aplicação e fazer o comunicado de deposito
+    CrudService.prototype.getByCodmensageiro = function (codmensageiro, dtbaixa) {
+        return this.dbService.getDB()
+            .then(function (db) {
+            var sql = 'SELECT count(obj.codmensageiro), sum(obj.valorgerado) FROM trecibos obj '
+                + 'WHERE obj.codmensageiro = ? '
+                + 'AND obj.statusrec = "B" '
+                + 'AND obj.impresso = "S" '
+                + 'AND obj.dtbaixa = ?';
+            var data = [codmensageiro, dtbaixa];
+            return db.executeSql(sql, data)
+                .then(function (data) {
+                if (data.rows.length > 0) {
+                    var recibos = new Array();
+                    for (var i = 0; i < data.rows.length; i++) {
+                        var tmp = data.rows.item(i);
+                        var recibo = new _class_recibos__WEBPACK_IMPORTED_MODULE_3__["Recibos"](tmp.nrorecibo, tmp.impresso, tmp.dtoperacao, tmp.entrega, tmp.formulario, tmp.nomenorecibo, tmp.entregaweb, tmp.dtcobranca, tmp.reagendado, tmp.dtreagendamento, tmp.dtrecebimento, tmp.valorgerado, tmp.valorcheque, tmp.valordinheiro, tmp.doacaoespecial, tmp.parceladoacaoespecial, tmp.aumentodefinitivo, tmp.dtoperacaobaixa, tmp.periodicidade, tmp.valoralterado, tmp.valornaoalterado, tmp.dtvaloralteradobaixa, tmp.valorbakp, tmp.valorhorabkp, tmp.valordatabkp, tmp.dataqld, tmp.naorecebido, tmp.nrosorte, tmp.statusrec, tmp.dtbaixa, tmp.parcela, tmp.via, tmp.motivodevol, tmp.enderecosecundario, tmp.numerosecundario, tmp.bairrosecundario, tmp.cidadesecundario, tmp.complementosecundario, tmp.cepsecundario, tmp.telefonesecundario, tmp.desccategoria, tmp.valorremarcado, tmp.dtremarc, tmp.codoperador, tmp.codcategoria, tmp.codcontrib, tmp.codusuario, tmp.observacoes, tmp.codmensageiro);
                         recibos.push(recibo);
                     }
                     return recibos;
@@ -281,7 +365,7 @@ var CrudService = /** @class */ (function () {
                 .then(function (data) {
                 if (data.rows.length > 0) {
                     var item = data.rows.item(0);
-                    var recibo = new _class_recibos__WEBPACK_IMPORTED_MODULE_3__["Recibos"](item.nrorecibo, item.nomenorecibo, item.entregaweb, item.dtcobranca, item.reagendado, item.dtreagendamento, item.valorgerado, item.statusrec, item.dtbaixa, item.parcela, item.via, item.motivodevol, item.enderecosecundario, item.numerosecundario, item.bairrosecundario, item.cidadesecundario, item.complementosecundario, item.cepsecundario, item.telefonesecundario, item.desccategoria, item.observacoes, item.envioservidor, item.codmensageiro);
+                    var recibo = new _class_recibos__WEBPACK_IMPORTED_MODULE_3__["Recibos"](item.nrorecibo, item.impresso, item.dtoperacao, item.entrega, item.formulario, item.nomenorecibo, item.entregaweb, item.dtcobranca, item.reagendado, item.dtreagendamento, item.valorgerado, item.dtrecebimento, item.valorcheque, item.valordinheiro, item.doacaoespecial, item.parceladoacaoespecial, item.aumentodefinitivo, item.dtoperacaobaixa, item.periodicidade, item.valoralterado, item.valornaoalterado, item.dtvaloralteradobaixa, item.valorbakp, item.valorhorabkp, item.valordatabkp, item.dataqld, item.naorecebido, item.nrosorte, item.statusrec, item.dtbaixa, item.parcela, item.via, item.motivodevol, item.enderecosecundario, item.numerosecundario, item.bairrosecundario, item.cidadesecundario, item.complementosecundario, item.cepsecundario, item.telefonesecundario, item.desccategoria, item.valorremarcado, item.dtremarc, item.codoperador, item.codcategoria, item.codcontrib, item.codusuario, item.observacoes, item.codmensageiro);
                     console.log('Consulta realizada');
                     return recibo;
                 }

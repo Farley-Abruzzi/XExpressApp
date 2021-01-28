@@ -14,12 +14,6 @@ export class PopinfoComponent implements OnInit {
 
   resumos: ResumoPorCidade;
 
-  // dtStart: Date = new Date();
-  // dtEnd: Date = new Date(this.dtStart.getFullYear(), this.dtStart.getMonth() + 1, 0);
-
-  // dtInicio: string = " ";
-  // dtFim: string = " ";
-
   constructor( private contribService: ContribuintesService, private datePipe: DatePipe ) { }
   
 
@@ -37,22 +31,6 @@ export class PopinfoComponent implements OnInit {
         console.log('Resumo por cidade:', this.resumos);
       });
   }
-
-
-  // conversorDate(): void {
-  //   this.dtInicio = this.datePipe.transform(this.dtStart,"yyyy-MM-dd");
-  //   this.dtFim = this.datePipe.transform(this.dtEnd,"yyyy-MM-dd");
-  //  }
-
-  // carregarDtInicio(event){
-  //   this.dtInicio = this.datePipe.transform(new Date( event.detail.value ),"yyyy-MM-dd");
-  // }
-
-  // carregarDtFim(event){
-  //   this.dtFim = this.datePipe.transform(new Date( event.detail.value ),"yyyy-MM-dd");
-
-  //   this.carregarResumoPorCidade();
-  // }
 
 
 }

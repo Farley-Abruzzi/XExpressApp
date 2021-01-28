@@ -19,7 +19,7 @@ import { SQLite } from '@ionic-native/sqlite/ngx';
 import { AuthService } from './services/auth.services';
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { UsuarioService } from './services/usuario.service';
-import { AuthInterceptor } from '../interceptors/auth-interceptor';
+import { AuthInterceptor} from '../interceptors/auth-interceptor';
 import { ImageUtilService } from './services/image-util.service';
 
 

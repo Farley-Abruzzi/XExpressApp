@@ -12,7 +12,7 @@ export class AuthInterceptor implements HttpInterceptor {
     constructor(public storage: StorageService) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
+        console.log('INTERCEPTOR');
         let localUser = this.storage.getLocalUser();
 
         let N = URL.length;

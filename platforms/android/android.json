@@ -18,8 +18,7 @@
                 "android:icon": "@mipmap/ic_launcher",
                 "android:label": "@string/app_name",
                 "android:networkSecurityConfig": "@xml/network_security_config",
-                "android:supportsRtl": "true",
-                "android:usesCleartextTraffic": "true"
+                "android:supportsRtl": "true"
               }
             }
           ]
@@ -36,6 +35,10 @@
           "/*": [
             {
               "xml": "<feature name=\"Calendar\"><param name=\"android-package\" value=\"nl.xservices.plugins.Calendar\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
               "count": 1
             },
             {
@@ -56,10 +59,6 @@
             },
             {
               "xml": "<feature name=\"SQLitePlugin\"><param name=\"android-package\" value=\"io.sqlc.SQLitePlugin\" /></feature>",
-              "count": 1
-            },
-            {
-              "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
               "count": 1
             }
           ]
@@ -137,35 +136,35 @@
   },
   "installed_plugins": {
     "cordova-plugin-bluetooth-serial": {
-      "PACKAGE_NAME": "io.xexpress.com"
+      "PACKAGE_NAME": "io.express.com"
     },
     "cordova-plugin-calendar": {
-      "PACKAGE_NAME": "io.xexpress.com"
-    },
-    "cordova-plugin-device": {
-      "PACKAGE_NAME": "io.xexpress.com"
-    },
-    "cordova-plugin-ionic-keyboard": {
-      "PACKAGE_NAME": "io.xexpress.com"
-    },
-    "cordova-plugin-ionic-webview": {
-      "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+",
-      "PACKAGE_NAME": "io.xexpress.com"
-    },
-    "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "io.xexpress.com"
-    },
-    "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "io.xexpress.com"
-    },
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "io.xexpress.com"
-    },
-    "cordova-sqlite-storage": {
       "PACKAGE_NAME": "io.express.com"
     },
     "cordova-plugin-camera": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
+      "PACKAGE_NAME": "io.express.com"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "io.express.com"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "io.express.com"
+    },
+    "cordova-plugin-ionic-webview": {
+      "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+",
+      "PACKAGE_NAME": "io.express.com"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "io.express.com"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "io.express.com"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.express.com"
+    },
+    "cordova-sqlite-storage": {
       "PACKAGE_NAME": "io.express.com"
     }
   },
@@ -185,6 +184,38 @@
       "pluginId": "cordova-plugin-calendar",
       "clobbers": [
         "Calendar"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.Camera",
+      "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "Camera"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.CameraPopoverOptions",
+      "file": "plugins/cordova-plugin-camera/www/CameraPopoverOptions.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "CameraPopoverOptions"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.camera",
+      "file": "plugins/cordova-plugin-camera/www/Camera.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "navigator.camera"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.CameraPopoverHandle",
+      "file": "plugins/cordova-plugin-camera/www/CameraPopoverHandle.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "CameraPopoverHandle"
       ]
     },
     {
@@ -234,50 +265,18 @@
       "clobbers": [
         "SQLitePlugin"
       ]
-    },
-    {
-      "id": "cordova-plugin-camera.Camera",
-      "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
-      "pluginId": "cordova-plugin-camera",
-      "clobbers": [
-        "Camera"
-      ]
-    },
-    {
-      "id": "cordova-plugin-camera.CameraPopoverOptions",
-      "file": "plugins/cordova-plugin-camera/www/CameraPopoverOptions.js",
-      "pluginId": "cordova-plugin-camera",
-      "clobbers": [
-        "CameraPopoverOptions"
-      ]
-    },
-    {
-      "id": "cordova-plugin-camera.camera",
-      "file": "plugins/cordova-plugin-camera/www/Camera.js",
-      "pluginId": "cordova-plugin-camera",
-      "clobbers": [
-        "navigator.camera"
-      ]
-    },
-    {
-      "id": "cordova-plugin-camera.CameraPopoverHandle",
-      "file": "plugins/cordova-plugin-camera/www/CameraPopoverHandle.js",
-      "pluginId": "cordova-plugin-camera",
-      "clobbers": [
-        "CameraPopoverHandle"
-      ]
     }
   ],
   "plugin_metadata": {
     "cordova-plugin-bluetooth-serial": "0.4.7",
     "cordova-plugin-calendar": "5.1.4",
+    "cordova-plugin-camera": "4.1.0",
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-ionic-keyboard": "2.2.0",
     "cordova-plugin-ionic-webview": "4.1.1",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
     "cordova-plugin-whitelist": "1.3.3",
-    "cordova-sqlite-storage": "4.0.0",
-    "cordova-plugin-camera": "4.1.0"
+    "cordova-sqlite-storage": "4.0.0"
   }
 }

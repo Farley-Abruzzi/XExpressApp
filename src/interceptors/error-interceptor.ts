@@ -3,18 +3,18 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HTTP_INTERCEPTORS
 import { Observable, throwError} from "rxjs";
 import { catchError } from 'rxjs/operators';
 import { StorageService } from '../app/services/storage.service';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
+import { FieldMessage } from '../app/interfaces/fieldmessage';
  
  
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor{
     
-    constructor(public storage: StorageService, private toastCtrl: ToastController) {}
+    constructor(public storage: StorageService, private toastCtrl: ToastController, public alertCtrl: AlertController) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
-        return next.handle(req)
-            .pipe(
-                catchError(error => {
+        return next.handle(req).pipe(catchError(error => {
+            
                     let errorObj = error;
                     if(errorObj.error){
                         errorObj = errorObj.error;
@@ -33,6 +33,9 @@ export class ErrorInterceptor implements HttpInterceptor{
                         case 403:
                             this.handle403();
                             break;
+                        case 422:
+                            this.handle422(errorObj);
+                            break;
                         default:
                             this.handleDefaultError(errorObj);
                     }
@@ -41,8 +44,17 @@ export class ErrorInterceptor implements HttpInterceptor{
                 })) as any;
     }
 
-    handle401() {
-        this.presentToast('Login ou senha inválidos');
+    async handle401() {
+        const alert = await this.alertCtrl.create({
+            header: 'Erro 401: falha de autenticação',
+            message: 'Email ou senha incorretos',
+            buttons: [
+                {
+                    text: 'Ok'
+                }
+            ]
+        });
+        await alert.present();
     }
     
     handle403() {
@@ -50,14 +62,30 @@ export class ErrorInterceptor implements HttpInterceptor{
         this.storage.setLocalUser(null);
     }
 
+    async handle422(errorObj) {
+        const alert = await this.alertCtrl.create({
+            header: 'Erro 422: Validacao',
+            message: this.listErrors(errorObj.errors),
+            buttons: [
+                {
+                    text: 'Ok'
+                }
+            ]
+        });
+        await alert.present();
+    }
+
     async handleDefaultError(errorObj) {
-        const toast = await this.toastCtrl.create({
-            message: 'Erro ' + errorObj.status + ': ' + errorObj.error,
-            duration: 2000,
-            mode: "ios"
-          });
-        toast.present();
-        //this.storage.setLocalUser(null);
+        const alert = await this.alertCtrl.create({
+            header: 'Erro ' + errorObj.status + ': ' + errorObj.error,
+            message: errorObj.message,
+            buttons: [
+                {
+                    text: 'Ok'
+                }
+            ]
+        });
+        await alert.present();
     }
 
     async presentToast( message: string ) {
@@ -67,7 +95,15 @@ export class ErrorInterceptor implements HttpInterceptor{
           mode: "ios"
         });
         toast.present();
-      }
+    }
+    
+    private listErrors(messages : FieldMessage[]) : string {
+        let s : string = '';
+        for (var i=0; i<messages.length; i++) {
+            s = s + '<p><strong>' + messages[i].fieldName + "</strong>: " + messages[i].message + '</p>';
+        }
+        return s;
+    }
   
 } 
  

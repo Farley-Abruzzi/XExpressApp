@@ -5,6 +5,9 @@ import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
 import { CrudService } from 'src/app/services/crud.service';
 import { ContribuintesService } from '../../services/contribuintes.service';
 import { Recibos } from '../../class/recibos';
+import { StorageService } from '../../services/storage.service';
+import { UsuarioService } from '../../services/usuario.service';
+import { UsuarioDTO } from '../../interfaces/usuario.dto';
 
 @Component({
   selector: 'app-tab2',
@@ -17,53 +20,68 @@ export class Tab2Page implements OnInit {
   objRecibos: Recibos;
   envioFechado: Date = new Date();
   darkMode: boolean = true;
+  usuario: UsuarioDTO;
+  codMens: number;
 
-  constructor( private navCtrl: NavController, private calendar: Calendar, private bluetoothSerial: BluetoothSerial, 
-               private crudService: CrudService, private contribService: ContribuintesService, private toastCtrl: ToastController ) {
+  constructor(private navCtrl: NavController, private calendar: Calendar,
+    private bluetoothSerial: BluetoothSerial, private crudService: CrudService,
+    private contribService: ContribuintesService, private toastCtrl: ToastController,
+    private storage: StorageService, private usuarioService: UsuarioService) {
     // Ativador automático do tema dark, quando este reconhece que o tema do sistema do usuário também é dark.
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     this.darkMode = prefersDark.matches;
    }
 
   ngOnInit() {
-    this.connect();
+    //this.connect();
   }
 
   carregarContribuintes() {
+    let localUser = this.storage.getLocalUser();
+    if (localUser && localUser.email) {
+      this.usuarioService.findByEmail(localUser.email)
+        .subscribe(resp => {
+          this.usuario = resp;
+          this.codMens = this.usuario.codmensageiro;
+        
+          this.contribService.getListaRecibos(this.codMens).subscribe( resp => {
 
-    this.contribService.getListaRecibos()
-      .subscribe( resp => {
+            this.listaDeRecibos.push(...resp);
+            console.log("Recibos:", this.listaDeRecibos);
+            this.setObjRecibos("Recibos baixados!");
+    
+            // if(this.listaDeRecibos.reagendado == "S") {
+            //   this.cardColors = "secondary";
+            // } else {
+            //   this.cardColors = "danger";
+            // }
+          },  error =>{});
 
-        this.listaDeRecibos.push(...resp);
-        console.log("Recibos:", this.listaDeRecibos);
-        this.setObjRecibos("Recibos baixados!");
-
-        // if(this.listaDeRecibos.reagendado == "S") {
-        //   this.cardColors = "secondary";
-        // } else {
-        //   this.cardColors = "danger";
-        // }
-      },error =>{
-        console.error(error);
-      });
+        }, error => {
+            if (error.status == 403) {
+              console.log(error.status);
+            }
+        });
+      }  
   }
+  
 
 
   connect() {
     this.bluetoothSerial.connectInsecure("00:02:5B:B4:13:87").subscribe((data) => {
       console.log('Conectado', data);
     });
-}
+  }
 
   disconnectDevices() {
 
-  this.bluetoothSerial.disconnect().then((error) => {
-    console.log('Dispositivo desconectado.', error); 
-  });
-  this.bluetoothSerial.clear().then(() => {
-    console.log('Limpo');
-  });
-}
+    this.bluetoothSerial.disconnect().then((error) => {
+      console.log('Dispositivo desconectado.', error); 
+    });
+    this.bluetoothSerial.clear().then(() => {
+      console.log('Limpo');
+    });
+  }
 
   profile() {
     this.navCtrl.navigateForward('profile', { animated: true });
@@ -90,7 +108,7 @@ export class Tab2Page implements OnInit {
   }
 
 
-  // Baixa a carga de recibos no local storage (app)
+  // Baixa a carga de recibos no local storage (app / baixar recibos)
   envioTotal() {
     this.carregarContribuintes();
   }

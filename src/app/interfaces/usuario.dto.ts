@@ -1,5 +1,5 @@
 export interface UsuarioDTO {
-  id: string;
+  codmensageiro: number;
   login: string;
   email: string;
   imageUrl?: string;

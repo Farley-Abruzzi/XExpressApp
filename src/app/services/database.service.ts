@@ -35,12 +35,34 @@ export class DatabaseService {
       await db.sqlBatch([
         'CREATE TABLE IF NOT EXISTS recibos( '
         + 'nrorecibo INTEGER NOT NULL PRIMARY KEY, '
+        + 'impresso VARCHAR(1), '
+        + 'dtoperacao DATE, '
         + 'nomenorecibo VARCHAR(100), '
         + 'entregaweb VARCHAR(1), '
+        + 'formulario INTEGER, '
         + 'dtcobranca DATE, '
+        + 'dtrecebimento DATE, '
         + 'reagendado VARCHAR(1), '
         + 'dtreagendamento DATE, '
         + 'valorgerado REAL(6), '
+        + 'valordinheiro INTEGER, '
+        + 'valorcheque INTEGER, '
+        + 'valoralterado INTEGER, '
+        + 'valornaoalterado INTEGER, '
+        + 'valorbakp INTEGER, '
+        + 'valorhorabkp VARCHAR(15), '
+        + 'valordatabkp DATE, '
+        + 'valorremarcado INTEGER, '
+        + 'dataqld DATE, '
+        + 'dtremarc DATE, '
+        + 'naorecebido INTEGER, '
+        + 'nrosorte INTEGER, '
+        + 'doacaoespecial INTEGER, '
+        + 'parceladoacaoespecial VARCHAR(10), '
+        + 'aumentodefinitivo INTEGER, '
+        + 'dtoperacaobaixa DATE, '
+        + 'dtvaloralteradobaixa VARCHAR(15), '
+        + 'periodicidade INTEGER, '
         + 'statusrec VARCHAR(1), '
         + 'dtbaixa DATE, '
         + 'parcela VARCHAR(8), '
@@ -56,7 +78,11 @@ export class DatabaseService {
         + 'desccategoria VARCHAR(30), '
         + 'observacoes VARCHAR(300), '
         + 'envioservidor VARCHAR(1), ' // Campo será usado no futuro para confirmar envio
-        + 'codmensageiro INTEGER);',
+        + 'codmensageiro INTEGER, '
+        + 'codoperador INTEGER, '
+        + 'codcategoria INTEGER, '
+        + 'codcontrib INTEGER, '
+        + 'codusuario INTEGER);',
         
         'CREATE TABLE IF NOT EXISTS recibosDevolvidos( '
         + 'nrorecibo INTEGER NOT NULL PRIMARY KEY, '
@@ -67,7 +93,7 @@ export class DatabaseService {
         + 'codusuario INTEGER, '
         + 'motivodevolucao VARCHAR(100), '
         + 'statendimento INTEGER, '
-        + 'envioservidor VARCHAR(1), ' //Campo será utilizado no futuro para confirmar envio
+        + 'envioservidor VARCHAR(1), ' // Campo será utilizado no futuro para confirmar envio
         + 'dscatendimento VARCHAR(300));'
       ]);
       console.log('Tables ok/success');

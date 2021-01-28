@@ -483,7 +483,7 @@ module.exports = webpackAsyncContext;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n"
+module.exports = "<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n</ion-app>\r\n"
 
 /***/ }),
 
@@ -647,6 +647,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _interceptors_error_interceptor__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../interceptors/error-interceptor */ "./src/interceptors/error-interceptor.ts");
 /* harmony import */ var _services_usuario_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./services/usuario.service */ "./src/app/services/usuario.service.ts");
 /* harmony import */ var _interceptors_auth_interceptor__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../interceptors/auth-interceptor */ "./src/interceptors/auth-interceptor.ts");
+/* harmony import */ var _services_image_util_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./services/image-util.service */ "./src/app/services/image-util.service.ts");
+
 
 
 
@@ -693,7 +695,8 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HTTP_INTERCEPTORS"], useClass: _interceptors_auth_interceptor__WEBPACK_IMPORTED_MODULE_20__["AuthInterceptor"], multi: true },
             _interceptors_error_interceptor__WEBPACK_IMPORTED_MODULE_18__["ErrorInterceptorProvider"],
             _services_auth_services__WEBPACK_IMPORTED_MODULE_17__["AuthService"],
-            _services_usuario_service__WEBPACK_IMPORTED_MODULE_19__["UsuarioService"]
+            _services_usuario_service__WEBPACK_IMPORTED_MODULE_19__["UsuarioService"],
+            _services_image_util_service__WEBPACK_IMPORTED_MODULE_21__["ImageUtilService"]
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]]
     })
@@ -716,7 +719,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _environments_environment_prod__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../environments/environment.prod */ "./src/environments/environment.prod.ts");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
 /* harmony import */ var _storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./storage.service */ "./src/app/services/storage.service.ts");
 /* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @auth0/angular-jwt */ "./node_modules/@auth0/angular-jwt/fesm2015/auth0-angular-jwt.js");
 
@@ -725,7 +728,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const URL = _environments_environment_prod__WEBPACK_IMPORTED_MODULE_3__["environment"].url;
+const URL = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].url;
 let AuthService = class AuthService {
     constructor(http, storage) {
         this.http = http;
@@ -761,7 +764,9 @@ AuthService.ctorParameters = () => [
     { type: _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"] }
 ];
 AuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"]])
 ], AuthService);
 
@@ -847,7 +852,7 @@ let DatabaseService = class DatabaseService {
                         + 'codusuario INTEGER, '
                         + 'motivodevolucao VARCHAR(100), '
                         + 'statendimento INTEGER, '
-                        + 'envioservidor VARCHAR(1), ' //Campo será utilizado no futuro para confirmar envio
+                        + 'envioservidor VARCHAR(1), ' // Campo será utilizado no futuro para confirmar envio
                         + 'dscatendimento VARCHAR(300));'
                 ]);
                 console.log('Tables ok/success');
@@ -872,6 +877,40 @@ DatabaseService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/services/image-util.service.ts":
+/*!************************************************!*\
+  !*** ./src/app/services/image-util.service.ts ***!
+  \************************************************/
+/*! exports provided: ImageUtilService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ImageUtilService", function() { return ImageUtilService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+let ImageUtilService = class ImageUtilService {
+    dataUriToBlob(dataURI) {
+        var byteString = atob(dataURI.split(',')[1]);
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ab], { type: mimeString });
+    }
+};
+ImageUtilService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()
+], ImageUtilService);
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/storage.service.ts":
 /*!*********************************************!*\
   !*** ./src/app/services/storage.service.ts ***!
@@ -885,7 +924,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
-/* harmony import */ var _environments_storage_keys_config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../environments/storage_keys.config */ "./src/environments/storage_keys.config.ts");
+/* harmony import */ var _config_storage_keys_config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../config/storage_keys.config */ "./src/config/storage_keys.config.ts");
 
 
 
@@ -900,7 +939,7 @@ let StorageService = class StorageService {
         this.storage.set('objetos', this.objetos);
     }
     getLocalUser() {
-        let usr = localStorage.getItem(_environments_storage_keys_config__WEBPACK_IMPORTED_MODULE_3__["STORAGE_KEYS"].localUser);
+        let usr = localStorage.getItem(_config_storage_keys_config__WEBPACK_IMPORTED_MODULE_3__["STORAGE_KEYS"].localUser);
         if (usr == null) {
             return null;
         }
@@ -910,10 +949,10 @@ let StorageService = class StorageService {
     }
     setLocalUser(obj) {
         if (obj == null) {
-            localStorage.removeItem(_environments_storage_keys_config__WEBPACK_IMPORTED_MODULE_3__["STORAGE_KEYS"].localUser);
+            localStorage.removeItem(_config_storage_keys_config__WEBPACK_IMPORTED_MODULE_3__["STORAGE_KEYS"].localUser);
         }
         else {
-            localStorage.setItem(_environments_storage_keys_config__WEBPACK_IMPORTED_MODULE_3__["STORAGE_KEYS"].localUser, JSON.stringify(obj));
+            localStorage.setItem(_config_storage_keys_config__WEBPACK_IMPORTED_MODULE_3__["STORAGE_KEYS"].localUser, JSON.stringify(obj));
         }
     }
 };
@@ -946,6 +985,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var _environments_environment_prod__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../environments/environment.prod */ "./src/environments/environment.prod.ts");
 /* harmony import */ var _storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./storage.service */ "./src/app/services/storage.service.ts");
+/* harmony import */ var _image_util_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./image-util.service */ "./src/app/services/image-util.service.ts");
+
 
 
 
@@ -953,23 +994,61 @@ __webpack_require__.r(__webpack_exports__);
 
 const URL = _environments_environment_prod__WEBPACK_IMPORTED_MODULE_3__["environment"].url;
 let UsuarioService = class UsuarioService {
-    constructor(http, storage) {
+    constructor(http, storage, imageUtilService) {
         this.http = http;
         this.storage = storage;
+        this.imageUtilService = imageUtilService;
     }
     findByEmail(email) {
         return this.http.get(`${URL}/usuario/email?value=${email}`);
     }
+    // =============================== Inserindo deposito com POST ===================================
+    getApiDbPostDepositos(deposito) {
+        return this.http.post(`${URL}/deposito`, deposito, {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+    uploadPicture(picture) {
+        let pictureBlob = this.imageUtilService.dataUriToBlob(picture);
+        let formData = new FormData();
+        formData.set('file', pictureBlob, 'file.png');
+        return this.http.post(`${URL}/deposito/picture`, formData, {
+            observe: 'response',
+            responseType: 'text'
+        });
+    }
 };
 UsuarioService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
-    { type: _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"] }
+    { type: _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"] },
+    { type: _image_util_service__WEBPACK_IMPORTED_MODULE_5__["ImageUtilService"] }
 ];
 UsuarioService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
+        _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"],
+        _image_util_service__WEBPACK_IMPORTED_MODULE_5__["ImageUtilService"]])
 ], UsuarioService);
 
+
+
+/***/ }),
+
+/***/ "./src/config/storage_keys.config.ts":
+/*!*******************************************!*\
+  !*** ./src/config/storage_keys.config.ts ***!
+  \*******************************************/
+/*! exports provided: STORAGE_KEYS */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STORAGE_KEYS", function() { return STORAGE_KEYS; });
+const STORAGE_KEYS = {
+    localUser: "localUser"
+};
 
 
 /***/ }),
@@ -1021,23 +1100,6 @@ const environment = {
 
 /***/ }),
 
-/***/ "./src/environments/storage_keys.config.ts":
-/*!*************************************************!*\
-  !*** ./src/environments/storage_keys.config.ts ***!
-  \*************************************************/
-/*! exports provided: STORAGE_KEYS */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STORAGE_KEYS", function() { return STORAGE_KEYS; });
-const STORAGE_KEYS = {
-    localUser: "localUser"
-};
-
-
-/***/ }),
-
 /***/ "./src/interceptors/auth-interceptor.ts":
 /*!**********************************************!*\
   !*** ./src/interceptors/auth-interceptor.ts ***!
@@ -1062,6 +1124,7 @@ let AuthInterceptor = class AuthInterceptor {
         this.storage = storage;
     }
     intercept(req, next) {
+        console.log('INTERCEPTOR');
         let localUser = this.storage.getLocalUser();
         let N = URL.length;
         let requestToAPI = req.url.substring(0, N) == URL;
@@ -1117,13 +1180,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ErrorInterceptor = class ErrorInterceptor {
-    constructor(storage, toastCtrl) {
+    constructor(storage, toastCtrl, alertCtrl) {
         this.storage = storage;
         this.toastCtrl = toastCtrl;
+        this.alertCtrl = alertCtrl;
     }
     intercept(req, next) {
-        return next.handle(req)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(error => {
+        return next.handle(req).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(error => {
             let errorObj = error;
             if (errorObj.error) {
                 errorObj = errorObj.error;
@@ -1140,6 +1203,9 @@ let ErrorInterceptor = class ErrorInterceptor {
                 case 403:
                     this.handle403();
                     break;
+                case 422:
+                    this.handle422(errorObj);
+                    break;
                 default:
                     this.handleDefaultError(errorObj);
             }
@@ -1147,21 +1213,49 @@ let ErrorInterceptor = class ErrorInterceptor {
         }));
     }
     handle401() {
-        this.presentToast('Login ou senha inválidos');
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const alert = yield this.alertCtrl.create({
+                header: 'Erro 401: falha de autenticação',
+                message: 'Email ou senha incorretos',
+                buttons: [
+                    {
+                        text: 'Ok'
+                    }
+                ]
+            });
+            yield alert.present();
+        });
     }
     handle403() {
         this.presentToast('Acesso negado');
         this.storage.setLocalUser(null);
     }
+    handle422(errorObj) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const alert = yield this.alertCtrl.create({
+                header: 'Erro 422: Validacao',
+                message: this.listErrors(errorObj.errors),
+                buttons: [
+                    {
+                        text: 'Ok'
+                    }
+                ]
+            });
+            yield alert.present();
+        });
+    }
     handleDefaultError(errorObj) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            const toast = yield this.toastCtrl.create({
-                message: 'Erro ' + errorObj.status + ': ' + errorObj.error,
-                duration: 2000,
-                mode: "ios"
+            const alert = yield this.alertCtrl.create({
+                header: 'Erro ' + errorObj.status + ': ' + errorObj.error,
+                message: errorObj.message,
+                buttons: [
+                    {
+                        text: 'Ok'
+                    }
+                ]
             });
-            toast.present();
-            //this.storage.setLocalUser(null);
+            yield alert.present();
         });
     }
     presentToast(message) {
@@ -1174,14 +1268,22 @@ let ErrorInterceptor = class ErrorInterceptor {
             toast.present();
         });
     }
+    listErrors(messages) {
+        let s = '';
+        for (var i = 0; i < messages.length; i++) {
+            s = s + '<p><strong>' + messages[i].fieldName + "</strong>: " + messages[i].message + '</p>';
+        }
+        return s;
+    }
 };
 ErrorInterceptor.ctorParameters = () => [
     { type: _app_services_storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["AlertController"] }
 ];
 ErrorInterceptor = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_app_services_storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_app_services_storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["AlertController"]])
 ], ErrorInterceptor);
 
 const ErrorInterceptorProvider = {

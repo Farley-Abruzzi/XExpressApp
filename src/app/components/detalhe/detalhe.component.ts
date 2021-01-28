@@ -25,6 +25,7 @@ export class DetalheComponent implements OnInit {
   dtDevAtual: Date = new Date();
 
   valorDoacao: number;
+  conectPrint: boolean = false;
 
 
   constructor( private contribService: ContribuintesService,
@@ -46,51 +47,51 @@ export class DetalheComponent implements OnInit {
   // Chama a API de recibos para ser vizualizada no app
   carregarRecibosDetalhes() {
     // Para rodar no app
-    // this.crudService.getById(this.nrorecibo)
-    //   .then( (data: Recibos) => {
-    //     this.recibo = data;
+    this.crudService.getById(this.nrorecibo)
+      .then( (data: Recibos) => {
+        this.recibo = data;
 
-    //     if(this.recibo.complementosecundario == "") {
-    //       this.lbReferencia = false;
-    //     } else {
-    //       this.lbReferencia = true;
-    //     }
-    // });
-
-    // Para rodar na web
-    this.contribService.getRecibosDetalhe( this.nrorecibo )
-      .subscribe( resp => {
-        this.recibo = resp;
-
-        if (this.recibo.complementosecundario == "") {
+        if(this.recibo.complementosecundario == "") {
           this.lbReferencia = false;
         } else {
           this.lbReferencia = true;
         }
     });
+
+    // Para rodar na web
+    // this.contribService.getRecibosDetalhe( this.nrorecibo )
+    //   .subscribe( resp => {
+    //     this.recibo = resp;
+
+    //     if (this.recibo.complementosecundario == "") {
+    //       this.lbReferencia = false;
+    //     } else {
+    //       this.lbReferencia = true;
+    //     }
+    // });
   }
 
   // Atualiza a API de recibos no backend ou no BD do app
   getPutRecibos( msg: string, opcao: string ) {
     // Para rodar no app
-    // this.crudService.update(this.recibo, opcao)
-    //   .then(() => {
-    //     this.presentToast(msg);
-    //     // this.sairDoModal();
-    // }).catch(
-    //   e => console.error(e)
-    // );
-
-    // Para rodar na web
-    this.contribService.putRecibo( this.recibo )
-      .subscribe(() => {
-        // Exibir tost de reagendamento
+    this.crudService.update(this.recibo, opcao)
+      .then(() => {
         this.presentToast(msg);
         this.sairDoModal();
-        console.log(this.recibo);
-      }, error => {
-        console.log(error);
-      });
+    }).catch(
+      e => console.error(e)
+    );
+
+    // Para rodar na web
+    // this.contribService.putRecibo( this.recibo )
+    //   .subscribe(() => {
+    //     // Exibir tost de reagendamento
+    //     this.presentToast(msg);
+    //     this.sairDoModal();
+    //     console.log(this.recibo);
+    //   }, error => {
+    //     console.log(error);
+    //   });
 }
 
   // Método para efetuar uma doação
@@ -358,6 +359,32 @@ export class DetalheComponent implements OnInit {
     });
     await actionSheet.present();
   }
+
+  bluetoothImpressora(bluetooth: boolean) {
+    
+  }
+
+  // Método para conectar o dispositivo a impressora via bluetooth.
+  connectOrDisconnectPrint() {
+    if (this.conectPrint = !this.conectPrint) {
+      console.log('CONECTADO: ', this.conectPrint);
+        this.bluetoothSerial.connectInsecure("00:02:5B:B4:13:87").subscribe((data) => {
+          console.log('Conectado', data);
+        });
+      this.presentToast('IMPRESSORA CONECTADA!');
+
+    } else {
+      console.log('DESCONECTADO: ', this.conectPrint);
+      this.bluetoothSerial.disconnect().then((error) => {
+        console.log('Dispositivo desconectado.', error);
+      });
+      this.bluetoothSerial.clear().then(() => {
+        console.log('Limpo');
+      });
+      this.presentToast('IMPRESSORA DESCONECTADA!');
+    }
+  }
+
 
   // Atualiza a página contribuição apos ações(Doação, Reagendamento e Devolução) no modal recibo/detalhes
   atualizarPagina() {

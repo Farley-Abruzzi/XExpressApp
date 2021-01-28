@@ -1,4 +1,5 @@
-cordova.define("cordova-plugin-calendar.Calendar", function(require, exports, module) { "use strict";
+cordova.define("cordova-plugin-calendar.Calendar", function(require, exports, module) {
+"use strict";
 function Calendar() {
 }
 

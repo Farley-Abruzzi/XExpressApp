@@ -1,14 +1,17 @@
+import { API_CONFIG } from './../../config/api.config';
 import { Injectable } from '@angular/core';
 import { CredenciaisDTO } from '../interfaces/credenciaisDTO';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { StorageService } from './storage.service';
 import { LocalUser } from '../interfaces/local_user';
 import { JwtHelperService  } from '@auth0/angular-jwt';
 
 const URL = environment.url;
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
   
   jwtHelperService: JwtHelperService  = new JwtHelperService ();
@@ -17,7 +20,7 @@ export class AuthService {
   }
 
   authenticate(creds: CredenciaisDTO) {
-    return this.http.post(`${URL}/login`, creds,
+    return this.http.post(`${ URL }/login`, creds,
       {
         observe: 'response',
         responseType: 'text'
@@ -25,8 +28,7 @@ export class AuthService {
   }
 
   refreshToken() {
-    return this.http.post(`${URL}/auth/refresh_token`,
-      {},
+    return this.http.post(`${ URL }/auth/refresh_token`,{},
       {
         observe: 'response',
         responseType: 'text'

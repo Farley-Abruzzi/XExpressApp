@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar color=\"dark\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/\"></ion-back-button>\n    </ion-buttons>\n    <ion-title>Benefícios</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content text-center color=\"light\">\n\n  <ion-row>\n    <ion-col>\n      <ion-button class=\"position\" shape=\"round\" fill=\"clear\">\n        <ion-icon class=\"custom-icon\" src=\"assets/icon/fuel.svg\"></ion-icon>\n      </ion-button>\n      <ion-label class=\"position-label\">Combustível</ion-label>\n    </ion-col>\n  </ion-row>\n\n\n</ion-content>\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar color=\"dark\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"/\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title>Benefícios</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content text-center color=\"light\">\r\n\r\n  <ion-row>\r\n    <ion-col>\r\n      <ion-button class=\"position\" shape=\"round\" fill=\"clear\">\r\n        <ion-icon class=\"custom-icon\" src=\"assets/icon/fuel.svg\"></ion-icon>\r\n      </ion-button>\r\n      <ion-label class=\"position-label\">Combustível</ion-label>\r\n    </ion-col>\r\n  </ion-row>\r\n\r\n\r\n</ion-content>\r\n"
 
 /***/ }),
 

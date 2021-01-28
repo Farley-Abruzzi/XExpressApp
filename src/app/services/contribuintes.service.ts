@@ -1,12 +1,12 @@
+import { API_CONFIG } from './../../config/api.config';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Resumo } from '../interfaces/resumo';
 import { ResumoPorCidade } from '../interfaces/resumoPorCidade';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Recibos } from '../class/recibos';
 import { Devolvidos } from '../Class/devolvidos';
-
+import { environment } from '../../environments/environment';
 
 const URL = environment.url;
 
@@ -23,9 +23,9 @@ export class ContribuintesService {
 
   
   // Pega as informações de recibos dos contribuintes no WebServices. 
-  getListaRecibos() {
+  getListaRecibos(cod: number) {
     // http://192.168.0.243:8081/recibos/listarecibosapp?cod=315&startDate=2019-07-01&endDate=2019-07-31
-    return this.http.get<Recibos[]>(`${ URL }/recibos/listarecibosapp?cod=315&startDate=2019-07-01&endDate=2019-07-31`);
+    return this.http.get<Recibos[]>(`${ URL }/recibos/listarecibosapp?cod=${ cod }&startDate=2019-07-01&endDate=2019-07-31`);
   }
   // Detalhes do recibo.
   getRecibosDetalhe( nrorecibo: number ) {

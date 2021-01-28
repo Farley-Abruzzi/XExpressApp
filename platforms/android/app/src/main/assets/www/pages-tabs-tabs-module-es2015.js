@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-tabs color=\"light\">\n  <ion-tab-bar slot=\"bottom\">\n\n    <ion-tab-button tab=\"tab1\">\n      <ion-icon name=\"cash\"></ion-icon>\n      <ion-label>Depositos</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button class=\"button-motorbike\" tab=\"tab2\">\n        <ion-icon class=\"custom-icon\" src=\"assets/icon/motorbike.svg\"></ion-icon>\n        <ion-label>Iniciar</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab3\">\n      <ion-icon name=\"pin\"></ion-icon>\n      <ion-label>Mapa</ion-label>\n    </ion-tab-button>\n\n  </ion-tab-bar>\n</ion-tabs>\n"
+module.exports = "<ion-tabs color=\"light\">\r\n  <ion-tab-bar slot=\"bottom\">\r\n\r\n    <ion-tab-button tab=\"tab1\">\r\n      <ion-icon name=\"cash\"></ion-icon>\r\n      <ion-label>Depositos</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button class=\"button-motorbike\" tab=\"tab2\">\r\n        <ion-icon class=\"custom-icon\" src=\"assets/icon/motorbike.svg\"></ion-icon>\r\n        <ion-label>Iniciar</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"tab3\">\r\n      <ion-icon name=\"pin\"></ion-icon>\r\n      <ion-label>Mapa</ion-label>\r\n    </ion-tab-button>\r\n\r\n  </ion-tab-bar>\r\n</ion-tabs>\r\n"
 
 /***/ }),
 
@@ -60,7 +60,7 @@ TabsPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-tab-bar {\n  height: 9%;\n}\n\nion-tab-button {\n  --color-selected: #10dc60;\n}\n\n.custom-icon {\n  font-size: 36px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvdGFicy9DOlxcVXNlcnNcXGVsaXNldVxcRGVza3RvcFxcMTAtZXhwcmVzcy9zcmNcXGFwcFxccGFnZXNcXHRhYnNcXHRhYnMucGFnZS5zY3NzIiwic3JjL2FwcC9wYWdlcy90YWJzL3RhYnMucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBO0VBQ0ksVUFBQTtBQ0FKOztBREdBO0VBQ0kseUJBQUE7QUNBSjs7QURHQTtFQUNJLGVBQUE7QUNBSiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL3RhYnMvdGFicy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcbmlvbi10YWItYmFyIHtcbiAgICBoZWlnaHQ6IDklO1xufVxuXG5pb24tdGFiLWJ1dHRvbiB7XG4gICAgLS1jb2xvci1zZWxlY3RlZDogIzEwZGM2MDtcbn1cblxuLmN1c3RvbS1pY29uIHtcbiAgICBmb250LXNpemU6IDM2cHg7XG59IiwiaW9uLXRhYi1iYXIge1xuICBoZWlnaHQ6IDklO1xufVxuXG5pb24tdGFiLWJ1dHRvbiB7XG4gIC0tY29sb3Itc2VsZWN0ZWQ6ICMxMGRjNjA7XG59XG5cbi5jdXN0b20taWNvbiB7XG4gIGZvbnQtc2l6ZTogMzZweDtcbn0iXX0= */"
+module.exports = "ion-tab-bar {\n  height: 9%;\n}\n\nion-tab-button {\n  --color-selected: #10dc60;\n}\n\n.custom-icon {\n  font-size: 36px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvdGFicy9DOlxcdGVtcFxcd3MtaW9uaWNcXFhFeHByZXNzQXBwL3NyY1xcYXBwXFxwYWdlc1xcdGFic1xcdGFicy5wYWdlLnNjc3MiLCJzcmMvYXBwL3BhZ2VzL3RhYnMvdGFicy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDSSxVQUFBO0FDQUo7O0FER0E7RUFDSSx5QkFBQTtBQ0FKOztBREdBO0VBQ0ksZUFBQTtBQ0FKIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvdGFicy90YWJzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxyXG5pb24tdGFiLWJhciB7XHJcbiAgICBoZWlnaHQ6IDklO1xyXG59XHJcblxyXG5pb24tdGFiLWJ1dHRvbiB7XHJcbiAgICAtLWNvbG9yLXNlbGVjdGVkOiAjMTBkYzYwO1xyXG59XHJcblxyXG4uY3VzdG9tLWljb24ge1xyXG4gICAgZm9udC1zaXplOiAzNnB4O1xyXG59IiwiaW9uLXRhYi1iYXIge1xuICBoZWlnaHQ6IDklO1xufVxuXG5pb24tdGFiLWJ1dHRvbiB7XG4gIC0tY29sb3Itc2VsZWN0ZWQ6ICMxMGRjNjA7XG59XG5cbi5jdXN0b20taWNvbiB7XG4gIGZvbnQtc2l6ZTogMzZweDtcbn0iXX0= */"
 
 /***/ }),
 

@@ -29,35 +29,13 @@ export class LoginPage implements OnInit {
   }
 
   logar() {
-    this.auth.authenticate(this.creds)
-      .subscribe(resp => {
+    this.auth.authenticate(this.creds).subscribe(resp => {
         this.auth.successfullLogin(resp.headers.get('Authorization'));
         this.navCtrl.navigateRoot('main/tabs/tab2', { animated: true });
       },
-        error => {});
+        error => {
+          console.log(error);
+      });
   }
-
-  // async login( fLogin: NgForm ) {
-
-  //   if ( fLogin.invalid ) { return; }
-
-  //   const valido = await this.usuarioService.login( this.loginUser.email, this.loginUser.password );
-    
-  //   if ( valido ) {
-  //     // Navegar para tabs
-  //     this.navCtrl.navigateRoot( '/main/tabs/tab1', { animated: true } );
-  //   } else {
-  //     // Alerta de usuario e contrasenha incorretos.
-  //     this.uiService.alertaInformativo('Usuário e contra/senha não são corretos.'); 
-  //   }
-
-  // }
-
-  
-//   mostrarLogin() {
-//     this.slidesOpts = {allowTouchMove: true};
-//     this.slides.slideTo(1);
-    
-// }
 
 }
