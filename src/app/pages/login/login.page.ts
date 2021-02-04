@@ -16,7 +16,7 @@ export class LoginPage implements OnInit {
   };
   
  
-  constructor( private navCtrl: NavController, private auth: AuthService) { }
+  constructor( private navCtrl: NavController, private auth: AuthService, private toastCtrl: ToastController) { }
   
 
   ngOnInit() {
@@ -29,13 +29,25 @@ export class LoginPage implements OnInit {
   }
 
   logar() {
-    this.auth.authenticate(this.creds).subscribe(resp => {
+    this.auth.authenticate(this.creds)
+      .subscribe(resp => {
         this.auth.successfullLogin(resp.headers.get('Authorization'));
         this.navCtrl.navigateRoot('main/tabs/tab2', { animated: true });
       },
         error => {
           console.log(error);
+          this.presentToast('Erro: ' + error);
       });
+  }
+
+  async presentToast( message: string ) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 3000,
+      mode: "ios",
+      color: "light"
+    });
+    toast.present();
   }
 
 }

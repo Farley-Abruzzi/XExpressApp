@@ -3,19 +3,22 @@ import { DatabaseService } from './database.service';
 import { Recibos } from '../class/recibos';
 import { SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { Devolvidos } from '../Class/devolvidos';
+import { Depositos } from '../class/depositos';
+import { DepositoDTO } from '../class/depositoDTO';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CrudService {
 
-  qtdRecibos: number;
-  valorDeposito: number;
+  qtdRecibos: any;
+  valorDeposito: any;
 
   constructor( private dbService: DatabaseService ) { }
 
   // Método para inserir recibos no banco do app
-  public async insert( recibos: Recibos ) {
+  async insert( recibos: Recibos ) {
 
     try {
       const db = await this.dbService.getDB();
@@ -40,7 +43,7 @@ export class CrudService {
   }
 
   // Método para inserir recibos devolvidos no BD do App
-  public async insertDevolvidos( devolvidos: Devolvidos ) {
+  async insertDevolvidos( devolvidos: Devolvidos ) {
 
     try {
       const db = await this.dbService.getDB();
@@ -62,8 +65,8 @@ export class CrudService {
   }
 
  // Para selecionar todos os recibos com status de Gerado no banco do app
-  public getAll() {
-    return this.dbService.getDB().then((db: SQLiteObject) => {
+  async getAll() {
+    return await this.dbService.getDB().then((db: SQLiteObject) => {
       let sql = "select * from recibos where statusrec = 'G'";
       let data: any[];
       return db.executeSql(sql, data)
@@ -95,32 +98,23 @@ export class CrudService {
   }
 
   // Consulta DB do app para comparar dados com o DB da aplicação e fazer o comunicado de deposito
-  public getByCodmensageiro(cod: number, dtcobranca: Date) {
+  getForDeposito() {
     return this.dbService.getDB().then((db: SQLiteObject) => {
-        let sql = "SELECT COUNT(obj.nrorecibo), SUM(obj.valorgerado) FROM recibos obj "
-          + "WHERE obj.codmensageiro = ? "
-          + "AND obj.statusrec = 'B' "
-          + "AND obj.impresso = 'S' "
-          + "AND obj.dtbaixa = ?";
-        let data = [cod, dtcobranca];
+      let sql = 'SELECT count(*) AS Qtd, sum(valorgerado) AS Total FROM recibos WHERE statusrec = "B"';
+        let data = [];
         return db.executeSql(sql, data)
-        .then((data: any) => {
-          if (data.rows.length > 0) {
-            var deposito: String[] = new Array<String>();
-            for (let i = 0; i < data.rows.length; i++) {
-              let item = data.rows.item(i);
+          .then((data: any) => {
+            var depositos = new Array<DepositoDTO>();
+            if (data.rows.length > 0) {
+              var deposito = new DepositoDTO();
+              deposito.qtdRecibos = data.rows.item(0).Qtd;
+              deposito.totalArrecadado = data.rows.item(0).Total;
+              //console.log(dtbaixa);
+              console.log('Consulta realizada: ', this.qtdRecibos, this.valorDeposito);
               
-              deposito.push(item);
-
-              console.log('Consulta realizada ');
-              console.log('COD, DT: ', cod, dtcobranca);
-            }
-            console.log('return recibos: ', deposito);
-            return deposito;
-          } else {
-            console.log('return new array<Recibos>');
-            return new Array<Recibos>();
-          }
+              depositos.push(deposito);    
+          } 
+            return depositos;
         }).catch(e => {
           console.error(e);
         });
@@ -130,8 +124,8 @@ export class CrudService {
   }
 
   // Para selecionar o recibo por id(nrorecibo)
-  public getById( nrorecibo: number ) {
-    return this.dbService.getDB()
+  async getById( nrorecibo: number ) {
+    return await this.dbService.getDB()
       .then((db: SQLiteObject) => {
         let sql = 'select * from recibos where nrorecibo = ?';
         let data = [nrorecibo];
@@ -160,7 +154,7 @@ export class CrudService {
   }
 
   // Para atualizar o recibo nos casos de (Doação, Reagendamento ou Devolução)
-  public update( recibo: Recibos, option: string ) {
+  update( recibo: Recibos, option: string ) {
     return this.dbService.getDB().then(
       (db: SQLiteObject) => { 
         let sql;

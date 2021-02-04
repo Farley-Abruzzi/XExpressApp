@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar color="dark">
-        <ion-button color="light" fill="clear" slot="start" (click)="sairDoModal()">
+        <ion-button color="light" slot="start" fill="clear" (click)="sairDoModal()">
             <ion-icon slot="start" name="arrow-round-back"></ion-icon>
         </ion-button>
         <ion-button color="success" slot="end" fill="clear" (click)="inputDoacao()">
@@ -14,7 +14,6 @@
             <ion-icon name="swap"></ion-icon>
         </ion-button>
         <ion-toggle color="success" slot="end" [ngModel]="conectPrint" (ionChange)="connectOrDisconnectPrint()"></ion-toggle>
-        <ion-title>Detalhes</ion-title>
     </ion-toolbar>
 </ion-header>
 

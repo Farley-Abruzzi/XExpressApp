@@ -72,7 +72,7 @@ export class DetalheComponent implements OnInit {
   }
 
   // Atualiza a API de recibos no backend ou no BD do app
-  getPutRecibos( msg: string, opcao: string ) {
+  getPutRecibosInApp( msg: string, opcao: string ) {
     // Para rodar no app
     this.crudService.update(this.recibo, opcao)
       .then(() => {
@@ -82,17 +82,20 @@ export class DetalheComponent implements OnInit {
       e => console.error(e)
     );
 
-    // Para rodar na web
-    // this.contribService.putRecibo( this.recibo )
-    //   .subscribe(() => {
-    //     // Exibir tost de reagendamento
-    //     this.presentToast(msg);
-    //     this.sairDoModal();
-    //     console.log(this.recibo);
-    //   }, error => {
-    //     console.log(error);
-    //   });
-}
+  }
+  
+  getPutRecibosInWeb(msg: string) {
+    //Para rodar na web
+    this.contribService.putRecibo( this.recibo )
+      .subscribe(() => {
+        // Exibir tost de reagendamento
+        this.presentToast(msg);
+        this.sairDoModal();
+        console.log(this.recibo);
+      }, error => {
+        console.log(error);
+      });
+  }
 
   // Método para efetuar uma doação
   async inputDoacao() {
@@ -133,7 +136,8 @@ export class DetalheComponent implements OnInit {
               this.recibo.statusrec = 'B';
               this.recibo.dtbaixa = this.dtBaixa;
 
-              this.getPutRecibos('Doação realizada!', 'doacao');
+              this.getPutRecibosInApp('Doação realizada!', 'doacao');
+              this.getPutRecibosInWeb('Doação realizada!');
               this.imprimir();
               // this.atualizarPagina();
             }
@@ -152,7 +156,8 @@ export class DetalheComponent implements OnInit {
       this.recibo.reagendado = "S";
       console.log('Data de reagendamento atualizada: ', this.datePipe.transform(this.recibo.dtreagendamento, 'dd/MM/yyyy'));
 
-      this.getPutRecibos("Reagendamento realizado com sucesso!" , 'reagendamento');
+      this.getPutRecibosInApp("Reagendamento realizado com sucesso!", 'reagendamento');
+      this.getPutRecibosInWeb('Doação realizada!');
       this.imprimirReagendamento();
       //this.atualizarPagina();
     }
@@ -240,7 +245,8 @@ export class DetalheComponent implements OnInit {
   // Setando o statusrec do recido pra quando ele for devolvido
   statusRecibo() {
     this.recibo.statusrec = "D";
-    this.getPutRecibos("Devolvido com sucesso!" , 'devolucao');
+    this.getPutRecibosInApp("Devolvido com sucesso!", 'devolucao');
+    this.getPutRecibosInWeb('Doação realizada!');
   }
 
   // Imprimindo o recibo de doação
@@ -308,7 +314,6 @@ export class DetalheComponent implements OnInit {
   // Encerra o modal recibo/detalhes, e atualiza a página que contem a lista de recibos
   async sairDoModal() {
     return await this.modalCtrl.dismiss( {animated: true} );
-
   }
 
   // Método para selecionar ações no modal recibo/detalhes
@@ -360,9 +365,6 @@ export class DetalheComponent implements OnInit {
     await actionSheet.present();
   }
 
-  bluetoothImpressora(bluetooth: boolean) {
-    
-  }
 
   // Método para conectar o dispositivo a impressora via bluetooth.
   connectOrDisconnectPrint() {

@@ -35,6 +35,7 @@ export class RelatorioPage implements OnInit {
   ngOnInit() {
     this.conversorDate();
     this.carregarPeriodo();
+    this.connect();
     // this.carregarResumo();
   }
 
@@ -53,7 +54,6 @@ export class RelatorioPage implements OnInit {
         this.objetos = resp;
         loading.dismiss();
       });
-      this.connect();
   }
 
   // Método para conectar o dispositivo a impressora via bluetooth.
@@ -88,7 +88,7 @@ export class RelatorioPage implements OnInit {
   // Imprime as informações relacionadas na impressora.
   Imprimir() {
     this.conversorDate();
-
+    
     this.bluetoothSerial.write(
       'Contabilizando o Periodo:\n'+'DE' + this.dtInicio +' A '+ this.dtFim + '\n' +
       'Total de contribuicoes: R$' + this.objetos.totalQtd + '\n' +

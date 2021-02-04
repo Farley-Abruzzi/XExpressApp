@@ -9,7 +9,8 @@ import { StorageService } from '../../services/storage.service';
 import { UsuarioDTO } from '../../interfaces/usuario.dto';
 import { CrudService } from '../../services/crud.service';
 import { Recibos } from '../../class/recibos';
-import { stringify } from 'querystring';
+import { DepositoDTO } from '../../class/depositoDTO';
+
 
 @Component({
   selector: 'app-tab1',
@@ -38,9 +39,9 @@ export class Tab1Page implements OnInit {
   isVisible: Boolean = false;
   usuario: UsuarioDTO;
   codMens: number;
-  listaDeRecibos: String[] = new Array<String>();
-  qtdRecibos: any;
-  valorDeposito: any;
+  listaDeRecibos: DepositoDTO[] = new Array<DepositoDTO>();
+  qtdRecibos: number;
+  valorDeposito: number;
   dataBaixa: Date;
   // var: String;
   // vetLista: string[] = [];
@@ -55,19 +56,8 @@ export class Tab1Page implements OnInit {
 
 
   ngOnInit() {
-    let localUser = this.storage.getLocalUser();
-    if (localUser && localUser.email) {
-      this.usuarioService.findByEmail(localUser.email)
-        .subscribe(resp => {
-          this.usuario = resp;
-          this.codMens = this.usuario.codmensageiro;
-
-        }
-      ), error => {}
-    }
-    this.mySlide.lockSwipes(true);
+    this.getForDep();
     //this.cameraOn = false;
-    
   }
 
   slideNext() {
@@ -108,50 +98,32 @@ export class Tab1Page implements OnInit {
     console.log("Descrição desp: ", this.detailDesp);
   }
 
-  // getCodMensageiro() {
-  //   let localUser = this.storage.getLocalUser();
-  //   if (localUser && localUser.email) {
-  //     this.usuarioService.findByEmail(localUser.email)
-  //       .subscribe(resp => {
-  //         this.usuario = resp;
-  //         this.codMens = this.usuario.codmensageiro;
-  //         let newDate = '2019-07-02';
-  //         let dtbaixa = new Date(newDate);
+  getForDep() {
+    
+          let newDate = '2021-02-05';
+          let dtbaixa = new Date(newDate);
           
-  //         console.log('CODMENS: ', this.codMens);
-  //         console.log('DATA FECHAMENTO: ', dtbaixa);
+          console.log('DATA FECHAMENTO: ', dtbaixa);
 
-  //         this.crud.getByCodmensageiro(this.codMens, dtbaixa)
-  //           .then((data: string[]) => {
+          this.crud.getForDeposito()
+            .then((data: DepositoDTO[]) => {
                
-  //             this.listaDeRecibos = data;
-  //             let ver: String;
-  //             let vetList: string[] = [];
-
-  //             for (var i = 0; i < this.listaDeRecibos.length; i++) {
-
-  //               ver = this.listaDeRecibos.length[i];
-  //               vetList = ver.split(',');
-
-  //               this.qtdRecibos = vetList[0];
-  //               this.valorDeposito = vetList[1];
-  //             }
+              this.listaDeRecibos.push(...data);
               
-  //             // this.var = this.listaDeRecibos[0];
-  //             // this.vetLista = this.var.split(",");
-  //             console.log('DADOS: ', this.qtdRecibos, this.valorDeposito);
-  //             console.log('DATA: ', this.listaDeRecibos[0]);
+              for (let i = 0; i < this.listaDeRecibos.length; i++) {
+
+                this.qtdRecibos = this.listaDeRecibos[0].qtdRecibos;
+                this.valorDeposito = this.listaDeRecibos[0].totalArrecadado;
+              }
               
-  //           }, error => {
-  //               console.log('Error SqLite: ', error);
-  //           });
-  //         }, error => {
-  //           if (error.status == 403) {
-  //             console.log(error.status);
-  //         }
-  //     }); 
-  //   }
-  // }
+              
+              console.log('QTD RECIBOS: ' + this.qtdRecibos + '\tTOTAL ARRECADADO: ' + this.valorDeposito);
+              console.log('DATA: ', this.listaDeRecibos[0]);
+              
+            }, error => {
+                console.log('Error SqLite: ', error);
+            });
+  }
 
 
   setObjDeposito() {

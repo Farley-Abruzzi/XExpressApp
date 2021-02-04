@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'main/tabs/tab2'
+    redirectTo: 'login'
   },
   
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },

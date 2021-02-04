@@ -35,13 +35,14 @@ export class AuthService {
       });
   }
 
-  successfullLogin(authorizationValue: string) {
-    let tok = authorizationValue.substring(7);
+  successfullLogin(authorization: string) {
+    let tok = authorization.substring(7);
     let user: LocalUser = {
       token: tok,
       email: this.jwtHelperService.decodeToken(tok).sub
     };
     this.storage.setLocalUser(user);
+    console.log('User: ', user);
   }
 
   logout() {

@@ -123,18 +123,20 @@ export class ContribuicaoPage implements OnInit {
           this.usuario = resp;
           this.codMens = this.usuario.codmensageiro;
         
-          this.contribService.getListaRecibos(this.codMens)
-            .subscribe( resp => {
+          this.crudService.getAll()
+            .then((data: Recibos[]) => {
+                this.listaDeRecibos = data;
+                console.log("Recibos:", this.listaDeRecibos);
+                
 
-          this.listaDeRecibos = resp;
-          console.log("Recibos:", this.listaDeRecibos);
-      
-          if(this.listaDeRecibos.length[4] == "S") {
-            this.cardColors = "secondary";
-          } else {
-            this.cardColors = "danger";
-          }
-        },error=> {});
+                if(this.listaDeRecibos.length[4] == "S") {
+                    this.cardColors = "secondary";
+                } else {
+                    this.cardColors = "danger";
+                }
+            }, error => {
+                console.log(error);
+          });
 
         },error => {});
     }  
