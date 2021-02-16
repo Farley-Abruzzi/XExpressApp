@@ -21,7 +21,6 @@ export class Tab1Page implements OnInit {
   
   @ViewChild('mySlider', { static: true }) mySlide: any;
   
-
   deposito: Depositos = new Depositos();
 
   dtDeposito: Date = new Date();
@@ -30,7 +29,6 @@ export class Tab1Page implements OnInit {
   entity: string = " ";
   codValid: number;
   valorDesp: number;
-  valorDep: number;
   detailDesp: string;
 
   picture: string;
@@ -42,9 +40,8 @@ export class Tab1Page implements OnInit {
   listaDeRecibos: DepositoDTO[] = new Array<DepositoDTO>();
   qtdRecibos: number;
   valorDeposito: number;
-  dataBaixa: Date;
-  // var: String;
-  // vetLista: string[] = [];
+  dataFech: Date;
+  
 
   constructor(private usuarioService: UsuarioService,
               private datePipe: DatePipe,
@@ -56,8 +53,16 @@ export class Tab1Page implements OnInit {
 
 
   ngOnInit() {
-    this.getForDep();
     //this.cameraOn = false;
+    let localUser = this.storage.getLocalUser();
+    if (localUser && localUser.email) {
+      this.usuarioService.findByEmail(localUser.email)
+        .subscribe(resp => {
+          this.usuario = resp;
+          this.codMens = resp.codmensageiro;
+        }), error => {}
+    }
+    
   }
 
   slideNext() {
@@ -69,7 +74,7 @@ export class Tab1Page implements OnInit {
 
   selectDtDeposito(event){
     this.dtFech = event.detail.value;
-    console.log("Data de fechamento: ", this.datePipe.transform(this.dtFech, "yyyy-MM-dd"));
+    console.log("Data do deposito: ", this.dtFech);
     this.isVisible = true;
   }
 
@@ -88,24 +93,22 @@ export class Tab1Page implements OnInit {
     console.log("Valor despesa: ", this.valorDesp);
   }
 
-  selectByValorDeposito(event) {
-    this.valorDep = event.detail.value;
-    console.log("Valor deposito: ", this.valorDep);
-  }
+  // selectByValorDeposito(event) {
+  //   this.valorDep = event.detail.value;
+  //   console.log("Valor deposito: ", this.valorDep);
+  // }
 
   selectByDetailDespesa(event) {
     this.detailDesp = event.detail.value;
     console.log("Descrição desp: ", this.detailDesp);
   }
 
-  getForDep() {
-    
-          let newDate = '2021-02-05';
-          let dtbaixa = new Date(newDate);
+  async getForDep() {
           
-          console.log('DATA FECHAMENTO: ', dtbaixa);
-
-          this.crud.getForDeposito()
+          let datadorecebimento = this.datePipe.transform(this.dtFech, 'dd/MM/yyyy');
+          console.log('DATA RECEBIMENTO: ', datadorecebimento);
+          
+          await this.crud.getForDeposito(datadorecebimento)
             .then((data: DepositoDTO[]) => {
                
               this.listaDeRecibos.push(...data);
@@ -116,42 +119,46 @@ export class Tab1Page implements OnInit {
                 this.valorDeposito = this.listaDeRecibos[0].totalArrecadado;
               }
               
-              
               console.log('QTD RECIBOS: ' + this.qtdRecibos + '\tTOTAL ARRECADADO: ' + this.valorDeposito);
-              console.log('DATA: ', this.listaDeRecibos[0]);
+             
+              this.setObjDeposito(this.qtdRecibos, this.valorDeposito);
               
-            }, error => {
-                console.log('Error SqLite: ', error);
-            });
+        }, error => {
+            console.log('Error SqLite: ', error);
+      });
   }
 
 
-  setObjDeposito() {
+  setObjDeposito(qtdRec: number, valorTotal: number) {
 
           this.deposito = new Depositos();
-
+    
           let newDate = this.dtFech;
-          let dataFechamento = new Date(newDate);
+          this.dataFech = new Date(newDate);
 
-          this.deposito.dtfechamento = dataFechamento;
+    
+          console.log('DTFECHAMENTO: ', this.dataFech);
+          
+          this.deposito.dtfechamento = this.dataFech;
           this.deposito.codvalidacao = this.codValid;
-          this.deposito.valordeposito = this.valorDep;
+          this.deposito.valordeposito = valorTotal;
           this.deposito.entidade = this.entity;
           this.deposito.codusuario = 70026;
           this.deposito.codmensageiro = this.codMens;
-          this.deposito.totalarrecadado = this.valorDep;
-          this.deposito.qtdrecibos = null;
+          this.deposito.totalarrecadado = valorTotal;
+          this.deposito.qtdrecibos = qtdRec;
           this.deposito.valordespesa = this.valorDesp;
           this.deposito.descricaodespesa = this.detailDesp;
 
-          if (this.deposito.valordespesa !== null) {
+          if (this.deposito.valordespesa != null) {
             this.deposito.valordeposito = this.deposito.valordeposito - this.deposito.valordespesa;
             this.deposito.totalarrecadado = this.deposito.valordeposito;
             console.log('VALOR DEPOSITO: ', this.deposito.valordeposito);
-          }
+    }
   }
 
   getApiDbPostDepositos() {
+    console.log("OBJ DEPOSITO: ", this.deposito);
     this.usuarioService.getApiDbPostDepositos(this.deposito)
       .subscribe(resp => {
         this.presentToast('Deposito inserido com sucesso!');
@@ -183,7 +190,7 @@ export class Tab1Page implements OnInit {
   }
 
   sendPicture() {
-    this.setObjDeposito();
+    this.getForDep();
     this.usuarioService.uploadPicture(this.picture)
       .subscribe(resp => {
         this.picture = null;
@@ -198,9 +205,8 @@ export class Tab1Page implements OnInit {
     this.picture = null;
   }
 
-  salvar(){
-    this.setObjDeposito();
-    console.log("OBJ DEPOSITO: ", this.deposito);
+  async salvar(){
+    await this.getForDep();
     this.getApiDbPostDepositos();
   }
 

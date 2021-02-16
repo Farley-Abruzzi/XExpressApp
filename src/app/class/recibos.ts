@@ -7,6 +7,7 @@ export class Recibos {
   nomenorecibo: string;
   entregaweb: string;
   dtcobranca: Date;
+  datadorecebimento?: string;
   reagendado?: string;
   dtreagendamento?: Date;
   dtrecebimento?: Date;
@@ -58,6 +59,7 @@ export class Recibos {
     nomenorecibo: string,
     entregaweb: string,
     dtcobranca: Date,
+    datadorecebimento: string,
     reagendado: string,
     dtreagendamento: Date,
     dtrecebimento: Date,
@@ -108,6 +110,7 @@ export class Recibos {
     this.nomenorecibo = nomenorecibo;
     this.entregaweb = entregaweb;
     this.dtcobranca = dtcobranca;
+    this.datadorecebimento = datadorecebimento;
     this.reagendado = reagendado;
     this.dtreagendamento = dtreagendamento;
     this.dtrecebimento = dtrecebimento;

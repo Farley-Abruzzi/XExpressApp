@@ -42,6 +42,7 @@ export class DatabaseService {
         + 'formulario INTEGER, '
         + 'dtcobranca DATE, '
         + 'dtrecebimento DATE, '
+        + 'datadorecebimento VARCHAR(10), '
         + 'reagendado VARCHAR(1), '
         + 'dtreagendamento DATE, '
         + 'valorgerado REAL(6), '

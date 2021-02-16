@@ -39,7 +39,7 @@ export class Tab2Page implements OnInit {
   carregarContribuintes() {
     let localUser = this.storage.getLocalUser();
     if (localUser && localUser.email) {
-      this.usuarioService.findByEmail(localUser.email)
+     this.usuarioService.findByEmail(localUser.email)
         .subscribe(resp => {
           this.usuario = resp;
           this.codMens = this.usuario.codmensageiro;
@@ -118,7 +118,7 @@ export class Tab2Page implements OnInit {
     this.listaDeRecibos.forEach(recibos => {
       console.log(recibos.nrorecibo);
       this.objRecibos = new Recibos(recibos.nrorecibo, recibos.impresso, recibos.dtoperacao, recibos.entrega, recibos.formulario, recibos.nomenorecibo, recibos.entregaweb,
-        recibos.dtcobranca, recibos.reagendado, recibos.dtreagendamento, recibos.dtrecebimento, recibos.valorgerado, recibos.valorcheque, recibos.valordinheiro,
+        recibos.dtcobranca, recibos.datadorecebimento, recibos.reagendado, recibos.dtreagendamento, recibos.dtrecebimento, recibos.valorgerado, recibos.valorcheque, recibos.valordinheiro,
         recibos.doacaoespecial, recibos.parceladoacaoespecial, recibos.aumentodefinitivo, recibos.dtoperacaobaixa, recibos.periodicidade, recibos.valoralterado,
         recibos.valornaoalterado, recibos.dtvaloralteradobaixa, recibos.valorbakp, recibos.valorhorabkp, recibos.valordatabkp, recibos.dataqld, recibos.naorecebido,
         recibos.nrosorte, recibos.statusrec, recibos.dtbaixa, recibos.parcela, recibos.via, recibos.motivodevol, recibos.valorremarcado, recibos.dtremarc, recibos.codoperador, recibos.codcategoria, recibos.enderecosecundario, recibos.numerosecundario,

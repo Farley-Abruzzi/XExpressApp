@@ -88,7 +88,6 @@ export class DetalheComponent implements OnInit {
     //Para rodar na web
     this.contribService.putRecibo( this.recibo )
       .subscribe(() => {
-        // Exibir tost de reagendamento
         this.presentToast(msg);
         this.sairDoModal();
         console.log(this.recibo);
@@ -135,6 +134,8 @@ export class DetalheComponent implements OnInit {
               this.recibo.valorgerado = this.valorDoacao;
               this.recibo.statusrec = 'B';
               this.recibo.dtbaixa = this.dtBaixa;
+              this.recibo.datadorecebimento = this.datePipe.transform(this.dtBaixa, 'dd/MM/yyyy');
+              console.log('DTREC: ', this.recibo.datadorecebimento);
 
               this.getPutRecibosInApp('Doação realizada!', 'doacao');
               this.getPutRecibosInWeb('Doação realizada!');

@@ -5,6 +5,8 @@ import { SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { Devolvidos } from '../Class/devolvidos';
 import { Depositos } from '../class/depositos';
 import { DepositoDTO } from '../class/depositoDTO';
+import { DatePipe } from '@angular/common';
+import { parse } from 'querystring';
 
 
 @Injectable({
@@ -15,17 +17,17 @@ export class CrudService {
   qtdRecibos: any;
   valorDeposito: any;
 
-  constructor( private dbService: DatabaseService ) { }
+  constructor( private dbService: DatabaseService, private datePipe: DatePipe ) { }
 
   // Método para inserir recibos no banco do app
   async insert( recibos: Recibos ) {
 
     try {
       const db = await this.dbService.getDB();
-      let sql = 'insert into recibos (nrorecibo, nomenorecibo, entregaweb, dtcobranca, reagendado, dtreagendamento, valorgerado, statusrec, dtbaixa, parcela, via, motivodevol,'
+      let sql = 'insert into recibos (nrorecibo, nomenorecibo, entregaweb, dtcobranca, datadorecebimento, reagendado, dtreagendamento, valorgerado, statusrec, dtbaixa, parcela, via, motivodevol,'
         + ' enderecosecundario, numerosecundario, bairrosecundario, cidadesecundario, complementosecundario, cepsecundario, telefonesecundario, desccategoria, '
-        + ' observacoes, codmensageiro) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
-      let data = [recibos.nrorecibo, recibos.nomenorecibo, recibos.entregaweb, recibos.dtcobranca, recibos.reagendado, recibos.dtreagendamento, recibos.valorgerado,
+        + ' observacoes, codmensageiro) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+      let data = [recibos.nrorecibo, recibos.nomenorecibo, recibos.entregaweb, recibos.dtcobranca, recibos.datadorecebimento, recibos.reagendado, recibos.dtreagendamento, recibos.valorgerado,
       recibos.statusrec, recibos.dtbaixa, recibos.parcela, recibos.via, recibos.motivodevol, recibos.enderecosecundario, recibos.numerosecundario,
       recibos.bairrosecundario, recibos.cidadesecundario, recibos.complementosecundario, recibos.cepsecundario, recibos.telefonesecundario, recibos.desccategoria,
       recibos.observacoes, recibos.codmensageiro];
@@ -76,7 +78,7 @@ export class CrudService {
             for (let i = 0; i < data.rows.length; i++) {
               let tmp = data.rows.item(i);
               var recibo = new Recibos(tmp.nrorecibo, tmp.impresso, tmp.dtoperacao, tmp.entrega, tmp.formulario, tmp.nomenorecibo, tmp.entregaweb,
-                tmp.dtcobranca, tmp.reagendado, tmp.dtreagendamento, tmp.dtrecebimento, tmp.valorgerado, tmp.valorcheque, tmp.valordinheiro, tmp.doacaoespecial,
+                tmp.dtcobranca, tmp.datadorecebimento, tmp.reagendado, tmp.dtreagendamento, tmp.dtrecebimento, tmp.valorgerado, tmp.valorcheque, tmp.valordinheiro, tmp.doacaoespecial,
                 tmp.parceladoacaoespecial, tmp.aumentodefinitivo, tmp.dtoperacaobaixa, tmp.periodicidade, tmp.valoralterado, tmp.valornaoalterado, tmp.dtvaloralteradobaixa,
                 tmp.valorbakp, tmp.valorhorabkp, tmp.valordatabkp, tmp.dataqld, tmp.naorecebido, tmp.nrosorte, tmp.statusrec, tmp.dtbaixa, tmp.parcela, tmp.via, tmp.motivodevol, tmp.enderecosecundario, tmp.numerosecundario,
                 tmp.bairrosecundario, tmp.cidadesecundario, tmp.complementosecundario, tmp.cepsecundario, tmp.telefonesecundario, tmp.desccategoria,
@@ -98,20 +100,21 @@ export class CrudService {
   }
 
   // Consulta DB do app para comparar dados com o DB da aplicação e fazer o comunicado de deposito
-  getForDeposito() {
-    return this.dbService.getDB().then((db: SQLiteObject) => {
-      let sql = 'SELECT count(*) AS Qtd, sum(valorgerado) AS Total FROM recibos WHERE statusrec = "B"';
-        let data = [];
+  async getForDeposito(datadorecebimento: string) {
+    // dtbaixa.toISOString();
+    console.log('DTBAIXA: ', datadorecebimento);
+    return await this.dbService.getDB().then((db: SQLiteObject) => {
+      let sql = "SELECT count(*) AS Qtd, sum(valorgerado) AS Total FROM recibos WHERE datadorecebimento = ? AND statusrec = 'B'";
+      let data = [datadorecebimento];
         return db.executeSql(sql, data)
           .then((data: any) => {
             var depositos = new Array<DepositoDTO>();
             if (data.rows.length > 0) {
+              //let item = data.rows.item(0);
               var deposito = new DepositoDTO();
               deposito.qtdRecibos = data.rows.item(0).Qtd;
               deposito.totalArrecadado = data.rows.item(0).Total;
-              //console.log(dtbaixa);
-              console.log('Consulta realizada: ', this.qtdRecibos, this.valorDeposito);
-              
+              console.log('Consulta realizada: ', deposito.qtdRecibos, deposito.totalArrecadado);
               depositos.push(deposito);    
           } 
             return depositos;
@@ -134,7 +137,7 @@ export class CrudService {
             if (data.rows.length > 0) {
               let item = data.rows.item(0);
               let recibo = new Recibos(item.nrorecibo, item.impresso, item.dtoperacao, item.entrega, item.formulario, item.nomenorecibo, item.entregaweb,
-                item.dtcobranca, item.reagendado, item.dtreagendamento, item.valorgerado, item.dtrecebimento, item.valorcheque, item.valordinheiro,
+                item.dtcobranca, item.datadorecebimento, item.reagendado, item.dtreagendamento, item.valorgerado, item.dtrecebimento, item.valorcheque, item.valordinheiro,
                 item.doacaoespecial, item.parceladoacaoespecial, item.aumentodefinitivo, item.dtoperacaobaixa, item.periodicidade, item.valoralterado,
                 item.valornaoalterado, item.dtvaloralteradobaixa, item.valorbakp, item.valorhorabkp, item.valordatabkp, item.dataqld, item.naorecebido,
                 item.nrosorte, item.statusrec, item.dtbaixa, item.parcela, item.via, item.motivodevol, item.enderecosecundario, item.numerosecundario,
@@ -163,8 +166,8 @@ export class CrudService {
         switch(option)  {
 
           case 'doacao':{
-            sql = 'UPDATE recibos SET valorgerado  = ?, statusrec = ?, dtbaixa = ?, motivodevol = ? WHERE nrorecibo = ?';
-            data = [recibo.valorgerado, recibo.statusrec, recibo.dtbaixa, recibo.motivodevol, recibo.nrorecibo]
+            sql = 'UPDATE recibos SET valorgerado  = ?, statusrec = ?, datadorecebimento = ?, motivodevol = ? WHERE nrorecibo = ?';
+            data = [recibo.valorgerado, recibo.statusrec, recibo.datadorecebimento, recibo.motivodevol, recibo.nrorecibo]
             break;
           }
           
