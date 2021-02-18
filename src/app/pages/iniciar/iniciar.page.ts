@@ -127,7 +127,6 @@ export class Tab2Page implements OnInit {
       //inserir recibos   
       this.crudService.insert(this.objRecibos);
     });
-    //alert('Recibos baixados');
     this.presentToast(msg);
   }
 

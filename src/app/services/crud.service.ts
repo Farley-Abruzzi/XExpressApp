@@ -133,7 +133,7 @@ export class CrudService {
         let sql = 'select * from recibos where nrorecibo = ?';
         let data = [nrorecibo];
         return db.executeSql(sql, data)
-          .then((data) => {
+          .then((data: any) => {
             if (data.rows.length > 0) {
               let item = data.rows.item(0);
               let recibo = new Recibos(item.nrorecibo, item.impresso, item.dtoperacao, item.entrega, item.formulario, item.nomenorecibo, item.entregaweb,
@@ -191,5 +191,37 @@ export class CrudService {
         ); //passar parametro e a string;
       }
     ).catch(e => console.error(e));
+  }
+
+  async getByBairro(bairro: string) {
+    console.log('BAIRRO NO CRUD: ', bairro);
+    return await this.dbService.getDB().then((db: SQLiteObject) => {
+        let sql = 'select * from recibos where bairrosecundario = ?';
+        let data = [bairro];
+        return db.executeSql(sql, data)
+          .then((data: any) => {
+            if (data.rows.length > 0) {
+              var recibos = new Array<Recibos>();
+            for (let i = 0; i < data.rows.length; i++) {
+              let tmp = data.rows.item(i);
+              var recibo = new Recibos(tmp.nrorecibo, tmp.impresso, tmp.dtoperacao, tmp.entrega, tmp.formulario, tmp.nomenorecibo, tmp.entregaweb,
+                tmp.dtcobranca, tmp.datadorecebimento, tmp.reagendado, tmp.dtreagendamento, tmp.dtrecebimento, tmp.valorgerado, tmp.valorcheque, tmp.valordinheiro, tmp.doacaoespecial,
+                tmp.parceladoacaoespecial, tmp.aumentodefinitivo, tmp.dtoperacaobaixa, tmp.periodicidade, tmp.valoralterado, tmp.valornaoalterado, tmp.dtvaloralteradobaixa,
+                tmp.valorbakp, tmp.valorhorabkp, tmp.valordatabkp, tmp.dataqld, tmp.naorecebido, tmp.nrosorte, tmp.statusrec, tmp.dtbaixa, tmp.parcela, tmp.via, tmp.motivodevol, tmp.enderecosecundario, tmp.numerosecundario,
+                tmp.bairrosecundario, tmp.cidadesecundario, tmp.complementosecundario, tmp.cepsecundario, tmp.telefonesecundario, tmp.desccategoria,
+                tmp.valorremarcado, tmp.dtremarc, tmp.codoperador, tmp.codcategoria, tmp.codcontrib, tmp.codusuario, tmp.observacoes, tmp.codmensageiro)
+              recibos.push(recibo);
+              console.log('Consulta realizada!');
+            }
+            return recibos;
+          } else {
+            return null;
+          }
+        }).catch(
+          e => console.error(e)
+        );
+    }).catch(
+      e => console.error(e)
+    );
   }
 }

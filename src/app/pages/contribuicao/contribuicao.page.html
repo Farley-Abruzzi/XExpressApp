@@ -1,12 +1,15 @@
 <ion-header>
     <ion-toolbar color="dark">
+        <ion-title>Contribuições</ion-title>
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/"></ion-back-button>
         </ion-buttons>
         <ion-button color="success" slot="end" fill="clear">
             <ion-icon name="search"></ion-icon>
         </ion-button>
-        <ion-title>Contribuições</ion-title>
+        <ion-button color="success" slot="end" (click)="filtrarRecibos()">
+            <ion-icon name="funnel"></ion-icon>
+        </ion-button>
     </ion-toolbar>
 </ion-header>
 

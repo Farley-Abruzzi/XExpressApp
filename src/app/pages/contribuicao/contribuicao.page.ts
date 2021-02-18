@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NavController, ModalController, LoadingController } from '@ionic/angular';
+import { NavController, ModalController, LoadingController, AlertController } from '@ionic/angular';
 import { ContribuintesService } from 'src/app/services/contribuintes.service';
 import { DetalheComponent } from '../../components/detalhe/detalhe.component';
 import { Recibos } from '../../class/recibos';
@@ -17,14 +17,16 @@ import { UsuarioDTO } from '../../interfaces/usuario.dto';
 export class ContribuicaoPage implements OnInit {
 
   listaDeRecibos: Recibos[] = new Array<Recibos>();
+  listaRecibosFiltrados: Recibos[] = new Array<Recibos>();
   n:number = 25;
   cardColors: string;
   usuario: UsuarioDTO;
   codMens: number;
+  bairro: string;
 
   constructor(private navCtrl: NavController, private contribService: ContribuintesService, private modalCtrl: ModalController,
               private crudService: CrudService, public loadingController: LoadingController,
-              private storage: StorageService, private usuarioService: UsuarioService) { }
+              private storage: StorageService, private usuarioService: UsuarioService, private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.carregarContribuintes();
@@ -141,5 +143,71 @@ export class ContribuicaoPage implements OnInit {
         },error => {});
     }  
   }
+
+  async filtrarRecibos() {
+    const input = await this.alertCtrl.create({
+      header: 'Filtro',
+      subHeader: 'Pelo bairro: ',
+      inputs: [
+        {
+          name: 'txtValor',
+          type: 'text',
+          value: ''
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: (data) => {
+            console.log('Confirm Ok', data);
+            this.bairro = data.txtValor;
+            console.log('BAIRRO: ', this.bairro);
+            this.filtroPorBairro(this.bairro);
+          },
+        }
+      ]
+    });
+    await input.present();
+  }
+
+  async filtroPorBairro(bairro: string) {
+    let loading = await this.presentLoading();
+    await this.crudService.getByBairro(bairro)
+      .then((data: Recibos[]) => {
+        
+        this.listaDeRecibos = data;
+        //this.refreshFilter(this.listaDeRecibos);
+        console.log('Recibos por Bairro: ', this.listaDeRecibos);
+        loading.dismiss();
+      
+      if(this.listaDeRecibos.length[4] == "S") {
+          this.cardColors = "secondary";
+      } else {
+          this.cardColors = "danger";
+      }
+        
+        
+      });
+  }
+
+  // refreshFilter(listaDeRecibos) {
+  //   setTimeout(() => {
+  //     // event.target.complete();
+  //   }, 2000);
+  //     listaDeRecibos
+  //     console.log('Recibos por Bairro: ', listaDeRecibos);
+      
+  //     if(this.listaDeRecibos.length[4] == "S") {
+  //         this.cardColors = "secondary";
+  //     } else {
+  //         this.cardColors = "danger";
+  //     }
+  // }
 
 }
