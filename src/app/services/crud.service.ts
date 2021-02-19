@@ -166,8 +166,8 @@ export class CrudService {
         switch(option)  {
 
           case 'doacao':{
-            sql = 'UPDATE recibos SET valorgerado  = ?, statusrec = ?, datadorecebimento = ?, motivodevol = ? WHERE nrorecibo = ?';
-            data = [recibo.valorgerado, recibo.statusrec, recibo.datadorecebimento, recibo.motivodevol, recibo.nrorecibo]
+            sql = 'UPDATE recibos SET valorgerado  = ?, statusrec = ?, datadorecebimento = ?, dtbaixa = ?, motivodevol = ? WHERE nrorecibo = ?';
+            data = [recibo.valorgerado, recibo.statusrec, recibo.datadorecebimento, recibo.dtbaixa, recibo.motivodevol, recibo.nrorecibo]
             break;
           }
           
@@ -196,7 +196,7 @@ export class CrudService {
   async getByBairro(bairro: string) {
     console.log('BAIRRO NO CRUD: ', bairro);
     return await this.dbService.getDB().then((db: SQLiteObject) => {
-        let sql = 'select * from recibos where bairrosecundario = ?';
+        let sql = "SELECT * FROM recibos WHERE bairrosecundario = ? AND statusrec = 'G'";
         let data = [bairro];
         return db.executeSql(sql, data)
           .then((data: any) => {

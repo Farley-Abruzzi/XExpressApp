@@ -23,6 +23,8 @@ export class ContribuicaoPage implements OnInit {
   usuario: UsuarioDTO;
   codMens: number;
   bairro: string;
+  public bairro_1: string;
+  comFiltro: boolean = false;
 
   constructor(private navCtrl: NavController, private contribService: ContribuintesService, private modalCtrl: ModalController,
               private crudService: CrudService, public loadingController: LoadingController,
@@ -111,7 +113,11 @@ export class ContribuicaoPage implements OnInit {
   }
 
   doRefresh(event) {
-    this.refreshRecibos();
+    if (this.comFiltro == false) {
+      this.refreshRecibos();
+    } else {
+      this.refreshFilter();
+    }
     setTimeout(() => {
       event.target.complete();
     }, 2000);
@@ -168,12 +174,14 @@ export class ContribuicaoPage implements OnInit {
             console.log('Confirm Ok', data);
             this.bairro = data.txtValor;
             console.log('BAIRRO: ', this.bairro);
-            this.filtroPorBairro(this.bairro);
+            this.bairro_1 = this.bairro;
+            this.filtroPorBairro(this.bairro.toUpperCase().trim());
           },
         }
       ]
     });
     await input.present();
+    return this.bairro_1;
   }
 
   async filtroPorBairro(bairro: string) {
@@ -182,32 +190,35 @@ export class ContribuicaoPage implements OnInit {
       .then((data: Recibos[]) => {
         
         this.listaDeRecibos = data;
-        //this.refreshFilter(this.listaDeRecibos);
+        // this.refreshFilter(bairro);
         console.log('Recibos por Bairro: ', this.listaDeRecibos);
         loading.dismiss();
+        this.comFiltro = true;
       
       if(this.listaDeRecibos.length[4] == "S") {
           this.cardColors = "secondary";
       } else {
           this.cardColors = "danger";
       }
-        
-        
-      });
+    });
   }
 
-  // refreshFilter(listaDeRecibos) {
-  //   setTimeout(() => {
-  //     // event.target.complete();
-  //   }, 2000);
-  //     listaDeRecibos
-  //     console.log('Recibos por Bairro: ', listaDeRecibos);
+  async refreshFilter() {
+    let loading = await this.presentLoading();
+    console.log('BAIRRO DO REFRESHFILTER: ', this.bairro_1);
+    await this.crudService.getByBairro(this.bairro_1.toUpperCase().trim())
+      .then((data: Recibos[]) => {
       
-  //     if(this.listaDeRecibos.length[4] == "S") {
-  //         this.cardColors = "secondary";
-  //     } else {
-  //         this.cardColors = "danger";
-  //     }
-  // }
+        this.listaDeRecibos = data;
+      
+        console.log('Recibos por Bairro: ', this.listaDeRecibos);
+        loading.dismiss();
+        if (this.listaDeRecibos.length[4] == "S") {
+          this.cardColors = "secondary";
+        } else {
+          this.cardColors = "danger";
+        }
+    });
+  }
 
 }

@@ -21,6 +21,7 @@ export class DetalheComponent implements OnInit {
   lbReferencia: boolean = false;
 
   dtReagendamento: Date = new Date();
+  dataReag = new Date(this.dtReagendamento.getFullYear(), this.dtReagendamento.getMonth() + 1, 0);
   dtBaixa: Date = new Date();
   dtDevAtual: Date = new Date();
 
@@ -91,9 +92,7 @@ export class DetalheComponent implements OnInit {
         this.presentToast(msg);
         this.sairDoModal();
         console.log(this.recibo);
-      }, error => {
-        console.log(error);
-      });
+      }, error => {});
   }
 
   // Método para efetuar uma doação
@@ -153,12 +152,12 @@ export class DetalheComponent implements OnInit {
   reagendar( event ) {
     // Evento do click "Ok"
     if(this.recibo !== undefined){
-      this.recibo.dtreagendamento = new Date( event.detail.value );
+      this.recibo.dtreagendamento = new Date(this.datePipe.transform(event.detail.value, 'yyyy-MM-dd'));
       this.recibo.reagendado = "S";
-      console.log('Data de reagendamento atualizada: ', this.datePipe.transform(this.recibo.dtreagendamento, 'dd/MM/yyyy'));
+      console.log('Data de reagendamento atualizada: ', this.recibo.dtreagendamento);
 
       this.getPutRecibosInApp("Reagendamento realizado com sucesso!", 'reagendamento');
-      this.getPutRecibosInWeb('Doação realizada!');
+      this.getPutRecibosInWeb("Reagendamento realizado com sucesso!");
       this.imprimirReagendamento();
       //this.atualizarPagina();
     }
@@ -379,7 +378,7 @@ export class DetalheComponent implements OnInit {
     } else {
       console.log('DESCONECTADO: ', this.conectPrint);
       this.bluetoothSerial.disconnect().then((error) => {
-        console.log('Dispositivo desconectado.', error);
+        console.log('Desconectado.', error);
       });
       this.bluetoothSerial.clear().then(() => {
         console.log('Limpo');
