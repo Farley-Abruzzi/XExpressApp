@@ -190,17 +190,23 @@ export class ContribuicaoPage implements OnInit {
       .then((data: Recibos[]) => {
         
         this.listaDeRecibos = data;
+
+        if (this.listaDeRecibos == null) {
+          alert('Bairro não encontrado')
+        }
         // this.refreshFilter(bairro);
         console.log('Recibos por Bairro: ', this.listaDeRecibos);
         loading.dismiss();
         this.comFiltro = true;
       
-      if(this.listaDeRecibos.length[4] == "S") {
+        if (this.listaDeRecibos.length[4] == "S") {
           this.cardColors = "secondary";
-      } else {
+        } else {
           this.cardColors = "danger";
-      }
-    });
+        }
+      }, error => {
+          console.log(error);
+      });
   }
 
   async refreshFilter() {
@@ -210,9 +216,9 @@ export class ContribuicaoPage implements OnInit {
       .then((data: Recibos[]) => {
       
         this.listaDeRecibos = data;
-      
         console.log('Recibos por Bairro: ', this.listaDeRecibos);
         loading.dismiss();
+        
         if (this.listaDeRecibos.length[4] == "S") {
           this.cardColors = "secondary";
         } else {

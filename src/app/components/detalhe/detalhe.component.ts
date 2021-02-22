@@ -77,6 +77,7 @@ export class DetalheComponent implements OnInit {
     // Para rodar no app
     this.crudService.update(this.recibo, opcao)
       .then(() => {
+        console.log(this.recibo);
         this.presentToast(msg);
         this.sairDoModal();
     }).catch(
@@ -85,12 +86,10 @@ export class DetalheComponent implements OnInit {
 
   }
   
-  getPutRecibosInWeb(msg: string) {
+  getPutRecibosInWeb() {
     //Para rodar na web
     this.contribService.putRecibo( this.recibo )
       .subscribe(() => {
-        this.presentToast(msg);
-        this.sairDoModal();
         console.log(this.recibo);
       }, error => {});
   }
@@ -134,10 +133,11 @@ export class DetalheComponent implements OnInit {
               this.recibo.statusrec = 'B';
               this.recibo.dtbaixa = this.dtBaixa;
               this.recibo.datadorecebimento = this.datePipe.transform(this.dtBaixa, 'dd/MM/yyyy');
+              this.recibo.dtreagendamento = null;
               console.log('DTREC: ', this.recibo.datadorecebimento);
 
               this.getPutRecibosInApp('Doação realizada!', 'doacao');
-              this.getPutRecibosInWeb('Doação realizada!');
+              this.getPutRecibosInWeb();
               this.imprimir();
               // this.atualizarPagina();
             }
@@ -157,7 +157,7 @@ export class DetalheComponent implements OnInit {
       console.log('Data de reagendamento atualizada: ', this.recibo.dtreagendamento);
 
       this.getPutRecibosInApp("Reagendamento realizado com sucesso!", 'reagendamento');
-      this.getPutRecibosInWeb("Reagendamento realizado com sucesso!");
+      this.getPutRecibosInWeb();
       this.imprimirReagendamento();
       //this.atualizarPagina();
     }
@@ -246,7 +246,7 @@ export class DetalheComponent implements OnInit {
   statusRecibo() {
     this.recibo.statusrec = "D";
     this.getPutRecibosInApp("Devolvido com sucesso!", 'devolucao');
-    this.getPutRecibosInWeb('Doação realizada!');
+    this.getPutRecibosInWeb();
   }
 
   // Imprimindo o recibo de doação
