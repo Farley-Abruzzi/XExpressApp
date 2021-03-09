@@ -317,10 +317,6 @@ var Tab1Page = /** @class */ (function () {
         this.valorDesp = event.detail.value;
         console.log("Valor despesa: ", this.valorDesp);
     };
-    // selectByValorDeposito(event) {
-    //   this.valorDep = event.detail.value;
-    //   console.log("Valor deposito: ", this.valorDep);
-    // }
     Tab1Page.prototype.selectByDetailDespesa = function (event) {
         this.detailDesp = event.detail.value;
         console.log("Descrição desp: ", this.detailDesp);

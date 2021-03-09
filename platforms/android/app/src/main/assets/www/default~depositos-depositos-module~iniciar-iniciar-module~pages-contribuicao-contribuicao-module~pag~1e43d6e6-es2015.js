@@ -167,7 +167,7 @@ let ContribuintesService = class ContribuintesService {
     // Pega as informações de recibos dos contribuintes no WebServices. 
     getListaRecibos(cod) {
         // http://192.168.0.243:8081/recibos/listarecibosapp?cod=315&startDate=2019-07-01&endDate=2019-07-31
-        return this.http.get(`${URL}/recibos/listarecibosapp?cod=${cod}&startDate=2019-07-01&endDate=2019-07-31`);
+        return this.http.get(`${URL}/recibos/listarecibosapp?cod=${cod}&startDate=2021-03-01&endDate=2021-03-31`);
     }
     // Detalhes do recibo.
     getRecibosDetalhe(nrorecibo) {
@@ -382,8 +382,8 @@ let CrudService = class CrudService {
             let data;
             switch (option) {
                 case 'doacao': {
-                    sql = 'UPDATE recibos SET valorgerado  = ?, statusrec = ?, datadorecebimento = ?, motivodevol = ? WHERE nrorecibo = ?';
-                    data = [recibo.valorgerado, recibo.statusrec, recibo.datadorecebimento, recibo.motivodevol, recibo.nrorecibo];
+                    sql = 'UPDATE recibos SET valorgerado  = ?, statusrec = ?, datadorecebimento = ?, dtbaixa = ?, motivodevol = ? WHERE nrorecibo = ?';
+                    data = [recibo.valorgerado, recibo.statusrec, recibo.datadorecebimento, recibo.dtbaixa, recibo.motivodevol, recibo.nrorecibo];
                     break;
                 }
                 case 'reagendamento': {
@@ -399,6 +399,31 @@ let CrudService = class CrudService {
             }
             return db.executeSql(sql, data).then(() => console.log("Recibo Atualizado")).catch(e => console.error(e)); //passar parametro e a string;
         }).catch(e => console.error(e));
+    }
+    getByBairro(bairro) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            console.log('BAIRRO NO CRUD: ', bairro);
+            return yield this.dbService.getDB().then((db) => {
+                let sql = "SELECT * FROM recibos WHERE bairrosecundario = ? AND statusrec = 'G' ORDER BY dtcobranca ASC";
+                let data = [bairro];
+                return db.executeSql(sql, data)
+                    .then((data) => {
+                    if (data.rows.length > 0) {
+                        var recibos = new Array();
+                        for (let i = 0; i < data.rows.length; i++) {
+                            let tmp = data.rows.item(i);
+                            var recibo = new _class_recibos__WEBPACK_IMPORTED_MODULE_3__["Recibos"](tmp.nrorecibo, tmp.impresso, tmp.dtoperacao, tmp.entrega, tmp.formulario, tmp.nomenorecibo, tmp.entregaweb, tmp.dtcobranca, tmp.datadorecebimento, tmp.reagendado, tmp.dtreagendamento, tmp.dtrecebimento, tmp.valorgerado, tmp.valorcheque, tmp.valordinheiro, tmp.doacaoespecial, tmp.parceladoacaoespecial, tmp.aumentodefinitivo, tmp.dtoperacaobaixa, tmp.periodicidade, tmp.valoralterado, tmp.valornaoalterado, tmp.dtvaloralteradobaixa, tmp.valorbakp, tmp.valorhorabkp, tmp.valordatabkp, tmp.dataqld, tmp.naorecebido, tmp.nrosorte, tmp.statusrec, tmp.dtbaixa, tmp.parcela, tmp.via, tmp.motivodevol, tmp.enderecosecundario, tmp.numerosecundario, tmp.bairrosecundario, tmp.cidadesecundario, tmp.complementosecundario, tmp.cepsecundario, tmp.telefonesecundario, tmp.desccategoria, tmp.valorremarcado, tmp.dtremarc, tmp.codoperador, tmp.codcategoria, tmp.codcontrib, tmp.codusuario, tmp.observacoes, tmp.codmensageiro);
+                            recibos.push(recibo);
+                            console.log('Consulta realizada!');
+                        }
+                        return recibos;
+                    }
+                    else {
+                        return null;
+                    }
+                }).catch(e => console.error(e));
+            }).catch(e => console.error(e));
+        });
     }
 };
 CrudService.ctorParameters = () => [

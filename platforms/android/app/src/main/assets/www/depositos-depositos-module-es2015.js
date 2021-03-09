@@ -311,10 +311,6 @@ let Tab1Page = class Tab1Page {
         this.valorDesp = event.detail.value;
         console.log("Valor despesa: ", this.valorDesp);
     }
-    // selectByValorDeposito(event) {
-    //   this.valorDep = event.detail.value;
-    //   console.log("Valor deposito: ", this.valorDep);
-    // }
     selectByDetailDespesa(event) {
         this.detailDesp = event.detail.value;
         console.log("Descrição desp: ", this.detailDesp);

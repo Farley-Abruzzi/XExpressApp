@@ -182,7 +182,6 @@ let Tab2Page = class Tab2Page {
             //inserir recibos   
             this.crudService.insert(this.objRecibos);
         });
-        //alert('Recibos baixados');
         this.presentToast(msg);
     }
     alterarTema() {

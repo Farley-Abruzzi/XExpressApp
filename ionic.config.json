@@ -1,7 +1,7 @@
 {
-  "name": "express",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
+    "name": "XexpressApp",
+    "integrations": {
+        "cordova": {}
+    },
+    "type": "angular"
 }

@@ -28,11 +28,11 @@
                         <ion-label color="dark"><b>Nome:</b> {{ recibo.nomenorecibo }}</ion-label><br>
                         <ion-label color="dark"><b>Agendamento:</b> {{ recibo.dtcobranca }}</ion-label><br>
                         <ion-label color="dark"><b>Cidade:</b> {{ recibo.cidadesecundario }}</ion-label><br><br>
-                        <ion-label color="dark"><b>Endereço:</b> <br>{{ recibo.enderecosecundario +", "+ recibo.numerosecundario +", "+ recibo.bairrosecundario }}</ion-label><br>
+                        <ion-label color="dark"><b>Endereço:</b> {{ recibo.enderecosecundario +", "+ recibo.numerosecundario +", "+ recibo.bairrosecundario }}</ion-label><br>
                         <ion-label color="dark" [style.visibility]="lbReferencia ? 'visible':'hidden'"><b>Referência:</b> {{ recibo.complementosecundario }}</ion-label><br><br>
-                        <ion-label color="dark"><b>Valor:</b> R$ {{ recibo.valorgerado }}</ion-label><br>
                         <ion-label color="dark"><b>Telefone(s):</b> {{ recibo.telefonesecundario }}</ion-label><br>
-                        <ion-label color="dark"><b>Categoria:</b> {{ recibo.desccategoria }}</ion-label><br><br>
+                        <ion-label color="dark"><b>Categoria:</b> {{ recibo.desccategoria }}</ion-label><br>
+                        <ion-label color="dark"><b>Valor:</b> {{ recibo.dtrecebimento | currency: 'BRL':true}}</ion-label><br><br>
                         <ion-label color="dark"><br><b>Obs. da Parcela:</b> {{ recibo.observacoes }}</ion-label><br>
                     </ion-card-content>
                 </ion-card>
@@ -45,8 +45,5 @@
             </ion-col>
         </ion-row>
     </ion-grid>
-
-
-
 
 </ion-content>

@@ -69,7 +69,7 @@ export class CrudService {
  // Para selecionar todos os recibos com status de Gerado no banco do app
   async getAll() {
     return await this.dbService.getDB().then((db: SQLiteObject) => {
-      let sql = "select * from recibos where statusrec = 'G'";
+      let sql = "select * from recibos where statusrec = 'G' ORDER BY dtcobranca ASC";
       let data: any[];
       return db.executeSql(sql, data)
         .then((data: any) => {
@@ -196,7 +196,7 @@ export class CrudService {
   async getByBairro(bairro: string) {
     console.log('BAIRRO NO CRUD: ', bairro);
     return await this.dbService.getDB().then((db: SQLiteObject) => {
-        let sql = "SELECT * FROM recibos WHERE bairrosecundario = ? AND statusrec = 'G'";
+        let sql = "SELECT * FROM recibos WHERE bairrosecundario = ? AND statusrec = 'G' ORDER BY dtcobranca ASC";
         let data = [bairro];
         return db.executeSql(sql, data)
           .then((data: any) => {

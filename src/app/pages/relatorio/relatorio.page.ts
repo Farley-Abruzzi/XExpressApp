@@ -101,10 +101,10 @@ export class RelatorioPage implements OnInit {
     }
 
   // Teste, guarda recibos no local storage
-  mostrarRecidos() {
-    this.storage.setRecibos( this.objetos );
-    console.log('Recibos salvos', this.objetos );
-  }
+  // mostrarRecidos() {
+  //   this.storage.setRecibos( this.objetos );
+  //   console.log('Recibos salvos', this.objetos );
+  // }
 
   // converte datas
   conversorDate(): void {

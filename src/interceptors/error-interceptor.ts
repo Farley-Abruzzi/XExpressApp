@@ -8,7 +8,7 @@ import { FieldMessage } from '../app/interfaces/fieldmessage';
  
  
 @Injectable()
-export class ErrorInterceptor implements HttpInterceptor{
+export class ErrorInterceptor implements HttpInterceptor {
     
     constructor(public storage: StorageService, private toastCtrl: ToastController, public alertCtrl: AlertController) {}
 
@@ -20,8 +20,7 @@ export class ErrorInterceptor implements HttpInterceptor{
                         errorObj = errorObj.error;
                     }
                     if (!errorObj.status) {
-                        errorObj = JSON.parse(errorObj);
-                        
+                        errorObj = JSON.parse(errorObj);  
                     }
                     console.log("Erro detectado pelo Inteceptor:");
                     console.log(errorObj);

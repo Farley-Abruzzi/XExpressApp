@@ -42,7 +42,6 @@ export class DetalheComponent implements OnInit {
 
   ngOnInit() {
     this.carregarRecibosDetalhes();
-    console.log('Número do recibo: ', this.nrorecibo );
   }
 
   // Chama a API de recibos para ser vizualizada no app
@@ -51,6 +50,8 @@ export class DetalheComponent implements OnInit {
     this.crudService.getById(this.nrorecibo)
       .then( (data: Recibos) => {
         this.recibo = data;
+
+        console.log('RECIBO: ', this.recibo);
 
         if(this.recibo.complementosecundario == "") {
           this.lbReferencia = false;
@@ -77,7 +78,7 @@ export class DetalheComponent implements OnInit {
     // Para rodar no app
     this.crudService.update(this.recibo, opcao)
       .then(() => {
-        console.log(this.recibo);
+        console.log('PUT IN APP: ', this.recibo);
         this.presentToast(msg);
         this.sairDoModal();
     }).catch(
@@ -90,7 +91,7 @@ export class DetalheComponent implements OnInit {
     //Para rodar na web
     this.contribService.putRecibo( this.recibo )
       .subscribe(() => {
-        console.log(this.recibo);
+        console.log('PUT IN WEB: ', this.recibo);
       }, error => {});
   }
 
@@ -134,12 +135,10 @@ export class DetalheComponent implements OnInit {
               this.recibo.dtbaixa = this.dtBaixa;
               this.recibo.datadorecebimento = this.datePipe.transform(this.dtBaixa, 'dd/MM/yyyy');
               this.recibo.dtreagendamento = null;
-              console.log('DTREC: ', this.recibo.datadorecebimento);
 
               this.getPutRecibosInApp('Doação realizada!', 'doacao');
               this.getPutRecibosInWeb();
               this.imprimir();
-              // this.atualizarPagina();
             }
           }
         }
@@ -154,8 +153,7 @@ export class DetalheComponent implements OnInit {
     if(this.recibo !== undefined){
       this.recibo.dtreagendamento = new Date(this.datePipe.transform(event.detail.value, 'yyyy-MM-dd'));
       this.recibo.reagendado = "S";
-      console.log('Data de reagendamento atualizada: ', this.recibo.dtreagendamento);
-
+      console.log('DTREAG: ', this.recibo.dtreagendamento);
       this.getPutRecibosInApp("Reagendamento realizado com sucesso!", 'reagendamento');
       this.getPutRecibosInWeb();
       this.imprimirReagendamento();
@@ -236,7 +234,7 @@ export class DetalheComponent implements OnInit {
   getPostDevolvidos() {
     this.contribService.postDevolvidos( this.devolvido )
       .subscribe( () => {
-        console.log('Inserido');
+        console.log('Devolvido Inserido');
       }, error => {
         console.log(error);
       });
@@ -369,14 +367,12 @@ export class DetalheComponent implements OnInit {
   // Método para conectar o dispositivo a impressora via bluetooth.
   connectOrDisconnectPrint() {
     if (this.conectPrint = !this.conectPrint) {
-      console.log('CONECTADO: ', this.conectPrint);
         this.bluetoothSerial.connectInsecure("00:02:5B:B4:13:87").subscribe((data) => {
           console.log('Conectado', data);
         });
       this.presentToast('IMPRESSORA CONECTADA!');
 
     } else {
-      console.log('DESCONECTADO: ', this.conectPrint);
       this.bluetoothSerial.disconnect().then((error) => {
         console.log('Desconectado.', error);
       });

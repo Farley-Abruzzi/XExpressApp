@@ -33,8 +33,6 @@ export class Tab3Page implements OnInit, AfterViewInit {
       map.resize();
     });
     
-    
-
     //   map.on('load', function() {
 
     //     map.resize();

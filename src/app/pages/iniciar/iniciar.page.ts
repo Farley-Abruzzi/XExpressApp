@@ -22,6 +22,7 @@ export class Tab2Page implements OnInit {
   darkMode: boolean = true;
   usuario: UsuarioDTO;
   codMens: number;
+  bairro: string;
 
   constructor(private navCtrl: NavController, private calendar: Calendar,
     private bluetoothSerial: BluetoothSerial, private crudService: CrudService,
@@ -43,8 +44,14 @@ export class Tab2Page implements OnInit {
         .subscribe(resp => {
           this.usuario = resp;
           this.codMens = this.usuario.codmensageiro;
+
+          if (this.codMens == 330) {
+            this.bairro = "AMORIM"
+          } else if (this.codMens = 795) {
+            this.bairro = "CUSTODIO PEREIRA"
+          }
         
-          this.contribService.getListaRecibos(this.codMens).subscribe( resp => {
+          this.contribService.getListaRecibos(this.codMens, this.bairro).subscribe( resp => {
 
             this.listaDeRecibos.push(...resp);
             console.log("Recibos:", this.listaDeRecibos);

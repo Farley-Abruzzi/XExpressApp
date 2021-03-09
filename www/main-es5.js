@@ -768,7 +768,6 @@ var AuthService = /** @class */ (function () {
             email: this.jwtHelperService.decodeToken(tok).sub
         };
         this.storage.setLocalUser(user);
-        console.log('User: ', user);
     };
     AuthService.prototype.logout = function () {
         this.storage.setLocalUser(null);
@@ -1129,7 +1128,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
 var environment = {
     production: true,
-    url: 'http://192.168.0.243:8380'
+    url: 'http://192.168.100.158:8380'
+    // In Job
+    //url: 'http://192.168.0.243:8380'
 };
 
 
@@ -1150,7 +1151,9 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    url: 'http://192.168.0.243:8380'
+    url: 'http://192.168.100.158:8380'
+    // In Job
+    //url: 'http://192.168.0.243:8380'
 };
 /*
  * For easier debugging in development mode, you can import the following file
@@ -1190,7 +1193,6 @@ var AuthInterceptor = /** @class */ (function () {
     AuthInterceptor.prototype.intercept = function (req, next) {
         console.log('INTERCEPTOR');
         var localUser = this.storage.getLocalUser();
-        console.log('localUser: ', localUser);
         var N = URL.length;
         var requestToAPI = req.url.substring(0, N) == URL;
         if (localUser && requestToAPI) {

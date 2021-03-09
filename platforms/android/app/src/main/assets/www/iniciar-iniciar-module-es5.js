@@ -188,7 +188,6 @@ var Tab2Page = /** @class */ (function () {
             //inserir recibos   
             _this.crudService.insert(_this.objRecibos);
         });
-        //alert('Recibos baixados');
         this.presentToast(msg);
     };
     Tab2Page.prototype.alterarTema = function () {

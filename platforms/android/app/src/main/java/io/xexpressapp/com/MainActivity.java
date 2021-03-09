@@ -17,7 +17,7 @@
        under the License.
  */
 
-package io.express.com;
+package io.xexpressapp.com;
 
 import android.os.Bundle;
 import org.apache.cordova.*;

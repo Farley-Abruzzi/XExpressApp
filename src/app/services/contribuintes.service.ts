@@ -23,9 +23,9 @@ export class ContribuintesService {
 
   
   // Pega as informações de recibos dos contribuintes no WebServices. 
-  getListaRecibos(cod: number) {
+  getListaRecibos(cod: number, bairro: string) {
     // http://192.168.0.243:8081/recibos/listarecibosapp?cod=315&startDate=2019-07-01&endDate=2019-07-31
-    return this.http.get<Recibos[]>(`${ URL }/recibos/listarecibosapp?cod=${ cod }&startDate=2019-07-01&endDate=2019-07-31`);
+    return this.http.get<Recibos[]>(`${ URL }/recibos/listarecibosapp?cod=${ cod }&startDate=2021-03-01&endDate=2021-03-31&bairro=${ bairro }`);
   }
   // Detalhes do recibo.
   getRecibosDetalhe( nrorecibo: number ) {

@@ -93,11 +93,6 @@ export class Tab1Page implements OnInit {
     console.log("Valor despesa: ", this.valorDesp);
   }
 
-  // selectByValorDeposito(event) {
-  //   this.valorDep = event.detail.value;
-  //   console.log("Valor deposito: ", this.valorDep);
-  // }
-
   selectByDetailDespesa(event) {
     this.detailDesp = event.detail.value;
     console.log("Descrição desp: ", this.detailDesp);
@@ -135,8 +130,6 @@ export class Tab1Page implements OnInit {
     
           let newDate = this.dtFech;
           this.dataFech = new Date(newDate);
-
-    
           console.log('DTFECHAMENTO: ', this.dataFech);
           
           this.deposito.dtfechamento = this.dataFech;

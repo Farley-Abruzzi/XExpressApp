@@ -11,8 +11,8 @@ import { AuthService } from '../../services/auth.services';
 export class LoginPage implements OnInit {
 
   creds: CredenciaisDTO = {
-    email: '',
-    password: ''
+    email: "",
+    password: ""
   };
   
  
@@ -22,16 +22,19 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.auth.refreshToken()
       .subscribe(resp => {
-        this.auth.successfullLogin(resp.headers.get('Authorization'));
+        this.auth.successfullLogin(resp.headers.get("Authorization"));
         this.navCtrl.navigateRoot('main/tabs/tab2', { animated: true });
       },
         error => {});
   }
 
   logar() {
+    this.creds.email = this.creds.email.trim();
+    console.log('CREDS: ', this.creds);
     this.auth.authenticate(this.creds)
       .subscribe(resp => {
-        this.auth.successfullLogin(resp.headers.get('Authorization'));
+        console.log('OBJ CREDS: ', this.creds);
+        this.auth.successfullLogin(resp.headers.get("Authorization"));
         this.navCtrl.navigateRoot('main/tabs/tab2', { animated: true });
       },
         error => {

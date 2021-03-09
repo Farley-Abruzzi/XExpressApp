@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button defaultHref=\"/\"></ion-back-button>\r\n        </ion-buttons>\r\n        <ion-button color=\"success\" slot=\"end\" fill=\"clear\">\r\n            <ion-icon name=\"search\"></ion-icon>\r\n        </ion-button>\r\n        <ion-title>Contribuições</ion-title>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content color=\"light\">\r\n    <ion-refresher slot=\"fixed\" pullFactor=\"0.5\" pullMin=\"100\" pullMax=\"200\" (ionRefresh)=\"doRefresh($event)\">\r\n        <ion-refresher-content pullingIcon=\"chevron-down-circle-outline\" refreshingSpinner=\"circles\" refreshingText=\"Atualizando...\">\r\n        </ion-refresher-content>\r\n    </ion-refresher>\r\n\r\n    <ion-grid>\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-list *ngFor=\"let lista of listaDeRecibos\" [ngSwitch]=\"lista.reagendado\">\r\n                    <ion-card (click)=\"verDetalhes( lista.nrorecibo )\" button=\"true\">\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color:#4c8dff\">\r\n                            <ion-label><b>Nome:</b> {{ lista.nomenorecibo }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Endereço:</b> {{ lista.enderecosecundario +\", \"+ lista.numerosecundario +\", \"+ lista.bairrosecundario +\", \"+ lista.cidadesecundario }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Data da cobrança:</b> {{ lista.dtcobranca }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Categoria:</b> {{ lista.desccategoria }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #d33939\">\r\n                            <ion-label><b>Reagendado para:</b> {{ lista.dtreagendamento | date: 'dd/MM/yyyy'}}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Nome:</b> {{ lista.nomenorecibo }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Endereço:</b> {{ lista.enderecosecundario +\", \"+ lista.numerosecundario +\", \"+ lista.bairrosecundario +\", \"+ lista.cidadesecundario }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Data da cobrança:</b> {{ lista.dtcobranca }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Categoria:</b> {{ lista.desccategoria }}</ion-label>\r\n                        </ion-item>\r\n                    </ion-card>\r\n                </ion-list>\r\n            </ion-col>\r\n        </ion-row>\r\n    </ion-grid>\r\n\r\n</ion-content>"
+module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-title>Contribuições</ion-title>\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button defaultHref=\"/\"></ion-back-button>\r\n        </ion-buttons>\r\n        <ion-button color=\"success\" slot=\"end\" fill=\"clear\">\r\n            <ion-icon name=\"search\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button color=\"success\" slot=\"end\" (click)=\"filtrarRecibos()\">\r\n            <ion-icon name=\"funnel\"></ion-icon>\r\n        </ion-button>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content color=\"light\">\r\n    <ion-refresher slot=\"fixed\" pullFactor=\"0.5\" pullMin=\"100\" pullMax=\"200\" (ionRefresh)=\"doRefresh($event)\">\r\n        <ion-refresher-content pullingIcon=\"chevron-down-circle-outline\" refreshingSpinner=\"circles\" refreshingText=\"Atualizando...\">\r\n        </ion-refresher-content>\r\n    </ion-refresher>\r\n\r\n    <ion-grid>\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-list *ngFor=\"let lista of listaDeRecibos\" [ngSwitch]=\"lista.reagendado\">\r\n                    <ion-card (click)=\"verDetalhes( lista.nrorecibo )\" button=\"true\">\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color:#4c8dff\">\r\n                            <ion-label><b>Nome:</b> {{ lista.nomenorecibo }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Endereço:</b> {{ lista.enderecosecundario +\", \"+ lista.numerosecundario +\", \"+ lista.bairrosecundario +\", \"+ lista.cidadesecundario }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Data da cobrança:</b> {{ lista.dtcobranca }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Categoria:</b> {{ lista.desccategoria }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #d33939\">\r\n                            <ion-label><b>Reagendado para:</b> {{ lista.dtreagendamento | date: 'dd/MM/yyyy'}}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Nome:</b> {{ lista.nomenorecibo }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Endereço:</b> {{ lista.enderecosecundario +\", \"+ lista.numerosecundario +\", \"+ lista.bairrosecundario +\", \"+ lista.cidadesecundario }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Data da cobrança:</b> {{ lista.dtcobranca }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Categoria:</b> {{ lista.desccategoria }}</ion-label>\r\n                        </ion-item>\r\n                    </ion-card>\r\n                </ion-list>\r\n            </ion-col>\r\n        </ion-row>\r\n    </ion-grid>\r\n\r\n</ion-content>"
 
 /***/ }),
 
@@ -100,7 +100,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ContribuicaoPage = class ContribuicaoPage {
-    constructor(navCtrl, contribService, modalCtrl, crudService, loadingController, storage, usuarioService) {
+    constructor(navCtrl, contribService, modalCtrl, crudService, loadingController, storage, usuarioService, alertCtrl) {
         this.navCtrl = navCtrl;
         this.contribService = contribService;
         this.modalCtrl = modalCtrl;
@@ -108,8 +108,11 @@ let ContribuicaoPage = class ContribuicaoPage {
         this.loadingController = loadingController;
         this.storage = storage;
         this.usuarioService = usuarioService;
+        this.alertCtrl = alertCtrl;
         this.listaDeRecibos = new Array();
+        this.listaRecibosFiltrados = new Array();
         this.n = 25;
+        this.comFiltro = false;
     }
     ngOnInit() {
         this.carregarContribuintes();
@@ -187,7 +190,12 @@ let ContribuicaoPage = class ContribuicaoPage {
         });
     }
     doRefresh(event) {
-        this.refreshRecibos();
+        if (this.comFiltro == false) {
+            this.refreshRecibos();
+        }
+        else {
+            this.refreshFilter();
+        }
         setTimeout(() => {
             event.target.complete();
         }, 2000);
@@ -215,6 +223,80 @@ let ContribuicaoPage = class ContribuicaoPage {
             }, error => { });
         }
     }
+    filtrarRecibos() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const input = yield this.alertCtrl.create({
+                header: 'Filtro',
+                subHeader: 'Pelo bairro: ',
+                inputs: [
+                    {
+                        name: 'txtValor',
+                        type: 'text',
+                        value: ''
+                    },
+                ],
+                buttons: [
+                    {
+                        text: 'Cancelar',
+                        role: 'cancel',
+                        handler: () => {
+                            console.log('Confirm Cancel');
+                        }
+                    }, {
+                        text: 'Ok',
+                        handler: (data) => {
+                            console.log('Confirm Ok', data);
+                            this.bairro = data.txtValor;
+                            console.log('BAIRRO: ', this.bairro);
+                            this.bairro_1 = this.bairro;
+                            this.filtroPorBairro(this.bairro.toUpperCase().trim());
+                        },
+                    }
+                ]
+            });
+            yield input.present();
+            return this.bairro_1;
+        });
+    }
+    filtroPorBairro(bairro) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let loading = yield this.presentLoading();
+            yield this.crudService.getByBairro(bairro)
+                .then((data) => {
+                this.listaDeRecibos = data;
+                if (this.listaDeRecibos == null) {
+                    alert('Bairro não encontrado');
+                }
+                loading.dismiss();
+                this.comFiltro = true;
+                if (this.listaDeRecibos.length[4] == "S") {
+                    this.cardColors = "secondary";
+                }
+                else {
+                    this.cardColors = "danger";
+                }
+            }, error => {
+                console.log(error);
+            });
+        });
+    }
+    refreshFilter() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let loading = yield this.presentLoading();
+            console.log('BAIRRO DO REFRESHFILTER: ', this.bairro_1);
+            yield this.crudService.getByBairro(this.bairro_1.toUpperCase().trim())
+                .then((data) => {
+                this.listaDeRecibos = data;
+                loading.dismiss();
+                if (this.listaDeRecibos.length[4] == "S") {
+                    this.cardColors = "secondary";
+                }
+                else {
+                    this.cardColors = "danger";
+                }
+            });
+        });
+    }
 };
 ContribuicaoPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"] },
@@ -223,7 +305,8 @@ ContribuicaoPage.ctorParameters = () => [
     { type: _services_crud_service__WEBPACK_IMPORTED_MODULE_5__["CrudService"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
     { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_6__["StorageService"] },
-    { type: _services_usuario_service__WEBPACK_IMPORTED_MODULE_7__["UsuarioService"] }
+    { type: _services_usuario_service__WEBPACK_IMPORTED_MODULE_7__["UsuarioService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] }
 ];
 ContribuicaoPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -233,7 +316,7 @@ ContribuicaoPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], src_app_services_contribuintes_service__WEBPACK_IMPORTED_MODULE_3__["ContribuintesService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"],
         _services_crud_service__WEBPACK_IMPORTED_MODULE_5__["CrudService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"],
-        _services_storage_service__WEBPACK_IMPORTED_MODULE_6__["StorageService"], _services_usuario_service__WEBPACK_IMPORTED_MODULE_7__["UsuarioService"]])
+        _services_storage_service__WEBPACK_IMPORTED_MODULE_6__["StorageService"], _services_usuario_service__WEBPACK_IMPORTED_MODULE_7__["UsuarioService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]])
 ], ContribuicaoPage);
 
 

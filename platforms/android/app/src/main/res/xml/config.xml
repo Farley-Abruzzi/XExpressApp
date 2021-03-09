@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.express.com" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.xexpressapp.com" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <feature name="BluetoothSerial">
         <param name="android-package" value="com.megster.cordova.BluetoothSerial" />
     </feature>
@@ -36,7 +36,7 @@
     <feature name="IonicWebView">
         <param name="android-package" value="com.ionicframework.cordova.webview.IonicWebView" />
     </feature>
-    <name>X-Express</name>
+    <name>X-ExpressApp</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="farleyabruzzi@gmail.com" href="http://ionicframework.com/">Farley Abruzzi</author>
     <content original-src="index.html" src="http://localhost:8100" />

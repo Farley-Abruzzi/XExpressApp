@@ -51,13 +51,13 @@ export class ContribuicaoPage implements OnInit {
             .then((data: Recibos[]) => {
                 this.listaDeRecibos = data;
                 console.log("Recibos:", this.listaDeRecibos);
-                loading.dismiss();
-
+                
                 if(this.listaDeRecibos.length[4] == "S") {
                     this.cardColors = "secondary";
                 } else {
                     this.cardColors = "danger";
                 }
+                loading.dismiss();
             }, error => {
                 console.log(error);
           });
@@ -194,8 +194,7 @@ export class ContribuicaoPage implements OnInit {
         if (this.listaDeRecibos == null) {
           alert('Bairro não encontrado')
         }
-        // this.refreshFilter(bairro);
-        console.log('Recibos por Bairro: ', this.listaDeRecibos);
+        
         loading.dismiss();
         this.comFiltro = true;
       
@@ -216,7 +215,6 @@ export class ContribuicaoPage implements OnInit {
       .then((data: Recibos[]) => {
       
         this.listaDeRecibos = data;
-        console.log('Recibos por Bairro: ', this.listaDeRecibos);
         loading.dismiss();
         
         if (this.listaDeRecibos.length[4] == "S") {
