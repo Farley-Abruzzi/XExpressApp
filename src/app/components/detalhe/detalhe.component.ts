@@ -25,6 +25,9 @@ export class DetalheComponent implements OnInit {
   dtBaixa: Date = new Date();
   dtDevAtual: Date = new Date();
 
+  newDt: string = " ";
+  dataR: Date;
+
   valorDoacao: number;
   conectPrint: boolean = false;
 
@@ -35,13 +38,31 @@ export class DetalheComponent implements OnInit {
                private datePipe: DatePipe,
                private toastCtrl: ToastController,
                private alertCtrl: AlertController,
-               private navCtrl: NavController,
                private bluetoothSerial: BluetoothSerial,
                private crudService: CrudService
                ) { }
 
   ngOnInit() {
     this.carregarRecibosDetalhes();
+  }
+
+  // Método para conectar e desconectar o dispositivo a impressora via bluetooth.
+  connectOrDisconnectPrint() {
+    if (this.conectPrint = !this.conectPrint) {
+        this.bluetoothSerial.connectInsecure("02:36:0D:6B:4D:F3" || "00:02:5B:B4:13:18" || "00:02:5B:B4:13:87").subscribe((data) => {
+          console.log('Conectado', data);
+        });
+      this.presentToast('IMPRESSORA CONECTADA!');
+
+    } else {
+      this.bluetoothSerial.disconnect().then((error) => {
+        console.log('Desconectado.', error);
+      });
+      this.bluetoothSerial.clear().then(() => {
+        console.log('Limpo');
+      });
+      this.presentToast('IMPRESSORA DESCONECTADA!');
+    }
   }
 
   // Chama a API de recibos para ser vizualizada no app
@@ -150,14 +171,12 @@ export class DetalheComponent implements OnInit {
   // Método que recebe a data pelo componente "datetime" e imputa para data de "reagendamento".
   reagendar( event ) {
     // Evento do click "Ok"
-    if(this.recibo !== undefined){
-      this.recibo.dtreagendamento = new Date(this.datePipe.transform(event.detail.value, 'yyyy-MM-dd'));
+    if (this.recibo !== undefined) {
+      this.recibo.dtreagendamento = event.detail.value;
       this.recibo.reagendado = "S";
-      console.log('DTREAG: ', this.recibo.dtreagendamento);
       this.getPutRecibosInApp("Reagendamento realizado com sucesso!", 'reagendamento');
       this.getPutRecibosInWeb();
       this.imprimirReagendamento();
-      //this.atualizarPagina();
     }
   }
 
@@ -288,7 +307,7 @@ export class DetalheComponent implements OnInit {
       'GRUPO LUTA PELA VIDA' + '\n' +
       'CNPJ: 01.316.056/0001-12' + '\n' +
       '0800-342062' + '\n\n' +
-      'VALOR: R$' + this.recibo.valorgerado +',00' + '\n\n' +
+      'VALOR: R$' + this.recibo.dtrecebimento +',00' + '\n\n' +
       '===============================' + '\n\n\n' +
       'Ola estive aqui para recolher'+ '\n' +
       'sua doacao que e muito '+ '\n' +
@@ -364,24 +383,7 @@ export class DetalheComponent implements OnInit {
   }
 
 
-  // Método para conectar o dispositivo a impressora via bluetooth.
-  connectOrDisconnectPrint() {
-    if (this.conectPrint = !this.conectPrint) {
-        this.bluetoothSerial.connectInsecure("00:02:5B:B4:13:87").subscribe((data) => {
-          console.log('Conectado', data);
-        });
-      this.presentToast('IMPRESSORA CONECTADA!');
-
-    } else {
-      this.bluetoothSerial.disconnect().then((error) => {
-        console.log('Desconectado.', error);
-      });
-      this.bluetoothSerial.clear().then(() => {
-        console.log('Limpo');
-      });
-      this.presentToast('IMPRESSORA DESCONECTADA!');
-    }
-  }
+  
 
 
   // Atualiza a página contribuição apos ações(Doação, Reagendamento e Devolução) no modal recibo/detalhes

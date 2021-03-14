@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-button class=\"buttonPrint\" slot=\"end\" fill=\"clear\" (click)=\"Imprimir()\">\r\n            <ion-icon name=\"print\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button class=\"buttonPrint\" slot=\"end\" fill=\"clear\">\r\n            <ion-icon name=\"save\"></ion-icon>\r\n        </ion-button>\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button defaultHref=\"/\"></ion-back-button>\r\n        </ion-buttons>\r\n        <ion-title>Relatórios</ion-title>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content color=\"light\">\r\n    <ion-grid>\r\n        <ion-row>\r\n            <ion-col>\r\n\r\n                <ion-list *ngIf=\"objetos\">\r\n                    <ion-toolbar class=\"SizeToolbar\" text-center color=\"success\">\r\n                        <ion-label class=\"LabelPeriodo\">Período</ion-label>\r\n                        <ion-button color=\"dark\" class=\"calendarStart\" slot=\"start\" fill=\"clear\">De\r\n                            <ion-icon name=\"calendar\"></ion-icon>\r\n                            <ion-datetime class=\"dateTime-1\" cancelText=\"Cancelar\" done-text=\"Ok\" (ionChange)=\"carregarDtInicio( $event )\" [ngModel]=\"dtStart.toISOString()\" display-format=\"DD/MM/YYYY\"></ion-datetime>\r\n                        </ion-button>\r\n\r\n                        <ion-button color=\"dark\" class=\"calendarEnd\" slot=\"start\" fill=\"clear\">Até\r\n                            <ion-icon name=\"calendar\"></ion-icon>\r\n                            <ion-datetime class=\"dateTime-2\" cancelText=\"Cancelar\" done-text=\"Ok\" (ionChange)=\"carregarDtFim( $event )\" [ngModel]=\"dtEnd.toISOString()\" display-format=\"DD/MM/YYYY\"></ion-datetime>\r\n                        </ion-button>\r\n                    </ion-toolbar>\r\n\r\n                    <ion-button class=\"ButtonPorCidade\" expand=\"block\" fill=\"outline\" (click)=\"mostrarPop( $event )\" color=\"success\">\r\n                        <b>Ver Por Cidade</b>\r\n                    </ion-button>\r\n\r\n\r\n\r\n\r\n\r\n                    <ion-card color=\"light\">\r\n                        <!-- Lista de contabilização por período. -->\r\n                        <ion-item color=\"medium\">\r\n                            <ion-label><b>Recebidos (Hoje):</b> R$ {{ objetos.qtdRecebido.toFixed(2) }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label><b>Total de contribuições:</b> R$ {{ objetos.totalQtd.toFixed(2) }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label><b>A Receber:</b> R$ {{ objetos.valorEmAberto.toFixed(2) }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"medium\"><b>Em Aberto:</b> {{ objetos.qtdEmAberto }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"success\"><b>Recebidas:</b> {{ objetos.qtdRecebido }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"danger\"><b>Devolvidas:</b> {{ objetos.qtdDevolvido }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"danger\"><b>Canceladas:</b> {{ objetos.qtdCancelado }}</ion-label>\r\n                        </ion-item>\r\n                        <br>\r\n                    </ion-card>\r\n                </ion-list>\r\n\r\n            </ion-col>\r\n        </ion-row>\r\n    </ion-grid>\r\n\r\n</ion-content>"
+module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-button class=\"buttonPrint\" slot=\"end\" fill=\"clear\" (click)=\"Imprimir()\">\r\n            <ion-icon name=\"print\"></ion-icon>\r\n        </ion-button>\r\n        <ion-toggle color=\"success\" slot=\"end\" [ngModel]=\"conectPrint\" (ionChange)=\"connectOrDisconnectPrint()\"></ion-toggle>\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button defaultHref=\"/\"></ion-back-button>\r\n        </ion-buttons>\r\n        <ion-title>Relatórios</ion-title>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content color=\"light\">\r\n    <ion-grid>\r\n        <ion-row>\r\n            <ion-col>\r\n\r\n                <ion-list *ngIf=\"objetos\">\r\n                    <ion-toolbar class=\"SizeToolbar\" text-center color=\"success\">\r\n                        <ion-label class=\"LabelPeriodo\">Período</ion-label>\r\n                        <ion-button color=\"dark\" class=\"calendarStart\" slot=\"start\" fill=\"clear\">De\r\n                            <ion-icon name=\"calendar\"></ion-icon>\r\n                            <ion-datetime class=\"dateTime-1\" cancelText=\"Cancelar\" done-text=\"Ok\" (ionChange)=\"carregarDtInicio( $event )\" [ngModel]=\"dtStart.toISOString()\" display-format=\"DD/MM/YYYY\"></ion-datetime>\r\n                        </ion-button>\r\n\r\n                        <ion-button color=\"dark\" class=\"calendarEnd\" slot=\"start\" fill=\"clear\">Até\r\n                            <ion-icon name=\"calendar\"></ion-icon>\r\n                            <ion-datetime class=\"dateTime-2\" cancelText=\"Cancelar\" done-text=\"Ok\" (ionChange)=\"carregarDtFim( $event )\" [ngModel]=\"dtEnd.toISOString()\" display-format=\"DD/MM/YYYY\"></ion-datetime>\r\n                        </ion-button>\r\n                    </ion-toolbar>\r\n\r\n                    <ion-button class=\"ButtonPorCidade\" expand=\"block\" fill=\"outline\" (click)=\"mostrarPop( $event )\" color=\"success\">\r\n                        <b>Ver Por Cidade</b>\r\n                    </ion-button>\r\n\r\n\r\n\r\n\r\n\r\n                    <ion-card color=\"light\">\r\n                        <!-- Lista de contabilização por período. -->\r\n                        <ion-item color=\"medium\">\r\n                            <ion-label><b>Recebidos (Hoje):</b> {{ objetos.qtdRecebido | currency: 'BRL':true }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label><b>Total de contribuições:</b> {{ objetos.totalQtd | currency: 'BRL':true }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label><b>A Receber:</b> {{ objetos.valorEmAberto | currency: 'BRL':true }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"medium\"><b>Em Aberto:</b> {{ objetos.qtdEmAberto }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"success\"><b>Recebidas:</b> {{ objetos.qtdRecebido }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"danger\"><b>Devolvidas:</b> {{ objetos.qtdDevolvido }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"danger\"><b>Canceladas:</b> {{ objetos.qtdCancelado }}</ion-label>\r\n                        </ion-item>\r\n                        <br>\r\n                    </ion-card>\r\n                </ion-list>\r\n\r\n            </ion-col>\r\n        </ion-row>\r\n    </ion-grid>\r\n\r\n</ion-content>"
 
 /***/ }),
 
@@ -120,17 +120,18 @@ var RelatorioPage = /** @class */ (function () {
         this.dtEnd = new Date(this.dtStart.getFullYear(), this.dtStart.getMonth() + 1, 0);
         this.dtInicio = " ";
         this.dtFim = " ";
+        this.conectPrint = false;
     }
     RelatorioPage.prototype.ngOnInit = function () {
         this.conversorDate();
         this.carregarPeriodo();
-        this.connect();
         // this.carregarResumo();
     };
     // Método para carregar a contabilização por período após a seleção da data início e fim.
     // Carrega também os recibos por cidade através do mesmo seletor de data.
     RelatorioPage.prototype.carregarPeriodo = function () {
         this.carregarResumo();
+        this.conectPrint = true;
         // this.carregarResumoPorCidade();
     };
     // Carrega o objeto de resumo do mensageiro.
@@ -147,26 +148,13 @@ var RelatorioPage = /** @class */ (function () {
                             .subscribe(function (resp) {
                             _this.objetos = resp;
                             loading.dismiss();
+                        }, function (error) {
+                            console.log(error);
+                            loading.dismiss();
                         });
                         return [2 /*return*/];
                 }
             });
-        });
-    };
-    // Método para conectar o dispositivo a impressora via bluetooth.
-    RelatorioPage.prototype.connect = function () {
-        this.bluetoothSerial.connectInsecure("00:02:5B:B4:13:87").subscribe(function (data) {
-            console.log('Conectado', data);
-        });
-        this.presentToast('IMPRESSORA CONECTADA!');
-    };
-    // Desconecta o dispositivo da impressora.
-    RelatorioPage.prototype.disconnectDevices = function () {
-        this.bluetoothSerial.disconnect().then(function (error) {
-            console.log('Dispositivo desconectado.', error);
-        });
-        this.bluetoothSerial.clear().then(function () {
-            console.log('Limpo');
         });
     };
     // Mostrando mensagens de confirmação no Toast
@@ -240,6 +228,24 @@ var RelatorioPage = /** @class */ (function () {
                 }
             });
         });
+    };
+    // Método para conectar e desconectar o dispositivo a impressora via bluetooth.
+    RelatorioPage.prototype.connectOrDisconnectPrint = function () {
+        if (this.conectPrint = !this.conectPrint) {
+            this.bluetoothSerial.connectInsecure("02:36:0D:6B:4D:F3" || false || false || false).subscribe(function (data) {
+                console.log('Conectado', data);
+            });
+            this.presentToast('IMPRESSORA CONECTADA!');
+        }
+        else {
+            this.bluetoothSerial.disconnect().then(function (error) {
+                console.log('Desconectado.', error);
+            });
+            this.bluetoothSerial.clear().then(function () {
+                console.log('Limpo');
+            });
+            this.presentToast('IMPRESSORA DESCONECTADA!');
+        }
     };
     // Mostra o resumo por cidade da página relatorio
     RelatorioPage.prototype.mostrarPop = function (evento) {

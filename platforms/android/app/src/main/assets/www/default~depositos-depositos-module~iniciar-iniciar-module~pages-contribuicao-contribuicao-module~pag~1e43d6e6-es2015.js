@@ -165,9 +165,9 @@ let ContribuintesService = class ContribuintesService {
         this.router = router;
     }
     // Pega as informações de recibos dos contribuintes no WebServices. 
-    getListaRecibos(cod) {
+    getListaRecibos(cod, bairro) {
         // http://192.168.0.243:8081/recibos/listarecibosapp?cod=315&startDate=2019-07-01&endDate=2019-07-31
-        return this.http.get(`${URL}/recibos/listarecibosapp?cod=${cod}&startDate=2021-03-01&endDate=2021-03-31`);
+        return this.http.get(`${URL}/recibos/listarecibosapp?cod=${cod}&startDate=2021-03-01&endDate=2021-03-31&bairro=${bairro}`);
     }
     // Detalhes do recibo.
     getRecibosDetalhe(nrorecibo) {
@@ -299,7 +299,7 @@ let CrudService = class CrudService {
     getAll() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             return yield this.dbService.getDB().then((db) => {
-                let sql = "select * from recibos where statusrec = 'G'";
+                let sql = "select * from recibos where statusrec = 'G' ORDER BY dtcobranca ASC";
                 let data;
                 return db.executeSql(sql, data)
                     .then((data) => {

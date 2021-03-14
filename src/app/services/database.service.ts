@@ -37,6 +37,7 @@ export class DatabaseService {
         + 'nrorecibo INTEGER NOT NULL PRIMARY KEY, '
         + 'impresso VARCHAR(1), '
         + 'dtoperacao DATE, '
+        + 'entrega DATE, '
         + 'nomenorecibo VARCHAR(100), '
         + 'entregaweb VARCHAR(1), '
         + 'formulario INTEGER, '

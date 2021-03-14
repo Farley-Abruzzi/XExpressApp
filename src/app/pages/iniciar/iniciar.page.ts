@@ -47,8 +47,8 @@ export class Tab2Page implements OnInit {
 
           if (this.codMens == 330) {
             this.bairro = "AMORIM"
-          } else if (this.codMens = 795) {
-            this.bairro = "CUSTODIO PEREIRA"
+          } else if (this.codMens = 876) {
+            this.bairro = "MORUMBI"
           }
         
           this.contribService.getListaRecibos(this.codMens, this.bairro).subscribe( resp => {

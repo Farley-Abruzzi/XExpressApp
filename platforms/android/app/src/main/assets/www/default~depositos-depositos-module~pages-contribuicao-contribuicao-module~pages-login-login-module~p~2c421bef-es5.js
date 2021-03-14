@@ -18,7 +18,7 @@ module.exports = "<ion-row>\r\n  <ion-col text-center>\r\n    <h3>Selecione Avat
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-button color=\"light\" slot=\"start\" fill=\"clear\" (click)=\"sairDoModal()\">\r\n            <ion-icon slot=\"start\" name=\"arrow-round-back\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button color=\"success\" slot=\"end\" fill=\"clear\" (click)=\"inputDoacao()\">\r\n            <ion-icon name=\"cash\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button color=\"success\" slot=\"end\" fill=\"clear\">\r\n            <ion-icon name=\"calendar\"></ion-icon>\r\n            <ion-datetime class=\"dateModel\" cancelText=\"Cancelar\" done-text=\"Ok\" display-format=\"DD/MM/YYYY\" (ionChange)=\"reagendar( $event )\" [ngModel]=\"dtReagendamento.toISOString()\"></ion-datetime>\r\n        </ion-button>\r\n        <ion-button color=\"success\" slot=\"end\" fill=\"clear\" (click)=\"alertDevolucao()\">\r\n            <ion-icon name=\"swap\"></ion-icon>\r\n        </ion-button>\r\n        <ion-toggle color=\"success\" slot=\"end\" [ngModel]=\"conectPrint\" (ionChange)=\"connectOrDisconnectPrint()\"></ion-toggle>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n    <ion-grid>\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-text class=\"text-1\">Hospital do Câncer em Uberlândia</ion-text><br>\r\n                <ion-card style=\"height: 100%;\" *ngIf=\"recibo\" color=\"warning\">\r\n                    <ion-card-content padding color=\"warning\">\r\n                        <ion-label color=\"dark\"><b>Nome:</b> {{ recibo.nomenorecibo }}</ion-label><br>\r\n                        <ion-label color=\"dark\"><b>Agendamento:</b> {{ recibo.dtcobranca }}</ion-label><br>\r\n                        <ion-label color=\"dark\"><b>Cidade:</b> {{ recibo.cidadesecundario }}</ion-label><br><br>\r\n                        <ion-label color=\"dark\"><b>Endereço:</b> {{ recibo.enderecosecundario +\", \"+ recibo.numerosecundario +\", \"+ recibo.bairrosecundario }}</ion-label><br>\r\n                        <ion-label color=\"dark\" [style.visibility]=\"lbReferencia ? 'visible':'hidden'\"><b>Referência:</b> {{ recibo.complementosecundario }}</ion-label><br><br>\r\n                        <ion-label color=\"dark\"><b>Telefone(s):</b> {{ recibo.telefonesecundario }}</ion-label><br>\r\n                        <ion-label color=\"dark\"><b>Categoria:</b> {{ recibo.desccategoria }}</ion-label><br>\r\n                        <ion-label color=\"dark\"><b>Valor:</b> R$ {{ recibo.valorgerado }}</ion-label><br><br>\r\n                        <ion-label color=\"dark\"><br><b>Obs. da Parcela:</b> {{ recibo.observacoes }}</ion-label><br>\r\n                    </ion-card-content>\r\n                </ion-card>\r\n\r\n                <ion-button class=\"buttonAction\" color=\"dark\" expand=\"block\" (click)=\"presentActionSheet()\">\r\n                    Mostrar Ações\r\n                </ion-button>\r\n\r\n\r\n            </ion-col>\r\n        </ion-row>\r\n    </ion-grid>\r\n\r\n</ion-content>"
+module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-button color=\"light\" slot=\"start\" fill=\"clear\" (click)=\"sairDoModal()\">\r\n            <ion-icon slot=\"start\" name=\"arrow-round-back\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button color=\"success\" slot=\"end\" fill=\"clear\" (click)=\"inputDoacao()\">\r\n            <ion-icon name=\"cash\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button color=\"success\" slot=\"end\" fill=\"clear\">\r\n            <ion-icon name=\"calendar\"></ion-icon>\r\n            <ion-datetime class=\"dateModel\" cancelText=\"Cancelar\" done-text=\"Ok\" display-format=\"DD/MM/YYYY\" (ionChange)=\"reagendar( $event )\" [ngModel]=\"dtReagendamento.toISOString()\"></ion-datetime>\r\n        </ion-button>\r\n        <ion-button color=\"success\" slot=\"end\" fill=\"clear\" (click)=\"alertDevolucao()\">\r\n            <ion-icon name=\"swap\"></ion-icon>\r\n        </ion-button>\r\n        <ion-toggle color=\"success\" slot=\"end\" [ngModel]=\"conectPrint\" (ionChange)=\"connectOrDisconnectPrint()\"></ion-toggle>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n    <ion-grid>\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-text class=\"text-1\">Hospital do Câncer em Uberlândia</ion-text><br>\r\n                <ion-card style=\"height: 100%;\" *ngIf=\"recibo\" color=\"warning\">\r\n                    <ion-card-content padding color=\"warning\">\r\n                        <ion-label color=\"dark\"><b>Nome:</b> {{ recibo.nomenorecibo }}</ion-label><br>\r\n                        <ion-label color=\"dark\"><b>Agendamento:</b> {{ recibo.dtcobranca }}</ion-label><br>\r\n                        <ion-label color=\"dark\"><b>Cidade:</b> {{ recibo.cidadesecundario }}</ion-label><br><br>\r\n                        <ion-label color=\"dark\"><b>Endereço:</b> {{ recibo.enderecosecundario +\", \"+ recibo.numerosecundario +\", \"+ recibo.bairrosecundario }}</ion-label><br>\r\n                        <ion-label color=\"dark\" [style.visibility]=\"lbReferencia ? 'visible':'hidden'\"><b>Referência:</b> {{ recibo.complementosecundario }}</ion-label><br><br>\r\n                        <ion-label color=\"dark\"><b>Telefone(s):</b> {{ recibo.telefonesecundario }}</ion-label><br>\r\n                        <ion-label color=\"dark\"><b>Categoria:</b> {{ recibo.desccategoria }}</ion-label><br>\r\n                        <ion-label color=\"dark\"><b>Valor:</b> {{ recibo.dtrecebimento | currency: 'BRL':true}}</ion-label><br><br>\r\n                        <ion-label color=\"dark\"><br><b>Obs. da Parcela:</b> {{ recibo.observacoes }}</ion-label><br>\r\n                    </ion-card-content>\r\n                </ion-card>\r\n\r\n                <ion-button class=\"buttonAction\" color=\"dark\" expand=\"block\" (click)=\"presentActionSheet()\">\r\n                    Mostrar Ações\r\n                </ion-button>\r\n\r\n\r\n            </ion-col>\r\n        </ion-row>\r\n    </ion-grid>\r\n\r\n</ion-content>"
 
 /***/ }),
 
@@ -276,14 +276,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var DetalheComponent = /** @class */ (function () {
-    function DetalheComponent(contribService, modalCtrl, actionSheetCtrl, datePipe, toastCtrl, alertCtrl, navCtrl, bluetoothSerial, crudService) {
+    function DetalheComponent(contribService, modalCtrl, actionSheetCtrl, datePipe, toastCtrl, alertCtrl, bluetoothSerial, crudService) {
         this.contribService = contribService;
         this.modalCtrl = modalCtrl;
         this.actionSheetCtrl = actionSheetCtrl;
         this.datePipe = datePipe;
         this.toastCtrl = toastCtrl;
         this.alertCtrl = alertCtrl;
-        this.navCtrl = navCtrl;
         this.bluetoothSerial = bluetoothSerial;
         this.crudService = crudService;
         this.lbReferencia = false;
@@ -291,10 +290,29 @@ var DetalheComponent = /** @class */ (function () {
         this.dataReag = new Date(this.dtReagendamento.getFullYear(), this.dtReagendamento.getMonth() + 1, 0);
         this.dtBaixa = new Date();
         this.dtDevAtual = new Date();
+        this.newDt = " ";
         this.conectPrint = false;
     }
     DetalheComponent.prototype.ngOnInit = function () {
         this.carregarRecibosDetalhes();
+    };
+    // Método para conectar e desconectar o dispositivo a impressora via bluetooth.
+    DetalheComponent.prototype.connectOrDisconnectPrint = function () {
+        if (this.conectPrint = !this.conectPrint) {
+            this.bluetoothSerial.connectInsecure("02:36:0D:6B:4D:F3" || false || false).subscribe(function (data) {
+                console.log('Conectado', data);
+            });
+            this.presentToast('IMPRESSORA CONECTADA!');
+        }
+        else {
+            this.bluetoothSerial.disconnect().then(function (error) {
+                console.log('Desconectado.', error);
+            });
+            this.bluetoothSerial.clear().then(function () {
+                console.log('Limpo');
+            });
+            this.presentToast('IMPRESSORA DESCONECTADA!');
+        }
     };
     // Chama a API de recibos para ser vizualizada no app
     DetalheComponent.prototype.carregarRecibosDetalhes = function () {
@@ -303,6 +321,7 @@ var DetalheComponent = /** @class */ (function () {
         this.crudService.getById(this.nrorecibo)
             .then(function (data) {
             _this.recibo = data;
+            console.log('RECIBO: ', _this.recibo);
             if (_this.recibo.complementosecundario == "") {
                 _this.lbReferencia = false;
             }
@@ -405,12 +424,11 @@ var DetalheComponent = /** @class */ (function () {
     DetalheComponent.prototype.reagendar = function (event) {
         // Evento do click "Ok"
         if (this.recibo !== undefined) {
-            this.recibo.dtreagendamento = new Date(this.datePipe.transform(event.detail.value, 'yyyy-MM-dd'));
+            this.recibo.dtreagendamento = event.detail.value;
             this.recibo.reagendado = "S";
             this.getPutRecibosInApp("Reagendamento realizado com sucesso!", 'reagendamento');
             this.getPutRecibosInWeb();
             this.imprimirReagendamento();
-            //this.atualizarPagina();
         }
     };
     // Método para imputar motivos da devolução
@@ -527,7 +545,7 @@ var DetalheComponent = /** @class */ (function () {
             'GRUPO LUTA PELA VIDA' + '\n' +
             'CNPJ: 01.316.056/0001-12' + '\n' +
             '0800-342062' + '\n\n' +
-            'VALOR: R$' + this.recibo.valorgerado + ',00' + '\n\n' +
+            'VALOR: R$' + this.recibo.dtrecebimento + ',00' + '\n\n' +
             '===============================' + '\n\n\n' +
             'Ola estive aqui para recolher' + '\n' +
             'sua doacao que e muito ' + '\n' +
@@ -626,24 +644,6 @@ var DetalheComponent = /** @class */ (function () {
             });
         });
     };
-    // Método para conectar o dispositivo a impressora via bluetooth.
-    DetalheComponent.prototype.connectOrDisconnectPrint = function () {
-        if (this.conectPrint = !this.conectPrint) {
-            this.bluetoothSerial.connectInsecure("00:02:5B:B4:13:87").subscribe(function (data) {
-                console.log('Conectado', data);
-            });
-            this.presentToast('IMPRESSORA CONECTADA!');
-        }
-        else {
-            this.bluetoothSerial.disconnect().then(function (error) {
-                console.log('Desconectado.', error);
-            });
-            this.bluetoothSerial.clear().then(function () {
-                console.log('Limpo');
-            });
-            this.presentToast('IMPRESSORA DESCONECTADA!');
-        }
-    };
     // Atualiza a página contribuição apos ações(Doação, Reagendamento e Devolução) no modal recibo/detalhes
     DetalheComponent.prototype.atualizarPagina = function () {
         setTimeout(function () {
@@ -657,7 +657,6 @@ var DetalheComponent = /** @class */ (function () {
         { type: _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] },
         { type: _ionic_native_bluetooth_serial_ngx__WEBPACK_IMPORTED_MODULE_5__["BluetoothSerial"] },
         { type: src_app_services_crud_service__WEBPACK_IMPORTED_MODULE_7__["CrudService"] }
     ]; };
@@ -677,7 +676,6 @@ var DetalheComponent = /** @class */ (function () {
             _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"],
             _ionic_native_bluetooth_serial_ngx__WEBPACK_IMPORTED_MODULE_5__["BluetoothSerial"],
             src_app_services_crud_service__WEBPACK_IMPORTED_MODULE_7__["CrudService"]])
     ], DetalheComponent);

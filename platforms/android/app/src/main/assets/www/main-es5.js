@@ -1128,7 +1128,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
 var environment = {
     production: true,
-    url: 'http://192.168.100.158:8380'
+    url: 'http://187.32.122.17:8380'
     // In Job
     //url: 'http://192.168.0.243:8380'
 };
@@ -1151,7 +1151,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    url: 'http://192.168.100.158:8380'
+    url: 'http://187.32.122.17:8380'
     // In Job
     //url: 'http://192.168.0.243:8380'
 };

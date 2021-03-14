@@ -292,7 +292,7 @@ var Tab1Page = /** @class */ (function () {
                 .subscribe(function (resp) {
                 _this.usuario = resp;
                 _this.codMens = resp.codmensageiro;
-            }), function (error) { };
+            }, function (error) { });
         }
     };
     Tab1Page.prototype.slideNext = function () {

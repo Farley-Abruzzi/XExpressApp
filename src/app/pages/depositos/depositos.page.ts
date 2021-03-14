@@ -60,9 +60,8 @@ export class Tab1Page implements OnInit {
         .subscribe(resp => {
           this.usuario = resp;
           this.codMens = resp.codmensageiro;
-        }), error => {}
-    }
-    
+        }, error => {}  
+      )}
   }
 
   slideNext() {

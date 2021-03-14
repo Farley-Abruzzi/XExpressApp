@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-title>Contribuições</ion-title>\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button defaultHref=\"/\"></ion-back-button>\r\n        </ion-buttons>\r\n        <ion-button color=\"success\" slot=\"end\" fill=\"clear\">\r\n            <ion-icon name=\"search\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button color=\"success\" slot=\"end\" (click)=\"filtrarRecibos()\">\r\n            <ion-icon name=\"funnel\"></ion-icon>\r\n        </ion-button>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content color=\"light\">\r\n    <ion-refresher slot=\"fixed\" pullFactor=\"0.5\" pullMin=\"100\" pullMax=\"200\" (ionRefresh)=\"doRefresh($event)\">\r\n        <ion-refresher-content pullingIcon=\"chevron-down-circle-outline\" refreshingSpinner=\"circles\" refreshingText=\"Atualizando...\">\r\n        </ion-refresher-content>\r\n    </ion-refresher>\r\n\r\n    <ion-grid>\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-list *ngFor=\"let lista of listaDeRecibos\" [ngSwitch]=\"lista.reagendado\">\r\n                    <ion-card (click)=\"verDetalhes( lista.nrorecibo )\" button=\"true\">\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color:#4c8dff\">\r\n                            <ion-label><b>Nome:</b> {{ lista.nomenorecibo }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Endereço:</b> {{ lista.enderecosecundario +\", \"+ lista.numerosecundario +\", \"+ lista.bairrosecundario +\", \"+ lista.cidadesecundario }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Data da cobrança:</b> {{ lista.dtcobranca }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Categoria:</b> {{ lista.desccategoria }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #d33939\">\r\n                            <ion-label><b>Reagendado para:</b> {{ lista.dtreagendamento | date: 'dd/MM/yyyy'}}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Nome:</b> {{ lista.nomenorecibo }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Endereço:</b> {{ lista.enderecosecundario +\", \"+ lista.numerosecundario +\", \"+ lista.bairrosecundario +\", \"+ lista.cidadesecundario }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Data da cobrança:</b> {{ lista.dtcobranca }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Categoria:</b> {{ lista.desccategoria }}</ion-label>\r\n                        </ion-item>\r\n                    </ion-card>\r\n                </ion-list>\r\n            </ion-col>\r\n        </ion-row>\r\n    </ion-grid>\r\n\r\n</ion-content>"
+module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-title>Contribuições</ion-title>\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button defaultHref=\"/\"></ion-back-button>\r\n        </ion-buttons>\r\n        <ion-button color=\"success\" slot=\"end\" fill=\"clear\">\r\n            <ion-icon name=\"search\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button color=\"success\" slot=\"end\" (click)=\"filtrarRecibos()\">\r\n            <ion-icon name=\"funnel\"></ion-icon>\r\n        </ion-button>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content color=\"light\">\r\n    <ion-refresher slot=\"fixed\" pullFactor=\"0.3\" pullMin=\"70\" pullMax=\"130\" (ionRefresh)=\"doRefresh($event)\">\r\n        <ion-refresher-content pullingIcon=\"chevron-down-circle-outline\" refreshingSpinner=\"circles\" refreshingText=\"Atualizando...\">\r\n        </ion-refresher-content>\r\n    </ion-refresher>\r\n\r\n    <ion-grid>\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-list *ngFor=\"let lista of listaDeRecibos\" [ngSwitch]=\"lista.reagendado\">\r\n                    <ion-card (click)=\"verDetalhes( lista.nrorecibo )\" button=\"true\">\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color:#4c8dff\">\r\n                            <ion-label><b>Nome:</b> {{ lista.nomenorecibo }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Endereço:</b> {{ lista.enderecosecundario +\", \"+ lista.numerosecundario +\", \"+ lista.bairrosecundario +\", \"+ lista.cidadesecundario }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Data da cobrança:</b> {{ lista.dtcobranca }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Categoria:</b> {{ lista.desccategoria }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #d33939\">\r\n                            <ion-label><b>Reagendado para:</b> {{ lista.dtreagendamento | date: 'dd/MM/yyyy'}}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Nome:</b> {{ lista.nomenorecibo }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Endereço:</b> {{ lista.enderecosecundario +\", \"+ lista.numerosecundario +\", \"+ lista.bairrosecundario +\", \"+ lista.cidadesecundario }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Data da cobrança:</b> {{ lista.dtcobranca }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Categoria:</b> {{ lista.desccategoria }}</ion-label>\r\n                        </ion-item>\r\n                    </ion-card>\r\n                </ion-list>\r\n            </ion-col>\r\n        </ion-row>\r\n    </ion-grid>\r\n\r\n</ion-content>"
 
 /***/ }),
 
@@ -132,15 +132,15 @@ let ContribuicaoPage = class ContribuicaoPage {
                         .then((data) => {
                         this.listaDeRecibos = data;
                         console.log("Recibos:", this.listaDeRecibos);
-                        loading.dismiss();
                         if (this.listaDeRecibos.length[4] == "S") {
                             this.cardColors = "secondary";
                         }
                         else {
                             this.cardColors = "danger";
                         }
+                        loading.dismiss();
                     }, error => {
-                        console.log(error);
+                        loading.dismiss();
                     });
                     // Para rodar na web
                     // this.contribService.getListaRecibos(this.codMens)
@@ -275,15 +275,12 @@ let ContribuicaoPage = class ContribuicaoPage {
                 else {
                     this.cardColors = "danger";
                 }
-            }, error => {
-                console.log(error);
-            });
+            }, error => { });
         });
     }
     refreshFilter() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let loading = yield this.presentLoading();
-            console.log('BAIRRO DO REFRESHFILTER: ', this.bairro_1);
             yield this.crudService.getByBairro(this.bairro_1.toUpperCase().trim())
                 .then((data) => {
                 this.listaDeRecibos = data;
@@ -294,6 +291,9 @@ let ContribuicaoPage = class ContribuicaoPage {
                 else {
                     this.cardColors = "danger";
                 }
+            }, error => {
+                console.log('Erro: ', error);
+                loading.dismiss();
             });
         });
     }

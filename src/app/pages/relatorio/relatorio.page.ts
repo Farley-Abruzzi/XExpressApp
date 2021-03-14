@@ -22,6 +22,7 @@ export class RelatorioPage implements OnInit {
   dtEnd: Date = new Date(this.dtStart.getFullYear(), this.dtStart.getMonth() + 1, 0);
   dtInicio: string = " ";
   dtFim: string = " ";
+  conectPrint: boolean = false;
 
   constructor( private bluetoothSerial: BluetoothSerial,
                private contribService: ContribuintesService,
@@ -35,7 +36,6 @@ export class RelatorioPage implements OnInit {
   ngOnInit() {
     this.conversorDate();
     this.carregarPeriodo();
-    this.connect();
     // this.carregarResumo();
   }
 
@@ -43,6 +43,7 @@ export class RelatorioPage implements OnInit {
   // Carrega também os recibos por cidade através do mesmo seletor de data.
   carregarPeriodo() {
     this.carregarResumo();
+    this.conectPrint = true;
     // this.carregarResumoPorCidade();
   }
 
@@ -53,26 +54,12 @@ export class RelatorioPage implements OnInit {
       .subscribe( resp => {
         this.objetos = resp;
         loading.dismiss();
+      }, error => {
+        console.log(error);
+        loading.dismiss();
       });
   }
 
-  // Método para conectar o dispositivo a impressora via bluetooth.
-  connect() {
-      this.bluetoothSerial.connectInsecure("00:02:5B:B4:13:87").subscribe((data) => {
-        console.log('Conectado', data);
-      });
-      this.presentToast('IMPRESSORA CONECTADA!');
-  }
-
-  // Desconecta o dispositivo da impressora.
-  disconnectDevices() {
-    this.bluetoothSerial.disconnect().then((error) => {
-      console.log('Dispositivo desconectado.', error);
-    });
-    this.bluetoothSerial.clear().then(() => {
-      console.log('Limpo');
-    });
-  }
 
   // Mostrando mensagens de confirmação no Toast
   async presentToast( message: string ) {
@@ -138,6 +125,25 @@ export class RelatorioPage implements OnInit {
     return loading;
 
     //const { role, data } = await loading.onDidDismiss();
+  }
+
+  // Método para conectar e desconectar o dispositivo a impressora via bluetooth.
+  connectOrDisconnectPrint() {
+    if (this.conectPrint = !this.conectPrint) {
+        this.bluetoothSerial.connectInsecure("02:36:0D:6B:4D:F3" || "00:02:5B:B4:13:18" || "02:23:BC:84:DE:C1" || "00:02:5B:B4:13:87").subscribe((data) => {
+          console.log('Conectado', data);
+        });
+      this.presentToast('IMPRESSORA CONECTADA!');
+
+    } else {
+      this.bluetoothSerial.disconnect().then((error) => {
+        console.log('Desconectado.', error);
+      });
+      this.bluetoothSerial.clear().then(() => {
+        console.log('Limpo');
+      });
+      this.presentToast('IMPRESSORA DESCONECTADA!');
+    }
   }
 
   // Mostra o resumo por cidade da página relatorio

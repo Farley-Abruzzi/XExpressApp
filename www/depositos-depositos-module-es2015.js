@@ -286,7 +286,7 @@ let Tab1Page = class Tab1Page {
                 .subscribe(resp => {
                 this.usuario = resp;
                 this.codMens = resp.codmensageiro;
-            }), error => { };
+            }, error => { });
         }
     }
     slideNext() {

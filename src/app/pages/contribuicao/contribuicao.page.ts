@@ -59,7 +59,7 @@ export class ContribuicaoPage implements OnInit {
                 }
                 loading.dismiss();
             }, error => {
-                console.log(error);
+              loading.dismiss();
           });
     
           // Para rodar na web
@@ -146,7 +146,7 @@ export class ContribuicaoPage implements OnInit {
                 console.log(error);
           });
 
-        },error => {});
+        }, error => {});
     }  
   }
 
@@ -203,17 +203,14 @@ export class ContribuicaoPage implements OnInit {
         } else {
           this.cardColors = "danger";
         }
-      }, error => {
-          console.log(error);
-      });
+      }, error => {});
   }
 
   async refreshFilter() {
     let loading = await this.presentLoading();
-    console.log('BAIRRO DO REFRESHFILTER: ', this.bairro_1);
     await this.crudService.getByBairro(this.bairro_1.toUpperCase().trim())
       .then((data: Recibos[]) => {
-      
+
         this.listaDeRecibos = data;
         loading.dismiss();
         
@@ -222,6 +219,9 @@ export class ContribuicaoPage implements OnInit {
         } else {
           this.cardColors = "danger";
         }
+      }, error => {
+        console.log('Erro: ', error);
+        loading.dismiss();
     });
   }
 
