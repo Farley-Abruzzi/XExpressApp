@@ -1,8 +1,7 @@
-import { API_CONFIG } from './../../config/api.config';
+import { environment } from './../../environments/environment.prod';
 import { Injectable } from '@angular/core';
 import { CredenciaisDTO } from '../interfaces/credenciaisDTO';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { StorageService } from './storage.service';
 import { LocalUser } from '../interfaces/local_user';
 import { JwtHelperService  } from '@auth0/angular-jwt';

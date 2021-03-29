@@ -1,4 +1,4 @@
-import { API_CONFIG } from './../../config/api.config';
+import { environment } from './../../environments/environment.prod';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Resumo } from '../interfaces/resumo';
@@ -6,7 +6,6 @@ import { ResumoPorCidade } from '../interfaces/resumoPorCidade';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Recibos } from '../class/recibos';
 import { Devolvidos } from '../Class/devolvidos';
-import { environment } from '../../environments/environment';
 
 const URL = environment.url;
 
@@ -33,16 +32,16 @@ export class ContribuintesService {
     return this.http.get<Recibos>(`${ URL }/recibos/app/${ nrorecibo }`);
   }
   // Pega as informações de resumo do mensageiro no WebServices.
-  getResumo(dtStart: string, dtEnd: string) {
+  getResumo(cod: number, dtStart: string, dtEnd: string) {
     this.dtInicio = dtStart;
     this.dtFim = dtEnd
     // http://192.168.0.243:8081/recibos/resumomensageiro?cod=11&startDate=2017-01-01&endDate=2018-01-01
-    return this.http.get<Resumo>(`${ URL }/recibos/resumomensageiro?cod=315&startDate=${ dtStart }&endDate=${ dtEnd }`);
+    return this.http.get<Resumo>(`${ URL }/recibos/resumomensageiro?cod=${ cod }&startDate=${ dtStart }&endDate=${ dtEnd }`);
   }
   // Pega as informações de resumo do mensageiro por cidade.
-  getResumoPorCidade() {
+  getResumoPorCidade(cod: number) {
     // http://192.168.0.243:8081/recibos/mensageiroporcidade1?cod=630&startDate=2019-01-01&endDate=2019-03-10
-    return this.http.get<ResumoPorCidade>(`${ URL }/recibos/mensageiroporcidade1?cod=315&startDate=${ this.dtInicio }&endDate=${ this.dtFim }`);
+    return this.http.get<ResumoPorCidade>(`${ URL }/recibos/mensageiroporcidade1?cod=${ cod }&startDate=${ this.dtInicio }&endDate=${ this.dtFim }`);
   }
   // Atualiza os recibos no BD
   putRecibo( recibo: Recibos ) {

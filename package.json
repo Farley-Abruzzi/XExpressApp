@@ -26,7 +26,7 @@
         "@auth0/angular-jwt": "^5.0.1",
         "@ionic-native/bluetooth-serial": "^5.13.0",
         "@ionic-native/calendar": "^5.12.0",
-        "@ionic-native/camera": "^5.29.0",
+        "@ionic-native/camera": "^5.31.1",
         "@ionic-native/core": "^5.0.0",
         "@ionic-native/splash-screen": "^5.0.0",
         "@ionic-native/sqlite": "^5.19.1",
@@ -90,9 +90,7 @@
             },
             "cordova-plugin-ionic-keyboard": {},
             "cordova-sqlite-storage": {},
-            "cordova-plugin-camera": {
-                "ANDROID_SUPPORT_V4_VERSION": "27.+"
-            }
+            "cordova-plugin-camera": {}
         },
         "platforms": [
             "android",

@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-title>Contribuições</ion-title>\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button defaultHref=\"/\"></ion-back-button>\r\n        </ion-buttons>\r\n        <ion-button color=\"success\" slot=\"end\" fill=\"clear\">\r\n            <ion-icon name=\"search\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button color=\"success\" slot=\"end\" (click)=\"filtrarRecibos()\">\r\n            <ion-icon name=\"funnel\"></ion-icon>\r\n        </ion-button>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content color=\"light\">\r\n    <ion-refresher slot=\"fixed\" pullFactor=\"0.3\" pullMin=\"70\" pullMax=\"130\" (ionRefresh)=\"doRefresh($event)\">\r\n        <ion-refresher-content pullingIcon=\"chevron-down-circle-outline\" refreshingSpinner=\"circles\" refreshingText=\"Atualizando...\">\r\n        </ion-refresher-content>\r\n    </ion-refresher>\r\n\r\n    <ion-grid>\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-list *ngFor=\"let lista of listaDeRecibos\" [ngSwitch]=\"lista.reagendado\">\r\n                    <ion-card (click)=\"verDetalhes( lista.nrorecibo )\" button=\"true\">\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color:#4c8dff\">\r\n                            <ion-label><b>Nome:</b> {{ lista.nomenorecibo }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Endereço:</b> {{ lista.enderecosecundario +\", \"+ lista.numerosecundario +\", \"+ lista.bairrosecundario +\", \"+ lista.cidadesecundario }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Data da cobrança:</b> {{ lista.dtcobranca }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Categoria:</b> {{ lista.desccategoria }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #d33939\">\r\n                            <ion-label><b>Reagendado para:</b> {{ lista.dtreagendamento | date: 'dd/MM/yyyy'}}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Nome:</b> {{ lista.nomenorecibo }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Endereço:</b> {{ lista.enderecosecundario +\", \"+ lista.numerosecundario +\", \"+ lista.bairrosecundario +\", \"+ lista.cidadesecundario }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Data da cobrança:</b> {{ lista.dtcobranca }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Categoria:</b> {{ lista.desccategoria }}</ion-label>\r\n                        </ion-item>\r\n                    </ion-card>\r\n                </ion-list>\r\n            </ion-col>\r\n        </ion-row>\r\n    </ion-grid>\r\n\r\n</ion-content>"
+module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-title>Contribuições</ion-title>\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button defaultHref=\"/\"></ion-back-button>\r\n        </ion-buttons>\r\n        <ion-button color=\"success\" slot=\"end\" fill=\"clear\">\r\n            <ion-icon name=\"search\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button color=\"success\" slot=\"end\" (click)=\"filtrarRecibos()\">\r\n            <ion-icon name=\"funnel\"></ion-icon>\r\n        </ion-button>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content color=\"light\">\r\n    <ion-refresher slot=\"fixed\" pullFactor=\"0.3\" pullMin=\"70\" pullMax=\"130\" (ionRefresh)=\"doRefresh()\">\r\n        <ion-refresher-content pullingIcon=\"chevron-down-circle-outline\" refreshingSpinner=\"circles\" refreshingText=\"Atualizando...\">\r\n        </ion-refresher-content>\r\n    </ion-refresher>\r\n\r\n    <ion-grid>\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-list *ngFor=\"let lista of listaDeRecibos\" [ngSwitch]=\"lista.reagendado\">\r\n                    <ion-card [routerLink]=\"['/recibo', lista.nrorecibo]\" button=\"true\">\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color:#4c8dff\">\r\n                            <ion-label><b>Nome:</b> {{ lista.nomenorecibo }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Endereço:</b> {{ lista.enderecosecundario +\", \"+ lista.numerosecundario }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Cidade/Bairro:</b> {{ lista.cidadesecundario +\", \"+ lista.bairrosecundario}}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Data da cobrança:</b> {{ lista.dtcobranca }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #4c8dff\">\r\n                            <ion-label><b>Categoria:</b> {{ lista.desccategoria }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchCase=\"'S'\" style=\"color: #d33939\">\r\n                            <ion-label><b>Reagendado para:</b> {{ lista.dtreagendamento | date: 'dd/MM/yyyy'}}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Nome:</b> {{ lista.nomenorecibo }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Endereço:</b> {{ lista.enderecosecundario +\", \"+ lista.numerosecundario }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Cidade/Bairro:</b> {{ lista.cidadesecundario +\", \"+ lista.bairrosecundario}}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Data da cobrança:</b> {{ lista.dtcobranca }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item *ngSwitchDefault>\r\n                            <ion-label><b>Categoria:</b> {{ lista.desccategoria }}</ion-label>\r\n                        </ion-item>\r\n                    </ion-card>\r\n                </ion-list>\r\n            </ion-col>\r\n        </ion-row>\r\n    </ion-grid>\r\n\r\n\r\n</ion-content>"
 
 /***/ }),
 
@@ -90,11 +90,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var src_app_services_contribuintes_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/contribuintes.service */ "./src/app/services/contribuintes.service.ts");
-/* harmony import */ var _components_detalhe_detalhe_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/detalhe/detalhe.component */ "./src/app/components/detalhe/detalhe.component.ts");
-/* harmony import */ var _services_crud_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/crud.service */ "./src/app/services/crud.service.ts");
-/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/storage.service */ "./src/app/services/storage.service.ts");
-/* harmony import */ var _services_usuario_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../services/usuario.service */ "./src/app/services/usuario.service.ts");
-
+/* harmony import */ var _services_crud_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/crud.service */ "./src/app/services/crud.service.ts");
+/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/storage.service */ "./src/app/services/storage.service.ts");
+/* harmony import */ var _services_usuario_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/usuario.service */ "./src/app/services/usuario.service.ts");
 
 
 
@@ -103,10 +101,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ContribuicaoPage = /** @class */ (function () {
-    function ContribuicaoPage(navCtrl, contribService, modalCtrl, crudService, loadingController, storage, usuarioService, alertCtrl) {
-        this.navCtrl = navCtrl;
+    function ContribuicaoPage(contribService, crudService, loadingController, storage, usuarioService, alertCtrl) {
         this.contribService = contribService;
-        this.modalCtrl = modalCtrl;
         this.crudService = crudService;
         this.loadingController = loadingController;
         this.storage = storage;
@@ -118,10 +114,11 @@ var ContribuicaoPage = /** @class */ (function () {
         this.comFiltro = false;
     }
     ContribuicaoPage.prototype.ngOnInit = function () {
-        this.carregarContribuintes();
+        this.carregarContribuintesApp();
+        // this.listaContribuintesWeb();
     };
     // Método que carrega todos os contribuintes do mensageiro.
-    ContribuicaoPage.prototype.carregarContribuintes = function () {
+    ContribuicaoPage.prototype.carregarContribuintesApp = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var loading, localUser;
             var _this = this;
@@ -141,7 +138,7 @@ var ContribuicaoPage = /** @class */ (function () {
                                     .then(function (data) {
                                     _this.listaDeRecibos = data;
                                     console.log("Recibos:", _this.listaDeRecibos);
-                                    if (_this.listaDeRecibos.length[4] == "S") {
+                                    if (_this.listaDeRecibos.length[37] == "S") {
                                         _this.cardColors = "secondary";
                                     }
                                     else {
@@ -151,18 +148,6 @@ var ContribuicaoPage = /** @class */ (function () {
                                 }, function (error) {
                                     loading.dismiss();
                                 });
-                                // Para rodar na web
-                                // this.contribService.getListaRecibos(this.codMens)
-                                //   .subscribe(resp => {
-                                //     this.listaDeRecibos = resp;
-                                //     console.log("Recibos:", this.listaDeRecibos);
-                                //     loading.dismiss();
-                                //     if (this.listaDeRecibos.length[4] == "S") {
-                                //       this.cardColors = "secondary";
-                                //     } else {
-                                //       this.cardColors = "danger";
-                                //     }
-                                //   }, error => { });
                             }, function (error) {
                                 if (error.status == 403) {
                                     console.log(error.status);
@@ -174,22 +159,49 @@ var ContribuicaoPage = /** @class */ (function () {
             });
         });
     };
-    // Método com promessa para mostrar os detalhes do recibo.
-    ContribuicaoPage.prototype.verDetalhes = function (nrorecibo) {
+    ContribuicaoPage.prototype.listaContribuintesWeb = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var modal;
+            var loading, localUser;
+            var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.modalCtrl.create({
-                            component: _components_detalhe_detalhe_component__WEBPACK_IMPORTED_MODULE_4__["DetalheComponent"],
-                            animated: true,
-                            componentProps: {
-                                nrorecibo: nrorecibo
-                            }
-                        })];
+                    case 0: return [4 /*yield*/, this.presentLoading()];
                     case 1:
-                        modal = _a.sent();
-                        modal.present();
+                        loading = _a.sent();
+                        localUser = this.storage.getLocalUser();
+                        if (localUser && localUser.email) {
+                            this.usuarioService.findByEmail(localUser.email)
+                                .subscribe(function (resp) {
+                                _this.usuario = resp;
+                                _this.codMens = _this.usuario.codmensageiro;
+                                if (_this.codMens == 330) {
+                                    _this.bairro = "AMORIM";
+                                }
+                                else if (_this.codMens = 876) {
+                                    _this.bairro = "MORUMBI";
+                                }
+                                // Para rodar na web
+                                _this.contribService.getListaRecibos(_this.codMens, _this.bairro)
+                                    .subscribe(function (resp) {
+                                    _this.listaDeRecibos = resp;
+                                    console.log("Recibos:", _this.listaDeRecibos);
+                                    loading.dismiss();
+                                    if (_this.listaDeRecibos == null) {
+                                        _this.carregarContribuintesApp();
+                                    }
+                                    if (_this.listaDeRecibos.length[4] == "S") {
+                                        _this.cardColors = "secondary";
+                                    }
+                                    else {
+                                        _this.cardColors = "danger";
+                                    }
+                                }, function (error) { });
+                            }, function (error) {
+                                if (error.status == 403) {
+                                    console.log(error.status);
+                                }
+                            });
+                        }
                         return [2 /*return*/];
                 }
             });
@@ -215,16 +227,13 @@ var ContribuicaoPage = /** @class */ (function () {
             });
         });
     };
-    ContribuicaoPage.prototype.doRefresh = function (event) {
+    ContribuicaoPage.prototype.doRefresh = function () {
         if (this.comFiltro == false) {
             this.refreshRecibos();
         }
         else {
             this.refreshFilter();
         }
-        setTimeout(function () {
-            event.target.complete();
-        }, 2000);
     };
     ContribuicaoPage.prototype.refreshRecibos = function () {
         var _this = this;
@@ -249,6 +258,35 @@ var ContribuicaoPage = /** @class */ (function () {
                 });
             }, function (error) { });
         }
+    };
+    ContribuicaoPage.prototype.refreshFilter = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: 
+                    // let loading = await this.presentLoading();
+                    return [4 /*yield*/, this.crudService.getByBairro(this.bairro_1.toUpperCase().trim())
+                            .then(function (data) {
+                            _this.listaDeRecibos = data;
+                            // loading.dismiss();
+                            if (_this.listaDeRecibos.length[4] == "S") {
+                                _this.cardColors = "secondary";
+                            }
+                            else {
+                                _this.cardColors = "danger";
+                            }
+                        }, function (error) {
+                            console.log('Erro: ', error);
+                            // loading.dismiss();
+                        })];
+                    case 1:
+                        // let loading = await this.presentLoading();
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     ContribuicaoPage.prototype.filtrarRecibos = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
@@ -326,44 +364,12 @@ var ContribuicaoPage = /** @class */ (function () {
             });
         });
     };
-    ContribuicaoPage.prototype.refreshFilter = function () {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var loading;
-            var _this = this;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.presentLoading()];
-                    case 1:
-                        loading = _a.sent();
-                        return [4 /*yield*/, this.crudService.getByBairro(this.bairro_1.toUpperCase().trim())
-                                .then(function (data) {
-                                _this.listaDeRecibos = data;
-                                loading.dismiss();
-                                if (_this.listaDeRecibos.length[4] == "S") {
-                                    _this.cardColors = "secondary";
-                                }
-                                else {
-                                    _this.cardColors = "danger";
-                                }
-                            }, function (error) {
-                                console.log('Erro: ', error);
-                                loading.dismiss();
-                            })];
-                    case 2:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
     ContribuicaoPage.ctorParameters = function () { return [
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"] },
         { type: src_app_services_contribuintes_service__WEBPACK_IMPORTED_MODULE_3__["ContribuintesService"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
-        { type: _services_crud_service__WEBPACK_IMPORTED_MODULE_5__["CrudService"] },
+        { type: _services_crud_service__WEBPACK_IMPORTED_MODULE_4__["CrudService"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
-        { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_6__["StorageService"] },
-        { type: _services_usuario_service__WEBPACK_IMPORTED_MODULE_7__["UsuarioService"] },
+        { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"] },
+        { type: _services_usuario_service__WEBPACK_IMPORTED_MODULE_6__["UsuarioService"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] }
     ]; };
     ContribuicaoPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -372,9 +378,8 @@ var ContribuicaoPage = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./contribuicao.page.html */ "./node_modules/raw-loader/index.js!./src/app/pages/contribuicao/contribuicao.page.html"),
             styles: [__webpack_require__(/*! ./contribuicao.page.scss */ "./src/app/pages/contribuicao/contribuicao.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], src_app_services_contribuintes_service__WEBPACK_IMPORTED_MODULE_3__["ContribuintesService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"],
-            _services_crud_service__WEBPACK_IMPORTED_MODULE_5__["CrudService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"],
-            _services_storage_service__WEBPACK_IMPORTED_MODULE_6__["StorageService"], _services_usuario_service__WEBPACK_IMPORTED_MODULE_7__["UsuarioService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_contribuintes_service__WEBPACK_IMPORTED_MODULE_3__["ContribuintesService"], _services_crud_service__WEBPACK_IMPORTED_MODULE_4__["CrudService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"],
+            _services_storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"], _services_usuario_service__WEBPACK_IMPORTED_MODULE_6__["UsuarioService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]])
     ], ContribuicaoPage);
     return ContribuicaoPage;
 }());

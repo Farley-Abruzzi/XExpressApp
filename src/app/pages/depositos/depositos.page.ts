@@ -1,15 +1,14 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ContribuintesService } from '../../services/contribuintes.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Depositos } from '../../class/depositos';
 import { UsuarioService } from '../../services/usuario.service';
-import { NavController, ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 import { StorageService } from '../../services/storage.service';
 import { UsuarioDTO } from '../../interfaces/usuario.dto';
 import { CrudService } from '../../services/crud.service';
-import { Recibos } from '../../class/recibos';
 import { DepositoDTO } from '../../class/depositoDTO';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -41,27 +40,30 @@ export class Tab1Page implements OnInit {
   qtdRecibos: number;
   valorDeposito: number;
   dataFech: Date;
+  email: string;
+  codUsuario: number;
   
 
-  constructor(private usuarioService: UsuarioService,
-              private datePipe: DatePipe,
-              private camera: Camera,
-              private toastCtrl: ToastController,
-              private navCtrl: NavController,
-              private storage: StorageService,
-              private crud: CrudService) { }
+  constructor(private usuarioService: UsuarioService, private datePipe: DatePipe, private camera: Camera,
+              private toastCtrl: ToastController, public loadingController: LoadingController,
+              private storage: StorageService, private crud: CrudService, public sanitizer: DomSanitizer) { }
 
 
   ngOnInit() {
     //this.cameraOn = false;
+    this.isVisible = false;
     let localUser = this.storage.getLocalUser();
     if (localUser && localUser.email) {
       this.usuarioService.findByEmail(localUser.email)
         .subscribe(resp => {
           this.usuario = resp;
           this.codMens = resp.codmensageiro;
+          // this.urlimage = resp.imageUrl;
+          this.email = resp.email;
+          this.codUsuario = resp.codusuario;
         }, error => {}  
-      )}
+      )
+    }
   }
 
   slideNext() {
@@ -114,7 +116,7 @@ export class Tab1Page implements OnInit {
               }
               
               console.log('QTD RECIBOS: ' + this.qtdRecibos + '\tTOTAL ARRECADADO: ' + this.valorDeposito);
-             
+              
               this.setObjDeposito(this.qtdRecibos, this.valorDeposito);
               
         }, error => {
@@ -122,11 +124,9 @@ export class Tab1Page implements OnInit {
       });
   }
 
-
   setObjDeposito(qtdRec: number, valorTotal: number) {
-
           this.deposito = new Depositos();
-    
+
           let newDate = this.dtFech;
           this.dataFech = new Date(newDate);
           console.log('DTFECHAMENTO: ', this.dataFech);
@@ -135,12 +135,14 @@ export class Tab1Page implements OnInit {
           this.deposito.codvalidacao = this.codValid;
           this.deposito.valordeposito = valorTotal;
           this.deposito.entidade = this.entity;
-          this.deposito.codusuario = 70026;
+          this.deposito.codusuario = this.codUsuario;
           this.deposito.codmensageiro = this.codMens;
           this.deposito.totalarrecadado = valorTotal;
           this.deposito.qtdrecibos = qtdRec;
           this.deposito.valordespesa = this.valorDesp;
           this.deposito.descricaodespesa = this.detailDesp;
+          //this.deposito.imageurl = this.urlImage;
+          this.deposito.email = this.email;
 
           if (this.deposito.valordespesa != null) {
             this.deposito.valordeposito = this.deposito.valordeposito - this.deposito.valordespesa;
@@ -149,15 +151,22 @@ export class Tab1Page implements OnInit {
     }
   }
 
-  getApiDbPostDepositos() {
+  async getApiDbPostDepositos() {
+    await this.presentLoading('Por favor aguarde...');
+    this.sendPicture();
     console.log("OBJ DEPOSITO: ", this.deposito);
     this.usuarioService.getApiDbPostDepositos(this.deposito)
       .subscribe(resp => {
-        this.presentToast('Deposito inserido com sucesso!');
-        this.navCtrl.navigateRoot('main/tabs/tab2', { animated: true });
-    },error=>{
-        this.presentToast('VALOR DO DEPOSITO INCORRETO');
-      console.log(error)
+        setTimeout(() => {
+          this.mySlide.lockSwipes(false);
+          this.mySlide.slideTo(0);
+          this.presentToast('Deposito e Imagem inseridos com sucesso!');
+        }, 2000); 
+      }, error => {
+        alert('Erro ' + error.status + ': Valor do deposito incorreto');
+        //this.presentToast('VALOR DO DEPOSITO INCORRETO');
+        this.mySlide.lockSwipes(false);
+        this.mySlide.slideTo(0);
     });
   }
   
@@ -167,30 +176,48 @@ export class Tab1Page implements OnInit {
 
     const options: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.PNG,
       mediaType: this.camera.MediaType.PICTURE
     }
     
     this.camera.getPicture(options).then((imageData) => {   
+        this.picture = 'data:image/png;base64,' + imageData;
+        this.cameraOn = false;
+    }, (err) => {
+       this.cameraOn = false;
+       }
+    );
+  }
+
+  getGalleryPicture() {
+    this.cameraOn = true;
+
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.PNG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    
+    this.camera.getPicture(options).then((imageData) => {
       this.picture = 'data:image/png;base64,' + imageData;
       this.cameraOn = false;
-      console.log('CAMERA ', this.picture);
     }, (err) => {
-      
+      this.cameraOn = false;
     });
   }
 
   sendPicture() {
-    this.getForDep();
     this.usuarioService.uploadPicture(this.picture)
       .subscribe(resp => {
         this.picture = null;
-        this.getApiDbPostDepositos();
-        this.navCtrl.navigateRoot('main/tabs/tab2', { animated: true });
+        this.deposito.imageurl = resp.headers.get("Location");
       }, error => {
-          
-      });
+        alert('Falha no envio da imagen');
+      }
+    );
   }
 
   cancel() {
@@ -200,6 +227,16 @@ export class Tab1Page implements OnInit {
   async salvar(){
     await this.getForDep();
     this.getApiDbPostDepositos();
+  }
+
+  async presentLoading( message: string ) {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message,
+      spinner: "bubbles",
+      duration: 2000
+    });
+    loading.present();
   }
 
   async presentToast( message: string ) {

@@ -10,6 +10,8 @@ export class Depositos {
   qtdrecibos: number;
   valordespesa: number;
   descricaodespesa: string;
+  imageurl: string;
+  email: string;
 
 
   constructor() {

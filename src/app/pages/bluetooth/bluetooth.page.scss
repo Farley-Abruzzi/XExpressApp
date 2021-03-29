@@ -1,0 +1,13 @@
+page-bluetooth {
+    .submit-btn {
+        color: #10dc60;
+        background: rgba(0, 0, 0, 0);
+        border-radius: 30px !important;
+        border: 1px solid #FFF;
+    }
+    .my-custom-class {
+        --background: #f4f5f8;
+        --spinner-color: #10dc60;
+        color: #fff;
+    }
+}

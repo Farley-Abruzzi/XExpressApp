@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-toolbar color="dark">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Bluetooth</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-button full color="success" (click)="listPairedDevices()" (click)="presentLoading()">
+        <ion-icon name="refresh"></ion-icon>&nbsp;Atualizar Dispositivos Bluetooth</ion-button>
+    <ion-row>
+        <ion-col>
+            <ion-list ngDefaultControl radio-group [(ngModel)]="pairedDeviceID" *ngIf="listToggle">
+                <ion-item *ngFor="let i of pairedList;let j=index">
+                    <ion-label>{{i.name}}</ion-label>
+                    <ion-radio value="{{j}}"></ion-radio>
+                </ion-item>
+            </ion-list>
+        </ion-col>
+    </ion-row>
+    <ion-button full color="success" *ngIf="listToggle" (click)="selectDevice()">
+        <ion-icon name="bluetooth"></ion-icon>&nbsp;Conectar dispositivo Bluetooth</ion-button>
+    <ion-list>
+        <ion-item placeholder="Digite os dados que deseja enviar">
+            <ion-textarea placeholder="Digite os dados que deseja enviar"></ion-textarea>
+            <ion-input type="text" name="datasend" [(ngModel)]="dataSend"></ion-input>
+        </ion-item>
+    </ion-list>
+    <ion-button color="success" fill="outline" (click)="sendData()">
+        <ion-icon name="send"></ion-icon>&nbsp;Enviar dados via Bluetooth
+    </ion-button>
+</ion-content>

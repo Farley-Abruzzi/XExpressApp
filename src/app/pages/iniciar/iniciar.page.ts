@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NavController, ToastController } from '@ionic/angular';
-import { Calendar } from '@ionic-native/calendar/ngx';
-import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
 import { CrudService } from 'src/app/services/crud.service';
 import { ContribuintesService } from '../../services/contribuintes.service';
 import { Recibos } from '../../class/recibos';
@@ -24,17 +22,16 @@ export class Tab2Page implements OnInit {
   codMens: number;
   bairro: string;
 
-  constructor(private navCtrl: NavController, private calendar: Calendar,
-    private bluetoothSerial: BluetoothSerial, private crudService: CrudService,
-    private contribService: ContribuintesService, private toastCtrl: ToastController,
-    private storage: StorageService, private usuarioService: UsuarioService) {
+  constructor(private navCtrl: NavController, private crudService: CrudService,
+              private contribService: ContribuintesService, private toastCtrl: ToastController,
+              private storage: StorageService, private usuarioService: UsuarioService) {
     // Ativador automático do tema dark, quando este reconhece que o tema do sistema do usuário também é dark.
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     this.darkMode = prefersDark.matches;
    }
 
   ngOnInit() {
-    //this.connect();
+    // this.connect();
   }
 
   carregarContribuintes() {
@@ -47,13 +44,13 @@ export class Tab2Page implements OnInit {
 
           if (this.codMens == 330) {
             this.bairro = "AMORIM"
-          } else if (this.codMens = 876) {
-            this.bairro = "MORUMBI"
+          } else if (this.codMens = 795) {
+            this.bairro = "CUSTODIO PEREIRA"
           }
         
           this.contribService.getListaRecibos(this.codMens, this.bairro).subscribe( resp => {
 
-            this.listaDeRecibos.push(...resp);
+            this.listaDeRecibos = resp;
             console.log("Recibos:", this.listaDeRecibos);
             this.setObjRecibos("Recibos baixados!");
     
@@ -71,24 +68,6 @@ export class Tab2Page implements OnInit {
         });
       }  
   }
-  
-
-
-  connect() {
-    this.bluetoothSerial.connectInsecure("00:02:5B:B4:13:87").subscribe((data) => {
-      console.log('Conectado', data);
-    });
-  }
-
-  disconnectDevices() {
-
-    this.bluetoothSerial.disconnect().then((error) => {
-      console.log('Dispositivo desconectado.', error); 
-    });
-    this.bluetoothSerial.clear().then(() => {
-      console.log('Limpo');
-    });
-  }
 
   profile() {
     this.navCtrl.navigateForward('profile', { animated: true });
@@ -101,7 +80,7 @@ export class Tab2Page implements OnInit {
 
   // Navega para página Contribuições.
   contribuicao() {
-    this.navCtrl.navigateForward( 'contribuicao', {animated: true} );
+    this.navCtrl.navigateRoot( 'contribuicao', {animated: true} );
   }
 
   // Navega para página Relátorio.
@@ -114,9 +93,12 @@ export class Tab2Page implements OnInit {
     this.navCtrl.navigateForward( 'mensagem', {animated: true} );
   }
 
+  bluetooth() {
+    this.navCtrl.navigateForward( 'bluetooth', {animated: true} );
+  }
 
   // Baixa a carga de recibos no local storage (app / baixar recibos)
-  envioTotal() {
+  cargaRecibos() {
     this.carregarContribuintes();
   }
 
@@ -125,12 +107,11 @@ export class Tab2Page implements OnInit {
     this.listaDeRecibos.forEach(recibos => {
       console.log(recibos.nrorecibo);
       this.objRecibos = new Recibos(recibos.nrorecibo, recibos.impresso, recibos.dtoperacao, recibos.entrega, recibos.formulario, recibos.nomenorecibo, recibos.entregaweb,
-        recibos.dtcobranca, recibos.datadorecebimento, recibos.reagendado, recibos.dtreagendamento, recibos.dtrecebimento, recibos.valorgerado, recibos.valorcheque, recibos.valordinheiro,
-        recibos.doacaoespecial, recibos.parceladoacaoespecial, recibos.aumentodefinitivo, recibos.dtoperacaobaixa, recibos.periodicidade, recibos.valoralterado,
-        recibos.valornaoalterado, recibos.dtvaloralteradobaixa, recibos.valorbakp, recibos.valorhorabkp, recibos.valordatabkp, recibos.dataqld, recibos.naorecebido,
-        recibos.nrosorte, recibos.statusrec, recibos.dtbaixa, recibos.parcela, recibos.via, recibos.motivodevol, recibos.valorremarcado, recibos.dtremarc, recibos.codoperador, recibos.codcategoria, recibos.enderecosecundario, recibos.numerosecundario,
-        recibos.bairrosecundario, recibos.cidadesecundario, recibos.complementosecundario, recibos.cepsecundario, recibos.telefonesecundario, recibos.desccategoria,
-        recibos.observacoes, recibos.codcontrib, recibos.codusuario,  recibos.codmensageiro);
+        recibos.dtcobranca, recibos.dtrecebimento, recibos.valorgerado, recibos.valordinheiro, recibos.valorcheque, recibos.doacaoespecial, recibos.parceladoacaoespecial, recibos.aumentodefinitivo,
+        recibos.dtoperacaobaixa, recibos.periodicidade, recibos.valoralterado, recibos.valornaoalterado, recibos.dtvaloralteradobaixa, recibos.valorbakp, recibos.valorhorabkp, recibos.valordatabkp,
+        recibos.dataqld, recibos.naorecebido, recibos.nrosorte, recibos.statusrec, recibos.dtbaixa, recibos.parcela, recibos.via, recibos.motivodevol,
+        recibos.dtremarc, recibos.valorremarcado, recibos.codoperador, recibos.codmensageiro, recibos.codcategoria, recibos.dtreagendamento, recibos.reagendado, recibos.codcontrib, recibos.codusuario,
+        recibos.enderecosecundario, recibos.numerosecundario, recibos.bairrosecundario, recibos.cidadesecundario, recibos.complementosecundario, recibos.cepsecundario, recibos.telefonesecundario, recibos.desccategoria, recibos.observacoes, recibos.datadorecebimento)
       //inserir recibos   
       this.crudService.insert(this.objRecibos);
     });

@@ -12,16 +12,19 @@ var map = {
 		"./src/app/pages/beneficio/beneficio.module.ts",
 		"pages-beneficio-beneficio-module"
 	],
+	"./pages/bluetooth/bluetooth.module": [
+		"./src/app/pages/bluetooth/bluetooth.module.ts",
+		"pages-bluetooth-bluetooth-module"
+	],
 	"./pages/contribuicao/contribuicao.module": [
 		"./src/app/pages/contribuicao/contribuicao.module.ts",
-		"default~depositos-depositos-module~iniciar-iniciar-module~pages-contribuicao-contribuicao-module~pag~1e43d6e6",
-		"default~depositos-depositos-module~pages-contribuicao-contribuicao-module~pages-login-login-module~p~2c421bef",
+		"default~depositos-depositos-module~iniciar-iniciar-module~pages-contribuicao-contribuicao-module~pag~751c7b4e",
+		"common",
 		"pages-contribuicao-contribuicao-module"
 	],
 	"./pages/login/login.module": [
 		"./src/app/pages/login/login.module.ts",
-		"default~depositos-depositos-module~iniciar-iniciar-module~pages-contribuicao-contribuicao-module~pag~1e43d6e6",
-		"default~depositos-depositos-module~pages-contribuicao-contribuicao-module~pages-login-login-module~p~2c421bef",
+		"common",
 		"pages-login-login-module"
 	],
 	"./pages/mensagem/mensagem.module": [
@@ -32,10 +35,14 @@ var map = {
 		"./src/app/pages/profile/profile.module.ts",
 		"pages-profile-profile-module"
 	],
+	"./pages/recibo/recibo.module": [
+		"./src/app/pages/recibo/recibo.module.ts",
+		"default~depositos-depositos-module~iniciar-iniciar-module~pages-contribuicao-contribuicao-module~pag~751c7b4e",
+		"pages-recibo-recibo-module"
+	],
 	"./pages/relatorio/relatorio.module": [
 		"./src/app/pages/relatorio/relatorio.module.ts",
-		"default~depositos-depositos-module~iniciar-iniciar-module~pages-contribuicao-contribuicao-module~pag~1e43d6e6",
-		"default~depositos-depositos-module~pages-contribuicao-contribuicao-module~pages-login-login-module~p~2c421bef",
+		"common",
 		"pages-relatorio-relatorio-module"
 	]
 };
@@ -518,13 +525,15 @@ var routes = [
     { path: 'relatorio', loadChildren: './pages/relatorio/relatorio.module#RelatorioPageModule' },
     { path: 'beneficio', loadChildren: './pages/beneficio/beneficio.module#BeneficioPageModule' },
     { path: 'mensagem', loadChildren: './pages/mensagem/mensagem.module#MensagemPageModule' },
+    { path: 'recibo/:id', loadChildren: './pages/recibo/recibo.module#ReciboPageModule' },
+    { path: 'bluetooth', loadChildren: './pages/bluetooth/bluetooth.module#BluetoothPageModule' },
     {
         path: '',
         pathMatch: 'full',
         redirectTo: 'login'
     },
     { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
-    { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' }
+    { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -731,9 +740,9 @@ var AppModule = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthService", function() { return AuthService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _environments_environment_prod__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../environments/environment.prod */ "./src/environments/environment.prod.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./storage.service */ "./src/app/services/storage.service.ts");
 /* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @auth0/angular-jwt */ "./node_modules/@auth0/angular-jwt/fesm2015/auth0-angular-jwt.js");
 
@@ -742,7 +751,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var URL = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].url;
+var URL = _environments_environment_prod__WEBPACK_IMPORTED_MODULE_1__["environment"].url;
 var AuthService = /** @class */ (function () {
     function AuthService(http, storage) {
         this.http = http;
@@ -773,14 +782,14 @@ var AuthService = /** @class */ (function () {
         this.storage.setLocalUser(null);
     };
     AuthService.ctorParameters = function () { return [
-        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] },
         { type: _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"] }
     ]; };
     AuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
             providedIn: 'root'
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"], _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"]])
     ], AuthService);
     return AuthService;
 }());
@@ -848,38 +857,43 @@ var DatabaseService = /** @class */ (function () {
                                     + 'nrorecibo INTEGER NOT NULL PRIMARY KEY, '
                                     + 'impresso VARCHAR(1), '
                                     + 'dtoperacao DATE, '
+                                    + 'entrega DATE, '
                                     + 'nomenorecibo VARCHAR(100), '
                                     + 'entregaweb VARCHAR(1), '
-                                    + 'formulario INTEGER, '
                                     + 'dtcobranca DATE, '
+                                    + 'formulario INTEGER, '
                                     + 'dtrecebimento DATE, '
-                                    + 'datadorecebimento VARCHAR(10), '
-                                    + 'reagendado VARCHAR(1), '
-                                    + 'dtreagendamento DATE, '
                                     + 'valorgerado REAL(6), '
                                     + 'valordinheiro INTEGER, '
                                     + 'valorcheque INTEGER, '
-                                    + 'valoralterado INTEGER, '
-                                    + 'valornaoalterado INTEGER, '
-                                    + 'valorbakp INTEGER, '
-                                    + 'valorhorabkp VARCHAR(15), '
-                                    + 'valordatabkp DATE, '
-                                    + 'valorremarcado INTEGER, '
-                                    + 'dataqld DATE, '
-                                    + 'dtremarc DATE, '
-                                    + 'naorecebido INTEGER, '
-                                    + 'nrosorte INTEGER, '
                                     + 'doacaoespecial INTEGER, '
                                     + 'parceladoacaoespecial VARCHAR(10), '
                                     + 'aumentodefinitivo INTEGER, '
                                     + 'dtoperacaobaixa DATE, '
-                                    + 'dtvaloralteradobaixa VARCHAR(15), '
                                     + 'periodicidade INTEGER, '
+                                    + 'valoralterado INTEGER, '
+                                    + 'valornaoalterado INTEGER, '
+                                    + 'dtvaloralteradobaixa VARCHAR(15), '
+                                    + 'valorbakp INTEGER, '
+                                    + 'valorhorabkp VARCHAR(15), '
+                                    + 'valordatabkp DATE, '
+                                    + 'dataqld DATE, '
+                                    + 'naorecebido INTEGER, '
+                                    + 'nrosorte INTEGER, '
                                     + 'statusrec VARCHAR(1), '
                                     + 'dtbaixa DATE, '
                                     + 'parcela VARCHAR(8), '
                                     + 'via INTEGER, '
                                     + 'motivodevol VARCHAR(100), '
+                                    + 'dtremarc DATE, '
+                                    + 'valorremarcado INTEGER, '
+                                    + 'codoperador INTEGER, '
+                                    + 'codmensageiro INTEGER, '
+                                    + 'codcategoria INTEGER, '
+                                    + 'reagendado VARCHAR(1), '
+                                    + 'dtreagendamento DATE, '
+                                    + 'codcontrib INTEGER, '
+                                    + 'codusuario INTEGER, '
                                     + 'enderecosecundario VARCHAR(100), '
                                     + 'numerosecundario VARCHAR(8), '
                                     + 'bairrosecundario VARCHAR(100), '
@@ -889,12 +903,8 @@ var DatabaseService = /** @class */ (function () {
                                     + 'telefonesecundario VARCHAR(100), '
                                     + 'desccategoria VARCHAR(30), '
                                     + 'observacoes VARCHAR(300), '
-                                    + 'envioservidor VARCHAR(1), ' // Campo será usado no futuro para confirmar envio
-                                    + 'codmensageiro INTEGER, '
-                                    + 'codoperador INTEGER, '
-                                    + 'codcategoria INTEGER, '
-                                    + 'codcontrib INTEGER, '
-                                    + 'codusuario INTEGER);',
+                                    + 'datadorecebimento VARCHAR(10), '
+                                    + 'envioservidor VARCHAR(1)); ',
                                 'CREATE TABLE IF NOT EXISTS recibosDevolvidos( '
                                     + 'nrorecibo INTEGER NOT NULL PRIMARY KEY, '
                                     + 'dtdevol DATE, '
@@ -1075,7 +1085,7 @@ var UsuarioService = /** @class */ (function () {
     UsuarioService.prototype.uploadPicture = function (picture) {
         var pictureBlob = this.imageUtilService.dataUriToBlob(picture);
         var formData = new FormData();
-        formData.set('file', pictureBlob, 'file.png');
+        formData.set('file', pictureBlob, pictureBlob.size + ".png");
         return this.http.post(URL + "/deposito/picture", formData, {
             observe: 'response',
             responseType: 'text'
@@ -1088,9 +1098,7 @@ var UsuarioService = /** @class */ (function () {
     ]; };
     UsuarioService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
-            _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"],
-            _image_util_service__WEBPACK_IMPORTED_MODULE_5__["ImageUtilService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"], _image_util_service__WEBPACK_IMPORTED_MODULE_5__["ImageUtilService"]])
     ], UsuarioService);
     return UsuarioService;
 }());
@@ -1128,9 +1136,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
 var environment = {
     production: true,
+    // In Prod
     url: 'http://187.32.122.17:8380'
-    // In Job
-    //url: 'http://192.168.0.243:8380'
+    // In Dev
+    // url: 'http://192.168.100.158:8380'
 };
 
 
@@ -1153,7 +1162,7 @@ var environment = {
     production: false,
     url: 'http://187.32.122.17:8380'
     // In Job
-    //url: 'http://192.168.0.243:8380'
+    // url: 'http://192.168.100.158:8380'
 };
 /*
  * For easier debugging in development mode, you can import the following file
@@ -1263,7 +1272,7 @@ var ErrorInterceptor = /** @class */ (function () {
             if (!errorObj.status) {
                 errorObj = JSON.parse(errorObj);
             }
-            console.log("Erro detectado pelo Inteceptor:");
+            console.log("Erro detectado pelo Inteceptor: ");
             console.log(errorObj);
             switch (errorObj.status) {
                 case 401:

@@ -7,16 +7,7 @@
 </ion-header>
 
 <ion-content color="light">
-    <!-- <ion-grid fixed>
-    <ion-row>
-      <ion-col size="12">
-        <ion-button color="success" expand="block" href="http://localhost:4200/comunicar-deposito">
-          Comunicar depositos
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
-
+    <ion-progress-bar color="success"></ion-progress-bar>
     <ion-slides mode="ios" #mySlider>
         <ion-slide>
             <ion-card color="dark">
@@ -48,7 +39,7 @@
                     <p>2º Passo: Clique na entidade, e observe se os valores estão estão de acordo com o resumo que você imprimiu.</p>
                     <br>
                     <ion-label>Entidade:</ion-label>
-                    <ion-select placeholder="Qual entidade?" (ionChange)="selectByEntity( $event )" [ngModel]="deposito.entidade">
+                    <ion-select placeholder="Qual entidade?" (ionChange)="selectByEntity( $event )" [(ngModel)]="deposito.entidade">
                         <ion-select-option value="Hospital do Cancer de Uberlandia">Hospital do Cancêr de Uberlândia</ion-select-option>
                     </ion-select>
                 </ion-card-content>
@@ -61,7 +52,7 @@
                     <p>3º Passo: Informe o código de validação que foi impresso no final do resumo.</p>
                     <br>
                     <ion-item>
-                        <ion-input placeholder="Código" (ionChange)="selectByCodValidacao( $event )" [ngModel]="deposito.codvalidacao"></ion-input>
+                        <ion-input type="number" placeholder="Código" (ionChange)="selectByCodValidacao( $event )" [(ngModel)]="deposito.codvalidacao"></ion-input>
                     </ion-item>
                     <br>
                     <br>
@@ -79,28 +70,30 @@
         </ion-slide>
 
         <ion-slide>
-            <ion-card color="dark">
+            <ion-card class="cardImage" color="dark">
                 <ion-card-header>
                     Enviar imagem do comprovante
                 </ion-card-header>
-                <ion-item *ngIf="picture">
-                    <img [src]="picture">
-                </ion-item>
-                <ion-item>
+                <ion-item color="dark">
                     <ion-button color="success" expand="block" ion-button block (click)="getCameraPicture()" [disabled]="cameraOn">Camera</ion-button>
+                    <!-- <button ion-button block (click)="getGalleryPicture()" [disabled]="cameraOn">Galeria</button> -->
                 </ion-item>
-                <ion-item>
-                    <ion-button *ngIf="picture" fill="outline" color="success" ion-button block (click)="sendPicture()">Enviar imagem</ion-button>
-                    <ion-button *ngIf="picture" fill="outline" color="danger" ion-button block (click)="cancel()">Descartar imagem</ion-button>
-                    <ion-button color="success" ion-button block (click)="salvar()">Comunicar Deposito</ion-button>
+                <ion-item color="dark" *ngIf="picture">
+                    <ion-img [src]="picture"></ion-img>
+                </ion-item>
+                <ion-item color="dark">
+                    <ion-button *ngIf="picture" fill="outline" color="danger" (click)="cancel()">Descartar imagem</ion-button>
+                </ion-item>
+                <ion-item color="dark">
+                    <ion-button *ngIf="picture" color="success" (click)="salvar()" (click)="presentLoading()">Comunicar Deposito</ion-button>
                 </ion-item>
             </ion-card>
         </ion-slide>
 
-
     </ion-slides>
     <br>
     <br>
+
     <ion-row text-center>
         <ion-col>
             <ion-button [style.visibility]="isVisible ? 'visible' : 'hidden'" class="buttonNext" shape="round" color="success" (click)="slideNext()">

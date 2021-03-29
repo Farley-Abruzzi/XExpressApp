@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
       },
         error => {
           console.log(error);
-          this.presentToast('Erro: ' + error);
+          this.presentToast('Erro ' + error.status + ': Login ou senha incorretos');
       });
   }
 

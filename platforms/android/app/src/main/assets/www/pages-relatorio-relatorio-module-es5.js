@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-button class=\"buttonPrint\" slot=\"end\" fill=\"clear\" (click)=\"Imprimir()\">\r\n            <ion-icon name=\"print\"></ion-icon>\r\n        </ion-button>\r\n        <ion-toggle color=\"success\" slot=\"end\" [ngModel]=\"conectPrint\" (ionChange)=\"connectOrDisconnectPrint()\"></ion-toggle>\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button defaultHref=\"/\"></ion-back-button>\r\n        </ion-buttons>\r\n        <ion-title>Relatórios</ion-title>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content color=\"light\">\r\n    <ion-grid>\r\n        <ion-row>\r\n            <ion-col>\r\n\r\n                <ion-list *ngIf=\"objetos\">\r\n                    <ion-toolbar class=\"SizeToolbar\" text-center color=\"success\">\r\n                        <ion-label class=\"LabelPeriodo\">Período</ion-label>\r\n                        <ion-button color=\"dark\" class=\"calendarStart\" slot=\"start\" fill=\"clear\">De\r\n                            <ion-icon name=\"calendar\"></ion-icon>\r\n                            <ion-datetime class=\"dateTime-1\" cancelText=\"Cancelar\" done-text=\"Ok\" (ionChange)=\"carregarDtInicio( $event )\" [ngModel]=\"dtStart.toISOString()\" display-format=\"DD/MM/YYYY\"></ion-datetime>\r\n                        </ion-button>\r\n\r\n                        <ion-button color=\"dark\" class=\"calendarEnd\" slot=\"start\" fill=\"clear\">Até\r\n                            <ion-icon name=\"calendar\"></ion-icon>\r\n                            <ion-datetime class=\"dateTime-2\" cancelText=\"Cancelar\" done-text=\"Ok\" (ionChange)=\"carregarDtFim( $event )\" [ngModel]=\"dtEnd.toISOString()\" display-format=\"DD/MM/YYYY\"></ion-datetime>\r\n                        </ion-button>\r\n                    </ion-toolbar>\r\n\r\n                    <ion-button class=\"ButtonPorCidade\" expand=\"block\" fill=\"outline\" (click)=\"mostrarPop( $event )\" color=\"success\">\r\n                        <b>Ver Por Cidade</b>\r\n                    </ion-button>\r\n\r\n\r\n\r\n\r\n\r\n                    <ion-card color=\"light\">\r\n                        <!-- Lista de contabilização por período. -->\r\n                        <ion-item color=\"medium\">\r\n                            <ion-label><b>Recebidos (Hoje):</b> {{ objetos.qtdRecebido | currency: 'BRL':true }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label><b>Total de contribuições:</b> {{ objetos.totalQtd | currency: 'BRL':true }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label><b>A Receber:</b> {{ objetos.valorEmAberto | currency: 'BRL':true }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"medium\"><b>Em Aberto:</b> {{ objetos.qtdEmAberto }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"success\"><b>Recebidas:</b> {{ objetos.qtdRecebido }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"danger\"><b>Devolvidas:</b> {{ objetos.qtdDevolvido }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"danger\"><b>Canceladas:</b> {{ objetos.qtdCancelado }}</ion-label>\r\n                        </ion-item>\r\n                        <br>\r\n                    </ion-card>\r\n                </ion-list>\r\n\r\n            </ion-col>\r\n        </ion-row>\r\n    </ion-grid>\r\n\r\n</ion-content>"
+module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-button class=\"buttonPrint\" slot=\"end\" fill=\"clear\" (click)=\"Imprimir()\">\r\n            <ion-icon name=\"print\"></ion-icon>\r\n        </ion-button>\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button defaultHref=\"/\"></ion-back-button>\r\n        </ion-buttons>\r\n        <ion-title>Relatórios</ion-title>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content color=\"light\">\r\n    <ion-grid>\r\n        <ion-row>\r\n            <ion-col>\r\n\r\n                <ion-list *ngIf=\"objetos\">\r\n                    <ion-toolbar class=\"SizeToolbar\" text-center color=\"success\">\r\n                        <ion-label class=\"LabelPeriodo\">Período</ion-label>\r\n                        <ion-button color=\"dark\" class=\"calendarStart\" slot=\"start\" fill=\"clear\">De\r\n                            <ion-icon name=\"calendar\"></ion-icon>\r\n                            <ion-datetime class=\"dateTime-1\" cancelText=\"Cancelar\" done-text=\"Ok\" (ionChange)=\"carregarDtInicio( $event )\" [ngModel]=\"dtStart.toISOString()\" display-format=\"DD/MM/YYYY\"></ion-datetime>\r\n                        </ion-button>\r\n\r\n                        <ion-button color=\"dark\" class=\"calendarEnd\" slot=\"start\" fill=\"clear\">Até\r\n                            <ion-icon name=\"calendar\"></ion-icon>\r\n                            <ion-datetime class=\"dateTime-2\" cancelText=\"Cancelar\" done-text=\"Ok\" (ionChange)=\"carregarDtFim( $event )\" [ngModel]=\"dtEnd.toISOString()\" display-format=\"DD/MM/YYYY\"></ion-datetime>\r\n                        </ion-button>\r\n                    </ion-toolbar>\r\n\r\n                    <ion-button class=\"ButtonPorCidade\" expand=\"block\" fill=\"outline\" (click)=\"mostrarPop( $event )\" color=\"success\">\r\n                        <b>Ver Por Cidade</b>\r\n                    </ion-button>\r\n\r\n\r\n\r\n\r\n\r\n                    <ion-card color=\"light\">\r\n                        <!-- Lista de contabilização por período. -->\r\n                        <ion-item color=\"medium\">\r\n                            <ion-label><b>Recebidos (Hoje):</b> {{ objetos.qtdRecebido }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label><b>Total de contribuições:</b> {{ objetos.totalValorGerado | currency: 'BRL':true }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label><b>A Receber:</b> {{ objetos.valorEmAberto | currency: 'BRL':true }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"medium\"><b>Em Aberto:</b> {{ objetos.qtdEmAberto }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"success\"><b>Recebidas:</b> {{ objetos.qtdRecebido }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"danger\"><b>Devolvidas:</b> {{ objetos.qtdDevolvido }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"danger\"><b>Canceladas:</b> {{ objetos.qtdCancelado }}</ion-label>\r\n                        </ion-item>\r\n                        <br>\r\n                    </ion-card>\r\n                </ion-list>\r\n\r\n            </ion-col>\r\n        </ion-row>\r\n    </ion-grid>\r\n\r\n</ion-content>"
 
 /***/ }),
 
@@ -99,6 +99,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/storage.service */ "./src/app/services/storage.service.ts");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _components_popresumo_popinfo_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/popresumo/popinfo.component */ "./src/app/components/popresumo/popinfo.component.ts");
+/* harmony import */ var _services_usuario_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../services/usuario.service */ "./src/app/services/usuario.service.ts");
+
 
 
 
@@ -108,50 +110,68 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var RelatorioPage = /** @class */ (function () {
-    function RelatorioPage(bluetoothSerial, contribService, datePipe, storage, popoverCtrl, loadingController, toastCtrl) {
+    function RelatorioPage(bluetoothSerial, contribService, datePipe, popoverCtrl, loadingController, toastCtrl, usuarioService, storage) {
         this.bluetoothSerial = bluetoothSerial;
         this.contribService = contribService;
         this.datePipe = datePipe;
-        this.storage = storage;
         this.popoverCtrl = popoverCtrl;
         this.loadingController = loadingController;
         this.toastCtrl = toastCtrl;
+        this.usuarioService = usuarioService;
+        this.storage = storage;
         this.dtStart = new Date();
         this.dtEnd = new Date(this.dtStart.getFullYear(), this.dtStart.getMonth() + 1, 0);
         this.dtInicio = " ";
         this.dtFim = " ";
-        this.conectPrint = false;
     }
     RelatorioPage.prototype.ngOnInit = function () {
-        this.conversorDate();
-        this.carregarPeriodo();
-        // this.carregarResumo();
+        // this.carregarPeriodo();
+        this.carregarResumo();
     };
     // Método para carregar a contabilização por período após a seleção da data início e fim.
     // Carrega também os recibos por cidade através do mesmo seletor de data.
     RelatorioPage.prototype.carregarPeriodo = function () {
-        this.carregarResumo();
-        this.conectPrint = true;
-        // this.carregarResumoPorCidade();
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.carregarResumo()];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     // Carrega o objeto de resumo do mensageiro.
     RelatorioPage.prototype.carregarResumo = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var loading;
+            var loading, localUser;
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.presentLoading()];
                     case 1:
                         loading = _a.sent();
-                        this.contribService.getResumo(this.dtInicio, this.dtFim)
-                            .subscribe(function (resp) {
-                            _this.objetos = resp;
-                            loading.dismiss();
-                        }, function (error) {
-                            console.log(error);
-                            loading.dismiss();
-                        });
+                        localUser = this.storage.getLocalUser();
+                        if (localUser && localUser.email) {
+                            this.usuarioService.findByEmail(localUser.email)
+                                .subscribe(function (resp) {
+                                _this.usuario = resp;
+                                _this.codMens = _this.usuario.codmensageiro;
+                                _this.contribService.getResumo(_this.codMens, _this.dtInicio, _this.dtFim)
+                                    .subscribe(function (resp) {
+                                    _this.objetos = resp;
+                                    console.log('OBJ RESUMO: ', _this.objetos);
+                                    loading.dismiss();
+                                }, function (error) {
+                                    console.log(error);
+                                });
+                            }, function (error) {
+                                if (error.status == 403) {
+                                    console.log(error.status);
+                                }
+                            });
+                        }
                         return [2 /*return*/];
                 }
             });
@@ -180,23 +200,19 @@ var RelatorioPage = /** @class */ (function () {
     // Imprime as informações relacionadas na impressora.
     RelatorioPage.prototype.Imprimir = function () {
         this.conversorDate();
-        this.bluetoothSerial.write('Contabilizando o Periodo:\n' + 'DE' + this.dtInicio + ' A ' + this.dtFim + '\n' +
-            'Total de contribuicoes: R$' + this.objetos.totalQtd + '\n' +
-            'A Receber: R$' + this.objetos.valorEmAberto.toFixed(2) + '\n' +
-            'Recebidas: ' + this.objetos.qtdRecebido + '\n' +
-            'Devolvidas: ' + this.objetos.qtdDevolvido + '\n' +
-            'Canceladas: ' + this.objetos.qtdCancelado + '\n\n\n');
+        this.bluetoothSerial.write('\n\n\n' + '  *** RELATORIO ***' + '\n\n' +
+            'Contabilizando o Periodo:\n' + 'DE ' + this.dtInicio + ' A ' + this.dtFim + '\n\n' +
+            'Total de contribuicoes: R$' + this.objetos.totalQtd + '\n\n' +
+            'A Receber: R$' + this.objetos.valorEmAberto.toFixed(2) + '\n\n' +
+            'Recebidas: ' + this.objetos.qtdRecebido + '\n\n' +
+            'Devolvidas: ' + this.objetos.qtdDevolvido + '\n\n' +
+            'Canceladas: ' + this.objetos.qtdCancelado + '\n\n\n\n');
         console.log('Imprimindo');
     };
-    // Teste, guarda recibos no local storage
-    // mostrarRecidos() {
-    //   this.storage.setRecibos( this.objetos );
-    //   console.log('Recibos salvos', this.objetos );
-    // }
     // converte datas
     RelatorioPage.prototype.conversorDate = function () {
-        this.dtInicio = this.datePipe.transform(this.dtStart, "yyyy-MM-dd");
-        this.dtFim = this.datePipe.transform(this.dtEnd, "yyyy-MM-dd");
+        this.dtInicio = this.datePipe.transform(this.dtStart, "dd/MM/yyyy");
+        this.dtFim = this.datePipe.transform(this.dtEnd, "dd/MM/yyyy");
     };
     // Carrega e transforma a data inicio
     RelatorioPage.prototype.carregarDtInicio = function (event) {
@@ -229,24 +245,6 @@ var RelatorioPage = /** @class */ (function () {
             });
         });
     };
-    // Método para conectar e desconectar o dispositivo a impressora via bluetooth.
-    RelatorioPage.prototype.connectOrDisconnectPrint = function () {
-        if (this.conectPrint = !this.conectPrint) {
-            this.bluetoothSerial.connectInsecure("02:36:0D:6B:4D:F3" || false || false || false).subscribe(function (data) {
-                console.log('Conectado', data);
-            });
-            this.presentToast('IMPRESSORA CONECTADA!');
-        }
-        else {
-            this.bluetoothSerial.disconnect().then(function (error) {
-                console.log('Desconectado.', error);
-            });
-            this.bluetoothSerial.clear().then(function () {
-                console.log('Limpo');
-            });
-            this.presentToast('IMPRESSORA DESCONECTADA!');
-        }
-    };
     // Mostra o resumo por cidade da página relatorio
     RelatorioPage.prototype.mostrarPop = function (evento) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
@@ -274,10 +272,11 @@ var RelatorioPage = /** @class */ (function () {
         { type: _ionic_native_bluetooth_serial_ngx__WEBPACK_IMPORTED_MODULE_2__["BluetoothSerial"] },
         { type: _services_contribuintes_service__WEBPACK_IMPORTED_MODULE_3__["ContribuintesService"] },
         { type: _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"] },
-        { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["PopoverController"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["LoadingController"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"] }
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"] },
+        { type: _services_usuario_service__WEBPACK_IMPORTED_MODULE_8__["UsuarioService"] },
+        { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"] }
     ]; };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
@@ -292,12 +291,98 @@ var RelatorioPage = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_bluetooth_serial_ngx__WEBPACK_IMPORTED_MODULE_2__["BluetoothSerial"],
             _services_contribuintes_service__WEBPACK_IMPORTED_MODULE_3__["ContribuintesService"],
             _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"],
-            _services_storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["PopoverController"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["LoadingController"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"]])
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"],
+            _services_usuario_service__WEBPACK_IMPORTED_MODULE_8__["UsuarioService"],
+            _services_storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"]])
     ], RelatorioPage);
     return RelatorioPage;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/contribuintes.service.ts":
+/*!***************************************************!*\
+  !*** ./src/app/services/contribuintes.service.ts ***!
+  \***************************************************/
+/*! exports provided: ContribuintesService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContribuintesService", function() { return ContribuintesService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _environments_environment_prod__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../environments/environment.prod */ "./src/environments/environment.prod.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
+
+
+
+var URL = _environments_environment_prod__WEBPACK_IMPORTED_MODULE_1__["environment"].url;
+var ContribuintesService = /** @class */ (function () {
+    function ContribuintesService(http, route, router) {
+        this.http = http;
+        this.route = route;
+        this.router = router;
+    }
+    // Pega as informações de recibos dos contribuintes no WebServices. 
+    ContribuintesService.prototype.getListaRecibos = function (cod, bairro) {
+        // http://192.168.0.243:8081/recibos/listarecibosapp?cod=315&startDate=2019-07-01&endDate=2019-07-31
+        return this.http.get(URL + "/recibos/listarecibosapp?cod=" + cod + "&startDate=2021-03-01&endDate=2021-03-31&bairro=" + bairro);
+    };
+    // Detalhes do recibo.
+    ContribuintesService.prototype.getRecibosDetalhe = function (nrorecibo) {
+        // http://192.168.0.243:8081/recibos/app/11382872
+        return this.http.get(URL + "/recibos/app/" + nrorecibo);
+    };
+    // Pega as informações de resumo do mensageiro no WebServices.
+    ContribuintesService.prototype.getResumo = function (cod, dtStart, dtEnd) {
+        this.dtInicio = dtStart;
+        this.dtFim = dtEnd;
+        // http://192.168.0.243:8081/recibos/resumomensageiro?cod=11&startDate=2017-01-01&endDate=2018-01-01
+        return this.http.get(URL + "/recibos/resumomensageiro?cod=" + cod + "&startDate=" + dtStart + "&endDate=" + dtEnd);
+    };
+    // Pega as informações de resumo do mensageiro por cidade.
+    ContribuintesService.prototype.getResumoPorCidade = function (cod) {
+        // http://192.168.0.243:8081/recibos/mensageiroporcidade1?cod=630&startDate=2019-01-01&endDate=2019-03-10
+        return this.http.get(URL + "/recibos/mensageiroporcidade1?cod=" + cod + "&startDate=" + this.dtInicio + "&endDate=" + this.dtFim);
+    };
+    // Atualiza os recibos no BD
+    ContribuintesService.prototype.putRecibo = function (recibo) {
+        // http://localhost:8081/recibos/11369854
+        return this.http.put(URL + "/recibos/" + recibo.nrorecibo, recibo, {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+                'Content-Type': 'application/json'
+            })
+        });
+    };
+    // Cria recibos devolvidos
+    ContribuintesService.prototype.postDevolvidos = function (devolvido) {
+        // http://192.168.0.243:8081/devolvido/17044484
+        return this.http.post(URL + "/devolvido", devolvido, {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+                'Content-Type': 'application/json'
+            })
+        });
+    };
+    ContribuintesService.ctorParameters = function () { return [
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
+    ]; };
+    ContribuintesService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
+    ], ContribuintesService);
+    return ContribuintesService;
 }());
 
 

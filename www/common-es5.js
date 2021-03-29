@@ -475,6 +475,149 @@ var openURL = function (url, ev, direction) { return tslib__WEBPACK_IMPORTED_MOD
 
 
 
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/components/popresumo/popinfo.component.html":
+/*!***************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/components/popresumo/popinfo.component.html ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-card class=\"cardReciboPorCidade\" mode=\"ios\" *ngFor=\"let obj of resumos\">\r\n    <!-- <ion-popover-controller></ion-popover-controller> -->\r\n    <ion-item class=\"itemObjResumo\">\r\n        <ion-label><b>Cidade:</b> {{ obj.cidade }}</ion-label>\r\n    </ion-item>\r\n    <ion-item class=\"itemObjResumo\">\r\n        <ion-label><b>Recebidas:</b> {{ obj.qtdRecebidos }}</ion-label>\r\n    </ion-item>\r\n    <ion-item class=\"itemObjResumo\">\r\n        <ion-label><b>Recebidos:</b> {{ obj.valorRecebidos | currency: 'BRL':true}}</ion-label>\r\n    </ion-item>\r\n    <ion-item class=\"itemObjResumo\">\r\n        <ion-label><b>Total:</b> {{ obj.qtdTotal }}</ion-label>\r\n    </ion-item>\r\n    <ion-item class=\"itemObjResumo\">\r\n        <ion-label><b>Valor total:</b> {{ obj.valorTotal | currency: 'BRL':true}}</ion-label>\r\n    </ion-item>\r\n    <ion-item class=\"itemObjResumo\">\r\n        <ion-label><b>Percentual:</b> {{ obj.percentualRecebido.toFixed(1) }}%</ion-label>\r\n    </ion-item>\r\n\r\n</ion-card>"
+
+/***/ }),
+
+/***/ "./src/app/components/components.module.ts":
+/*!*************************************************!*\
+  !*** ./src/app/components/components.module.ts ***!
+  \*************************************************/
+/*! exports provided: ComponentsModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComponentsModule", function() { return ComponentsModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _popresumo_popinfo_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./popresumo/popinfo.component */ "./src/app/components/popresumo/popinfo.component.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+
+
+
+
+
+
+var ComponentsModule = /** @class */ (function () {
+    function ComponentsModule() {
+    }
+    ComponentsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+            entryComponents: [
+                _popresumo_popinfo_component__WEBPACK_IMPORTED_MODULE_4__["PopinfoComponent"]
+            ],
+            declarations: [
+                _popresumo_popinfo_component__WEBPACK_IMPORTED_MODULE_4__["PopinfoComponent"]
+            ],
+            exports: [
+                _popresumo_popinfo_component__WEBPACK_IMPORTED_MODULE_4__["PopinfoComponent"]
+            ],
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+                _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"]
+            ]
+        })
+    ], ComponentsModule);
+    return ComponentsModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/popresumo/popinfo.component.scss":
+/*!*************************************************************!*\
+  !*** ./src/app/components/popresumo/popinfo.component.scss ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".itemObjResumo {\n  --min-height: 30%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9wb3ByZXN1bW8vQzpcXHRlbXBcXHdzLWlvbmljXFxYRXhwcmVzc0FwcC9zcmNcXGFwcFxcY29tcG9uZW50c1xccG9wcmVzdW1vXFxwb3BpbmZvLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9jb21wb25lbnRzL3BvcHJlc3Vtby9wb3BpbmZvLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksaUJBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcG9wcmVzdW1vL3BvcGluZm8uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuaXRlbU9ialJlc3VtbyB7XHJcbiAgICAtLW1pbi1oZWlnaHQ6IDMwJTtcclxufVxyXG5cclxuIiwiLml0ZW1PYmpSZXN1bW8ge1xuICAtLW1pbi1oZWlnaHQ6IDMwJTtcbn0iXX0= */"
+
+/***/ }),
+
+/***/ "./src/app/components/popresumo/popinfo.component.ts":
+/*!***********************************************************!*\
+  !*** ./src/app/components/popresumo/popinfo.component.ts ***!
+  \***********************************************************/
+/*! exports provided: PopinfoComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PopinfoComponent", function() { return PopinfoComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_contribuintes_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/contribuintes.service */ "./src/app/services/contribuintes.service.ts");
+/* harmony import */ var _services_usuario_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/usuario.service */ "./src/app/services/usuario.service.ts");
+/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/storage.service */ "./src/app/services/storage.service.ts");
+
+
+
+
+
+var PopinfoComponent = /** @class */ (function () {
+    function PopinfoComponent(contribService, usuarioService, storage) {
+        this.contribService = contribService;
+        this.usuarioService = usuarioService;
+        this.storage = storage;
+    }
+    PopinfoComponent.prototype.ngOnInit = function () {
+        // this.conversorDate();
+        this.carregarResumoPorCidade();
+    };
+    // Carrega o objeto de resumo do mensageiro por cidade.
+    PopinfoComponent.prototype.carregarResumoPorCidade = function () {
+        var _this = this;
+        var localUser = this.storage.getLocalUser();
+        if (localUser && localUser.email) {
+            this.usuarioService.findByEmail(localUser.email)
+                .subscribe(function (resp) {
+                _this.usuario = resp;
+                _this.codMens = _this.usuario.codmensageiro;
+                _this.contribService.getResumoPorCidade(_this.codMens)
+                    .subscribe(function (resp) {
+                    _this.resumos = resp;
+                    console.log('Resumo por cidade:', _this.resumos);
+                });
+            }, function (error) {
+                if (error.status == 403) {
+                    console.log(error.status);
+                }
+            });
+        }
+    };
+    PopinfoComponent.ctorParameters = function () { return [
+        { type: _services_contribuintes_service__WEBPACK_IMPORTED_MODULE_2__["ContribuintesService"] },
+        { type: _services_usuario_service__WEBPACK_IMPORTED_MODULE_3__["UsuarioService"] },
+        { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"] }
+    ]; };
+    PopinfoComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-popinfo',
+            template: __webpack_require__(/*! raw-loader!./popinfo.component.html */ "./node_modules/raw-loader/index.js!./src/app/components/popresumo/popinfo.component.html"),
+            styles: [__webpack_require__(/*! ./popinfo.component.scss */ "./src/app/components/popresumo/popinfo.component.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_contribuintes_service__WEBPACK_IMPORTED_MODULE_2__["ContribuintesService"], _services_usuario_service__WEBPACK_IMPORTED_MODULE_3__["UsuarioService"], _services_storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"]])
+    ], PopinfoComponent);
+    return PopinfoComponent;
+}());
+
+
+
 /***/ })
 
 }]);

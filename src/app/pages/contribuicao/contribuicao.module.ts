@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ContribuicaoPage } from './contribuicao.page';
 import { ComponentsModule } from '../../components/components.module';
+import { AppRoutingModule } from '../../app-routing.module';
 
 const routes: Routes = [
   {

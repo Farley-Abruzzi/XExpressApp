@@ -6,6 +6,8 @@ import { DatePipe } from '@angular/common';
 import { StorageService } from '../../services/storage.service';
 import { LoadingController, PopoverController, ToastController } from '@ionic/angular';
 import { PopinfoComponent } from '../../components/popresumo/popinfo.component';
+import { UsuarioService } from '../../services/usuario.service';
+import { UsuarioDTO } from '../../interfaces/usuario.dto';
 
 
 
@@ -22,42 +24,56 @@ export class RelatorioPage implements OnInit {
   dtEnd: Date = new Date(this.dtStart.getFullYear(), this.dtStart.getMonth() + 1, 0);
   dtInicio: string = " ";
   dtFim: string = " ";
-  conectPrint: boolean = false;
+  usuario: UsuarioDTO;
+  codMens: number;
 
   constructor( private bluetoothSerial: BluetoothSerial,
                private contribService: ContribuintesService,
                private datePipe: DatePipe,
-               private storage: StorageService,
                private popoverCtrl: PopoverController,
                private loadingController: LoadingController,
-               private toastCtrl: ToastController) { }
+               private toastCtrl: ToastController,
+               private usuarioService: UsuarioService,
+               private storage: StorageService) { }
 
 
   ngOnInit() {
-    this.conversorDate();
-    this.carregarPeriodo();
-    // this.carregarResumo();
+    // this.carregarPeriodo();
+    this.carregarResumo();
   }
 
   // Método para carregar a contabilização por período após a seleção da data início e fim.
   // Carrega também os recibos por cidade através do mesmo seletor de data.
-  carregarPeriodo() {
-    this.carregarResumo();
-    this.conectPrint = true;
-    // this.carregarResumoPorCidade();
+  async carregarPeriodo() {
+    await this.carregarResumo();
   }
 
   // Carrega o objeto de resumo do mensageiro.
   async carregarResumo() {
     let loading = await this.presentLoading();
-     this.contribService.getResumo(this.dtInicio, this.dtFim)
-      .subscribe( resp => {
-        this.objetos = resp;
-        loading.dismiss();
-      }, error => {
-        console.log(error);
-        loading.dismiss();
+
+    let localUser = this.storage.getLocalUser();
+    if (localUser && localUser.email) {
+      this.usuarioService.findByEmail(localUser.email)
+        .subscribe(resp => {
+          this.usuario = resp;
+          this.codMens = this.usuario.codmensageiro;
+
+          this.contribService.getResumo(this.codMens, this.dtInicio, this.dtFim)
+            .subscribe(resp => {
+              this.objetos = resp;
+              console.log('OBJ RESUMO: ', this.objetos);
+              loading.dismiss();
+            }, error => {
+              console.log(error);
+            });
+          
+        }, error => {
+          if (error.status == 403) {
+            console.log(error.status);
+          }
       });
+    }
   }
 
 
@@ -70,33 +86,28 @@ export class RelatorioPage implements OnInit {
       color: "dark"
     });
     toast.present();
-}
+  }
 
   // Imprime as informações relacionadas na impressora.
   Imprimir() {
     this.conversorDate();
     
     this.bluetoothSerial.write(
-      'Contabilizando o Periodo:\n'+'DE' + this.dtInicio +' A '+ this.dtFim + '\n' +
-      'Total de contribuicoes: R$' + this.objetos.totalQtd + '\n' +
-      'A Receber: R$' + this.objetos.valorEmAberto.toFixed(2) + '\n' +
-      'Recebidas: ' + this.objetos.qtdRecebido + '\n' +
-      'Devolvidas: '+ this.objetos.qtdDevolvido + '\n' +
-      'Canceladas: '+ this.objetos.qtdCancelado + '\n\n\n'
+      '\n\n\n'+'  *** RELATORIO ***' + '\n\n' +
+      'Contabilizando o Periodo:\n'+'DE ' + this.dtInicio +' A '+ this.dtFim + '\n\n' +
+      'Total de contribuicoes: R$' + this.objetos.totalQtd + '\n\n' +
+      'A Receber: R$' + this.objetos.valorEmAberto.toFixed(2) + '\n\n' +
+      'Recebidas: ' + this.objetos.qtdRecebido + '\n\n' +
+      'Devolvidas: '+ this.objetos.qtdDevolvido + '\n\n' +
+      'Canceladas: '+ this.objetos.qtdCancelado + '\n\n\n\n'
       );
       console.log('Imprimindo');
     }
 
-  // Teste, guarda recibos no local storage
-  // mostrarRecidos() {
-  //   this.storage.setRecibos( this.objetos );
-  //   console.log('Recibos salvos', this.objetos );
-  // }
-
   // converte datas
   conversorDate(): void {
-   this.dtInicio = this.datePipe.transform(this.dtStart,"yyyy-MM-dd");
-   this.dtFim = this.datePipe.transform(this.dtEnd,"yyyy-MM-dd");
+   this.dtInicio = this.datePipe.transform(this.dtStart,"dd/MM/yyyy");
+   this.dtFim = this.datePipe.transform(this.dtEnd,"dd/MM/yyyy");
   }
 
   // Carrega e transforma a data inicio
@@ -127,28 +138,8 @@ export class RelatorioPage implements OnInit {
     //const { role, data } = await loading.onDidDismiss();
   }
 
-  // Método para conectar e desconectar o dispositivo a impressora via bluetooth.
-  connectOrDisconnectPrint() {
-    if (this.conectPrint = !this.conectPrint) {
-        this.bluetoothSerial.connectInsecure("02:36:0D:6B:4D:F3" || "00:02:5B:B4:13:18" || "02:23:BC:84:DE:C1" || "00:02:5B:B4:13:87").subscribe((data) => {
-          console.log('Conectado', data);
-        });
-      this.presentToast('IMPRESSORA CONECTADA!');
-
-    } else {
-      this.bluetoothSerial.disconnect().then((error) => {
-        console.log('Desconectado.', error);
-      });
-      this.bluetoothSerial.clear().then(() => {
-        console.log('Limpo');
-      });
-      this.presentToast('IMPRESSORA DESCONECTADA!');
-    }
-  }
-
   // Mostra o resumo por cidade da página relatorio
   async mostrarPop( evento ) {
-
     const popover = await this.popoverCtrl.create({
       component: PopinfoComponent,
       event: evento,
@@ -156,7 +147,7 @@ export class RelatorioPage implements OnInit {
       translucent: true,
       animated: true
     });
-
     await popover.present();
   }
+
 }

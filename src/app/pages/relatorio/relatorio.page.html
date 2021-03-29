@@ -3,7 +3,6 @@
         <ion-button class="buttonPrint" slot="end" fill="clear" (click)="Imprimir()">
             <ion-icon name="print"></ion-icon>
         </ion-button>
-        <ion-toggle color="success" slot="end" [ngModel]="conectPrint" (ionChange)="connectOrDisconnectPrint()"></ion-toggle>
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/"></ion-back-button>
         </ion-buttons>
@@ -41,10 +40,10 @@
                     <ion-card color="light">
                         <!-- Lista de contabilização por período. -->
                         <ion-item color="medium">
-                            <ion-label><b>Recebidos (Hoje):</b> {{ objetos.qtdRecebido | currency: 'BRL':true }}</ion-label>
+                            <ion-label><b>Recebidos (Hoje):</b> {{ objetos.qtdRecebido }}</ion-label>
                         </ion-item>
                         <ion-item color="light">
-                            <ion-label><b>Total de contribuições:</b> {{ objetos.totalQtd | currency: 'BRL':true }}</ion-label>
+                            <ion-label><b>Total de contribuições:</b> {{ objetos.totalValorGerado | currency: 'BRL':true }}</ion-label>
                         </ion-item>
                         <ion-item color="light">
                             <ion-label><b>A Receber:</b> {{ objetos.valorEmAberto | currency: 'BRL':true }}</ion-label>

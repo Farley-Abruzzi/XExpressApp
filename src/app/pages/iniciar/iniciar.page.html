@@ -40,16 +40,8 @@
         <ion-row>
             <ion-col size="6" size-lg="3" size-md="4" size-sm="6">
                 <div>
-                    <ion-button class="button-3" size="large" fill="clear" (click)="envioTotal()">
-                        <!-- <ion-datetime class="datetime-text"
-                          cancelText="Cancelar" 
-                          done-text="Ok"
-                          pickerFormat="D MMM YYYY"
-                          [ngModel]="envioFechado.toISOString()"
-                          min="2000-01-01"
-                          max="2050-12-31">
-           </ion-datetime> -->
-                        <img src="assets/icon/send.png">
+                    <ion-button class="button-3" size="large" fill="clear" (click)="cargaRecibos()">
+                        <img src="assets/icon/download.png">
                     </ion-button>
                     <ion-label class="label-3">
                         Baixar recibos
@@ -71,11 +63,11 @@
         <ion-row>
             <ion-col size="6" size-lg="3" size-md="4" size-sm="6">
                 <div>
-                    <ion-button class="button-5" size="large" fill="clear">
-                        <img src="assets/icon/donation.png">
+                    <ion-button class="button-5" size="large" fill="clear" (click)="bluetooth()">
+                        <img src="assets/icon/bluetooth.png">
                     </ion-button>
                     <ion-label class="label-5">
-                        Lançar Doação
+                        Bluetooth
                     </ion-label>
                 </div>
             </ion-col>

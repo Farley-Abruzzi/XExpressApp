@@ -14,7 +14,7 @@
 </ion-header>
 
 <ion-content color="light">
-    <ion-refresher slot="fixed" pullFactor="0.3" pullMin="70" pullMax="130" (ionRefresh)="doRefresh($event)">
+    <ion-refresher slot="fixed" pullFactor="0.3" pullMin="70" pullMax="130" (ionRefresh)="doRefresh()">
         <ion-refresher-content pullingIcon="chevron-down-circle-outline" refreshingSpinner="circles" refreshingText="Atualizando...">
         </ion-refresher-content>
     </ion-refresher>
@@ -23,7 +23,7 @@
         <ion-row>
             <ion-col>
                 <ion-list *ngFor="let lista of listaDeRecibos" [ngSwitch]="lista.reagendado">
-                    <ion-card (click)="verDetalhes( lista.nrorecibo )" button="true">
+                    <ion-card [routerLink]="['/recibo', lista.nrorecibo]" button="true">
                         <ion-item *ngSwitchCase="'S'" style="color:#4c8dff">
                             <ion-label><b>Nome:</b> {{ lista.nomenorecibo }}</ion-label>
                         </ion-item>
@@ -62,5 +62,6 @@
             </ion-col>
         </ion-row>
     </ion-grid>
+
 
 </ion-content>

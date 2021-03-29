@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-tabs color=\"light\">\r\n  <ion-tab-bar slot=\"bottom\">\r\n\r\n    <ion-tab-button tab=\"tab1\">\r\n      <ion-icon name=\"cash\"></ion-icon>\r\n      <ion-label>Depositos</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button class=\"button-motorbike\" tab=\"tab2\">\r\n        <ion-icon class=\"custom-icon\" src=\"assets/icon/motorbike.svg\"></ion-icon>\r\n        <ion-label>Iniciar</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"tab3\">\r\n      <ion-icon name=\"pin\"></ion-icon>\r\n      <ion-label>Mapa</ion-label>\r\n    </ion-tab-button>\r\n\r\n  </ion-tab-bar>\r\n</ion-tabs>\r\n"
+module.exports = "<ion-tabs color=\"light\">\r\n    <ion-tab-bar slot=\"bottom\">\r\n\r\n        <ion-tab-button tab=\"tab1\">\r\n            <ion-icon name=\"cash\"></ion-icon>\r\n            <ion-label>Depositos</ion-label>\r\n        </ion-tab-button>\r\n\r\n        <ion-tab-button class=\"button-motorbike\" tab=\"tab2\">\r\n            <ion-icon class=\"custom-icon\" src=\"assets/icon/motorbike.svg\"></ion-icon>\r\n            <ion-label>Iniciar</ion-label>\r\n        </ion-tab-button>\r\n\r\n        <ion-tab-button tab=\"tab3\">\r\n            <ion-icon name=\"pin\"></ion-icon>\r\n            <ion-label>Mapa</ion-label>\r\n        </ion-tab-button>\r\n\r\n    </ion-tab-bar>\r\n</ion-tabs>"
 
 /***/ }),
 
@@ -122,7 +122,7 @@ const routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => Promise.all(/*! import() | depositos-depositos-module */[__webpack_require__.e("default~depositos-depositos-module~iniciar-iniciar-module~pages-contribuicao-contribuicao-module~pag~1e43d6e6"), __webpack_require__.e("default~depositos-depositos-module~pages-contribuicao-contribuicao-module~pages-login-login-module~p~2c421bef"), __webpack_require__.e("depositos-depositos-module")]).then(__webpack_require__.bind(null, /*! ../depositos/depositos.module */ "./src/app/pages/depositos/depositos.module.ts")).then(m => m.Tab1PageModule)
+                        loadChildren: () => Promise.all(/*! import() | depositos-depositos-module */[__webpack_require__.e("default~depositos-depositos-module~iniciar-iniciar-module~pages-contribuicao-contribuicao-module~pag~751c7b4e"), __webpack_require__.e("common"), __webpack_require__.e("depositos-depositos-module")]).then(__webpack_require__.bind(null, /*! ../depositos/depositos.module */ "./src/app/pages/depositos/depositos.module.ts")).then(m => m.Tab1PageModule)
                     }
                 ]
             },
@@ -131,7 +131,7 @@ const routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => Promise.all(/*! import() | iniciar-iniciar-module */[__webpack_require__.e("default~depositos-depositos-module~iniciar-iniciar-module~pages-contribuicao-contribuicao-module~pag~1e43d6e6"), __webpack_require__.e("iniciar-iniciar-module")]).then(__webpack_require__.bind(null, /*! ../iniciar/iniciar.module */ "./src/app/pages/iniciar/iniciar.module.ts")).then(m => m.Tab2PageModule)
+                        loadChildren: () => Promise.all(/*! import() | iniciar-iniciar-module */[__webpack_require__.e("default~depositos-depositos-module~iniciar-iniciar-module~pages-contribuicao-contribuicao-module~pag~751c7b4e"), __webpack_require__.e("iniciar-iniciar-module")]).then(__webpack_require__.bind(null, /*! ../iniciar/iniciar.module */ "./src/app/pages/iniciar/iniciar.module.ts")).then(m => m.Tab2PageModule)
                     }
                 ]
             },
