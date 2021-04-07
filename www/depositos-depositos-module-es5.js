@@ -385,7 +385,7 @@ var Tab1Page = /** @class */ (function () {
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.presentLoading('Por favor aguarde...')];
+                    case 0: return [4 /*yield*/, this.presentLoading()];
                     case 1:
                         _a.sent();
                         this.sendPicture();
@@ -468,14 +468,14 @@ var Tab1Page = /** @class */ (function () {
             });
         });
     };
-    Tab1Page.prototype.presentLoading = function (message) {
+    Tab1Page.prototype.presentLoading = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var loading;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.loadingController.create({
                             cssClass: 'my-custom-class',
-                            message: message,
+                            message: 'Por favor aguarde...',
                             spinner: "bubbles",
                             duration: 2000
                         })];
@@ -494,7 +494,7 @@ var Tab1Page = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.toastCtrl.create({
                             message: message,
-                            duration: 3000,
+                            duration: 4000,
                             mode: "ios",
                             color: "dark"
                         })];

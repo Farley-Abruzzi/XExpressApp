@@ -21,7 +21,6 @@ export class ProfilePage implements OnInit {
       this.usuarioService.findByEmail(localUser.email)
         .subscribe(resp => {
           this.usuario = resp;
-          console.log(this.usuario);
         },
           error => {
             if (error.status == 403) {

@@ -7,6 +7,9 @@ import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
 import { CrudService } from '../../services/crud.service';
 import { ActivatedRoute } from '@angular/router';
 import { Devolvidos } from '../../class/devolvidos';
+import { UsuarioService } from '../../services/usuario.service';
+import { StorageService } from '../../services/storage.service';
+import { UsuarioDTO } from '../../interfaces/usuario.dto';
 
 @Component({
   selector: 'app-recibo',
@@ -25,8 +28,11 @@ export class ReciboPage implements OnInit {
   dataReag = new Date(this.dtReagendamento.getFullYear(), this.dtReagendamento.getMonth() + 1, 0);
   dtBaixa: Date = new Date();
   dtDevAtual: Date = new Date();
+  usuario: UsuarioDTO;
+  codMens: number;
+  codUser: number;
 
-  newDt: string = " ";
+  dtReag: string = " ";
   dataR: Date;
 
   valorDoacao: number;
@@ -34,18 +40,24 @@ export class ReciboPage implements OnInit {
   nrorecibo: any;
   connection: boolean = false;
 
-  constructor( private contribService: ContribuintesService,
-    private actionSheetCtrl: ActionSheetController,
-    private datePipe: DatePipe,
-    private toastCtrl: ToastController,
-    private alertCtrl: AlertController,
-    private bluetoothSerial: BluetoothSerial,
-    private crudService: CrudService,
-    private route: ActivatedRoute,
-    private navCtrl: NavController
-    ) { }
+  constructor( private contribService: ContribuintesService, private actionSheetCtrl: ActionSheetController,
+    private datePipe: DatePipe, private toastCtrl: ToastController,
+    private alertCtrl: AlertController, private bluetoothSerial: BluetoothSerial,
+    private crudService: CrudService, private route: ActivatedRoute,
+    private navCtrl: NavController, private usuarioService: UsuarioService, private storage: StorageService) { }
+  
 
   ngOnInit() {
+    let localUser = this.storage.getLocalUser();
+    if (localUser && localUser.email) {
+      this.usuarioService.findByEmail(localUser.email)
+        .subscribe(resp => {
+          this.usuario = resp;
+          this.codMens = this.usuario.codmensageiro;
+          this.codUser = this.usuario.codusuario;
+        },
+      );
+    }
     this.nrorecibo = this.route.snapshot.paramMap.get('id');
     this.carregarRecibosDetalhes();
 }
@@ -140,6 +152,7 @@ const input = await this.alertCtrl.create({
           this.recibo.dtbaixa = this.dtBaixa;
           this.recibo.datadorecebimento = this.datePipe.transform(this.dtBaixa, 'dd/MM/yyyy');
           this.recibo.dtreagendamento = null;
+          this.recibo.reagendado = null;
         
           this.getPutRecibosInApp('Doação realizada!', 'doacao');
           this.getPutRecibosInWeb();
@@ -153,10 +166,14 @@ await input.present();
 }
 
 // Método que recebe a data pelo componente "datetime" e imputa para data de "reagendamento".
-reagendar( event ) {
+  reagendar(event) {
+    this.dtReag = event.detail.value;
+    let newDtReag = this.dtReag;
+    this.dataR = new Date(newDtReag);
+    console.log('DATA REAG: ', this.dataR);
 // Evento do click "Ok"
 if (this.recibo !== undefined) {
-    this.recibo.dtreagendamento = event.detail.value;
+    this.recibo.dtreagendamento = this.dataR;
     this.recibo.reagendado = "S";
     this.imprimirReagendamento();
     this.getPutRecibosInApp("Reagendamento realizado com sucesso!", 'reagendamento');
@@ -181,7 +198,7 @@ async alertDevolucao() {
       text: 'Endereço não encontrado',
       handler: () => {
       this.objDevolvido('Endereço não encontrado');
-      // this.getPostDevolvidos();
+      //this.getPostDevolvidos();
       this.insertDevolvidos();
       this.statusRecibo();
       }
@@ -223,7 +240,7 @@ objDevolvido( motivo: string ) {
     this.nrorecibo,
     this.dtDevAtual,
     this.datePipe.transform( this.dtDevAtual, 'HH:mm:ss'),
-    this.dtDevAtual, 341, 70014, motivo, 1, 'Descrição do atendimento');
+    this.dtDevAtual, this.codMens, this.codUser, motivo, 1, 'Descrição do atendimento');
 }
 
 // Inserindo alterações do recibo devolvido para o backend
@@ -239,6 +256,10 @@ getPostDevolvidos() {
 // Setando o statusrec do recido pra quando ele for devolvido
 statusRecibo() {
   this.recibo.statusrec = "D";
+  this.recibo.dtbaixa = new Date();
+  this.recibo.dtreagendamento = null;
+  this.recibo.reagendado = null;
+  console.log('DTDEVOL: ', this.recibo.dtbaixa);
   this.getPutRecibosInApp("Devolvido com sucesso!", 'devolucao');
   this.getPutRecibosInWeb();
   //this.getPostDevolvidos();
@@ -259,8 +280,8 @@ imprimir() {
     '===============================' + '\n\n' +
 
     'Cod. Contribuinte: ' + this.recibo.codcontrib + '\n' +
-    'Doador: ' + '\n' +
-    this.recibo.nomenorecibo + '\n' +
+    'Doador:\n' +
+     this.recibo.nomenorecibo + '\n' +
     'Data: ' + this.datePipe.transform(this.recibo.dtbaixa, 'dd/MM/yyyy') + '\n' +
     'Valor: R$' + this.recibo.valorgerado +',00' + '\n\n\n\n' +
 

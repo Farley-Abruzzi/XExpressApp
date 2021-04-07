@@ -152,7 +152,7 @@ export class Tab1Page implements OnInit {
   }
 
   async getApiDbPostDepositos() {
-    await this.presentLoading('Por favor aguarde...');
+    await this.presentLoading();
     this.sendPicture();
     console.log("OBJ DEPOSITO: ", this.deposito);
     this.usuarioService.getApiDbPostDepositos(this.deposito)
@@ -229,10 +229,10 @@ export class Tab1Page implements OnInit {
     this.getApiDbPostDepositos();
   }
 
-  async presentLoading( message: string ) {
+  async presentLoading() {
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
-      message,
+      message: 'Por favor aguarde...',
       spinner: "bubbles",
       duration: 2000
     });
@@ -242,7 +242,7 @@ export class Tab1Page implements OnInit {
   async presentToast( message: string ) {
     const toast = await this.toastCtrl.create({
       message,
-      duration: 3000,
+      duration: 6000,
       mode: "ios",
       color: "dark"
     });

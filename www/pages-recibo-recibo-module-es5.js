@@ -132,6 +132,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_crud_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/crud.service */ "./src/app/services/crud.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _class_devolvidos__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../class/devolvidos */ "./src/app/class/devolvidos.ts");
+/* harmony import */ var _services_usuario_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../services/usuario.service */ "./src/app/services/usuario.service.ts");
+/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../services/storage.service */ "./src/app/services/storage.service.ts");
+
+
 
 
 
@@ -142,7 +146,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ReciboPage = /** @class */ (function () {
-    function ReciboPage(contribService, actionSheetCtrl, datePipe, toastCtrl, alertCtrl, bluetoothSerial, crudService, route, navCtrl) {
+    function ReciboPage(contribService, actionSheetCtrl, datePipe, toastCtrl, alertCtrl, bluetoothSerial, crudService, route, navCtrl, usuarioService, storage) {
         this.contribService = contribService;
         this.actionSheetCtrl = actionSheetCtrl;
         this.datePipe = datePipe;
@@ -152,17 +156,29 @@ var ReciboPage = /** @class */ (function () {
         this.crudService = crudService;
         this.route = route;
         this.navCtrl = navCtrl;
+        this.usuarioService = usuarioService;
+        this.storage = storage;
         //@Input() nrorecibo;
         this.lbReferencia = false;
         this.dtReagendamento = new Date();
         this.dataReag = new Date(this.dtReagendamento.getFullYear(), this.dtReagendamento.getMonth() + 1, 0);
         this.dtBaixa = new Date();
         this.dtDevAtual = new Date();
-        this.newDt = " ";
+        this.dtReag = " ";
         this.conectPrint = false;
         this.connection = false;
     }
     ReciboPage.prototype.ngOnInit = function () {
+        var _this = this;
+        var localUser = this.storage.getLocalUser();
+        if (localUser && localUser.email) {
+            this.usuarioService.findByEmail(localUser.email)
+                .subscribe(function (resp) {
+                _this.usuario = resp;
+                _this.codMens = _this.usuario.codmensageiro;
+                _this.codUser = _this.usuario.codusuario;
+            });
+        }
         this.nrorecibo = this.route.snapshot.paramMap.get('id');
         this.carregarRecibosDetalhes();
     };
@@ -285,9 +301,13 @@ var ReciboPage = /** @class */ (function () {
     };
     // Método que recebe a data pelo componente "datetime" e imputa para data de "reagendamento".
     ReciboPage.prototype.reagendar = function (event) {
+        this.dtReag = event.detail.value;
+        var newDtReag = this.dtReag;
+        this.dataR = new Date(newDtReag);
+        console.log('DATA REAG: ', this.dataR);
         // Evento do click "Ok"
         if (this.recibo !== undefined) {
-            this.recibo.dtreagendamento = event.detail.value;
+            this.recibo.dtreagendamento = this.dataR;
             this.recibo.reagendado = "S";
             this.imprimirReagendamento();
             this.getPutRecibosInApp("Reagendamento realizado com sucesso!", 'reagendamento');
@@ -316,7 +336,7 @@ var ReciboPage = /** @class */ (function () {
                                     text: 'Endereço não encontrado',
                                     handler: function () {
                                         _this.objDevolvido('Endereço não encontrado');
-                                        // this.getPostDevolvidos();
+                                        //this.getPostDevolvidos();
                                         _this.insertDevolvidos();
                                         _this.statusRecibo();
                                     }
@@ -356,7 +376,7 @@ var ReciboPage = /** @class */ (function () {
     };
     // Setando alterações para o recibo devolvido
     ReciboPage.prototype.objDevolvido = function (motivo) {
-        this.devolvido = new _class_devolvidos__WEBPACK_IMPORTED_MODULE_8__["Devolvidos"](this.nrorecibo, this.dtDevAtual, this.datePipe.transform(this.dtDevAtual, 'HH:mm:ss'), this.dtDevAtual, 341, 70014, motivo, 1, 'Descrição do atendimento');
+        this.devolvido = new _class_devolvidos__WEBPACK_IMPORTED_MODULE_8__["Devolvidos"](this.nrorecibo, this.dtDevAtual, this.datePipe.transform(this.dtDevAtual, 'HH:mm:ss'), this.dtDevAtual, this.codMens, this.codUser, motivo, 1, 'Descrição do atendimento');
     };
     // Inserindo alterações do recibo devolvido para o backend
     ReciboPage.prototype.getPostDevolvidos = function () {
@@ -370,6 +390,9 @@ var ReciboPage = /** @class */ (function () {
     // Setando o statusrec do recido pra quando ele for devolvido
     ReciboPage.prototype.statusRecibo = function () {
         this.recibo.statusrec = "D";
+        this.recibo.dtbaixa = new Date();
+        this.recibo.dtreagendamento = new Date();
+        console.log('DTDEVOL: ', this.recibo.dtbaixa);
         this.getPutRecibosInApp("Devolvido com sucesso!", 'devolucao');
         this.getPutRecibosInWeb();
         //this.getPostDevolvidos();
@@ -386,7 +409,7 @@ var ReciboPage = /** @class */ (function () {
             'VALOR: R$' + this.recibo.valorgerado + ',00' + '\n\n' +
             '===============================' + '\n\n' +
             'Cod. Contribuinte: ' + this.recibo.codcontrib + '\n' +
-            'Doador: ' + '\n' +
+            'Doador:\n' +
             this.recibo.nomenorecibo + '\n' +
             'Data: ' + this.datePipe.transform(this.recibo.dtbaixa, 'dd/MM/yyyy') + '\n' +
             'Valor: R$' + this.recibo.valorgerado + ',00' + '\n\n\n\n' +
@@ -511,7 +534,9 @@ var ReciboPage = /** @class */ (function () {
         { type: _ionic_native_bluetooth_serial_ngx__WEBPACK_IMPORTED_MODULE_5__["BluetoothSerial"] },
         { type: _services_crud_service__WEBPACK_IMPORTED_MODULE_6__["CrudService"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] }
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] },
+        { type: _services_usuario_service__WEBPACK_IMPORTED_MODULE_9__["UsuarioService"] },
+        { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_10__["StorageService"] }
     ]; };
     ReciboPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -519,15 +544,11 @@ var ReciboPage = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./recibo.page.html */ "./node_modules/raw-loader/index.js!./src/app/pages/recibo/recibo.page.html"),
             styles: [__webpack_require__(/*! ./recibo.page.scss */ "./src/app/pages/recibo/recibo.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_contribuintes_service__WEBPACK_IMPORTED_MODULE_2__["ContribuintesService"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ActionSheetController"],
-            _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
-            _ionic_native_bluetooth_serial_ngx__WEBPACK_IMPORTED_MODULE_5__["BluetoothSerial"],
-            _services_crud_service__WEBPACK_IMPORTED_MODULE_6__["CrudService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_contribuintes_service__WEBPACK_IMPORTED_MODULE_2__["ContribuintesService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ActionSheetController"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_native_bluetooth_serial_ngx__WEBPACK_IMPORTED_MODULE_5__["BluetoothSerial"],
+            _services_crud_service__WEBPACK_IMPORTED_MODULE_6__["CrudService"], _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _services_usuario_service__WEBPACK_IMPORTED_MODULE_9__["UsuarioService"], _services_storage_service__WEBPACK_IMPORTED_MODULE_10__["StorageService"]])
     ], ReciboPage);
     return ReciboPage;
 }());

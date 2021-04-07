@@ -127,6 +127,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_crud_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/crud.service */ "./src/app/services/crud.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _class_devolvidos__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../class/devolvidos */ "./src/app/class/devolvidos.ts");
+/* harmony import */ var _services_usuario_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../services/usuario.service */ "./src/app/services/usuario.service.ts");
+/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../services/storage.service */ "./src/app/services/storage.service.ts");
+
+
 
 
 
@@ -137,7 +141,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ReciboPage = class ReciboPage {
-    constructor(contribService, actionSheetCtrl, datePipe, toastCtrl, alertCtrl, bluetoothSerial, crudService, route, navCtrl) {
+    constructor(contribService, actionSheetCtrl, datePipe, toastCtrl, alertCtrl, bluetoothSerial, crudService, route, navCtrl, usuarioService, storage) {
         this.contribService = contribService;
         this.actionSheetCtrl = actionSheetCtrl;
         this.datePipe = datePipe;
@@ -147,17 +151,28 @@ let ReciboPage = class ReciboPage {
         this.crudService = crudService;
         this.route = route;
         this.navCtrl = navCtrl;
+        this.usuarioService = usuarioService;
+        this.storage = storage;
         //@Input() nrorecibo;
         this.lbReferencia = false;
         this.dtReagendamento = new Date();
         this.dataReag = new Date(this.dtReagendamento.getFullYear(), this.dtReagendamento.getMonth() + 1, 0);
         this.dtBaixa = new Date();
         this.dtDevAtual = new Date();
-        this.newDt = " ";
+        this.dtReag = " ";
         this.conectPrint = false;
         this.connection = false;
     }
     ngOnInit() {
+        let localUser = this.storage.getLocalUser();
+        if (localUser && localUser.email) {
+            this.usuarioService.findByEmail(localUser.email)
+                .subscribe(resp => {
+                this.usuario = resp;
+                this.codMens = this.usuario.codmensageiro;
+                this.codUser = this.usuario.codusuario;
+            });
+        }
         this.nrorecibo = this.route.snapshot.paramMap.get('id');
         this.carregarRecibosDetalhes();
     }
@@ -257,9 +272,13 @@ let ReciboPage = class ReciboPage {
     }
     // Método que recebe a data pelo componente "datetime" e imputa para data de "reagendamento".
     reagendar(event) {
+        this.dtReag = event.detail.value;
+        let newDtReag = this.dtReag;
+        this.dataR = new Date(newDtReag);
+        console.log('DATA REAG: ', this.dataR);
         // Evento do click "Ok"
         if (this.recibo !== undefined) {
-            this.recibo.dtreagendamento = event.detail.value;
+            this.recibo.dtreagendamento = this.dataR;
             this.recibo.reagendado = "S";
             this.imprimirReagendamento();
             this.getPutRecibosInApp("Reagendamento realizado com sucesso!", 'reagendamento');
@@ -284,7 +303,7 @@ let ReciboPage = class ReciboPage {
                         text: 'Endereço não encontrado',
                         handler: () => {
                             this.objDevolvido('Endereço não encontrado');
-                            // this.getPostDevolvidos();
+                            //this.getPostDevolvidos();
                             this.insertDevolvidos();
                             this.statusRecibo();
                         }
@@ -317,7 +336,7 @@ let ReciboPage = class ReciboPage {
     }
     // Setando alterações para o recibo devolvido
     objDevolvido(motivo) {
-        this.devolvido = new _class_devolvidos__WEBPACK_IMPORTED_MODULE_8__["Devolvidos"](this.nrorecibo, this.dtDevAtual, this.datePipe.transform(this.dtDevAtual, 'HH:mm:ss'), this.dtDevAtual, 341, 70014, motivo, 1, 'Descrição do atendimento');
+        this.devolvido = new _class_devolvidos__WEBPACK_IMPORTED_MODULE_8__["Devolvidos"](this.nrorecibo, this.dtDevAtual, this.datePipe.transform(this.dtDevAtual, 'HH:mm:ss'), this.dtDevAtual, this.codMens, this.codUser, motivo, 1, 'Descrição do atendimento');
     }
     // Inserindo alterações do recibo devolvido para o backend
     getPostDevolvidos() {
@@ -331,6 +350,9 @@ let ReciboPage = class ReciboPage {
     // Setando o statusrec do recido pra quando ele for devolvido
     statusRecibo() {
         this.recibo.statusrec = "D";
+        this.recibo.dtbaixa = new Date();
+        this.recibo.dtreagendamento = new Date();
+        console.log('DTDEVOL: ', this.recibo.dtbaixa);
         this.getPutRecibosInApp("Devolvido com sucesso!", 'devolucao');
         this.getPutRecibosInWeb();
         //this.getPostDevolvidos();
@@ -347,7 +369,7 @@ let ReciboPage = class ReciboPage {
             'VALOR: R$' + this.recibo.valorgerado + ',00' + '\n\n' +
             '===============================' + '\n\n' +
             'Cod. Contribuinte: ' + this.recibo.codcontrib + '\n' +
-            'Doador: ' + '\n' +
+            'Doador:\n' +
             this.recibo.nomenorecibo + '\n' +
             'Data: ' + this.datePipe.transform(this.recibo.dtbaixa, 'dd/MM/yyyy') + '\n' +
             'Valor: R$' + this.recibo.valorgerado + ',00' + '\n\n\n\n' +
@@ -454,7 +476,9 @@ ReciboPage.ctorParameters = () => [
     { type: _ionic_native_bluetooth_serial_ngx__WEBPACK_IMPORTED_MODULE_5__["BluetoothSerial"] },
     { type: _services_crud_service__WEBPACK_IMPORTED_MODULE_6__["CrudService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] },
+    { type: _services_usuario_service__WEBPACK_IMPORTED_MODULE_9__["UsuarioService"] },
+    { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_10__["StorageService"] }
 ];
 ReciboPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -462,15 +486,11 @@ ReciboPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./recibo.page.html */ "./node_modules/raw-loader/index.js!./src/app/pages/recibo/recibo.page.html"),
         styles: [__webpack_require__(/*! ./recibo.page.scss */ "./src/app/pages/recibo/recibo.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_contribuintes_service__WEBPACK_IMPORTED_MODULE_2__["ContribuintesService"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ActionSheetController"],
-        _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
-        _ionic_native_bluetooth_serial_ngx__WEBPACK_IMPORTED_MODULE_5__["BluetoothSerial"],
-        _services_crud_service__WEBPACK_IMPORTED_MODULE_6__["CrudService"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_contribuintes_service__WEBPACK_IMPORTED_MODULE_2__["ContribuintesService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ActionSheetController"],
+        _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_native_bluetooth_serial_ngx__WEBPACK_IMPORTED_MODULE_5__["BluetoothSerial"],
+        _services_crud_service__WEBPACK_IMPORTED_MODULE_6__["CrudService"], _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _services_usuario_service__WEBPACK_IMPORTED_MODULE_9__["UsuarioService"], _services_storage_service__WEBPACK_IMPORTED_MODULE_10__["StorageService"]])
 ], ReciboPage);
 
 

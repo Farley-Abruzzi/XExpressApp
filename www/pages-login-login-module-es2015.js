@@ -113,7 +113,6 @@ let LoginPage = class LoginPage {
         console.log('CREDS: ', this.creds);
         this.auth.authenticate(this.creds)
             .subscribe(resp => {
-            console.log('OBJ CREDS: ', this.creds);
             this.auth.successfullLogin(resp.headers.get("Authorization"));
             this.navCtrl.navigateRoot('main/tabs/tab2', { animated: true });
         }, error => {

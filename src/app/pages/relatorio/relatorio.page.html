@@ -15,7 +15,7 @@
         <ion-row>
             <ion-col>
 
-                <ion-list *ngIf="objetos">
+                <ion-list *ngIf="objResumo">
                     <ion-toolbar class="SizeToolbar" text-center color="success">
                         <ion-label class="LabelPeriodo">Período</ion-label>
                         <ion-button color="dark" class="calendarStart" slot="start" fill="clear">De
@@ -40,25 +40,25 @@
                     <ion-card color="light">
                         <!-- Lista de contabilização por período. -->
                         <ion-item color="medium">
-                            <ion-label><b>Recebidos (Hoje):</b> {{ objetos.qtdRecebido }}</ion-label>
+                            <ion-label><b>Recebidos (Hoje):</b> {{ objResumo.qtdRecebido }}</ion-label>
                         </ion-item>
                         <ion-item color="light">
-                            <ion-label><b>Total de contribuições:</b> {{ objetos.totalValorGerado | currency: 'BRL':true }}</ion-label>
+                            <ion-label><b>Trabalhadas:</b> {{ objResumo.trabalhadas }}</ion-label>
                         </ion-item>
                         <ion-item color="light">
-                            <ion-label><b>A Receber:</b> {{ objetos.valorEmAberto | currency: 'BRL':true }}</ion-label>
+                            <ion-label><b>A Receber:</b> {{ objResumo.valorEmAberto | currency: 'BRL':true }}</ion-label>
                         </ion-item>
                         <ion-item color="light">
-                            <ion-label color="medium"><b>Em Aberto:</b> {{ objetos.qtdEmAberto }}</ion-label>
+                            <ion-label color="medium"><b>Em Aberto:</b> {{ objResumo.qtdEmAberto }}</ion-label>
                         </ion-item>
                         <ion-item color="light">
-                            <ion-label color="success"><b>Recebidas:</b> {{ objetos.qtdRecebido }}</ion-label>
+                            <ion-label color="success"><b>Recebidas:</b> {{ objResumo.qtdRecebido }}</ion-label>
                         </ion-item>
                         <ion-item color="light">
-                            <ion-label color="danger"><b>Devolvidas:</b> {{ objetos.qtdDevolvido }}</ion-label>
+                            <ion-label color="danger"><b>Devolvidas:</b> {{ objResumo.qtdDevolvido }}</ion-label>
                         </ion-item>
                         <ion-item color="light">
-                            <ion-label color="danger"><b>Canceladas:</b> {{ objetos.qtdCancelado }}</ion-label>
+                            <ion-label color="danger"><b>Canceladas:</b> {{ objResumo.qtdCancelado }}</ion-label>
                         </ion-item>
                         <br>
                     </ion-card>

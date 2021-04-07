@@ -365,7 +365,7 @@ let Tab1Page = class Tab1Page {
     }
     getApiDbPostDepositos() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            yield this.presentLoading('Por favor aguarde...');
+            yield this.presentLoading();
             this.sendPicture();
             console.log("OBJ DEPOSITO: ", this.deposito);
             this.usuarioService.getApiDbPostDepositos(this.deposito)
@@ -433,11 +433,11 @@ let Tab1Page = class Tab1Page {
             this.getApiDbPostDepositos();
         });
     }
-    presentLoading(message) {
+    presentLoading() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             const loading = yield this.loadingController.create({
                 cssClass: 'my-custom-class',
-                message,
+                message: 'Por favor aguarde...',
                 spinner: "bubbles",
                 duration: 2000
             });
@@ -448,7 +448,7 @@ let Tab1Page = class Tab1Page {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             const toast = yield this.toastCtrl.create({
                 message,
-                duration: 3000,
+                duration: 4000,
                 mode: "ios",
                 color: "dark"
             });

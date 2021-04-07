@@ -118,7 +118,6 @@ var LoginPage = /** @class */ (function () {
         console.log('CREDS: ', this.creds);
         this.auth.authenticate(this.creds)
             .subscribe(function (resp) {
-            console.log('OBJ CREDS: ', _this.creds);
             _this.auth.successfullLogin(resp.headers.get("Authorization"));
             _this.navCtrl.navigateRoot('main/tabs/tab2', { animated: true });
         }, function (error) {

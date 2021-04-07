@@ -136,36 +136,36 @@
   },
   "installed_plugins": {
     "cordova-plugin-bluetooth-serial": {
-      "PACKAGE_NAME": "io.xexpressapp.com"
+      "PACKAGE_NAME": "com.xexpress"
     },
     "cordova-plugin-calendar": {
-      "PACKAGE_NAME": "io.xexpressapp.com"
+      "PACKAGE_NAME": "com.xexpress"
     },
     "cordova-plugin-camera": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
-      "PACKAGE_NAME": "io.xexpressapp.com"
+      "PACKAGE_NAME": "com.xexpress"
     },
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "io.xexpressapp.com"
+      "PACKAGE_NAME": "com.xexpress"
     },
     "cordova-plugin-ionic-keyboard": {
-      "PACKAGE_NAME": "io.xexpressapp.com"
+      "PACKAGE_NAME": "com.xexpress"
     },
     "cordova-plugin-ionic-webview": {
       "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+",
-      "PACKAGE_NAME": "io.xexpressapp.com"
+      "PACKAGE_NAME": "com.xexpress"
     },
     "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "io.xexpressapp.com"
+      "PACKAGE_NAME": "com.xexpress"
     },
     "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "io.xexpressapp.com"
+      "PACKAGE_NAME": "com.xexpress"
     },
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "io.xexpressapp.com"
+      "PACKAGE_NAME": "com.xexpress"
     },
     "cordova-sqlite-storage": {
-      "PACKAGE_NAME": "io.xexpressapp.com"
+      "PACKAGE_NAME": "com.xexpress"
     }
   },
   "dependent_plugins": {},

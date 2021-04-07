@@ -44,10 +44,12 @@ export class Tab2Page implements OnInit {
 
           if (this.codMens == 330) {
             this.bairro = "AMORIM"
-          } else if (this.codMens = 795) {
+          } else if (this.codMens == 795) {
             this.bairro = "CUSTODIO PEREIRA"
+          } else if (this.codMens == 315) {
+            this.bairro = "TUBALINA";
           }
-        
+          console.log('CodMens: ', this.codMens + ' Bairro: ' + this.bairro);
           this.contribService.getListaRecibos(this.codMens, this.bairro).subscribe( resp => {
 
             this.listaDeRecibos = resp;
@@ -93,6 +95,7 @@ export class Tab2Page implements OnInit {
     this.navCtrl.navigateForward( 'mensagem', {animated: true} );
   }
 
+  // Navega para página bluetooth.
   bluetooth() {
     this.navCtrl.navigateForward( 'bluetooth', {animated: true} );
   }

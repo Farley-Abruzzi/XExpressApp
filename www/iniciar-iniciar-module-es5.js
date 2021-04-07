@@ -161,6 +161,7 @@ var Tab2Page = /** @class */ (function () {
     Tab2Page.prototype.mensagem = function () {
         this.navCtrl.navigateForward('mensagem', { animated: true });
     };
+    // Navega para página bluetooth.
     Tab2Page.prototype.bluetooth = function () {
         this.navCtrl.navigateForward('bluetooth', { animated: true });
     };

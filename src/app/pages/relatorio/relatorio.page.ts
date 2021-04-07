@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
 import { ContribuintesService } from '../../services/contribuintes.service';
-import { Resumo } from '../../interfaces/resumo';
 import { DatePipe } from '@angular/common';
 import { StorageService } from '../../services/storage.service';
 import { LoadingController, PopoverController, ToastController } from '@ionic/angular';
 import { PopinfoComponent } from '../../components/popresumo/popinfo.component';
 import { UsuarioService } from '../../services/usuario.service';
 import { UsuarioDTO } from '../../interfaces/usuario.dto';
+import { Resumo } from '../../interfaces/resumo';
 
 
 
@@ -18,7 +18,7 @@ import { UsuarioDTO } from '../../interfaces/usuario.dto';
 })
 export class RelatorioPage implements OnInit {
 
-  @Input() objetos: Resumo;
+  @Input() objResumo: Resumo;
 
   dtStart: Date = new Date();
   dtEnd: Date = new Date(this.dtStart.getFullYear(), this.dtStart.getMonth() + 1, 0);
@@ -38,7 +38,6 @@ export class RelatorioPage implements OnInit {
 
 
   ngOnInit() {
-    // this.carregarPeriodo();
     this.carregarResumo();
   }
 
@@ -51,21 +50,23 @@ export class RelatorioPage implements OnInit {
   // Carrega o objeto de resumo do mensageiro.
   async carregarResumo() {
     let loading = await this.presentLoading();
-
     let localUser = this.storage.getLocalUser();
     if (localUser && localUser.email) {
       this.usuarioService.findByEmail(localUser.email)
         .subscribe(resp => {
           this.usuario = resp;
           this.codMens = this.usuario.codmensageiro;
+        
 
           this.contribService.getResumo(this.codMens, this.dtInicio, this.dtFim)
             .subscribe(resp => {
-              this.objetos = resp;
-              console.log('OBJ RESUMO: ', this.objetos);
+              this.objResumo = resp;
+              this.objResumo.trabalhadas = this.objResumo.qtdRecebido + this.objResumo.qtdCancelado + this.objResumo.qtdDevolvido;
+              console.log('OBJ RESUMO: ', this.objResumo);
               loading.dismiss();
             }, error => {
               console.log(error);
+              loading.dismiss();
             });
           
         }, error => {
@@ -73,7 +74,7 @@ export class RelatorioPage implements OnInit {
             console.log(error.status);
           }
       });
-    }
+    } 
   }
 
 
@@ -93,13 +94,17 @@ export class RelatorioPage implements OnInit {
     this.conversorDate();
     
     this.bluetoothSerial.write(
-      '\n\n\n'+'  *** RELATORIO ***' + '\n\n' +
-      'Contabilizando o Periodo:\n'+'DE ' + this.dtInicio +' A '+ this.dtFim + '\n\n' +
-      'Total de contribuicoes: R$' + this.objetos.totalQtd + '\n\n' +
-      'A Receber: R$' + this.objetos.valorEmAberto.toFixed(2) + '\n\n' +
-      'Recebidas: ' + this.objetos.qtdRecebido + '\n\n' +
-      'Devolvidas: '+ this.objetos.qtdDevolvido + '\n\n' +
-      'Canceladas: '+ this.objetos.qtdCancelado + '\n\n\n\n'
+      '\n\n\n' + '      *** RELATORIO ***' + '\n\n' +
+      'Mensageiro:\n' +
+       this.objResumo.mensageiro + '\n\n' +
+      'Contabilizando o Periodo:\n' + 'DE ' + this.dtInicio + ' A ' + this.dtFim + '\n\n' +
+      'HOSPITAL DO CANCER EM UBERLANDIA\n\n\n' +
+      'RESUMO\n' +
+      'Trabalhadas: ' + this.objResumo.totalQtd + '\n\n' +
+      'A Receber: R$' + this.objResumo.valorEmAberto.toFixed(2) + '\n\n' +
+      'Recebidas: ' + this.objResumo.qtdRecebido + '\n\n' +
+      'Devolvidas: '+ this.objResumo.qtdDevolvido + '\n\n' +
+      'Canceladas: '+ this.objResumo.qtdCancelado + '\n\n\n\n'
       );
       console.log('Imprimindo');
     }

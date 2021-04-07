@@ -1,4 +1,5 @@
 export interface Resumo {
+  mensageiro: string;
   qtdRecebido: number;
   valorRecebido: number;
   percentualRecebido: number;
@@ -12,4 +13,5 @@ export interface Resumo {
   valorEmAberto: number;
   totalQtd: number;
   totalValorGerado: number;
+  trabalhadas?: number;
 }

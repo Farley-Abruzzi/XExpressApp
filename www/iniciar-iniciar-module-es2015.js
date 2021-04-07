@@ -157,6 +157,7 @@ let Tab2Page = class Tab2Page {
     mensagem() {
         this.navCtrl.navigateForward('mensagem', { animated: true });
     }
+    // Navega para página bluetooth.
     bluetooth() {
         this.navCtrl.navigateForward('bluetooth', { animated: true });
     }

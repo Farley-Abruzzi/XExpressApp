@@ -27,8 +27,9 @@ export class ContribuicaoPage implements OnInit {
   comFiltro: boolean = false;
   
 
-  constructor(private contribService: ContribuintesService, private crudService: CrudService, public loadingController: LoadingController,
-              private storage: StorageService, private usuarioService: UsuarioService, private alertCtrl: AlertController) { }
+  constructor(private contribService: ContribuintesService, private crudService: CrudService,
+              public loadingController: LoadingController, private storage: StorageService,
+              private usuarioService: UsuarioService, private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.carregarContribuintesApp();
@@ -39,18 +40,18 @@ export class ContribuicaoPage implements OnInit {
   async carregarContribuintesApp() {
     let loading = await this.presentLoading();
 
-    let localUser = this.storage.getLocalUser();
-    if (localUser && localUser.email) {
-      this.usuarioService.findByEmail(localUser.email)
-        .subscribe(resp => {
-          this.usuario = resp;
-          this.codMens = this.usuario.codmensageiro;
+    // let localUser = this.storage.getLocalUser();
+    // if (localUser && localUser.email) {
+    //   this.usuarioService.findByEmail(localUser.email)
+    //     .subscribe(resp => {
+    //       this.usuario = resp;
+    //       this.codMens = this.usuario.codmensageiro;
 
           // Para rodar no app
           this.crudService.getAll()
             .then((data: Recibos[]) => {
                 this.listaDeRecibos = data;
-                console.log("Recibos:", this.listaDeRecibos);
+                console.log("Recibos: ", this.listaDeRecibos);
                 
                 if(this.listaDeRecibos.length[37] == "S") {
                     this.cardColors = "secondary";
@@ -58,60 +59,63 @@ export class ContribuicaoPage implements OnInit {
                     this.cardColors = "danger";
                 }
                 loading.dismiss();
+              if (this.listaDeRecibos.length == 0) {
+                alert('Não há recibos baixados');
+                }
             }, error => {
               loading.dismiss();
           });
     
-        }, error => {
-          if (error.status == 403) {
-            console.log(error.status);
-          }
-      });
-    }
+    //     }, error => {
+    //       if (error.status == 403) {
+    //         console.log(error.status);
+    //       }
+    //   });
+    // }
   }
   
-  async listaContribuintesWeb() {
-    let loading = await this.presentLoading();
+  // async listaContribuintesWeb() {
+  //   let loading = await this.presentLoading();
 
-    let localUser = this.storage.getLocalUser();
-    if (localUser && localUser.email) {
-      this.usuarioService.findByEmail(localUser.email)
-        .subscribe(resp => {
-          this.usuario = resp;
-          this.codMens = this.usuario.codmensageiro;
+  //   let localUser = this.storage.getLocalUser();
+  //   if (localUser && localUser.email) {
+  //     this.usuarioService.findByEmail(localUser.email)
+  //       .subscribe(resp => {
+  //         this.usuario = resp;
+  //         this.codMens = this.usuario.codmensageiro;
 
-          if (this.codMens == 330) {
-            this.bairro = "AMORIM"
-          } else if (this.codMens = 876) {
-            this.bairro = "MORUMBI"
-          }
+  //         if (this.codMens == 330) {
+  //           this.bairro = "AMORIM"
+  //         } else if (this.codMens = 876) {
+  //           this.bairro = "MORUMBI"
+  //         }
 
-          // Para rodar na web
-          this.contribService.getListaRecibos(this.codMens, this.bairro)
-            .subscribe(resp => {
+  //         // Para rodar na web
+  //         this.contribService.getListaRecibos(this.codMens, this.bairro)
+  //           .subscribe(resp => {
 
-              this.listaDeRecibos = resp;
-              console.log("Recibos:", this.listaDeRecibos);
-              loading.dismiss();
-              if (this.listaDeRecibos == null) {
-                this.carregarContribuintesApp();
-              }
+  //             this.listaDeRecibos = resp;
+  //             console.log("Recibos:", this.listaDeRecibos);
+  //             loading.dismiss();
+  //             if (this.listaDeRecibos == null) {
+  //               this.carregarContribuintesApp();
+  //             }
              
 
-              if (this.listaDeRecibos.length[4] == "S") {
-                this.cardColors = "secondary";
-              } else {
-                this.cardColors = "danger";
-              }
-            }, error => { });
+  //             if (this.listaDeRecibos.length[4] == "S") {
+  //               this.cardColors = "secondary";
+  //             } else {
+  //               this.cardColors = "danger";
+  //             }
+  //           }, error => { });
       
-        }, error => {
-          if (error.status == 403) {
-            console.log(error.status);
-          }
-        });
-    } 
-  }
+  //       }, error => {
+  //         if (error.status == 403) {
+  //           console.log(error.status);
+  //         }
+  //       });
+  //   } 
+  // }
   
   async presentLoading() {
     const loading = await this.loadingController.create({

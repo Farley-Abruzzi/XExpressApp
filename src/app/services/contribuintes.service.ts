@@ -23,6 +23,7 @@ export class ContribuintesService {
   
   // Pega as informações de recibos dos contribuintes no WebServices. 
   getListaRecibos(cod: number, bairro: string) {
+    console.log('COD: ', cod + ' BAIRRO: ' + bairro);
     // http://192.168.0.243:8081/recibos/listarecibosapp?cod=315&startDate=2019-07-01&endDate=2019-07-31
     return this.http.get<Recibos[]>(`${ URL }/recibos/listarecibosapp?cod=${ cod }&startDate=2021-03-01&endDate=2021-03-31&bairro=${ bairro }`);
   }
@@ -34,7 +35,7 @@ export class ContribuintesService {
   // Pega as informações de resumo do mensageiro no WebServices.
   getResumo(cod: number, dtStart: string, dtEnd: string) {
     this.dtInicio = dtStart;
-    this.dtFim = dtEnd
+    this.dtFim = dtEnd;
     // http://192.168.0.243:8081/recibos/resumomensageiro?cod=11&startDate=2017-01-01&endDate=2018-01-01
     return this.http.get<Resumo>(`${ URL }/recibos/resumomensageiro?cod=${ cod }&startDate=${ dtStart }&endDate=${ dtEnd }`);
   }

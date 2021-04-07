@@ -33,7 +33,7 @@ export class CrudService {
         recibos.observacoes, recibos.datadorecebimento];
       try {
         await db.executeSql(sql, data);
-        // console.log('Recibos inseridos');
+        console.log('Recibos inseridos');
       }
       catch (e) {
         return console.error(e);

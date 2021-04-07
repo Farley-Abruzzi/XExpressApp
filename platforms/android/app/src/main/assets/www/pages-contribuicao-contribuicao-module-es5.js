@@ -145,6 +145,9 @@ var ContribuicaoPage = /** @class */ (function () {
                                         _this.cardColors = "danger";
                                     }
                                     loading.dismiss();
+                                    if (_this.listaDeRecibos.length == 0) {
+                                        alert('Não há recibos baixados');
+                                    }
                                 }, function (error) {
                                     loading.dismiss();
                                 });
@@ -378,8 +381,9 @@ var ContribuicaoPage = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./contribuicao.page.html */ "./node_modules/raw-loader/index.js!./src/app/pages/contribuicao/contribuicao.page.html"),
             styles: [__webpack_require__(/*! ./contribuicao.page.scss */ "./src/app/pages/contribuicao/contribuicao.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_contribuintes_service__WEBPACK_IMPORTED_MODULE_3__["ContribuintesService"], _services_crud_service__WEBPACK_IMPORTED_MODULE_4__["CrudService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"],
-            _services_storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"], _services_usuario_service__WEBPACK_IMPORTED_MODULE_6__["UsuarioService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_contribuintes_service__WEBPACK_IMPORTED_MODULE_3__["ContribuintesService"], _services_crud_service__WEBPACK_IMPORTED_MODULE_4__["CrudService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"], _services_storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"],
+            _services_usuario_service__WEBPACK_IMPORTED_MODULE_6__["UsuarioService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]])
     ], ContribuicaoPage);
     return ContribuicaoPage;
 }());
