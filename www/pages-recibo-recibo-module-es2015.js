@@ -259,6 +259,7 @@ let ReciboPage = class ReciboPage {
                                 this.recibo.dtbaixa = this.dtBaixa;
                                 this.recibo.datadorecebimento = this.datePipe.transform(this.dtBaixa, 'dd/MM/yyyy');
                                 this.recibo.dtreagendamento = null;
+                                this.recibo.reagendado = null;
                                 this.getPutRecibosInApp('Doação realizada!', 'doacao');
                                 this.getPutRecibosInWeb();
                                 this.imprimir();
@@ -351,7 +352,8 @@ let ReciboPage = class ReciboPage {
     statusRecibo() {
         this.recibo.statusrec = "D";
         this.recibo.dtbaixa = new Date();
-        this.recibo.dtreagendamento = new Date();
+        this.recibo.dtreagendamento = null;
+        this.recibo.reagendado = null;
         console.log('DTDEVOL: ', this.recibo.dtbaixa);
         this.getPutRecibosInApp("Devolvido com sucesso!", 'devolucao');
         this.getPutRecibosInWeb();

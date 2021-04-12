@@ -1,5 +1,5 @@
 {
-    "name": "xexpressapp",
+    "name": "x-express",
     "version": "0.0.1",
     "author": "Ionic Framework",
     "homepage": "https://ionicframework.com/",
@@ -46,6 +46,7 @@
         "cordova-plugin-whitelist": "^1.3.3",
         "cordova-sqlite-storage": "^4.0.0",
         "core-js": "^2.5.4",
+        "ionic": "5.4.16",
         "rxjs": "~6.5.1",
         "tslib": "^1.9.0",
         "zone.js": "~0.9.1"

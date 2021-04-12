@@ -122,11 +122,16 @@ var Tab2Page = /** @class */ (function () {
                 if (_this.codMens == 330) {
                     _this.bairro = "AMORIM";
                 }
-                else if (_this.codMens = 795) {
+                else if (_this.codMens == 795) {
                     _this.bairro = "CUSTODIO PEREIRA";
                 }
+                else if (_this.codMens == 315) {
+                    _this.bairro = "TUBALINA";
+                }
+                console.log('CodMens: ', _this.codMens + ' Bairro: ' + _this.bairro);
                 _this.contribService.getListaRecibos(_this.codMens, _this.bairro).subscribe(function (resp) {
-                    _this.listaDeRecibos = resp;
+                    var _a;
+                    (_a = _this.listaDeRecibos).push.apply(_a, resp);
                     console.log("Recibos:", _this.listaDeRecibos);
                     _this.setObjRecibos("Recibos baixados!");
                     // if(this.listaDeRecibos.reagendado == "S") {

@@ -1101,9 +1101,9 @@ __webpack_require__.r(__webpack_exports__);
 const environment = {
     production: true,
     // In Prod
-    // url: 'http://187.32.122.17:8380'
+    url: 'http://187.32.122.17:8380'
     // In Dev
-    url: 'http://192.168.100.158:8380'
+    // url: 'http://192.168.100.158:8380'
 };
 
 
@@ -1124,9 +1124,9 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    // url: 'http://187.32.122.17:8380'
+    url: 'http://187.32.122.17:8380'
     // In Job
-    url: 'http://192.168.100.158:8380'
+    // url: 'http://192.168.100.158:8380'
 };
 /*
  * For easier debugging in development mode, you can import the following file

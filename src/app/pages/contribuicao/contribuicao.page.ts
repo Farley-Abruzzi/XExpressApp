@@ -40,16 +40,8 @@ export class ContribuicaoPage implements OnInit {
   async carregarContribuintesApp() {
     let loading = await this.presentLoading();
 
-    // let localUser = this.storage.getLocalUser();
-    // if (localUser && localUser.email) {
-    //   this.usuarioService.findByEmail(localUser.email)
-    //     .subscribe(resp => {
-    //       this.usuario = resp;
-    //       this.codMens = this.usuario.codmensageiro;
-
           // Para rodar no app
-          this.crudService.getAll()
-            .then((data: Recibos[]) => {
+          this.crudService.getAll().then((data: Recibos[]) => {
                 this.listaDeRecibos = data;
                 console.log("Recibos: ", this.listaDeRecibos);
                 
@@ -59,19 +51,14 @@ export class ContribuicaoPage implements OnInit {
                     this.cardColors = "danger";
                 }
                 loading.dismiss();
-              if (this.listaDeRecibos.length == 0) {
-                alert('Não há recibos baixados');
-                }
+              
+                if (this.listaDeRecibos.length == 0) {
+                  alert('Não há recibos baixados');
+                  }
             }, error => {
+              console.log('ERROR: ',error);
               loading.dismiss();
           });
-    
-    //     }, error => {
-    //       if (error.status == 403) {
-    //         console.log(error.status);
-    //       }
-    //   });
-    // }
   }
   
   // async listaContribuintesWeb() {

@@ -118,11 +118,15 @@ let Tab2Page = class Tab2Page {
                 if (this.codMens == 330) {
                     this.bairro = "AMORIM";
                 }
-                else if (this.codMens = 795) {
+                else if (this.codMens == 795) {
                     this.bairro = "CUSTODIO PEREIRA";
                 }
+                else if (this.codMens == 315) {
+                    this.bairro = "TUBALINA";
+                }
+                console.log('CodMens: ', this.codMens + ' Bairro: ' + this.bairro);
                 this.contribService.getListaRecibos(this.codMens, this.bairro).subscribe(resp => {
-                    this.listaDeRecibos = resp;
+                    this.listaDeRecibos.push(...resp);
                     console.log("Recibos:", this.listaDeRecibos);
                     this.setObjRecibos("Recibos baixados!");
                     // if(this.listaDeRecibos.reagendado == "S") {

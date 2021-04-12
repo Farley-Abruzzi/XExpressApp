@@ -43,16 +43,16 @@ export class Tab2Page implements OnInit {
           this.codMens = this.usuario.codmensageiro;
 
           if (this.codMens == 330) {
-            this.bairro = "AMORIM"
+            this.bairro = "AMORIM";
           } else if (this.codMens == 795) {
-            this.bairro = "CUSTODIO PEREIRA"
+            this.bairro = "CUSTODIO PEREIRA";
           } else if (this.codMens == 315) {
             this.bairro = "TUBALINA";
           }
           console.log('CodMens: ', this.codMens + ' Bairro: ' + this.bairro);
           this.contribService.getListaRecibos(this.codMens, this.bairro).subscribe( resp => {
 
-            this.listaDeRecibos = resp;
+            this.listaDeRecibos.push(...resp);
             console.log("Recibos:", this.listaDeRecibos);
             this.setObjRecibos("Recibos baixados!");
     

@@ -120,96 +120,71 @@ var ContribuicaoPage = /** @class */ (function () {
     // Método que carrega todos os contribuintes do mensageiro.
     ContribuicaoPage.prototype.carregarContribuintesApp = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var loading, localUser;
+            var loading;
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.presentLoading()];
                     case 1:
                         loading = _a.sent();
-                        localUser = this.storage.getLocalUser();
-                        if (localUser && localUser.email) {
-                            this.usuarioService.findByEmail(localUser.email)
-                                .subscribe(function (resp) {
-                                _this.usuario = resp;
-                                _this.codMens = _this.usuario.codmensageiro;
-                                // Para rodar no app
-                                _this.crudService.getAll()
-                                    .then(function (data) {
-                                    _this.listaDeRecibos = data;
-                                    console.log("Recibos:", _this.listaDeRecibos);
-                                    if (_this.listaDeRecibos.length[37] == "S") {
-                                        _this.cardColors = "secondary";
-                                    }
-                                    else {
-                                        _this.cardColors = "danger";
-                                    }
-                                    loading.dismiss();
-                                    if (_this.listaDeRecibos.length == 0) {
-                                        alert('Não há recibos baixados');
-                                    }
-                                }, function (error) {
-                                    loading.dismiss();
-                                });
-                            }, function (error) {
-                                if (error.status == 403) {
-                                    console.log(error.status);
-                                }
-                            });
-                        }
+                        // Para rodar no app
+                        this.crudService.getAll().then(function (data) {
+                            _this.listaDeRecibos = data;
+                            console.log("Recibos: ", _this.listaDeRecibos);
+                            if (_this.listaDeRecibos.length[37] == "S") {
+                                _this.cardColors = "secondary";
+                            }
+                            else {
+                                _this.cardColors = "danger";
+                            }
+                            loading.dismiss();
+                            // if (this.listaDeRecibos.length == 0) {
+                            //   alert('Não há recibos baixados');
+                            //   }
+                        }, function (error) {
+                            console.log('ERROR: ', error);
+                            loading.dismiss();
+                        });
                         return [2 /*return*/];
                 }
             });
         });
     };
-    ContribuicaoPage.prototype.listaContribuintesWeb = function () {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var loading, localUser;
-            var _this = this;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.presentLoading()];
-                    case 1:
-                        loading = _a.sent();
-                        localUser = this.storage.getLocalUser();
-                        if (localUser && localUser.email) {
-                            this.usuarioService.findByEmail(localUser.email)
-                                .subscribe(function (resp) {
-                                _this.usuario = resp;
-                                _this.codMens = _this.usuario.codmensageiro;
-                                if (_this.codMens == 330) {
-                                    _this.bairro = "AMORIM";
-                                }
-                                else if (_this.codMens = 876) {
-                                    _this.bairro = "MORUMBI";
-                                }
-                                // Para rodar na web
-                                _this.contribService.getListaRecibos(_this.codMens, _this.bairro)
-                                    .subscribe(function (resp) {
-                                    _this.listaDeRecibos = resp;
-                                    console.log("Recibos:", _this.listaDeRecibos);
-                                    loading.dismiss();
-                                    if (_this.listaDeRecibos == null) {
-                                        _this.carregarContribuintesApp();
-                                    }
-                                    if (_this.listaDeRecibos.length[4] == "S") {
-                                        _this.cardColors = "secondary";
-                                    }
-                                    else {
-                                        _this.cardColors = "danger";
-                                    }
-                                }, function (error) { });
-                            }, function (error) {
-                                if (error.status == 403) {
-                                    console.log(error.status);
-                                }
-                            });
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
+    // async listaContribuintesWeb() {
+    //   let loading = await this.presentLoading();
+    //   let localUser = this.storage.getLocalUser();
+    //   if (localUser && localUser.email) {
+    //     this.usuarioService.findByEmail(localUser.email)
+    //       .subscribe(resp => {
+    //         this.usuario = resp;
+    //         this.codMens = this.usuario.codmensageiro;
+    //         if (this.codMens == 330) {
+    //           this.bairro = "AMORIM"
+    //         } else if (this.codMens = 876) {
+    //           this.bairro = "MORUMBI"
+    //         }
+    //         // Para rodar na web
+    //         this.contribService.getListaRecibos(this.codMens, this.bairro)
+    //           .subscribe(resp => {
+    //             this.listaDeRecibos = resp;
+    //             console.log("Recibos:", this.listaDeRecibos);
+    //             loading.dismiss();
+    //             if (this.listaDeRecibos == null) {
+    //               this.carregarContribuintesApp();
+    //             }
+    //             if (this.listaDeRecibos.length[4] == "S") {
+    //               this.cardColors = "secondary";
+    //             } else {
+    //               this.cardColors = "danger";
+    //             }
+    //           }, error => { });
+    //       }, error => {
+    //         if (error.status == 403) {
+    //           console.log(error.status);
+    //         }
+    //       });
+    //   } 
+    // }
     ContribuicaoPage.prototype.presentLoading = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var loading;

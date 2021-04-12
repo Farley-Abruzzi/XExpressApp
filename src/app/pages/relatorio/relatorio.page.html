@@ -43,6 +43,9 @@
                             <ion-label><b>Recebidos (Hoje):</b> {{ objResumo.qtdRecebido }}</ion-label>
                         </ion-item>
                         <ion-item color="light">
+                            <ion-label><b>Valor Recebido (Hoje):</b> {{ objResumo.valorRecebido | currency: 'BRL':true }}</ion-label>
+                        </ion-item>
+                        <ion-item color="light">
                             <ion-label><b>Trabalhadas:</b> {{ objResumo.trabalhadas }}</ion-label>
                         </ion-item>
                         <ion-item color="light">

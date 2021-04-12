@@ -1,22 +1,30 @@
-<ion-card class="cardReciboPorCidade" mode="ios" *ngFor="let obj of resumos">
+<ion-card mode="ios" *ngFor="let obj of resumos">
     <!-- <ion-popover-controller></ion-popover-controller> -->
-    <ion-item class="itemObjResumo">
-        <ion-label><b>Cidade:</b> {{ obj.cidade }}</ion-label>
-    </ion-item>
-    <ion-item class="itemObjResumo">
-        <ion-label><b>Recebidas:</b> {{ obj.qtdRecebidos }}</ion-label>
-    </ion-item>
-    <ion-item class="itemObjResumo">
-        <ion-label><b>Recebidos:</b> {{ obj.valorRecebidos | currency: 'BRL':true}}</ion-label>
-    </ion-item>
-    <ion-item class="itemObjResumo">
-        <ion-label><b>Total:</b> {{ obj.qtdTotal }}</ion-label>
-    </ion-item>
-    <ion-item class="itemObjResumo">
-        <ion-label><b>Valor total:</b> {{ obj.valorTotal | currency: 'BRL':true}}</ion-label>
-    </ion-item>
-    <ion-item class="itemObjResumo">
-        <ion-label><b>Percentual:</b> {{ obj.percentualRecebido.toFixed(1) }}%</ion-label>
-    </ion-item>
+
+    <ion-row>
+        <ion-col>
+            <ion-list class="listReciboPorCidade">
+                <ion-item class="itemObjResumo">
+                    <ion-label><b>Cidade:</b> {{ obj.cidade }}</ion-label>
+                </ion-item>
+                <ion-item class="itemObjResumo">
+                    <ion-label><b>Recebidas:</b> {{ obj.qtdRecebidos }}</ion-label>
+                </ion-item>
+                <ion-item class="itemObjResumo">
+                    <ion-label><b>Recebidos:</b> {{ obj.valorRecebidos | currency: 'BRL':true}}</ion-label>
+                </ion-item>
+                <ion-item class="itemObjResumo">
+                    <ion-label><b>Total:</b> {{ obj.qtdTotal }}</ion-label>
+                </ion-item>
+                <ion-item class="itemObjResumo">
+                    <ion-label><b>Valor total:</b> {{ obj.valorTotal | currency: 'BRL':true}}</ion-label>
+                </ion-item>
+                <ion-item class="itemObjResumo">
+                    <ion-label><b>Percentual:</b> {{ obj.percentualRecebido.toFixed(1) }}%</ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-col>
+    </ion-row>
+
 
 </ion-card>

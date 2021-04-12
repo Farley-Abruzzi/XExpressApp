@@ -106,7 +106,6 @@ var ProfilePage = /** @class */ (function () {
             this.usuarioService.findByEmail(localUser.email)
                 .subscribe(function (resp) {
                 _this.usuario = resp;
-                console.log(_this.usuario);
             }, function (error) {
                 if (error.status == 403) {
                     _this.navCtrl.navigateRoot('login', { animated: true });

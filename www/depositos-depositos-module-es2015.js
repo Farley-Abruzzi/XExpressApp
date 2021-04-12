@@ -448,7 +448,7 @@ let Tab1Page = class Tab1Page {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             const toast = yield this.toastCtrl.create({
                 message,
-                duration: 4000,
+                duration: 6000,
                 mode: "ios",
                 color: "dark"
             });

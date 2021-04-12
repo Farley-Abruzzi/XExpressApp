@@ -5,6 +5,7 @@ import { SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { Devolvidos } from '../Class/devolvidos';
 import { DepositoDTO } from '../class/depositoDTO';
 import { DatePipe } from '@angular/common';
+import { async } from '@angular/core/testing';
 
 
 @Injectable({
@@ -68,7 +69,7 @@ export class CrudService {
 
  // Para selecionar todos os recibos com status de Gerado no banco do app
   async getAll() {
-    return await this.dbService.getDB().then((db: SQLiteObject) => {
+    return await this.dbService.getDB().then(async (db: SQLiteObject) => {
       let sql = "select * from recibos where statusrec = 'G' ORDER BY dtcobranca ASC";
       let data: any[];
       return db.executeSql(sql, data)

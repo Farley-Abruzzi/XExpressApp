@@ -281,6 +281,7 @@ var ReciboPage = /** @class */ (function () {
                                             _this.recibo.dtbaixa = _this.dtBaixa;
                                             _this.recibo.datadorecebimento = _this.datePipe.transform(_this.dtBaixa, 'dd/MM/yyyy');
                                             _this.recibo.dtreagendamento = null;
+                                            _this.recibo.reagendado = null;
                                             _this.getPutRecibosInApp('Doação realizada!', 'doacao');
                                             _this.getPutRecibosInWeb();
                                             _this.imprimir();
@@ -391,7 +392,8 @@ var ReciboPage = /** @class */ (function () {
     ReciboPage.prototype.statusRecibo = function () {
         this.recibo.statusrec = "D";
         this.recibo.dtbaixa = new Date();
-        this.recibo.dtreagendamento = new Date();
+        this.recibo.dtreagendamento = null;
+        this.recibo.reagendado = null;
         console.log('DTDEVOL: ', this.recibo.dtbaixa);
         this.getPutRecibosInApp("Devolvido com sucesso!", 'devolucao');
         this.getPutRecibosInWeb();

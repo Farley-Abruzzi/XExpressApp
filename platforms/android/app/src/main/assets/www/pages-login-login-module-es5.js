@@ -193,6 +193,7 @@ var ContribuintesService = /** @class */ (function () {
     }
     // Pega as informações de recibos dos contribuintes no WebServices. 
     ContribuintesService.prototype.getListaRecibos = function (cod, bairro) {
+        console.log('COD: ', cod + ' BAIRRO: ' + bairro);
         // http://192.168.0.243:8081/recibos/listarecibosapp?cod=315&startDate=2019-07-01&endDate=2019-07-31
         return this.http.get(URL + "/recibos/listarecibosapp?cod=" + cod + "&startDate=2021-03-01&endDate=2021-03-31&bairro=" + bairro);
     };

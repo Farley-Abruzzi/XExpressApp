@@ -38,7 +38,7 @@ export class RelatorioPage implements OnInit {
 
 
   ngOnInit() {
-    this.carregarResumo();
+    this.carregarPeriodo();
   }
 
   // Método para carregar a contabilização por período após a seleção da data início e fim.
@@ -116,16 +116,15 @@ export class RelatorioPage implements OnInit {
   }
 
   // Carrega e transforma a data inicio
-  carregarDtInicio(event){
+  carregarDtInicio(event) {
     this.dtInicio = this.datePipe.transform(new Date( event.detail.value ),"yyyy-MM-dd");
     console.log('Data Inicio ' + this.dtInicio);
   }
 
   // Carrega e tranforma a data fim
-  carregarDtFim(event){
+  carregarDtFim(event) {
     this.dtFim = this.datePipe.transform(new Date( event.detail.value ),"yyyy-MM-dd");
     console.log('Data Fim ' + this.dtFim);
-
     this.carregarPeriodo();
   }
 

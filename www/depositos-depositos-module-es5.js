@@ -494,7 +494,7 @@ var Tab1Page = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.toastCtrl.create({
                             message: message,
-                            duration: 4000,
+                            duration: 6000,
                             mode: "ios",
                             color: "dark"
                         })];
