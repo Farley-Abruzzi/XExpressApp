@@ -91,8 +91,8 @@ export class Tab2Page implements OnInit {
   }
 
   // Navega para página Mensagem.
-  mensagem() {
-    this.navCtrl.navigateForward( 'mensagem', {animated: true} );
+  cadastro() {
+    this.navCtrl.navigateForward( 'cadastro', {animated: true} );
   }
 
   // Navega para página bluetooth.

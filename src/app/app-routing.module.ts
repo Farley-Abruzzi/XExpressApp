@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'contribuicao', loadChildren: './pages/contribuicao/contribuicao.module#ContribuicaoPageModule' },
   { path: 'relatorio', loadChildren: './pages/relatorio/relatorio.module#RelatorioPageModule' },
   { path: 'beneficio', loadChildren: './pages/beneficio/beneficio.module#BeneficioPageModule' },
-  { path: 'mensagem', loadChildren: './pages/mensagem/mensagem.module#MensagemPageModule' },
+  { path: 'cadastro', loadChildren: './pages/cadastro/cadastro.module#CadastroPageModule' },
   { path: 'recibo/:id', loadChildren: './pages/recibo/recibo.module#ReciboPageModule' },
   { path: 'bluetooth', loadChildren: './pages/bluetooth/bluetooth.module#BluetoothPageModule' },
   {
