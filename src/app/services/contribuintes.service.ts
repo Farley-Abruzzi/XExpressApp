@@ -6,6 +6,7 @@ import { ResumoPorCidade } from '../interfaces/resumoPorCidade';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Recibos } from '../class/recibos';
 import { Devolvidos } from '../Class/devolvidos';
+import { ResumoDTO } from '../interfaces/resumoDTO';
 
 const URL = environment.url;
 
@@ -23,9 +24,8 @@ export class ContribuintesService {
   
   // Pega as informações de recibos dos contribuintes no WebServices. 
   getListaRecibos(cod: number, bairro: string) {
-    console.log('COD: ', cod + ' BAIRRO: ' + bairro);
     // http://192.168.0.243:8081/recibos/listarecibosapp?cod=315&startDate=2019-07-01&endDate=2019-07-31
-    return this.http.get<Recibos[]>(`${ URL }/recibos/listarecibosapp?cod=${ cod }&startDate=2021-03-01&endDate=2021-03-31&bairro=${ bairro }`);
+    return this.http.get<Recibos[]>(`${ URL }/recibos/listarecibosapp?cod=${ cod }&startDate=2021-04-01&endDate=2021-04-30&bairro=${ bairro }`);
   }
   // Detalhes do recibo.
   getRecibosDetalhe( nrorecibo: number ) {
@@ -38,6 +38,10 @@ export class ContribuintesService {
     this.dtFim = dtEnd;
     // http://192.168.0.243:8081/recibos/resumomensageiro?cod=11&startDate=2017-01-01&endDate=2018-01-01
     return this.http.get<Resumo>(`${ URL }/recibos/resumomensageiro?cod=${ cod }&startDate=${ dtStart }&endDate=${ dtEnd }`);
+  }
+
+  getResumoBaixados(cod: number, dtStart: string, dtEnd: string) {
+    return this.http.get<ResumoDTO>(`${ URL }/recibos/resumorecibosbaixadosapp?cod=${ cod }&startDate=${ dtStart }&endDate=${ dtEnd }`);
   }
   // Pega as informações de resumo do mensageiro por cidade.
   getResumoPorCidade(cod: number) {

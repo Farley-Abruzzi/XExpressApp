@@ -53,7 +53,7 @@ export class Tab2Page implements OnInit {
           this.contribService.getListaRecibos(this.codMens, this.bairro).subscribe( resp => {
 
             this.listaDeRecibos.push(...resp);
-            console.log("Recibos:", this.listaDeRecibos);
+            console.log("Recibos: ", this.listaDeRecibos);
             this.setObjRecibos("Recibos baixados!");
     
             // if(this.listaDeRecibos.reagendado == "S") {

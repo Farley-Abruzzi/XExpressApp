@@ -22,15 +22,28 @@ export class BluetoothPage implements OnInit {
   ngOnInit() {
   }
 
+  // async presentLoading() {
+  //   const loading = await this.loadingController.create({
+  //     cssClass: 'my-custom-class',
+  //     message: 'Por favor aguarde...',
+  //     spinner: "bubbles",
+  //     duration: 1500
+  //   });
+  //   await loading.present();
+
+  // }
+
   async presentLoading() {
     const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
+      cssClass: 'loadingClass',
       message: 'Por favor aguarde...',
-      spinner: "bubbles",
-      duration: 1500
+      animated: true,
+      spinner: 'circles',
+      translucent: true
     });
-    await loading.present();
-
+    loading.present();
+    return loading;
+    //const { role, data } = await loading.onDidDismiss();
   }
 
   checkBluetoothEnabled() {
@@ -41,13 +54,16 @@ export class BluetoothPage implements OnInit {
     });
   }
 
-  listPairedDevices() {
+  async listPairedDevices() {
+    let loading = await this.presentLoading();
     this.bluetoothSerial.list().then(success => {
       this.pairedList = success;
       this.listToggle = true;
+      loading.dismiss();
     }, error => {
       this.showError("Habilite o Bluetooth")
       this.listToggle = false;
+      loading.dismiss();
     });
   }
 
@@ -59,16 +75,19 @@ export class BluetoothPage implements OnInit {
     }
     let address = connectedDevice.address;
     let name = connectedDevice.name;
-
+    console.log('Adress: ', address);
     this.connect(address);
   }
 
-  connect(address) {
+  async connect(address) {
+    let loading = await this.presentLoading();
     // Attempt to connect device with specified address, call app.deviceConnected if success
     this.bluetoothSerial.connect(address).subscribe(success => {
       this.deviceConnected();
+      loading.dismiss();
       this.showToast("Dispositivo conectado!");
     }, error => {
+      loading.dismiss();
       this.showError("Erro: Conecte o dispositivo");
     });
   }

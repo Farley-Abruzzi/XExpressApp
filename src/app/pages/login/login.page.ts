@@ -16,7 +16,7 @@ export class LoginPage implements OnInit {
   };
   
  
-  constructor( private navCtrl: NavController, private auth: AuthService, private toastCtrl: ToastController) { }
+  constructor(private navCtrl: NavController, private auth: AuthService, private toastCtrl: ToastController) { }
   
 
   ngOnInit() {

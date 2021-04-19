@@ -44,7 +44,6 @@ export class ContribuicaoPage implements OnInit {
           this.crudService.getAll().then((data: Recibos[]) => {
                 this.listaDeRecibos = data;
                 console.log("Recibos: ", this.listaDeRecibos);
-                
                 if(this.listaDeRecibos.length[37] == "S") {
                     this.cardColors = "secondary";
                 } else {

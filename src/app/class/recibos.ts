@@ -31,7 +31,7 @@ export class Recibos {
   via: number;
   motivodevol?: string;
   dtremarc?: Date;
-  valorremarcado: number;
+  valorremarcado?: number;
   codoperador: number;
   codmensageiro: number;
   codcategoria: number;

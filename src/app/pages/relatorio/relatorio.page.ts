@@ -8,6 +8,7 @@ import { PopinfoComponent } from '../../components/popresumo/popinfo.component';
 import { UsuarioService } from '../../services/usuario.service';
 import { UsuarioDTO } from '../../interfaces/usuario.dto';
 import { Resumo } from '../../interfaces/resumo';
+import { ResumoDTO } from '../../interfaces/resumoDTO';
 
 
 
@@ -19,6 +20,7 @@ import { Resumo } from '../../interfaces/resumo';
 export class RelatorioPage implements OnInit {
 
   @Input() objResumo: Resumo;
+  @Input() resumoDTO: ResumoDTO;
 
   dtStart: Date = new Date();
   dtEnd: Date = new Date(this.dtStart.getFullYear(), this.dtStart.getMonth() + 1, 0);
@@ -45,6 +47,7 @@ export class RelatorioPage implements OnInit {
   // Carrega também os recibos por cidade através do mesmo seletor de data.
   async carregarPeriodo() {
     await this.carregarResumo();
+    await this.carregarResumoBaixados();
   }
 
   // Carrega o objeto de resumo do mensageiro.
@@ -77,6 +80,27 @@ export class RelatorioPage implements OnInit {
     } 
   }
 
+  async carregarResumoBaixados() {
+    let localUser = this.storage.getLocalUser();
+    if (localUser && localUser.email) {
+      this.usuarioService.findByEmail(localUser.email)
+        .subscribe(resp => {
+          this.usuario = resp;
+          this.codMens = this.usuario.codmensageiro;
+
+          this.contribService.getResumoBaixados(this.codMens, this.dtInicio, this.dtFim)
+            .subscribe(resp => {
+              this.resumoDTO = resp;
+              console.log('BAIXADOS: ', this.resumoDTO);
+            })
+          }, error => {
+            if (error.status == 403) {
+              console.log(error.status);
+            }
+        });
+      }
+  }
+
 
   // Mostrando mensagens de confirmação no Toast
   async presentToast( message: string ) {
@@ -98,13 +122,20 @@ export class RelatorioPage implements OnInit {
       'Mensageiro:\n' +
        this.objResumo.mensageiro + '\n\n' +
       'Contabilizando o Periodo:\n' + 'DE ' + this.dtInicio + ' A ' + this.dtFim + '\n\n' +
-      'HOSPITAL DO CANCER EM UBERLANDIA\n\n\n' +
+      'HOSPITAL DO CANCER EM UBERLANDIA\n\n\n\n\n' +
+      'Codigo validacao: ' + '123' + '\n\n\n' +
       'RESUMO\n' +
-      'Trabalhadas: ' + this.objResumo.totalQtd + '\n\n' +
-      'A Receber: R$' + this.objResumo.valorEmAberto.toFixed(2) + '\n\n' +
-      'Recebidas: ' + this.objResumo.qtdRecebido + '\n\n' +
-      'Devolvidas: '+ this.objResumo.qtdDevolvido + '\n\n' +
-      'Canceladas: '+ this.objResumo.qtdCancelado + '\n\n\n\n'
+      'Trabalhadas: ' + this.objResumo.totalQtd + '\n\n\n' +
+      // 'A Receber: R$' + this.objResumo.valorEmAberto.toFixed(2) + '\n\n' +
+      'Recebidas: ' + this.objResumo.qtdRecebido + '\n' +
+      'Valor: R$' + this.objResumo.valorRecebido.toFixed(2) + '\n\n\n' +
+      'Devolvidas: ' + this.objResumo.qtdDevolvido + '\n' +
+      'Valor: R$' + this.objResumo.valorDevolvido.toFixed(2) + '\n\n\n' +
+      'Canceladas: ' + this.objResumo.qtdCancelado + '\n\n\n\n' +
+      'Recebidas (Dinheiro)' + '\n\n' +
+      'Codigo: ' + this.resumoDTO[0].nrorecibo + ' Valor: R$' + this.resumoDTO[0].valorgerado + '\n' +
+      'Codigo: ' + this.resumoDTO[1].nrorecibo + ' Valor: R$' + this.resumoDTO[1].valorgerado + '\n' +
+      'Codigo: ' + this.resumoDTO[2].nrorecibo + ' Valor: R$' + this.resumoDTO[2].valorgerado + '\n\n\n\n'
       );
       console.log('Imprimindo');
     }
