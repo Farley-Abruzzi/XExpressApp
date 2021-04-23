@@ -9,6 +9,7 @@ import { UsuarioService } from '../../services/usuario.service';
 import { UsuarioDTO } from '../../interfaces/usuario.dto';
 import { Resumo } from '../../interfaces/resumo';
 import { ResumoDTO } from '../../interfaces/resumoDTO';
+import { write } from 'fs';
 
 
 
@@ -20,7 +21,7 @@ import { ResumoDTO } from '../../interfaces/resumoDTO';
 export class RelatorioPage implements OnInit {
 
   @Input() objResumo: Resumo;
-  @Input() resumoDTO: ResumoDTO;
+  @Input() resumoDTO: ResumoDTO[];
 
   dtStart: Date = new Date();
   dtEnd: Date = new Date(this.dtStart.getFullYear(), this.dtStart.getMonth() + 1, 0);
@@ -28,6 +29,7 @@ export class RelatorioPage implements OnInit {
   dtFim: string = " ";
   usuario: UsuarioDTO;
   codMens: number;
+  nrecibos: any[] = [];
 
   constructor( private bluetoothSerial: BluetoothSerial,
                private contribService: ContribuintesService,
@@ -91,6 +93,7 @@ export class RelatorioPage implements OnInit {
           this.contribService.getResumoBaixados(this.codMens, this.dtInicio, this.dtFim)
             .subscribe(resp => {
               this.resumoDTO = resp;
+              
               console.log('BAIXADOS: ', this.resumoDTO);
             })
           }, error => {
@@ -113,6 +116,15 @@ export class RelatorioPage implements OnInit {
     toast.present();
   }
 
+  teste() {
+    if (this.resumoDTO !== null) {
+      for (var val of this.resumoDTO) {
+        console.log('TESTE: ', val['nrorecibo'] + ' ' + val['valorgerado']);
+        return val['nrorecibo'] + '   ' + val['valorgerado'] + '\n';
+      }
+    }
+  }
+
   // Imprime as informações relacionadas na impressora.
   Imprimir() {
     this.conversorDate();
@@ -120,7 +132,7 @@ export class RelatorioPage implements OnInit {
     this.bluetoothSerial.write(
       '\n\n\n' + '      *** RELATORIO ***' + '\n\n' +
       'Mensageiro:\n' +
-       this.objResumo.mensageiro + '\n\n' +
+      this.objResumo.mensageiro + '\n\n' +
       'Contabilizando o Periodo:\n' + 'DE ' + this.dtInicio + ' A ' + this.dtFim + '\n\n' +
       'HOSPITAL DO CANCER EM UBERLANDIA\n\n\n\n\n' +
       'Codigo validacao: ' + '123' + '\n\n\n' +
@@ -133,9 +145,11 @@ export class RelatorioPage implements OnInit {
       'Valor: R$' + this.objResumo.valorDevolvido.toFixed(2) + '\n\n\n' +
       'Canceladas: ' + this.objResumo.qtdCancelado + '\n\n\n\n' +
       'Recebidas (Dinheiro)' + '\n\n' +
-      'Codigo: ' + this.resumoDTO[0].nrorecibo + ' Valor: R$' + this.resumoDTO[0].valorgerado + '\n' +
-      'Codigo: ' + this.resumoDTO[1].nrorecibo + ' Valor: R$' + this.resumoDTO[1].valorgerado + '\n' +
-      'Codigo: ' + this.resumoDTO[2].nrorecibo + ' Valor: R$' + this.resumoDTO[2].valorgerado + '\n\n\n\n'
+      'Codigo  ' + '  Valor(R$)' + '\n' +
+      // this.resumoDTO[0].nrorecibo + '    ' + this.resumoDTO[0].valorgerado.toFixed(2) + '\n' +
+      // this.resumoDTO[1].nrorecibo + '    ' + this.resumoDTO[1].valorgerado.toFixed(2) + '\n' +
+      // this.resumoDTO[2].nrorecibo + '    ' + this.resumoDTO[2].valorgerado.toFixed(2) + '\n\n\n' +
+      this.teste()
       );
       console.log('Imprimindo');
     }

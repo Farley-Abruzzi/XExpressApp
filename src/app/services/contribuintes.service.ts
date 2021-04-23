@@ -41,7 +41,7 @@ export class ContribuintesService {
   }
 
   getResumoBaixados(cod: number, dtStart: string, dtEnd: string) {
-    return this.http.get<ResumoDTO>(`${ URL }/recibos/resumorecibosbaixadosapp?cod=${ cod }&startDate=${ dtStart }&endDate=${ dtEnd }`);
+    return this.http.get<ResumoDTO[]>(`${ URL }/recibos/resumorecibosbaixadosapp?cod=${ cod }&startDate=${ dtStart }&endDate=${ dtEnd }`);
   }
   // Pega as informações de resumo do mensageiro por cidade.
   getResumoPorCidade(cod: number) {
