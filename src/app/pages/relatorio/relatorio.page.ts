@@ -9,8 +9,6 @@ import { UsuarioService } from '../../services/usuario.service';
 import { UsuarioDTO } from '../../interfaces/usuario.dto';
 import { Resumo } from '../../interfaces/resumo';
 import { ResumoDTO } from '../../interfaces/resumoDTO';
-import { write } from 'fs';
-
 
 
 @Component({
@@ -116,18 +114,11 @@ export class RelatorioPage implements OnInit {
     toast.present();
   }
 
-  teste() {
-    if (this.resumoDTO !== null) {
-      for (var val of this.resumoDTO) {
-        console.log('TESTE: ', val['nrorecibo'] + ' ' + val['valorgerado']);
-        return val['nrorecibo'] + '   ' + val['valorgerado'] + '\n';
-      }
-    }
-  }
 
   // Imprime as informações relacionadas na impressora.
   Imprimir() {
     this.conversorDate();
+    console.log('Imprimindo');
     
     this.bluetoothSerial.write(
       '\n\n\n' + '      *** RELATORIO ***' + '\n\n' +
@@ -135,7 +126,7 @@ export class RelatorioPage implements OnInit {
       this.objResumo.mensageiro + '\n\n' +
       'Contabilizando o Periodo:\n' + 'DE ' + this.dtInicio + ' A ' + this.dtFim + '\n\n' +
       'HOSPITAL DO CANCER EM UBERLANDIA\n\n\n\n\n' +
-      'Codigo validacao: ' + '123' + '\n\n\n' +
+      'Codigo validacao: ' + '753' + '\n\n\n' +
       'RESUMO\n' +
       'Trabalhadas: ' + this.objResumo.totalQtd + '\n\n\n' +
       // 'A Receber: R$' + this.objResumo.valorEmAberto.toFixed(2) + '\n\n' +
@@ -145,14 +136,16 @@ export class RelatorioPage implements OnInit {
       'Valor: R$' + this.objResumo.valorDevolvido.toFixed(2) + '\n\n\n' +
       'Canceladas: ' + this.objResumo.qtdCancelado + '\n\n\n\n' +
       'Recebidas (Dinheiro)' + '\n\n' +
-      'Codigo  ' + '  Valor(R$)' + '\n' +
-      // this.resumoDTO[0].nrorecibo + '    ' + this.resumoDTO[0].valorgerado.toFixed(2) + '\n' +
-      // this.resumoDTO[1].nrorecibo + '    ' + this.resumoDTO[1].valorgerado.toFixed(2) + '\n' +
-      // this.resumoDTO[2].nrorecibo + '    ' + this.resumoDTO[2].valorgerado.toFixed(2) + '\n\n\n' +
-      this.teste()
-      );
-      console.log('Imprimindo');
+      'Codigo  ' + '  Valor(R$)' + '\n'
+    );
+
+      for (let i = 0; i < this.resumoDTO.length; i++) {
+        console.log('TESTE: ', this.resumoDTO[i].nrorecibo + ' ' + this.resumoDTO[i].valorgerado);
+        this.bluetoothSerial.write(this.resumoDTO[i].nrorecibo + '   ' + this.resumoDTO[i].valorgerado.toFixed(2) + '\n');
     }
+      this.bluetoothSerial.write('\n\n\n\n');
+      
+  }
 
   // converte datas
   conversorDate(): void {

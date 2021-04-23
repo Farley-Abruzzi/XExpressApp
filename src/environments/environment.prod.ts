@@ -7,5 +7,5 @@ export const environment = {
   // url:'http://192.168.0.10:8380'
 
   // In Dev
-  url: 'http://192.168.100.158:8380'
+  url: 'http://192.168.43.129:8380'
 };
