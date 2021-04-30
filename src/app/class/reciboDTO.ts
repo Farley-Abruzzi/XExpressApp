@@ -23,31 +23,11 @@ observacoes: string;
 codmensageiro: number;
 codcontrib: number;
   
-  constructor(
-    nrorecibo: number,
-    nomenorecibo: string,
-    entregaweb: string,
-    dtcobranca: Date,
-    reagendado: string,
-    dtreagendamento: Date,
-    valorgerado: number,
-    statusrec: string,
-    dtbaixa: Date,
-    parcela: string,
-    via: number,
-    motivodevol: string,
-    enderecosecundario: string,
-    numerosecundario: string,
-    bairrosecundario: string,
-    cidadesecundario: string,
-    complementosecundario: string,
-    cepsecundario: string,
-    telefonesecundario: string,
-    desccategoria: string,
-    observacoes: string,
-    codmensageiro: number,
-    codcontrib: number
-  ) {
+  constructor(nrorecibo: number, nomenorecibo: string, entregaweb: string, dtcobranca: Date, reagendado: string, dtreagendamento: Date,
+    valorgerado: number, statusrec: string, dtbaixa: Date, parcela: string, via: number, motivodevol: string, enderecosecundario: string,
+    numerosecundario: string, bairrosecundario: string, cidadesecundario: string, complementosecundario: string, cepsecundario: string,
+    telefonesecundario: string, desccategoria: string, observacoes: string, codmensageiro: number, codcontrib: number) {
+    
     this.nrorecibo = nrorecibo;
     this.nomenorecibo = nomenorecibo;
     this.entregaweb = entregaweb; 

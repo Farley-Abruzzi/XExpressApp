@@ -22,17 +22,6 @@ export class BluetoothPage implements OnInit {
   ngOnInit() {
   }
 
-  // async presentLoading() {
-  //   const loading = await this.loadingController.create({
-  //     cssClass: 'my-custom-class',
-  //     message: 'Por favor aguarde...',
-  //     spinner: "bubbles",
-  //     duration: 1500
-  //   });
-  //   await loading.present();
-
-  // }
-
   async presentLoading() {
     const loading = await this.loadingController.create({
       cssClass: 'loadingClass',

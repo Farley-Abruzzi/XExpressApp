@@ -138,9 +138,9 @@ var ContribuicaoPage = /** @class */ (function () {
                                 _this.cardColors = "danger";
                             }
                             loading.dismiss();
-                            // if (this.listaDeRecibos.length == 0) {
-                            //   alert('Não há recibos baixados');
-                            //   }
+                            if (_this.listaDeRecibos.length == 0) {
+                                alert('Não há recibos baixados');
+                            }
                         }, function (error) {
                             console.log('ERROR: ', error);
                             loading.dismiss();

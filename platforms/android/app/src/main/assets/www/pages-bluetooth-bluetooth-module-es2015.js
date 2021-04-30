@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button defaultHref=\"/\"></ion-back-button>\r\n        </ion-buttons>\r\n        <ion-title>Bluetooth</ion-title>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n    <ion-button full color=\"success\" (click)=\"listPairedDevices()\" (click)=\"presentLoading()\">\r\n        <ion-icon name=\"refresh\"></ion-icon>&nbsp;Atualizar Dispositivos Bluetooth</ion-button>\r\n    <ion-row>\r\n        <ion-col>\r\n            <ion-list ngDefaultControl radio-group [(ngModel)]=\"pairedDeviceID\" *ngIf=\"listToggle\">\r\n                <ion-item *ngFor=\"let i of pairedList;let j=index\">\r\n                    <ion-label>{{i.name}}</ion-label>\r\n                    <ion-radio value=\"{{j}}\"></ion-radio>\r\n                </ion-item>\r\n            </ion-list>\r\n        </ion-col>\r\n    </ion-row>\r\n    <ion-button full color=\"success\" *ngIf=\"listToggle\" (click)=\"selectDevice()\">\r\n        <ion-icon name=\"bluetooth\"></ion-icon>&nbsp;Conectar dispositivo Bluetooth</ion-button>\r\n    <ion-list>\r\n        <ion-item placeholder=\"Digite os dados que deseja enviar\">\r\n            <ion-textarea placeholder=\"Digite os dados que deseja enviar\"></ion-textarea>\r\n            <ion-input type=\"text\" name=\"datasend\" [(ngModel)]=\"dataSend\"></ion-input>\r\n        </ion-item>\r\n    </ion-list>\r\n    <ion-button color=\"success\" fill=\"outline\" (click)=\"sendData()\">\r\n        <ion-icon name=\"send\"></ion-icon>&nbsp;Enviar dados via Bluetooth\r\n    </ion-button>\r\n</ion-content>"
+module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button defaultHref=\"/\"></ion-back-button>\r\n        </ion-buttons>\r\n        <ion-title>Bluetooth</ion-title>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n    <ion-button full color=\"success\" (click)=\"listPairedDevices()\">\r\n        <ion-icon name=\"refresh\"></ion-icon>&nbsp;Atualizar Dispositivos Bluetooth</ion-button>\r\n    <ion-row>\r\n        <ion-col>\r\n            <ion-list ngDefaultControl radio-group [(ngModel)]=\"pairedDeviceID\" *ngIf=\"listToggle\">\r\n                <ion-item *ngFor=\"let i of pairedList;let j=index\">\r\n                    <ion-label>{{i.name}}</ion-label>\r\n                    <ion-radio value=\"{{j}}\"></ion-radio>\r\n                </ion-item>\r\n            </ion-list>\r\n        </ion-col>\r\n    </ion-row>\r\n    <ion-button full color=\"success\" *ngIf=\"listToggle\" (click)=\"selectDevice()\">\r\n        <ion-icon name=\"bluetooth\"></ion-icon>&nbsp;Conectar dispositivo Bluetooth</ion-button>\r\n    <ion-list>\r\n        <ion-item placeholder=\"Digite os dados que deseja enviar\">\r\n            <ion-textarea placeholder=\"Digite os dados que deseja enviar\"></ion-textarea>\r\n            <ion-input type=\"text\" name=\"datasend\" [(ngModel)]=\"dataSend\"></ion-input>\r\n        </ion-item>\r\n    </ion-list>\r\n    <ion-button color=\"success\" fill=\"outline\" (click)=\"sendData()\">\r\n        <ion-icon name=\"send\"></ion-icon>&nbsp;Enviar dados via Bluetooth\r\n    </ion-button>\r\n</ion-content>"
 
 /***/ }),
 
@@ -105,12 +105,15 @@ let BluetoothPage = class BluetoothPage {
     presentLoading() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             const loading = yield this.loadingController.create({
-                cssClass: 'my-custom-class',
+                cssClass: 'loadingClass',
                 message: 'Por favor aguarde...',
-                spinner: "bubbles",
-                duration: 1500
+                animated: true,
+                spinner: 'circles',
+                translucent: true
             });
-            yield loading.present();
+            loading.present();
+            return loading;
+            //const { role, data } = await loading.onDidDismiss();
         });
     }
     checkBluetoothEnabled() {
@@ -121,12 +124,17 @@ let BluetoothPage = class BluetoothPage {
         });
     }
     listPairedDevices() {
-        this.bluetoothSerial.list().then(success => {
-            this.pairedList = success;
-            this.listToggle = true;
-        }, error => {
-            this.showError("Habilite o Bluetooth");
-            this.listToggle = false;
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let loading = yield this.presentLoading();
+            this.bluetoothSerial.list().then(success => {
+                this.pairedList = success;
+                this.listToggle = true;
+                loading.dismiss();
+            }, error => {
+                this.showError("Habilite o Bluetooth");
+                this.listToggle = false;
+                loading.dismiss();
+            });
         });
     }
     selectDevice() {
@@ -137,15 +145,21 @@ let BluetoothPage = class BluetoothPage {
         }
         let address = connectedDevice.address;
         let name = connectedDevice.name;
+        console.log('Adress: ', address);
         this.connect(address);
     }
     connect(address) {
-        // Attempt to connect device with specified address, call app.deviceConnected if success
-        this.bluetoothSerial.connect(address).subscribe(success => {
-            this.deviceConnected();
-            this.showToast("Dispositivo conectado!");
-        }, error => {
-            this.showError("Erro: Conecte o dispositivo");
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let loading = yield this.presentLoading();
+            // Attempt to connect device with specified address, call app.deviceConnected if success
+            this.bluetoothSerial.connect(address).subscribe(success => {
+                this.deviceConnected();
+                loading.dismiss();
+                this.showToast("Dispositivo conectado!");
+            }, error => {
+                loading.dismiss();
+                this.showError("Erro: Conecte o dispositivo");
+            });
         });
     }
     deviceConnected() {

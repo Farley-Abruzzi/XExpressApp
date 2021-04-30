@@ -20,19 +20,26 @@ img {
 
 .gridPosition {
     position: fixed;
-    bottom: 35%;
+    bottom: 40%;
     right: 10%;
     left: 10%;
 }
 
 ion-item {
-    color: #10dc60;
+    --color: #10dc60;
     --background: none;
     --highlight-height: 1px;
 }
 
-.Developer {
+.developer {
     position: fixed;
     top: 94%;
     font-size: 11px;
+}
+
+.positionLogo {
+    position: fixed;
+    top: 89%;
+    right: 35%;
+    left: 35%;
 }

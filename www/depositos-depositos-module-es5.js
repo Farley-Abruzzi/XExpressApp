@@ -149,7 +149,7 @@ var Camera = /** @class */ (function (_super) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-title>\r\n            Depositos\r\n        </ion-title>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content color=\"light\">\r\n    <ion-progress-bar color=\"success\"></ion-progress-bar>\r\n    <ion-slides mode=\"ios\" #mySlider>\r\n        <ion-slide>\r\n            <ion-card color=\"dark\">\r\n                <ion-card-header>\r\n                    <ion-card-title>Comunicado de Depósito</ion-card-title>\r\n                </ion-card-header>\r\n                <ion-card-content>\r\n                    <p>Olá (Nome), antes de iniciar observe o seguinte:</p>\r\n                    <p>* Você precisa ter impresso o resumo do dia.</p>\r\n                    <p>* Ter os comprovantes dos depósitos em mãos.</p>\r\n                    <p>* Se tiver despesa, precisa da nota de despesa.</p>\r\n                    <br>\r\n                    <p>1º Passo: Informe a data do recebimento e o valor do deposito</p>\r\n                    <ion-row text-center>\r\n                        <ion-col>\r\n                            <ion-button shape=\"round\" color=\"success\" class=\"calendarDeposito\" fill=\"outline\">\r\n                                <ion-icon slot=\"start\" name=\"calendar\"></ion-icon>\r\n                                <ion-datetime cancelText=\"Cancelar\" done-text=\"Ok\" (ionChange)=\"selectDtDeposito( $event )\" [ngModel]=\"dtDeposito.toISOString()\" display-format=\"DD/MM/YYYY\"></ion-datetime>\r\n                            </ion-button>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-card-content>\r\n            </ion-card>\r\n        </ion-slide>\r\n\r\n        <ion-slide>\r\n            <ion-card color=\"dark\">\r\n                <ion-card-content>\r\n                    <p>2º Passo: Clique na entidade, e observe se os valores estão estão de acordo com o resumo que você imprimiu.</p>\r\n                    <br>\r\n                    <ion-label>Entidade:</ion-label>\r\n                    <ion-select placeholder=\"Qual entidade?\" (ionChange)=\"selectByEntity( $event )\" [(ngModel)]=\"deposito.entidade\">\r\n                        <ion-select-option value=\"Hospital do Cancer de Uberlandia\">Hospital do Cancêr de Uberlândia</ion-select-option>\r\n                    </ion-select>\r\n                </ion-card-content>\r\n            </ion-card>\r\n        </ion-slide>\r\n\r\n        <ion-slide>\r\n            <ion-card color=\"dark\">\r\n                <ion-card-content>\r\n                    <p>3º Passo: Informe o código de validação que foi impresso no final do resumo.</p>\r\n                    <br>\r\n                    <ion-item>\r\n                        <ion-input type=\"number\" placeholder=\"Código\" (ionChange)=\"selectByCodValidacao( $event )\" [(ngModel)]=\"deposito.codvalidacao\"></ion-input>\r\n                    </ion-item>\r\n                    <br>\r\n                    <br>\r\n                    <p>Caso tenha alguma despesa autorizada, favor informar nos campos abaixo.</p>\r\n                    <br>\r\n                    <ion-item>\r\n                        <ion-input type=\"number\" placeholder=\"Valor despesa\" (ionChange)=\"selectByValorDespesa( $event )\" [(ngModel)]=\"deposito.valordespesa\"></ion-input>\r\n                    </ion-item>\r\n                    <br>\r\n                    <ion-item>\r\n                        <ion-input type=\"text\" placeholder=\"Descrição despesa\" (ionChange)=\"selectByDetailDespesa( $event )\" [(ngModel)]=\"deposito.descricaodespesa\"></ion-input>\r\n                    </ion-item>\r\n                </ion-card-content>\r\n            </ion-card>\r\n        </ion-slide>\r\n\r\n        <ion-slide>\r\n            <ion-card class=\"cardImage\" color=\"dark\">\r\n                <ion-card-header>\r\n                    Enviar imagem do comprovante\r\n                </ion-card-header>\r\n                <ion-item color=\"dark\">\r\n                    <ion-button color=\"success\" expand=\"block\" ion-button block (click)=\"getCameraPicture()\" [disabled]=\"cameraOn\">Camera</ion-button>\r\n                    <!-- <button ion-button block (click)=\"getGalleryPicture()\" [disabled]=\"cameraOn\">Galeria</button> -->\r\n                </ion-item>\r\n                <ion-item color=\"dark\" *ngIf=\"picture\">\r\n                    <ion-img [src]=\"picture\"></ion-img>\r\n                </ion-item>\r\n                <ion-item color=\"dark\">\r\n                    <ion-button *ngIf=\"picture\" fill=\"outline\" color=\"danger\" (click)=\"cancel()\">Descartar imagem</ion-button>\r\n                </ion-item>\r\n                <ion-item color=\"dark\">\r\n                    <ion-button *ngIf=\"picture\" color=\"success\" (click)=\"salvar()\" (click)=\"presentLoading()\">Comunicar Deposito</ion-button>\r\n                </ion-item>\r\n            </ion-card>\r\n        </ion-slide>\r\n\r\n    </ion-slides>\r\n    <br>\r\n    <br>\r\n\r\n    <ion-row text-center>\r\n        <ion-col>\r\n            <ion-button [style.visibility]=\"isVisible ? 'visible' : 'hidden'\" class=\"buttonNext\" shape=\"round\" color=\"success\" (click)=\"slideNext()\">\r\n                Continuar\r\n            </ion-button>\r\n        </ion-col>\r\n    </ion-row>\r\n\r\n\r\n</ion-content>"
+module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-title>\r\n            Depositos\r\n        </ion-title>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content color=\"light\">\r\n    <ion-progress-bar color=\"success\"></ion-progress-bar>\r\n    <ion-slides mode=\"ios\" #mySlider>\r\n        <ion-slide>\r\n            <ion-card color=\"dark\">\r\n                <ion-card-header>\r\n                    <ion-card-title>Comunicado de Depósito</ion-card-title>\r\n                </ion-card-header>\r\n                <ion-card-content>\r\n                    <p>Olá {{ usuario?.login }}, antes de iniciar observe o seguinte:</p>\r\n                    <p>* Você precisa ter impresso o resumo do dia.</p>\r\n                    <p>* Ter os comprovantes dos depósitos em mãos.</p>\r\n                    <p>* Se tiver despesa, precisa da nota de despesa.</p>\r\n                    <br>\r\n                    <p>1º Passo: Informe a data do recebimento e o valor do deposito</p>\r\n                    <ion-row text-center>\r\n                        <ion-col>\r\n                            <ion-button shape=\"round\" color=\"success\" class=\"calendarDeposito\" fill=\"outline\">\r\n                                <ion-icon slot=\"start\" name=\"calendar\"></ion-icon>\r\n                                <ion-datetime cancelText=\"Cancelar\" done-text=\"Ok\" (ionChange)=\"selectDtDeposito( $event )\" [ngModel]=\"dtDeposito.toISOString()\" display-format=\"DD/MM/YYYY\"></ion-datetime>\r\n                            </ion-button>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-card-content>\r\n            </ion-card>\r\n        </ion-slide>\r\n\r\n        <ion-slide>\r\n            <ion-card color=\"dark\">\r\n                <ion-card-content>\r\n                    <p>2º Passo: Clique na entidade, e observe se os valores estão estão de acordo com o resumo que você imprimiu.</p>\r\n                    <br>\r\n                    <ion-label>Entidade:</ion-label>\r\n                    <ion-select placeholder=\"Qual entidade?\" (ionChange)=\"selectByEntity( $event )\" [(ngModel)]=\"deposito.entidade\">\r\n                        <ion-select-option value=\"Hospital do Cancer de Uberlandia\">Hospital do Cancêr de Uberlândia</ion-select-option>\r\n                    </ion-select>\r\n                </ion-card-content>\r\n            </ion-card>\r\n        </ion-slide>\r\n\r\n        <ion-slide>\r\n            <ion-card color=\"dark\">\r\n                <ion-card-content>\r\n                    <p>3º Passo: Informe o código de validação que foi impresso no final do resumo.</p>\r\n                    <br>\r\n                    <ion-item>\r\n                        <ion-input type=\"number\" placeholder=\"Código\" (ionChange)=\"selectByCodValidacao( $event )\" [(ngModel)]=\"deposito.codvalidacao\"></ion-input>\r\n                    </ion-item>\r\n                    <br>\r\n                    <br>\r\n                    <p>Caso tenha alguma despesa autorizada, favor informar nos campos abaixo.</p>\r\n                    <br>\r\n                    <ion-item>\r\n                        <ion-input type=\"number\" placeholder=\"Valor despesa\" (ionChange)=\"selectByValorDespesa( $event )\" [(ngModel)]=\"deposito.valordespesa\"></ion-input>\r\n                    </ion-item>\r\n                    <br>\r\n                    <ion-item>\r\n                        <ion-input type=\"text\" placeholder=\"Descrição despesa\" (ionChange)=\"selectByDetailDespesa( $event )\" [(ngModel)]=\"deposito.descricaodespesa\"></ion-input>\r\n                    </ion-item>\r\n                </ion-card-content>\r\n            </ion-card>\r\n        </ion-slide>\r\n\r\n        <ion-slide>\r\n            <ion-card class=\"cardImage\" color=\"dark\">\r\n                <ion-card-header>\r\n                    Enviar imagem do comprovante\r\n                </ion-card-header>\r\n                <ion-item color=\"dark\">\r\n                    <ion-button color=\"success\" expand=\"block\" ion-button block (click)=\"getCameraPicture()\" [disabled]=\"cameraOn\">Camera</ion-button>\r\n                    <!-- <button ion-button block (click)=\"getGalleryPicture()\" [disabled]=\"cameraOn\">Galeria</button> -->\r\n                </ion-item>\r\n                <ion-item color=\"dark\" *ngIf=\"picture\">\r\n                    <ion-img [src]=\"picture\"></ion-img>\r\n                </ion-item>\r\n                <ion-item color=\"dark\">\r\n                    <ion-button *ngIf=\"picture\" fill=\"outline\" color=\"danger\" (click)=\"cancel()\">Descartar imagem</ion-button>\r\n                </ion-item>\r\n                <ion-item color=\"dark\">\r\n                    <ion-button *ngIf=\"picture\" color=\"success\" (click)=\"salvar()\" (click)=\"presentLoading()\">Comunicar Deposito</ion-button>\r\n                </ion-item>\r\n            </ion-card>\r\n        </ion-slide>\r\n\r\n    </ion-slides>\r\n    <br>\r\n    <br>\r\n\r\n    <ion-row text-center>\r\n        <ion-col>\r\n            <ion-button [style.visibility]=\"isVisible ? 'visible' : 'hidden'\" class=\"buttonNext\" shape=\"round\" color=\"success\" (click)=\"slideNext()\">\r\n                Continuar\r\n            </ion-button>\r\n        </ion-col>\r\n    </ion-row>\r\n\r\n\r\n</ion-content>"
 
 /***/ }),
 
@@ -289,6 +289,7 @@ var Tab1Page = /** @class */ (function () {
     Tab1Page.prototype.ngOnInit = function () {
         var _this = this;
         //this.cameraOn = false;
+        this.mySlide.lockSwipes(true);
         this.isVisible = false;
         var localUser = this.storage.getLocalUser();
         if (localUser && localUser.email) {
@@ -296,7 +297,6 @@ var Tab1Page = /** @class */ (function () {
                 .subscribe(function (resp) {
                 _this.usuario = resp;
                 _this.codMens = resp.codmensageiro;
-                // this.urlimage = resp.imageUrl;
                 _this.email = resp.email;
                 _this.codUsuario = resp.codusuario;
             }, function (error) { });
@@ -379,6 +379,7 @@ var Tab1Page = /** @class */ (function () {
             this.deposito.totalarrecadado = this.deposito.valordeposito;
             console.log('VALOR DEPOSITO: ', this.deposito.valordeposito);
         }
+        this.sendPicture();
     };
     Tab1Page.prototype.getApiDbPostDepositos = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
@@ -388,7 +389,6 @@ var Tab1Page = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.presentLoading()];
                     case 1:
                         _a.sent();
-                        this.sendPicture();
                         console.log("OBJ DEPOSITO: ", this.deposito);
                         this.usuarioService.getApiDbPostDepositos(this.deposito)
                             .subscribe(function (resp) {
@@ -397,11 +397,13 @@ var Tab1Page = /** @class */ (function () {
                                 _this.mySlide.slideTo(0);
                                 _this.presentToast('Deposito e Imagem inseridos com sucesso!');
                             }, 2000);
+                            _this.mySlide.lockSwipes(true);
                         }, function (error) {
                             alert('Erro ' + error.status + ': Valor do deposito incorreto');
                             //this.presentToast('VALOR DO DEPOSITO INCORRETO');
                             _this.mySlide.lockSwipes(false);
                             _this.mySlide.slideTo(0);
+                            _this.mySlide.lockSwipes(true);
                         });
                         return [2 /*return*/];
                 }
@@ -446,8 +448,9 @@ var Tab1Page = /** @class */ (function () {
         var _this = this;
         this.usuarioService.uploadPicture(this.picture)
             .subscribe(function (resp) {
-            _this.picture = null;
             _this.deposito.imageurl = resp.headers.get("Location");
+            _this.getApiDbPostDepositos();
+            _this.picture = null;
         }, function (error) {
             alert('Falha no envio da imagen');
         });
@@ -462,7 +465,6 @@ var Tab1Page = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.getForDep()];
                     case 1:
                         _a.sent();
-                        this.getApiDbPostDepositos();
                         return [2 /*return*/];
                 }
             });

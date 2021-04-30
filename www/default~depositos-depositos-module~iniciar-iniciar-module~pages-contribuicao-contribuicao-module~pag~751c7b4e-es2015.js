@@ -166,9 +166,8 @@ let ContribuintesService = class ContribuintesService {
     }
     // Pega as informações de recibos dos contribuintes no WebServices. 
     getListaRecibos(cod, bairro) {
-        console.log('COD: ', cod + ' BAIRRO: ' + bairro);
         // http://192.168.0.243:8081/recibos/listarecibosapp?cod=315&startDate=2019-07-01&endDate=2019-07-31
-        return this.http.get(`${URL}/recibos/listarecibosapp?cod=${cod}&startDate=2021-03-01&endDate=2021-03-31&bairro=${bairro}`);
+        return this.http.get(`${URL}/recibos/listarecibosapp?cod=${cod}&startDate=2021-04-01&endDate=2021-04-30&bairro=${bairro}`);
     }
     // Detalhes do recibo.
     getRecibosDetalhe(nrorecibo) {
@@ -181,6 +180,9 @@ let ContribuintesService = class ContribuintesService {
         this.dtFim = dtEnd;
         // http://192.168.0.243:8081/recibos/resumomensageiro?cod=11&startDate=2017-01-01&endDate=2018-01-01
         return this.http.get(`${URL}/recibos/resumomensageiro?cod=${cod}&startDate=${dtStart}&endDate=${dtEnd}`);
+    }
+    getResumoBaixados(cod, dtStart, dtEnd) {
+        return this.http.get(`${URL}/recibos/resumorecibosbaixadosapp?cod=${cod}&startDate=${dtStart}&endDate=${dtEnd}`);
     }
     // Pega as informações de resumo do mensageiro por cidade.
     getResumoPorCidade(cod) {
@@ -301,7 +303,7 @@ let CrudService = class CrudService {
     // Para selecionar todos os recibos com status de Gerado no banco do app
     getAll() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            return yield this.dbService.getDB().then((db) => {
+            return yield this.dbService.getDB().then((db) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
                 let sql = "select * from recibos where statusrec = 'G' ORDER BY dtcobranca ASC";
                 let data;
                 return db.executeSql(sql, data)
@@ -323,7 +325,7 @@ let CrudService = class CrudService {
                 }).catch(e => {
                     console.error(e);
                 });
-            }).catch(e => {
+            })).catch(e => {
                 console.error(e);
             });
         });

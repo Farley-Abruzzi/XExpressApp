@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-button class=\"buttonPrint\" slot=\"end\" fill=\"clear\" (click)=\"Imprimir()\">\r\n            <ion-icon name=\"print\"></ion-icon>\r\n        </ion-button>\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button defaultHref=\"/\"></ion-back-button>\r\n        </ion-buttons>\r\n        <ion-title>Relatórios</ion-title>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content color=\"light\">\r\n    <ion-grid>\r\n        <ion-row>\r\n            <ion-col>\r\n\r\n                <ion-list *ngIf=\"objResumo\">\r\n                    <ion-toolbar class=\"SizeToolbar\" text-center color=\"success\">\r\n                        <ion-label class=\"LabelPeriodo\">Período</ion-label>\r\n                        <ion-button color=\"dark\" class=\"calendarStart\" slot=\"start\" fill=\"clear\">De\r\n                            <ion-icon name=\"calendar\"></ion-icon>\r\n                            <ion-datetime class=\"dateTime-1\" cancelText=\"Cancelar\" done-text=\"Ok\" (ionChange)=\"carregarDtInicio( $event )\" [ngModel]=\"dtStart.toISOString()\" display-format=\"DD/MM/YYYY\"></ion-datetime>\r\n                        </ion-button>\r\n\r\n                        <ion-button color=\"dark\" class=\"calendarEnd\" slot=\"start\" fill=\"clear\">Até\r\n                            <ion-icon name=\"calendar\"></ion-icon>\r\n                            <ion-datetime class=\"dateTime-2\" cancelText=\"Cancelar\" done-text=\"Ok\" (ionChange)=\"carregarDtFim( $event )\" [ngModel]=\"dtEnd.toISOString()\" display-format=\"DD/MM/YYYY\"></ion-datetime>\r\n                        </ion-button>\r\n                    </ion-toolbar>\r\n\r\n                    <ion-button class=\"ButtonPorCidade\" expand=\"block\" fill=\"outline\" (click)=\"mostrarPop( $event )\" color=\"success\">\r\n                        <b>Ver Por Cidade</b>\r\n                    </ion-button>\r\n\r\n\r\n\r\n\r\n\r\n                    <ion-card color=\"light\">\r\n                        <!-- Lista de contabilização por período. -->\r\n                        <ion-item color=\"medium\">\r\n                            <ion-label><b>Recebidos (Hoje):</b> {{ objResumo.qtdRecebido }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label><b>Trabalhadas:</b> {{ objResumo.trabalhadas }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label><b>A Receber:</b> {{ objResumo.valorEmAberto | currency: 'BRL':true }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"medium\"><b>Em Aberto:</b> {{ objResumo.qtdEmAberto }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"success\"><b>Recebidas:</b> {{ objResumo.qtdRecebido }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"danger\"><b>Devolvidas:</b> {{ objResumo.qtdDevolvido }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"danger\"><b>Canceladas:</b> {{ objResumo.qtdCancelado }}</ion-label>\r\n                        </ion-item>\r\n                        <br>\r\n                    </ion-card>\r\n                </ion-list>\r\n\r\n            </ion-col>\r\n        </ion-row>\r\n    </ion-grid>\r\n\r\n</ion-content>"
+module.exports = "<ion-header>\r\n    <ion-toolbar color=\"dark\">\r\n        <ion-button class=\"buttonPrint\" slot=\"end\" fill=\"clear\" (click)=\"Imprimir()\">\r\n            <ion-icon name=\"print\"></ion-icon>\r\n        </ion-button>\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button defaultHref=\"/\"></ion-back-button>\r\n        </ion-buttons>\r\n        <ion-title>Relatórios</ion-title>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content color=\"light\">\r\n    <ion-grid>\r\n        <ion-row>\r\n            <ion-col>\r\n\r\n                <ion-list *ngIf=\"objResumo\">\r\n                    <ion-toolbar class=\"SizeToolbar\" text-center color=\"success\">\r\n                        <ion-label class=\"LabelPeriodo\">Período</ion-label>\r\n                        <ion-button color=\"dark\" class=\"calendarStart\" slot=\"start\" fill=\"clear\">De\r\n                            <ion-icon name=\"calendar\"></ion-icon>\r\n                            <ion-datetime class=\"dateTime-1\" cancelText=\"Cancelar\" done-text=\"Ok\" (ionChange)=\"carregarDtInicio( $event )\" [ngModel]=\"dtStart.toISOString()\" display-format=\"DD/MM/YYYY\"></ion-datetime>\r\n                        </ion-button>\r\n\r\n                        <ion-button color=\"dark\" class=\"calendarEnd\" slot=\"start\" fill=\"clear\">Até\r\n                            <ion-icon name=\"calendar\"></ion-icon>\r\n                            <ion-datetime class=\"dateTime-2\" cancelText=\"Cancelar\" done-text=\"Ok\" (ionChange)=\"carregarDtFim( $event )\" [ngModel]=\"dtEnd.toISOString()\" display-format=\"DD/MM/YYYY\"></ion-datetime>\r\n                        </ion-button>\r\n                    </ion-toolbar>\r\n\r\n                    <ion-button class=\"ButtonPorCidade\" expand=\"block\" fill=\"outline\" (click)=\"mostrarPop( $event )\" color=\"success\">\r\n                        <b>Ver Por Cidade</b>\r\n                    </ion-button>\r\n\r\n                    <ion-card color=\"light\">\r\n                        <!-- Lista de contabilização por período. -->\r\n                        <ion-item color=\"medium\">\r\n                            <ion-label><b>Recebidos (Hoje):</b> {{ objResumo.qtdRecebido }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label><b>Valor Recebido (Hoje):</b> {{ objResumo.valorRecebido | currency: 'BRL':true }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label><b>Trabalhadas:</b> {{ objResumo.trabalhadas }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label><b>A Receber:</b> {{ objResumo.valorEmAberto | currency: 'BRL':true }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"medium\"><b>Em Aberto:</b> {{ objResumo.qtdEmAberto }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"success\"><b>Recebidas:</b> {{ objResumo.qtdRecebido }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"danger\"><b>Devolvidas:</b> {{ objResumo.qtdDevolvido }}</ion-label>\r\n                        </ion-item>\r\n                        <ion-item color=\"light\">\r\n                            <ion-label color=\"danger\"><b>Canceladas:</b> {{ objResumo.qtdCancelado }}</ion-label>\r\n                        </ion-item>\r\n                        <br>\r\n                    </ion-card>\r\n                </ion-list>\r\n\r\n            </ion-col>\r\n        </ion-row>\r\n    </ion-grid>\r\n\r\n</ion-content>"
 
 /***/ }),
 
@@ -123,6 +123,7 @@ var RelatorioPage = /** @class */ (function () {
         this.dtEnd = new Date(this.dtStart.getFullYear(), this.dtStart.getMonth() + 1, 0);
         this.dtInicio = " ";
         this.dtFim = " ";
+        this.nrecibos = [];
     }
     RelatorioPage.prototype.ngOnInit = function () {
         this.carregarPeriodo();
@@ -135,6 +136,9 @@ var RelatorioPage = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.carregarResumo()];
                     case 1:
+                        _a.sent();
+                        return [4 /*yield*/, this.carregarResumoBaixados()];
+                    case 2:
                         _a.sent();
                         return [2 /*return*/];
                 }
@@ -178,6 +182,32 @@ var RelatorioPage = /** @class */ (function () {
             });
         });
     };
+    RelatorioPage.prototype.carregarResumoBaixados = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var localUser;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                localUser = this.storage.getLocalUser();
+                if (localUser && localUser.email) {
+                    this.usuarioService.findByEmail(localUser.email)
+                        .subscribe(function (resp) {
+                        _this.usuario = resp;
+                        _this.codMens = _this.usuario.codmensageiro;
+                        _this.contribService.getResumoBaixados(_this.codMens, _this.dtInicio, _this.dtFim)
+                            .subscribe(function (resp) {
+                            _this.resumoDTO = resp;
+                            console.log('BAIXADOS: ', _this.resumoDTO);
+                        });
+                    }, function (error) {
+                        if (error.status == 403) {
+                            console.log(error.status);
+                        }
+                    });
+                }
+                return [2 /*return*/];
+            });
+        });
+    };
     // Mostrando mensagens de confirmação no Toast
     RelatorioPage.prototype.presentToast = function (message) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
@@ -201,18 +231,28 @@ var RelatorioPage = /** @class */ (function () {
     // Imprime as informações relacionadas na impressora.
     RelatorioPage.prototype.Imprimir = function () {
         this.conversorDate();
+        console.log('Imprimindo');
         this.bluetoothSerial.write('\n\n\n' + '      *** RELATORIO ***' + '\n\n' +
             'Mensageiro:\n' +
             this.objResumo.mensageiro + '\n\n' +
             'Contabilizando o Periodo:\n' + 'DE ' + this.dtInicio + ' A ' + this.dtFim + '\n\n' +
-            'HOSPITAL DO CANCER EM UBERLANDIA\n\n\n' +
+            'HOSPITAL DO CANCER EM UBERLANDIA\n\n\n\n\n' +
+            'Codigo validacao: ' + '753' + '\n\n\n' +
             'RESUMO\n' +
-            'Trabalhadas: ' + this.objResumo.totalQtd + '\n\n' +
-            'A Receber: R$' + this.objResumo.valorEmAberto.toFixed(2) + '\n\n' +
-            'Recebidas: ' + this.objResumo.qtdRecebido + '\n\n' +
-            'Devolvidas: ' + this.objResumo.qtdDevolvido + '\n\n' +
-            'Canceladas: ' + this.objResumo.qtdCancelado + '\n\n\n\n');
-        console.log('Imprimindo');
+            'Trabalhadas: ' + this.objResumo.totalQtd + '\n\n\n' +
+            // 'A Receber: R$' + this.objResumo.valorEmAberto.toFixed(2) + '\n\n' +
+            'Recebidas: ' + this.objResumo.qtdRecebido + '\n' +
+            'Valor: R$' + this.objResumo.valorRecebido.toFixed(2) + '\n\n\n' +
+            'Devolvidas: ' + this.objResumo.qtdDevolvido + '\n' +
+            'Valor: R$' + this.objResumo.valorDevolvido.toFixed(2) + '\n\n\n' +
+            'Canceladas: ' + this.objResumo.qtdCancelado + '\n\n\n\n' +
+            'Recebidas (Dinheiro)' + '\n\n' +
+            'Codigo  ' + '  Valor(R$)' + '\n');
+        for (var i = 0; i < this.resumoDTO.length; i++) {
+            console.log('TESTE: ', this.resumoDTO[i].nrorecibo + ' ' + this.resumoDTO[i].valorgerado);
+            this.bluetoothSerial.write(this.resumoDTO[i].nrorecibo + '   ' + this.resumoDTO[i].valorgerado + ',00' + '\n');
+        }
+        this.bluetoothSerial.write('\n\n\n\n');
     };
     // converte datas
     RelatorioPage.prototype.conversorDate = function () {
@@ -287,6 +327,10 @@ var RelatorioPage = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
     ], RelatorioPage.prototype, "objResumo", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Array)
+    ], RelatorioPage.prototype, "resumoDTO", void 0);
     RelatorioPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-relatorio',
@@ -338,9 +382,8 @@ var ContribuintesService = /** @class */ (function () {
     }
     // Pega as informações de recibos dos contribuintes no WebServices. 
     ContribuintesService.prototype.getListaRecibos = function (cod, bairro) {
-        console.log('COD: ', cod + ' BAIRRO: ' + bairro);
         // http://192.168.0.243:8081/recibos/listarecibosapp?cod=315&startDate=2019-07-01&endDate=2019-07-31
-        return this.http.get(URL + "/recibos/listarecibosapp?cod=" + cod + "&startDate=2021-03-01&endDate=2021-03-31&bairro=" + bairro);
+        return this.http.get(URL + "/recibos/listarecibosapp?cod=" + cod + "&startDate=2021-04-01&endDate=2021-04-30&bairro=" + bairro);
     };
     // Detalhes do recibo.
     ContribuintesService.prototype.getRecibosDetalhe = function (nrorecibo) {
@@ -353,6 +396,9 @@ var ContribuintesService = /** @class */ (function () {
         this.dtFim = dtEnd;
         // http://192.168.0.243:8081/recibos/resumomensageiro?cod=11&startDate=2017-01-01&endDate=2018-01-01
         return this.http.get(URL + "/recibos/resumomensageiro?cod=" + cod + "&startDate=" + dtStart + "&endDate=" + dtEnd);
+    };
+    ContribuintesService.prototype.getResumoBaixados = function (cod, dtStart, dtEnd) {
+        return this.http.get(URL + "/recibos/resumorecibosbaixadosapp?cod=" + cod + "&startDate=" + dtStart + "&endDate=" + dtEnd);
     };
     // Pega as informações de resumo do mensageiro por cidade.
     ContribuintesService.prototype.getResumoPorCidade = function (cod) {

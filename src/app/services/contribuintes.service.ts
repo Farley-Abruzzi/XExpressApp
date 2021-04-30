@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Recibos } from '../class/recibos';
 import { Devolvidos } from '../Class/devolvidos';
 import { ResumoDTO } from '../interfaces/resumoDTO';
+import { Contribuintes } from '../class/contribuintes';
 
 const URL = environment.url;
 
@@ -65,6 +66,21 @@ export class ContribuintesService {
         'Content-Type': 'application/json'
       })
     });
+  }
+
+  //Inserir novo contribuinte
+  postContribuinte(contribuinte: Contribuintes) { // api base
+    return this.http.post<Contribuintes>(`${ URL }/contribuintes`, contribuinte, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  //busca por ID
+  getUltContribuinte() { // api base
+    //console.log(id);
+    return this.http.get<Contribuintes>(`${ URL }/contribuintes/ultcontrib`);
   }
 
 

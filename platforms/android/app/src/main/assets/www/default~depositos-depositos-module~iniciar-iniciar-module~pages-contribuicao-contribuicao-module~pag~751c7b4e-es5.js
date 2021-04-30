@@ -171,9 +171,8 @@ var ContribuintesService = /** @class */ (function () {
     }
     // Pega as informações de recibos dos contribuintes no WebServices. 
     ContribuintesService.prototype.getListaRecibos = function (cod, bairro) {
-        console.log('COD: ', cod + ' BAIRRO: ' + bairro);
         // http://192.168.0.243:8081/recibos/listarecibosapp?cod=315&startDate=2019-07-01&endDate=2019-07-31
-        return this.http.get(URL + "/recibos/listarecibosapp?cod=" + cod + "&startDate=2021-03-01&endDate=2021-03-31&bairro=" + bairro);
+        return this.http.get(URL + "/recibos/listarecibosapp?cod=" + cod + "&startDate=2021-04-01&endDate=2021-04-30&bairro=" + bairro);
     };
     // Detalhes do recibo.
     ContribuintesService.prototype.getRecibosDetalhe = function (nrorecibo) {
@@ -186,6 +185,9 @@ var ContribuintesService = /** @class */ (function () {
         this.dtFim = dtEnd;
         // http://192.168.0.243:8081/recibos/resumomensageiro?cod=11&startDate=2017-01-01&endDate=2018-01-01
         return this.http.get(URL + "/recibos/resumomensageiro?cod=" + cod + "&startDate=" + dtStart + "&endDate=" + dtEnd);
+    };
+    ContribuintesService.prototype.getResumoBaixados = function (cod, dtStart, dtEnd) {
+        return this.http.get(URL + "/recibos/resumorecibosbaixadosapp?cod=" + cod + "&startDate=" + dtStart + "&endDate=" + dtEnd);
     };
     // Pega as informações de resumo do mensageiro por cidade.
     ContribuintesService.prototype.getResumoPorCidade = function (cod) {
@@ -332,31 +334,34 @@ var CrudService = /** @class */ (function () {
     // Para selecionar todos os recibos com status de Gerado no banco do app
     CrudService.prototype.getAll = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.dbService.getDB().then(function (db) {
-                            var sql = "select * from recibos where statusrec = 'G' ORDER BY dtcobranca ASC";
-                            var data;
-                            return db.executeSql(sql, data)
-                                .then(function (data) {
-                                if (data.rows.length > 0) {
-                                    var recibos = new Array();
-                                    for (var i = 0; i < data.rows.length; i++) {
-                                        var tmp = data.rows.item(i);
-                                        var recibo = new _class_recibos__WEBPACK_IMPORTED_MODULE_3__["Recibos"](tmp.nrorecibo, tmp.impresso, tmp.dtoperacao, tmp.entrega, tmp.formulario, tmp.nomenorecibo, tmp.entregaweb, tmp.dtcobranca, tmp.dtrecebimento, tmp.valorgerado, tmp.valordinheiro, tmp.valorcheque, tmp.doacaoespecial, tmp.parceladoacaoespecial, tmp.aumentodefinitivo, tmp.dtoperacaobaixa, tmp.periodicidade, tmp.valoralterado, tmp.valornaoalterado, tmp.dtvaloralteradobaixa, tmp.valorbakp, tmp.valorhorabkp, tmp.valordatabkp, tmp.dataqld, tmp.naorecebido, tmp.nrosorte, tmp.statusrec, tmp.dtbaixa, tmp.parcela, tmp.via, tmp.motivodevol, tmp.valorremarcado, tmp.dtremarc, tmp.codoperador, tmp.codmensageiro, tmp.codcategoria, tmp.dtreagendamento, tmp.reagendado, tmp.codcontrib, tmp.codusuario, tmp.enderecosecundario, tmp.numerosecundario, tmp.bairrosecundario, tmp.cidadesecundario, tmp.complementosecundario, tmp.cepsecundario, tmp.telefonesecundario, tmp.desccategoria, tmp.observacoes, tmp.datadorecebimento);
-                                        recibos.push(recibo);
-                                        console.log('Consulta realizada!');
-                                    }
-                                    return recibos;
-                                }
-                                else {
-                                    console.log('return new array<Recibos>');
-                                    return new Array();
-                                }
-                            }).catch(function (e) {
-                                console.error(e);
+                    case 0: return [4 /*yield*/, this.dbService.getDB().then(function (db) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                            var sql, data;
+                            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                sql = "select * from recibos where statusrec = 'G' ORDER BY dtcobranca ASC";
+                                return [2 /*return*/, db.executeSql(sql, data)
+                                        .then(function (data) {
+                                        if (data.rows.length > 0) {
+                                            var recibos = new Array();
+                                            for (var i = 0; i < data.rows.length; i++) {
+                                                var tmp = data.rows.item(i);
+                                                var recibo = new _class_recibos__WEBPACK_IMPORTED_MODULE_3__["Recibos"](tmp.nrorecibo, tmp.impresso, tmp.dtoperacao, tmp.entrega, tmp.formulario, tmp.nomenorecibo, tmp.entregaweb, tmp.dtcobranca, tmp.dtrecebimento, tmp.valorgerado, tmp.valordinheiro, tmp.valorcheque, tmp.doacaoespecial, tmp.parceladoacaoespecial, tmp.aumentodefinitivo, tmp.dtoperacaobaixa, tmp.periodicidade, tmp.valoralterado, tmp.valornaoalterado, tmp.dtvaloralteradobaixa, tmp.valorbakp, tmp.valorhorabkp, tmp.valordatabkp, tmp.dataqld, tmp.naorecebido, tmp.nrosorte, tmp.statusrec, tmp.dtbaixa, tmp.parcela, tmp.via, tmp.motivodevol, tmp.valorremarcado, tmp.dtremarc, tmp.codoperador, tmp.codmensageiro, tmp.codcategoria, tmp.dtreagendamento, tmp.reagendado, tmp.codcontrib, tmp.codusuario, tmp.enderecosecundario, tmp.numerosecundario, tmp.bairrosecundario, tmp.cidadesecundario, tmp.complementosecundario, tmp.cepsecundario, tmp.telefonesecundario, tmp.desccategoria, tmp.observacoes, tmp.datadorecebimento);
+                                                recibos.push(recibo);
+                                                console.log('Consulta realizada!');
+                                            }
+                                            return recibos;
+                                        }
+                                        else {
+                                            console.log('return new array<Recibos>');
+                                            return new Array();
+                                        }
+                                    }).catch(function (e) {
+                                        console.error(e);
+                                    })];
                             });
-                        }).catch(function (e) {
+                        }); }).catch(function (e) {
                             console.error(e);
                         })];
                     case 1: return [2 /*return*/, _a.sent()];

@@ -16,6 +16,10 @@ var map = {
 		"./src/app/pages/bluetooth/bluetooth.module.ts",
 		"pages-bluetooth-bluetooth-module"
 	],
+	"./pages/cadastro/cadastro.module": [
+		"./src/app/pages/cadastro/cadastro.module.ts",
+		"pages-cadastro-cadastro-module"
+	],
 	"./pages/contribuicao/contribuicao.module": [
 		"./src/app/pages/contribuicao/contribuicao.module.ts",
 		"default~depositos-depositos-module~iniciar-iniciar-module~pages-contribuicao-contribuicao-module~pag~751c7b4e",
@@ -26,10 +30,6 @@ var map = {
 		"./src/app/pages/login/login.module.ts",
 		"common",
 		"pages-login-login-module"
-	],
-	"./pages/mensagem/mensagem.module": [
-		"./src/app/pages/mensagem/mensagem.module.ts",
-		"pages-mensagem-mensagem-module"
 	],
 	"./pages/profile/profile.module": [
 		"./src/app/pages/profile/profile.module.ts",
@@ -518,7 +518,7 @@ const routes = [
     { path: 'contribuicao', loadChildren: './pages/contribuicao/contribuicao.module#ContribuicaoPageModule' },
     { path: 'relatorio', loadChildren: './pages/relatorio/relatorio.module#RelatorioPageModule' },
     { path: 'beneficio', loadChildren: './pages/beneficio/beneficio.module#BeneficioPageModule' },
-    { path: 'mensagem', loadChildren: './pages/mensagem/mensagem.module#MensagemPageModule' },
+    { path: 'cadastro', loadChildren: './pages/cadastro/cadastro.module#CadastroPageModule' },
     { path: 'recibo/:id', loadChildren: './pages/recibo/recibo.module#ReciboPageModule' },
     { path: 'bluetooth', loadChildren: './pages/bluetooth/bluetooth.module#BluetoothPageModule' },
     {
@@ -1100,10 +1100,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
 const environment = {
     production: true,
-    // In Prod
+    // In Prod (external)
     url: 'http://187.32.122.17:8380'
+    // In Prod (internal)
+    // url:'http://192.168.0.10:8380'
     // In Dev
-    // url: 'http://192.168.100.158:8380'
+    // url: 'http://192.168.43.129:8380'
 };
 
 
@@ -1124,9 +1126,11 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    url: 'http://187.32.122.17:8380'
+    // url: 'http://187.32.122.17:8380'
     // In Job
-    // url: 'http://192.168.100.158:8380'
+    // url: 'http://192.168.0.243:8380'
+    // In House
+    url: 'http://192.168.100.158:8380'
 };
 /*
  * For easier debugging in development mode, you can import the following file

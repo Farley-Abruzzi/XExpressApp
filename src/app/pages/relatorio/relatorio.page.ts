@@ -139,10 +139,10 @@ export class RelatorioPage implements OnInit {
       'Codigo  ' + '  Valor(R$)' + '\n'
     );
 
-      for (let i = 0; i < this.resumoDTO.length; i++) {
+    for (let i = 0; i < this.resumoDTO.length; i++) {
         console.log('TESTE: ', this.resumoDTO[i].nrorecibo + ' ' + this.resumoDTO[i].valorgerado);
-        this.bluetoothSerial.write(this.resumoDTO[i].nrorecibo + '   ' + this.resumoDTO[i].valorgerado.toFixed(2) + '\n');
-    }
+        this.bluetoothSerial.write(this.resumoDTO[i].nrorecibo + '   ' + this.resumoDTO[i].valorgerado + ',00' + '\n');
+      }
       this.bluetoothSerial.write('\n\n\n\n');
       
   }

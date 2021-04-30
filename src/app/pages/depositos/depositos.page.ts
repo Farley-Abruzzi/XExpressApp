@@ -42,6 +42,7 @@ export class Tab1Page implements OnInit {
   dataFech: Date;
   email: string;
   codUsuario: number;
+  urlImage: string;
   
 
   constructor(private usuarioService: UsuarioService, private datePipe: DatePipe, private camera: Camera,
@@ -51,6 +52,7 @@ export class Tab1Page implements OnInit {
 
   ngOnInit() {
     //this.cameraOn = false;
+    this.mySlide.lockSwipes(true);
     this.isVisible = false;
     let localUser = this.storage.getLocalUser();
     if (localUser && localUser.email) {
@@ -58,7 +60,6 @@ export class Tab1Page implements OnInit {
         .subscribe(resp => {
           this.usuario = resp;
           this.codMens = resp.codmensageiro;
-          // this.urlimage = resp.imageUrl;
           this.email = resp.email;
           this.codUsuario = resp.codusuario;
         }, error => {}  
@@ -125,35 +126,35 @@ export class Tab1Page implements OnInit {
   }
 
   setObjDeposito(qtdRec: number, valorTotal: number) {
-          this.deposito = new Depositos();
+    this.deposito = new Depositos();
+    
+      let newDate = this.dtFech;
+      this.dataFech = new Date(newDate);
+      console.log('DTFECHAMENTO: ', this.dataFech);
+      
+      this.deposito.dtfechamento = this.dataFech;
+      this.deposito.codvalidacao = this.codValid;
+      this.deposito.valordeposito = valorTotal;
+      this.deposito.entidade = this.entity;
+      this.deposito.codusuario = this.codUsuario;
+      this.deposito.codmensageiro = this.codMens;
+      this.deposito.totalarrecadado = valorTotal;
+      this.deposito.qtdrecibos = qtdRec;
+      this.deposito.valordespesa = this.valorDesp;
+      this.deposito.descricaodespesa = this.detailDesp;
+      //this.deposito.imageurl = this.urlImage;
+      this.deposito.email = this.email;
 
-          let newDate = this.dtFech;
-          this.dataFech = new Date(newDate);
-          console.log('DTFECHAMENTO: ', this.dataFech);
-          
-          this.deposito.dtfechamento = this.dataFech;
-          this.deposito.codvalidacao = this.codValid;
-          this.deposito.valordeposito = valorTotal;
-          this.deposito.entidade = this.entity;
-          this.deposito.codusuario = this.codUsuario;
-          this.deposito.codmensageiro = this.codMens;
-          this.deposito.totalarrecadado = valorTotal;
-          this.deposito.qtdrecibos = qtdRec;
-          this.deposito.valordespesa = this.valorDesp;
-          this.deposito.descricaodespesa = this.detailDesp;
-          //this.deposito.imageurl = this.urlImage;
-          this.deposito.email = this.email;
-
-          if (this.deposito.valordespesa != null) {
-            this.deposito.valordeposito = this.deposito.valordeposito - this.deposito.valordespesa;
-            this.deposito.totalarrecadado = this.deposito.valordeposito;
-            console.log('VALOR DEPOSITO: ', this.deposito.valordeposito);
+      if (this.deposito.valordespesa != null) {
+        this.deposito.valordeposito = this.deposito.valordeposito - this.deposito.valordespesa;
+        this.deposito.totalarrecadado = this.deposito.valordeposito;
+        console.log('VALOR DEPOSITO: ', this.deposito.valordeposito);
     }
+    this.sendPicture();
   }
 
   async getApiDbPostDepositos() {
     await this.presentLoading();
-    this.sendPicture();
     console.log("OBJ DEPOSITO: ", this.deposito);
     this.usuarioService.getApiDbPostDepositos(this.deposito)
       .subscribe(resp => {
@@ -161,12 +162,14 @@ export class Tab1Page implements OnInit {
           this.mySlide.lockSwipes(false);
           this.mySlide.slideTo(0);
           this.presentToast('Deposito e Imagem inseridos com sucesso!');
-        }, 2000); 
+        }, 2000);
+        this.mySlide.lockSwipes(true);
       }, error => {
         alert('Erro ' + error.status + ': Valor do deposito incorreto');
         //this.presentToast('VALOR DO DEPOSITO INCORRETO');
         this.mySlide.lockSwipes(false);
         this.mySlide.slideTo(0);
+        this.mySlide.lockSwipes(true);
     });
   }
   
@@ -212,8 +215,9 @@ export class Tab1Page implements OnInit {
   sendPicture() {
     this.usuarioService.uploadPicture(this.picture)
       .subscribe(resp => {
-        this.picture = null;
         this.deposito.imageurl = resp.headers.get("Location");
+        this.getApiDbPostDepositos();
+        this.picture = null;
       }, error => {
         alert('Falha no envio da imagen');
       }
@@ -226,7 +230,6 @@ export class Tab1Page implements OnInit {
 
   async salvar(){
     await this.getForDep();
-    this.getApiDbPostDepositos();
   }
 
   async presentLoading() {

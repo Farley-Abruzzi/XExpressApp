@@ -4,4 +4,5 @@ export interface UsuarioDTO {
   email: string;
   imageUrl?: string;
   codusuario: number;
+  codfunc: number;
 }

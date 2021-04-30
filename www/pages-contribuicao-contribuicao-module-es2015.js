@@ -129,9 +129,9 @@ let ContribuicaoPage = class ContribuicaoPage {
                     this.cardColors = "danger";
                 }
                 loading.dismiss();
-                // if (this.listaDeRecibos.length == 0) {
-                //   alert('Não há recibos baixados');
-                //   }
+                if (this.listaDeRecibos.length == 0) {
+                    alert('Não há recibos baixados');
+                }
             }, error => {
                 console.log('ERROR: ', error);
                 loading.dismiss();

@@ -13,78 +13,80 @@
         <ion-label color="dark">Dados obrigatórios</ion-label>
     </ion-toolbar>
 
-    <ion-row>
-        <ion-col>
-            <ion-item>
-                <ion-input name="nome" placeholder="Nome" type="text" required="true"></ion-input>
-            </ion-item>
-        </ion-col>
-    </ion-row>
+    <form [formGroup]="fContribuinte">
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-input name="nome" placeholder="Nome" type="text" formControlName="nome" required="true"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
 
-    <ion-row>
-        <ion-col>
-            <ion-item>
-                <ion-input name="telefone" placeholder="Telefone" type="tel" required="true"></ion-input>
-            </ion-item>
-        </ion-col>
-    </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-input name="telefone" placeholder="Telefone" type="tel" formControlName="telefone" required="true"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
 
-    <ion-row>
-        <ion-col>
-            <ion-item>
-                <ion-input name="valor" placeholder="Valor da doação" type="number" required="true"></ion-input>
-            </ion-item>
-        </ion-col>
-    </ion-row>
-
-
-    <ion-toolbar class="sizeToolbar" text-center color="medium">
-        <ion-label color="dark">Dados não obrigatórios</ion-label>
-    </ion-toolbar>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-input name="valor" placeholder="Valor da doação" type="number" formControlName="valor" required="true"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
 
 
-    <ion-row>
-        <ion-col>
-            <ion-item>
-                <ion-input name="endereco" placeholder="Endereço" type="text"></ion-input>
-            </ion-item>
-        </ion-col>
-        <ion-col size="3">
-            <ion-item>
-                <ion-input name="numero" placeholder="Nº" type="number"></ion-input>
-            </ion-item>
-        </ion-col>
-    </ion-row>
+        <ion-toolbar class="sizeToolbar" text-center color="medium">
+            <ion-label color="dark">Dados não obrigatórios</ion-label>
+        </ion-toolbar>
 
-    <ion-row>
-        <ion-col>
-            <ion-item>
-                <ion-input name="bairro" placeholder="Bairro" type="text"></ion-input>
-            </ion-item>
-        </ion-col>
-    </ion-row>
 
-    <ion-row>
-        <ion-col>
-            <ion-item>
-                <ion-input name="cidade" placeholder="Cidade" type="text"></ion-input>
-            </ion-item>
-        </ion-col>
-    </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-input name="endereco" placeholder="Endereço" type="text" formControlName="endereco"></ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col size="3">
+                <ion-item>
+                    <ion-input name="numero" placeholder="Nº" type="number" formControlName="numero"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
 
-    <ion-row>
-        <ion-col>
-            <ion-item>
-                <ion-input name="observacoes" placeholder="Observações" type="text"></ion-input>
-            </ion-item>
-        </ion-col>
-    </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-input name="bairro" placeholder="Bairro" type="text" formControlName="bairro"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
 
-    <ion-row text-center>
-        <ion-col>
-            <ion-button color="success">Gerar Doador</ion-button>
-        </ion-col>
-    </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-input name="cidade" placeholder="Cidade" type="text" formControlName="cidade"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-input name="observacoes" placeholder="Observações" type="text" formControlName="observacoes"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row text-center>
+            <ion-col>
+                <ion-button (click)="submitForm()" [disabled]="fContribuinte.invalid" color="success">Gerar Doador</ion-button>
+            </ion-col>
+        </ion-row>
+    </form>
 
 
 </ion-content>
