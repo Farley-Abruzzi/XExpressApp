@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, ToastController } from '@ionic/angular';
 import { CredenciaisDTO } from '../../interfaces/credenciaisDTO';
 import { AuthService } from '../../services/auth.services';

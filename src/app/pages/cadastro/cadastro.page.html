@@ -86,6 +86,16 @@
                 <ion-button (click)="submitForm()" [disabled]="fContribuinte.invalid" color="success">Gerar Doador</ion-button>
             </ion-col>
         </ion-row>
+
+        <ion-row text-center>
+            <ion-col>
+                <ion-button [style.visibility]="isVisible ? 'visible' : 'hidden'" color="success" (click)="setObjRecibo()">
+                    Gerar Recibo
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+
     </form>
 
 

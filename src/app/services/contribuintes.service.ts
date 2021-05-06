@@ -8,6 +8,7 @@ import { Recibos } from '../class/recibos';
 import { Devolvidos } from '../Class/devolvidos';
 import { ResumoDTO } from '../interfaces/resumoDTO';
 import { Contribuintes } from '../class/contribuintes';
+import { Recibo } from '../class/recibo';
 
 const URL = environment.url;
 
@@ -49,8 +50,9 @@ export class ContribuintesService {
     // http://192.168.0.243:8081/recibos/mensageiroporcidade1?cod=630&startDate=2019-01-01&endDate=2019-03-10
     return this.http.get<ResumoPorCidade>(`${ URL }/recibos/mensageiroporcidade1?cod=${ cod }&startDate=${ this.dtInicio }&endDate=${ this.dtFim }`);
   }
+
   // Atualiza os recibos no BD
-  putRecibo( recibo: Recibos ) {
+  putRecibo(recibo: Recibos) {
     // http://localhost:8081/recibos/11369854
     return this.http.put<Recibos>(`${ URL }/recibos/${ recibo.nrorecibo }`, recibo, {
       headers: new HttpHeaders ({
@@ -59,7 +61,7 @@ export class ContribuintesService {
     });
   }
   // Cria recibos devolvidos
-  postDevolvidos( devolvido: Devolvidos ) {
+  postDevolvidos(devolvido: Devolvidos) {
     // http://192.168.0.243:8081/devolvido/17044484
     return this.http.post<Devolvidos>(`${ URL }/devolvido`, devolvido, {
       headers: new HttpHeaders ({
@@ -69,7 +71,7 @@ export class ContribuintesService {
   }
 
   //Inserir novo contribuinte
-  postContribuinte(contribuinte: Contribuintes) { // api base
+  postContribuinte(contribuinte: Contribuintes) {
     return this.http.post<Contribuintes>(`${ URL }/contribuintes`, contribuinte, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -77,7 +79,21 @@ export class ContribuintesService {
     });
   }
 
-  //busca por ID
+  // Inserir novo recibo
+  postReciboGerado(recibo: Recibos) {
+    return this.http.post<Recibos>(`${ URL }/recibos`, recibo, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  //buscar pelo ultimo id
+  getUltRecibo(cod: number, dtOp: string) {
+    return this.http.get<Recibos>(`${ URL }/recibos/ultrecibo?cod=${ cod }&dtOp=${ dtOp }`);
+  }
+
+  //busca pelo ultimo id
   getUltContribuinte() { // api base
     //console.log(id);
     return this.http.get<Contribuintes>(`${ URL }/contribuintes/ultcontrib`);

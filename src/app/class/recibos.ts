@@ -50,7 +50,6 @@ export class Recibos {
   observacoes: string;
   datadorecebimento?: string;
   
-  
   constructor(nrorecibo: number, impresso: string, dtoperacao: Date, entrega: Date, formulario: number, nomenorecibo: string, entregaweb: string,
     dtcobranca: Date, dtrecebimento: Date, valorgerado: number, valordinheiro: number, valorcheque: number, doacaoespecial: number,
     parceladoacaoespecial: string, aumentodefinitivo: number, dtoperacaobaixa: Date, periodicidade: number, valoralterado: number,

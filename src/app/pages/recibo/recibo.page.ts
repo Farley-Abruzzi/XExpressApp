@@ -41,13 +41,16 @@ export class ReciboPage implements OnInit {
   connection: boolean = false;
 
   constructor( private contribService: ContribuintesService, private actionSheetCtrl: ActionSheetController,
-    private datePipe: DatePipe, private toastCtrl: ToastController,
-    private alertCtrl: AlertController, private bluetoothSerial: BluetoothSerial,
-    private crudService: CrudService, private route: ActivatedRoute,
-    private navCtrl: NavController, private usuarioService: UsuarioService, private storage: StorageService) { }
+    private datePipe: DatePipe, private toastCtrl: ToastController, private alertCtrl: AlertController,
+    private bluetoothSerial: BluetoothSerial, private crudService: CrudService, private route: ActivatedRoute,
+    private navCtrl: NavController, private usuarioService: UsuarioService, private storage: StorageService) {
+      // console.log('Route: ', this.route);
+     }
   
 
   ngOnInit() {
+    this.nrorecibo = this.route.snapshot.paramMap.get('id');
+    this.carregarRecibosDetalhes();
     let localUser = this.storage.getLocalUser();
     if (localUser && localUser.email) {
       this.usuarioService.findByEmail(localUser.email)
@@ -58,8 +61,7 @@ export class ReciboPage implements OnInit {
         },
       );
     }
-    this.nrorecibo = this.route.snapshot.paramMap.get('id');
-    this.carregarRecibosDetalhes();
+    
 }
 
 // Chama a API de recibos para ser vizualizada no app
@@ -68,28 +70,29 @@ carregarRecibosDetalhes() {
     this.crudService.getById(this.nrorecibo)
       .then( (data: Recibos) => {
         this.recibo = data;
-
         console.log('RECIBO: ', this.recibo);
 
-        if(this.recibo.complementosecundario == "") {
+        if(this.recibo.complementosecundario == null) {
         this.lbReferencia = false;
         } else {
         this.lbReferencia = true;
         }
     });
-
-// Para rodar na web
+  }
+  
+  // getReciboWeb() {
+  //   // Para rodar na web
   // this.contribService.getRecibosDetalhe( this.nrorecibo )
   //   .subscribe( resp => {
-  //     this.recibo = resp;
-
-  //     if (this.recibo.complementosecundario == "") {
-  //       this.lbReferencia = false;
-  //     } else {
-  //       this.lbReferencia = true;
-  //     }
-  // });
-}
+  //       this.recibo = resp;
+  //       console.log('RECIBO WEB: ', this.recibo);
+  //       if (this.recibo.complementosecundario == null) {
+  //         this.lbReferencia = false;
+  //       } else {
+  //         this.lbReferencia = true;
+  //       }
+  //   }, error => {});
+  // }
 
 
 // Atualiza a API de recibos no backend ou no BD do app

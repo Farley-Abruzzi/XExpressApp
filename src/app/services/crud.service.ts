@@ -1,3 +1,4 @@
+import { Recibo } from './../class/recibo';
 import { Injectable } from '@angular/core';
 import { DatabaseService } from './database.service';
 import { Recibos } from '../class/recibos';
@@ -151,6 +152,32 @@ export class CrudService {
         e => console.error(e)
       );
   }
+
+  // async getUltRecibo( ) {
+  //   return await this.dbService.getDB()
+  //     .then((db: SQLiteObject) => {
+  //       let sql = 'SELECT * FROM recibos ORDER BY rowid DESC LIMIT 1';
+  //       let data = [];
+  //       return db.executeSql(sql, data)
+  //         .then((data: any) => {
+  //           if (data.rows.length > 0) {
+  //             let tmp = data.rows.item(0);
+  //             let recibo = new Recibos(tmp.nrorecibo, tmp.impresso, tmp.dtoperacao, tmp.entrega, tmp.formulario, tmp.nomenorecibo, tmp.entregaweb, tmp.dtcobranca, tmp.dtrecebimento, tmp.valorgerado, tmp.valordinheiro,
+  //               tmp.valorcheque, tmp.doacaoespecial, tmp.parceladoacaoespecial, tmp.aumentodefinitivo, tmp.dtoperacaobaixa, tmp.periodicidade, tmp.valoralterado, tmp.valornaoalterado, tmp.dtvaloralteradobaixa, tmp.valorbakp, tmp.valorhorabkp,
+  //               tmp.valordatabkp, tmp.dataqld, tmp.naorecebido, tmp.nrosorte, tmp.statusrec, tmp.dtbaixa, tmp.parcela, tmp.via, tmp.motivodevol, tmp.valorremarcado, tmp.dtremarc, tmp.codoperador, tmp.codmensageiro, tmp.codcategoria, tmp.dtreagendamento, tmp.reagendado, tmp.codcontrib, tmp.codusuario, tmp.enderecosecundario, tmp.numerosecundario,
+  //               tmp.bairrosecundario, tmp.cidadesecundario, tmp.complementosecundario, tmp.cepsecundario, tmp.telefonesecundario, tmp.desccategoria, tmp.observacoes, tmp.datadorecebimento)
+  //             console.log('Consulta realizada');
+  //             return recibo;
+  //           } else {
+  //             return null;
+  //           }
+  //         }).catch(
+  //           e => console.error(e)
+  //         );
+  //     }).catch(
+  //       e => console.error(e)
+  //     );
+  // }
 
   // Para atualizar o recibo nos casos de (Doação, Reagendamento ou Devolução)
   update( recibo: Recibos, option: string ) {
