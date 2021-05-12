@@ -283,8 +283,8 @@ let Tab1Page = class Tab1Page {
     }
     ngOnInit() {
         //this.cameraOn = false;
-        this.mySlide.lockSwipes(true);
         this.isVisible = false;
+        this.mySlide.lockSwipes(true);
         let localUser = this.storage.getLocalUser();
         if (localUser && localUser.email) {
             this.usuarioService.findByEmail(localUser.email)

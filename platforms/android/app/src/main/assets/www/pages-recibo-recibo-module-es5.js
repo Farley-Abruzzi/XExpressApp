@@ -167,9 +167,12 @@ var ReciboPage = /** @class */ (function () {
         this.dtReag = " ";
         this.conectPrint = false;
         this.connection = false;
+        // console.log('Route: ', this.route);
     }
     ReciboPage.prototype.ngOnInit = function () {
         var _this = this;
+        this.nrorecibo = this.route.snapshot.paramMap.get('id');
+        this.carregarRecibosDetalhes();
         var localUser = this.storage.getLocalUser();
         if (localUser && localUser.email) {
             this.usuarioService.findByEmail(localUser.email)
@@ -179,8 +182,6 @@ var ReciboPage = /** @class */ (function () {
                 _this.codUser = _this.usuario.codusuario;
             });
         }
-        this.nrorecibo = this.route.snapshot.paramMap.get('id');
-        this.carregarRecibosDetalhes();
     };
     // Chama a API de recibos para ser vizualizada no app
     ReciboPage.prototype.carregarRecibosDetalhes = function () {
@@ -190,24 +191,27 @@ var ReciboPage = /** @class */ (function () {
             .then(function (data) {
             _this.recibo = data;
             console.log('RECIBO: ', _this.recibo);
-            if (_this.recibo.complementosecundario == "") {
+            if (_this.recibo.complementosecundario == null) {
                 _this.lbReferencia = false;
             }
             else {
                 _this.lbReferencia = true;
             }
         });
-        // Para rodar na web
-        // this.contribService.getRecibosDetalhe( this.nrorecibo )
-        //   .subscribe( resp => {
-        //     this.recibo = resp;
-        //     if (this.recibo.complementosecundario == "") {
-        //       this.lbReferencia = false;
-        //     } else {
-        //       this.lbReferencia = true;
-        //     }
-        // });
     };
+    // getReciboWeb() {
+    //   // Para rodar na web
+    // this.contribService.getRecibosDetalhe( this.nrorecibo )
+    //   .subscribe( resp => {
+    //       this.recibo = resp;
+    //       console.log('RECIBO WEB: ', this.recibo);
+    //       if (this.recibo.complementosecundario == null) {
+    //         this.lbReferencia = false;
+    //       } else {
+    //         this.lbReferencia = true;
+    //       }
+    //   }, error => {});
+    // }
     // Atualiza a API de recibos no backend ou no BD do app
     ReciboPage.prototype.getPutRecibosInApp = function (msg, opcao) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
@@ -280,7 +284,7 @@ var ReciboPage = /** @class */ (function () {
                                             _this.recibo.statusrec = 'B';
                                             _this.recibo.dtbaixa = _this.dtBaixa;
                                             _this.recibo.datadorecebimento = _this.datePipe.transform(_this.dtBaixa, 'dd/MM/yyyy');
-                                            _this.recibo.dtreagendamento = null;
+                                            _this.recibo.dtreagendamento = new Date(_this.recibo.dtreagendamento);
                                             _this.recibo.reagendado = null;
                                             _this.getPutRecibosInApp('Doação realizada!', 'doacao');
                                             _this.getPutRecibosInWeb();
@@ -547,9 +551,8 @@ var ReciboPage = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./recibo.page.scss */ "./src/app/pages/recibo/recibo.page.scss")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_contribuintes_service__WEBPACK_IMPORTED_MODULE_2__["ContribuintesService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ActionSheetController"],
-            _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_native_bluetooth_serial_ngx__WEBPACK_IMPORTED_MODULE_5__["BluetoothSerial"],
-            _services_crud_service__WEBPACK_IMPORTED_MODULE_6__["CrudService"], _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
+            _ionic_native_bluetooth_serial_ngx__WEBPACK_IMPORTED_MODULE_5__["BluetoothSerial"], _services_crud_service__WEBPACK_IMPORTED_MODULE_6__["CrudService"], _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _services_usuario_service__WEBPACK_IMPORTED_MODULE_9__["UsuarioService"], _services_storage_service__WEBPACK_IMPORTED_MODULE_10__["StorageService"]])
     ], ReciboPage);
     return ReciboPage;

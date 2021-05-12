@@ -154,7 +154,7 @@ const input = await this.alertCtrl.create({
           this.recibo.statusrec = 'B';
           this.recibo.dtbaixa = this.dtBaixa;
           this.recibo.datadorecebimento = this.datePipe.transform(this.dtBaixa, 'dd/MM/yyyy');
-          this.recibo.dtreagendamento = null;
+          this.recibo.dtreagendamento = new Date(this.recibo.dtreagendamento);
           this.recibo.reagendado = null;
         
           this.getPutRecibosInApp('Doação realizada!', 'doacao');

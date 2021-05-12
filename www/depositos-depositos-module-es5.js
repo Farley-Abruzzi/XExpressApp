@@ -289,8 +289,8 @@ var Tab1Page = /** @class */ (function () {
     Tab1Page.prototype.ngOnInit = function () {
         var _this = this;
         //this.cameraOn = false;
-        this.mySlide.lockSwipes(true);
         this.isVisible = false;
+        this.mySlide.lockSwipes(true);
         var localUser = this.storage.getLocalUser();
         if (localUser && localUser.email) {
             this.usuarioService.findByEmail(localUser.email)

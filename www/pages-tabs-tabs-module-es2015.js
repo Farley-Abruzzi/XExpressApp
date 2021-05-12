@@ -122,7 +122,7 @@ const routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => Promise.all(/*! import() | depositos-depositos-module */[__webpack_require__.e("default~depositos-depositos-module~iniciar-iniciar-module~pages-contribuicao-contribuicao-module~pag~751c7b4e"), __webpack_require__.e("common"), __webpack_require__.e("depositos-depositos-module")]).then(__webpack_require__.bind(null, /*! ../depositos/depositos.module */ "./src/app/pages/depositos/depositos.module.ts")).then(m => m.Tab1PageModule)
+                        loadChildren: () => Promise.all(/*! import() | depositos-depositos-module */[__webpack_require__.e("default~depositos-depositos-module~iniciar-iniciar-module~pages-cadastro-cadastro-module~pages-contr~20a781cb"), __webpack_require__.e("common"), __webpack_require__.e("depositos-depositos-module")]).then(__webpack_require__.bind(null, /*! ../depositos/depositos.module */ "./src/app/pages/depositos/depositos.module.ts")).then(m => m.Tab1PageModule)
                     }
                 ]
             },
@@ -131,7 +131,7 @@ const routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => Promise.all(/*! import() | iniciar-iniciar-module */[__webpack_require__.e("default~depositos-depositos-module~iniciar-iniciar-module~pages-contribuicao-contribuicao-module~pag~751c7b4e"), __webpack_require__.e("iniciar-iniciar-module")]).then(__webpack_require__.bind(null, /*! ../iniciar/iniciar.module */ "./src/app/pages/iniciar/iniciar.module.ts")).then(m => m.Tab2PageModule)
+                        loadChildren: () => Promise.all(/*! import() | iniciar-iniciar-module */[__webpack_require__.e("default~depositos-depositos-module~iniciar-iniciar-module~pages-cadastro-cadastro-module~pages-contr~20a781cb"), __webpack_require__.e("iniciar-iniciar-module")]).then(__webpack_require__.bind(null, /*! ../iniciar/iniciar.module */ "./src/app/pages/iniciar/iniciar.module.ts")).then(m => m.Tab2PageModule)
                     }
                 ]
             },

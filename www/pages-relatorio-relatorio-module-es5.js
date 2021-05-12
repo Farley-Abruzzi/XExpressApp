@@ -423,6 +423,31 @@ var ContribuintesService = /** @class */ (function () {
             })
         });
     };
+    //Inserir novo contribuinte
+    ContribuintesService.prototype.postContribuinte = function (contribuinte) {
+        return this.http.post(URL + "/contribuintes", contribuinte, {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+                'Content-Type': 'application/json'
+            })
+        });
+    };
+    // Inserir novo recibo
+    ContribuintesService.prototype.postReciboGerado = function (recibo) {
+        return this.http.post(URL + "/recibos", recibo, {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+                'Content-Type': 'application/json'
+            })
+        });
+    };
+    //buscar pelo ultimo id
+    ContribuintesService.prototype.getUltRecibo = function (cod, dtOp) {
+        return this.http.get(URL + "/recibos/ultrecibo?cod=" + cod + "&dtOp=" + dtOp);
+    };
+    //busca pelo ultimo id
+    ContribuintesService.prototype.getUltContribuinte = function () {
+        //console.log(id);
+        return this.http.get(URL + "/contribuintes/ultcontrib");
+    };
     ContribuintesService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },

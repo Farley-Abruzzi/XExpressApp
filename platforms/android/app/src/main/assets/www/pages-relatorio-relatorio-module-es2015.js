@@ -372,6 +372,31 @@ let ContribuintesService = class ContribuintesService {
             })
         });
     }
+    //Inserir novo contribuinte
+    postContribuinte(contribuinte) {
+        return this.http.post(`${URL}/contribuintes`, contribuinte, {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+    // Inserir novo recibo
+    postReciboGerado(recibo) {
+        return this.http.post(`${URL}/recibos`, recibo, {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+    //buscar pelo ultimo id
+    getUltRecibo(cod, dtOp) {
+        return this.http.get(`${URL}/recibos/ultrecibo?cod=${cod}&dtOp=${dtOp}`);
+    }
+    //busca pelo ultimo id
+    getUltContribuinte() {
+        //console.log(id);
+        return this.http.get(`${URL}/contribuintes/ultcontrib`);
+    }
 };
 ContribuintesService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] },

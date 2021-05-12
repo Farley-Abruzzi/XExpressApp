@@ -63,7 +63,6 @@ export class CadastroPage implements OnInit {
           this.usuario = resp;
           this.codMens = resp.codmensageiro;
           this.codUsuario = resp.codusuario;
-          this.codFunc = resp.codfunc;
           console.log(this.usuario);
         }, error => {}  
       )
@@ -83,7 +82,7 @@ export class CadastroPage implements OnInit {
     this.contribuinte.codmensageiro = this.codMens;
     this.contribuinte.codstatus = 1;
     this.contribuinte.codcategoria = 5;
-    this.contribuinte.codfunc = 73
+    this.contribuinte.codfunc = this.codMens;
     this.contribuinte.stsistema = 2;
 
     this.postContrib();
@@ -119,9 +118,9 @@ export class CadastroPage implements OnInit {
     
     this.datadorecebimento = this.datePipe.transform(this.dataFunc, 'dd/MM/yyyy');
 
-    this.objRecibo = new Recibos(null, 'N', new Date(), null, null, this.fContribuinte.value.nome, null, new Date(), null,
+    this.objRecibo = new Recibos(null, 'N', new Date(), new Date(), null, this.fContribuinte.value.nome, null, new Date(), null,
       this.fContribuinte.value.valor, this.fContribuinte.value.valor, null, null, null, null, null, null, null, null, null, null, null, null,
-      null, null, null, 'G', null, '01/01', 1, null, null, null, this.codUsuario, this.codMens, 5, null, null, this.ultimoContrib.codcontrib,
+      null, null, null, 'G', null, '01/01', 2, null, null, null, 73, this.codMens, 5, null, null, this.ultimoContrib.codcontrib,
       this.codUsuario, this.fContribuinte.value.endereco, this.fContribuinte.value.numero, this.fContribuinte.value.bairro,
       this.fContribuinte.value.cidade, null, null, null, 'EVENTUAL', this.fContribuinte.value.observacoes, this.datadorecebimento);
     

@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~depositos-depositos-module~iniciar-iniciar-module~pages-contribuicao-contribuicao-module~pag~751c7b4e"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~depositos-depositos-module~iniciar-iniciar-module~pages-cadastro-cadastro-module~pages-contr~20a781cb"],{
 
 /***/ "./src/app/class/depositoDTO.ts":
 /*!**************************************!*\
@@ -207,6 +207,31 @@ let ContribuintesService = class ContribuintesService {
             })
         });
     }
+    //Inserir novo contribuinte
+    postContribuinte(contribuinte) {
+        return this.http.post(`${URL}/contribuintes`, contribuinte, {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+    // Inserir novo recibo
+    postReciboGerado(recibo) {
+        return this.http.post(`${URL}/recibos`, recibo, {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+    //buscar pelo ultimo id
+    getUltRecibo(cod, dtOp) {
+        return this.http.get(`${URL}/recibos/ultrecibo?cod=${cod}&dtOp=${dtOp}`);
+    }
+    //busca pelo ultimo id
+    getUltContribuinte() {
+        //console.log(id);
+        return this.http.get(`${URL}/contribuintes/ultcontrib`);
+    }
 };
 ContribuintesService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] },
@@ -380,6 +405,31 @@ let CrudService = class CrudService {
             }).catch(e => console.error(e));
         });
     }
+    // async getUltRecibo( ) {
+    //   return await this.dbService.getDB()
+    //     .then((db: SQLiteObject) => {
+    //       let sql = 'SELECT * FROM recibos ORDER BY rowid DESC LIMIT 1';
+    //       let data = [];
+    //       return db.executeSql(sql, data)
+    //         .then((data: any) => {
+    //           if (data.rows.length > 0) {
+    //             let tmp = data.rows.item(0);
+    //             let recibo = new Recibos(tmp.nrorecibo, tmp.impresso, tmp.dtoperacao, tmp.entrega, tmp.formulario, tmp.nomenorecibo, tmp.entregaweb, tmp.dtcobranca, tmp.dtrecebimento, tmp.valorgerado, tmp.valordinheiro,
+    //               tmp.valorcheque, tmp.doacaoespecial, tmp.parceladoacaoespecial, tmp.aumentodefinitivo, tmp.dtoperacaobaixa, tmp.periodicidade, tmp.valoralterado, tmp.valornaoalterado, tmp.dtvaloralteradobaixa, tmp.valorbakp, tmp.valorhorabkp,
+    //               tmp.valordatabkp, tmp.dataqld, tmp.naorecebido, tmp.nrosorte, tmp.statusrec, tmp.dtbaixa, tmp.parcela, tmp.via, tmp.motivodevol, tmp.valorremarcado, tmp.dtremarc, tmp.codoperador, tmp.codmensageiro, tmp.codcategoria, tmp.dtreagendamento, tmp.reagendado, tmp.codcontrib, tmp.codusuario, tmp.enderecosecundario, tmp.numerosecundario,
+    //               tmp.bairrosecundario, tmp.cidadesecundario, tmp.complementosecundario, tmp.cepsecundario, tmp.telefonesecundario, tmp.desccategoria, tmp.observacoes, tmp.datadorecebimento)
+    //             console.log('Consulta realizada');
+    //             return recibo;
+    //           } else {
+    //             return null;
+    //           }
+    //         }).catch(
+    //           e => console.error(e)
+    //         );
+    //     }).catch(
+    //       e => console.error(e)
+    //     );
+    // }
     // Para atualizar o recibo nos casos de (Doação, Reagendamento ou Devolução)
     update(recibo, option) {
         return this.dbService.getDB().then((db) => {
@@ -447,4 +497,4 @@ CrudService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /***/ })
 
 }]);
-//# sourceMappingURL=default~depositos-depositos-module~iniciar-iniciar-module~pages-contribuicao-contribuicao-module~pag~751c7b4e-es2015.js.map
+//# sourceMappingURL=default~depositos-depositos-module~iniciar-iniciar-module~pages-cadastro-cadastro-module~pages-contr~20a781cb-es2015.js.map

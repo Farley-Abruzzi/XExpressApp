@@ -20,7 +20,7 @@ img {
 
 .gridPosition {
     position: fixed;
-    bottom: 40%;
+    bottom: 35%;
     right: 10%;
     left: 10%;
 }
@@ -42,4 +42,10 @@ ion-item {
     top: 89%;
     right: 35%;
     left: 35%;
+}
+
+.circle {
+    width: 40%;
+    border-radius: 100%;
+    margin: 25px auto 0 auto !important;
 }
